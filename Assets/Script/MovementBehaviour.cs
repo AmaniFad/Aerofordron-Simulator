@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class MovementBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private Rigidbody rb;
+    [SerializeField] private float speed;
+    [SerializeField] private float rotationSpeed;
+
+    private void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+    }
+    public void Move(Vector3 movementDirection)
+    {
+        rb.AddForce(movementDirection.normalized * speed * Time.deltaTime , ForceMode.Force);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Rotate(float rotation)
     {
-        
+        rb.gameObject.transform.Rotate(new Vector3(0f,rotation * rotationSpeed,0f));
     }
 }
