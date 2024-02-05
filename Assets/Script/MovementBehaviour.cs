@@ -22,4 +22,9 @@ public class MovementBehaviour : MonoBehaviour
     {
         rb.gameObject.transform.Rotate(new Vector3(0f,rotation * rotationSpeed,0f));
     }
+
+    public void StopMovingOnY()
+    {
+        rb.AddForce(new Vector3(0f,-Physics.gravity.y,0f));
+    }
 }
