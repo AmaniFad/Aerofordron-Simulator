@@ -22,15 +22,7 @@ public class Quiz : MonoBehaviour
 
     void Start()
     {
-        string rutaArchivo = Application.dataPath + "/Questions/QuestionsInJson/CGA.json";
-        string contenidoJSON = System.IO.File.ReadAllText(rutaArchivo);
-        questionsData = JsonUtility.FromJson<QuestionData>(contenidoJSON);
-
-
-        for(int i = 0; i < questionsData.questions.Length; i++)
-        {
-            Debug.Log(questionsData.questions[i].question);
-        }
+      
     }
 
     // Update is called once per frame
@@ -39,4 +31,16 @@ public class Quiz : MonoBehaviour
         
     }
 
+    public void SetJson(string json)
+    {
+        string rutaArchivo = Application.dataPath + "/Questions/QuestionsInJson/"+json+".json";
+        string contenidoJSON = System.IO.File.ReadAllText(rutaArchivo);
+        questionsData = JsonUtility.FromJson<QuestionData>(contenidoJSON);
+
+
+        for (int i = 0; i < questionsData.questions.Length; i++)
+        {
+            Debug.Log(questionsData.questions[i].question);
+        }
+    }
 }
