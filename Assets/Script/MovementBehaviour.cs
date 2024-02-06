@@ -13,6 +13,8 @@ public class MovementBehaviour : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
+
+    //Usamos Addforce para hacer mas realistas las fisicas
     public void Move(Vector3 movementDirection)
     {
         rb.AddForce(movementDirection.normalized * speed * Time.deltaTime , ForceMode.Force);
@@ -23,6 +25,7 @@ public class MovementBehaviour : MonoBehaviour
         rb.gameObject.transform.Rotate(new Vector3(0f,rotation * rotationSpeed,0f));
     }
 
+    //Esto es para que haga hover cuando lo dejes quieto
     public void StopMovingOnY()
     {
         rb.AddForce(new Vector3(0f,-Physics.gravity.y,0f));

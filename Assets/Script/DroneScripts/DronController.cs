@@ -9,7 +9,6 @@ public class DronController : MonoBehaviour
     [SerializeField] private float maxDistanceFromPlayer;
     private bool isDronPlatformOn;
     private MovementBehaviour mMovementBehaviour;
-    [SerializeField] private float batteryTime;
     void Start()
     {
         mMovementBehaviour = GetComponent<MovementBehaviour>();
@@ -17,8 +16,7 @@ public class DronController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        batteryTime -= Time.deltaTime;
-        if (batteryTime > 0)
+        if (BatteryController.Instance.HasBattery())
         {
 
         
@@ -33,9 +31,7 @@ public class DronController : MonoBehaviour
           mMovementBehaviour.StopMovingOnY();
         }
 
-
         Vector3 direction = transform.right * inputDirection.x + transform.forward * inputDirection.y;
-        Debug.Log("direction " + transform.right);
 
         mMovementBehaviour.Move(new Vector3(direction.x,verticalDirection,direction.z));
             mMovementBehaviour.Rotate(InputController.Instance.GetRotationalInput());
