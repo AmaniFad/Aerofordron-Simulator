@@ -18,25 +18,21 @@ public class DronController : MonoBehaviour
     {
         if (BatteryController.Instance.HasBattery())
         {
-        Vector2 inputDirection = InputController.Instance.GetDirectionInput();
-        float verticalDirection = InputController.Instance.GetVerticalInput();
-        if (transform.position.y >= maxHeight)
-        {
-            verticalDirection = 0;
-        }
-        if (verticalDirection == 0)
-        {
-          mMovementBehaviour.StopMovingOnY();
-        }
+            Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
+            float verticalDirection = DronInputController.Instance.GetVerticalInput();
+            if (transform.position.y >= maxHeight)
+            {
+                verticalDirection = 0;
+            }
+            if (verticalDirection == 0)
+            {
+                mMovementBehaviour.StopMovingOnY();
+            }
 
-        Vector3 direction = transform.right * inputDirection.x + transform.forward * inputDirection.y;
+            Vector3 direction = transform.right * inputDirection.x + transform.forward * inputDirection.y;
 
-        mMovementBehaviour.Move(new Vector3(direction.x,verticalDirection,direction.z));
-            mMovementBehaviour.Rotate(InputController.Instance.GetRotationalInput());
+            mMovementBehaviour.Move(new Vector3(direction.x, verticalDirection, direction.z));
+            mMovementBehaviour.Rotate(DronInputController.Instance.GetRotationalInput());
         }
     }
-
-
-
-
 }

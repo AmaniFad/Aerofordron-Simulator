@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     //Para un projecto mas grande con mas camaras esto no se haria asi, esto es bastante cutre pero nos sirve
     void Update()
     {
-        if (InputController.Instance.CanChangeCamera())
+        if (DronInputController.Instance.CanChangeCamera())
         {
             if (playerCamera.Priority == 11)
             {
@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
                 playerCamera.Priority = 11;
                 droneCamera.Priority = 10;
             }
-                InputController.Instance.HasChangedCamera();
+                DronInputController.Instance.HasChangedCamera();
         }
     }
 }
