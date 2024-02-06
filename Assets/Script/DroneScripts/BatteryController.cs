@@ -16,7 +16,6 @@ public class BatteryController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            Debug.Log("Instance Created");
         }
         else
         {

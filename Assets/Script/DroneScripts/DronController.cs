@@ -18,8 +18,6 @@ public class DronController : MonoBehaviour
     {
         if (BatteryController.Instance.HasBattery())
         {
-
-        
         Vector2 inputDirection = InputController.Instance.GetDirectionInput();
         float verticalDirection = InputController.Instance.GetVerticalInput();
         if (transform.position.y >= maxHeight)
