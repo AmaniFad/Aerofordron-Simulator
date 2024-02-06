@@ -30,4 +30,11 @@ public class MovementBehaviour : MonoBehaviour
     {
         rb.AddForce(new Vector3(0f,-Physics.gravity.y,0f));
     }
+
+    public void MoveRB3D(Vector3 input)
+    {
+        input.y = 0;
+        Vector3 velocityXZ = input.normalized * speed;
+        rb.velocity = new Vector3(velocityXZ.x, rb.velocity.y, velocityXZ.z);
+    }
 }
