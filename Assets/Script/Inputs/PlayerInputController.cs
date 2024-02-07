@@ -7,7 +7,7 @@ public class PlayerInputController : MonoBehaviour
 {
     public static PlayerInputController Instance;
     private Vector2 playerInput;
-
+    private bool isInteracting;
     void Start()
     {
         Instance = this;
@@ -22,5 +22,21 @@ public class PlayerInputController : MonoBehaviour
     {
         return playerInput;
     }
+
+    public void OnInteract(InputValue inputValue)
+    {
+        if (inputValue.isPressed)
+        {
+            isInteracting = true;
+        }
+        else
+        {
+            isInteracting = false;
+        }
+    }
    
+    public bool IsInteracting()
+    {
+        return isInteracting;
+    }
 }
