@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
         cameraForward.Normalize();
         cameraRight.Normalize();
-
         Vector3 input = cameraForward * playerWasd.y + cameraRight * playerWasd.x;
         MB.MoveRB3D(input);
     }
