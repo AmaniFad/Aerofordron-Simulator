@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class CallJson : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private static QuestionData questionsData;
 
-    // Update is called once per frame
-    void Update()
+    public static QuestionData FindJson(string json)
     {
-        
+        string rutaArchivo = Application.dataPath + "/Questions/QuestionsInJson/" + json + ".json";
+        string contenidoJSON = System.IO.File.ReadAllText(rutaArchivo);
+        questionsData = JsonUtility.FromJson<QuestionData>(contenidoJSON);
+        return questionsData;
     }
 }

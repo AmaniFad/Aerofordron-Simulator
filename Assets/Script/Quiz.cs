@@ -21,19 +21,6 @@ public class Quiz : MonoBehaviour
     private List<int> answersIndex = new List<int>();
     private bool startGame;
 
-    [System.Serializable]
-    public class Question
-    {
-        public string question;
-        public string[] answers;
-        public int correctIndex;
-    }
-
-    [System.Serializable]
-    public class QuestionData
-    {
-        public Question[] questions;
-    }
     public void SetStartGameBool(bool startGame)
     {
         this.startGame = startGame;
@@ -55,9 +42,7 @@ public class Quiz : MonoBehaviour
 
     public void SetJson(string json)
     {
-        string rutaArchivo = Application.dataPath + "/Questions/QuestionsInJson/"+json+".json";
-        string contenidoJSON = System.IO.File.ReadAllText(rutaArchivo);
-        questionsData = JsonUtility.FromJson<QuestionData>(contenidoJSON);
+        questionsData = CallJson.FindJson(json);
     }
 
     public void addAnswerPlayer(int index)
