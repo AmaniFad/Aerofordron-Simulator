@@ -4,28 +4,26 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    [SerializeField] private float raycastDistance = 10f;
+    [SerializeField] private LayerMask layerMask;
     void Start()
     {
         
     }
 
-    public float raycastDistance = 10f; // Distance to cast the ray
-    public LayerMask layerMask; // Layer mask to filter what objects the ray interacts with
 
     void Update()
     {
-        if (PlayerInputController.Instance.IsInteracting())
-        {
-            TryToInteract();
-        }
+
     }
 
     public void TryToInteract()
     {
-        // Cast a ray from the position of this object forward
-        Ray ray = new Ray(transform.position, transform.forward);
 
+        // Cast a ray from the position of this object forward
+        Ray ray = new Ray(transform.position, Camera.main.transform.forward);
+        Debug.DrawRay(transform.position, transform.forward,Color.red);
         RaycastHit hitInfo; // Information about the object hit by the ray
 
         // Perform the raycast
@@ -36,6 +34,7 @@ public class PlayerInteract : MonoBehaviour
             IInteractable interactableObject = hitInfo.collider.gameObject.GetComponent<IInteractable>();
             if (interactableObject != null)
             {
+                Debug.Log("Interact");
                 // Call the Interact method on the hit object
                 interactableObject.Interact();
             }
