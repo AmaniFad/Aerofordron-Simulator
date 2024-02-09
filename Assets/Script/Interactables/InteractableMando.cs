@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class InteractableMando : MonoBehaviour, IInteractable
 {
-    [SerializeField] private PlayerController player;
+    [SerializeField] private PlayerInteract player;
     private bool isPickable;
     public void Interact()
     {
         isPickable = false;
-        //pC.GrabItem(this);
+        player.GrabItem(this);
+       
         //this.transform.localRotation = rotationOffset;
         GetComponent<Rigidbody>().useGravity = false;
         GetComponent<Rigidbody>().isKinematic = true;
@@ -26,9 +27,16 @@ public class InteractableMando : MonoBehaviour, IInteractable
         isPickable = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GetDropped(InteractableMando grabbeable)
     {
-        
+        if (grabbeable != null)
+        {
+            grabbeable.GetComponent<InteractableMando>().isPickable = true;
+            grabbeable.transform.SetParent(null);
+
+            grabbeable.GetComponent<Rigidbody>().useGravity = true;
+            grabbeable.GetComponent<Rigidbody>().isKinematic = false;
+            grabbeable.GetComponent<BoxCollider>().isTrigger = false;
+        }
     }
 }

@@ -4,20 +4,36 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-
     [SerializeField] private float raycastDistance = 10f;
     [SerializeField] private LayerMask layerMask;
-    void Start()
+    [SerializeField] private Transform InteractionZone;
+
+    private InteractableMando grabbeableObj;
+    private Vector3 grabbeableObjOriginalScale;
+
+    private void Start()
     {
-        
+        grabbeableObj = null;
     }
-
-
-    void Update()
+    public void GrabItem(InteractableMando grabbeable)
     {
+        grabbeableObjOriginalScale = grabbeable.transform.localScale;
+        Quaternion rotation = grabbeable.transform.rotation;
+
+        //grabbeable.transform.rotation = Quaternion.identity;
+        grabbeable.transform.SetParent(InteractionZone, true);
+
+        // grabbeable.transform.rotation = rotation;
+        grabbeable.transform.position = InteractionZone.position;
+
+        grabbeableObj = grabbeable;
+    }
+    internal void DropObject()
+    {
+        grabbeableObj.transform.localScale = grabbeableObjOriginalScale;
+        grabbeableObj = null;
 
     }
-
     public void TryToInteract()
     {
 
@@ -26,19 +42,29 @@ public class PlayerInteract : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward,Color.red);
         RaycastHit hitInfo; // Information about the object hit by the ray
 
-        // Perform the raycast
-        if (Physics.Raycast(ray, out hitInfo, raycastDistance, layerMask))
+        Debug.Log(grabbeableObj);
+
+        if (grabbeableObj != null)
         {
-
-            // Check if the hit object implements the IInteract interface
-            IInteractable interactableObject = hitInfo.collider.gameObject.GetComponent<IInteractable>();
-            if (interactableObject != null)
-            {
-                Debug.Log("Interact");
-                // Call the Interact method on the hit object
-                interactableObject.Interact();
-            }
+            grabbeableObj.GetDropped(grabbeableObj);
+            DropObject();
         }
-    }
+        else
+        {
+            // Perform the raycast
+            if (Physics.Raycast(ray, out hitInfo, raycastDistance, layerMask))
+            {
 
+                // Check if the hit object implements the IInteract interface
+                IInteractable interactableObject = hitInfo.collider.gameObject.GetComponent<IInteractable>();
+                Debug.Log(interactableObject);
+                if (interactableObject != null)
+                {
+                    Debug.Log("Interact");
+                    // Call the Interact method on the hit object
+                    interactableObject.Interact();
+                }
+            }
+        }    
+    }
 }
