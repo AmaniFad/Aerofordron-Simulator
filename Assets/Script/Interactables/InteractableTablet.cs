@@ -20,7 +20,6 @@ public class InteractableTablet : MonoBehaviour, IInteractable
     public void RespawnTablet()
     {
         tabletPlaceholder.SetActive(true);
-        hudTablet.SetActive(false);
     }
 
 }

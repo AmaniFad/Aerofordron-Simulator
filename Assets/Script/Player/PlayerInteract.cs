@@ -13,10 +13,6 @@ public class PlayerInteract : MonoBehaviour
     }
 
 
-    void Update()
-    {
-
-    }
 
     public void TryToInteract()
     {
