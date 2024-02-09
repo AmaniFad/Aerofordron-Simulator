@@ -10,9 +10,17 @@ public class InteractableTablet : MonoBehaviour, IInteractable
     [SerializeField] private GameObject tabletPlaceholder;
     public void Interact()
     {
-        Debug.Log("Interacted");
         tabletPlaceholder.SetActive(false);
         hudTablet.SetActive(true);
+        PlayerStateController.instance.StopCameraMovement();
+        PlayerStateController.instance.StopMoving();
+        Cursor.visible = true;
+    }
+
+    public void RespawnTablet()
+    {
+        tabletPlaceholder.SetActive(true);
+        hudTablet.SetActive(false);
     }
 
 }

@@ -7,7 +7,6 @@ public class PlayerInteract : MonoBehaviour
 
     [SerializeField] private float raycastDistance = 10f;
     [SerializeField] private LayerMask layerMask;
-    // Start is called before the first frame update
     void Start()
     {
         
@@ -16,10 +15,7 @@ public class PlayerInteract : MonoBehaviour
 
     void Update()
     {
-        if (PlayerInputController.Instance.IsInteracting())
-        {
-            TryToInteract();
-        }
+
     }
 
     public void TryToInteract()
