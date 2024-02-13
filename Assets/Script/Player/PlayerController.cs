@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
         if (PlayerInputController.Instance.IsInteracting())
         {
             playerInteract.TryToInteract();
+            PlayerInputController.Instance.HasInteracted();
         }
         if (PlayerStateController.instance.CanMove())
         {

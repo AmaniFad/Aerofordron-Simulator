@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InteractableMando : MonoBehaviour, IInteractable
 {
     [SerializeField] private PlayerInteract player;
+    [SerializeField] private UnityEvent isTaked;
     private bool isPickable;
     public void Interact()
     {
@@ -17,7 +19,7 @@ public class InteractableMando : MonoBehaviour, IInteractable
         GetComponent<BoxCollider>().isTrigger = true;
         if (!isPickable)
         {
-            //isTaked.Invoke();
+            isTaked.Invoke();
         }
     }
 

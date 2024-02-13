@@ -20,7 +20,7 @@ public class PlayerInteract : MonoBehaviour
         grabbeableObjOriginalScale = grabbeable.transform.localScale;
         Quaternion rotation = grabbeable.transform.rotation;
 
-        //grabbeable.transform.rotation = Quaternion.identity;
+        grabbeable.transform.rotation = Quaternion.identity;
         grabbeable.transform.SetParent(InteractionZone, true);
 
         // grabbeable.transform.rotation = rotation;
@@ -38,11 +38,10 @@ public class PlayerInteract : MonoBehaviour
     {
 
         // Cast a ray from the position of this object forward
-        Ray ray = new Ray(transform.position, Camera.main.transform.forward);
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
         Debug.DrawRay(transform.position, transform.forward,Color.red);
-        RaycastHit hitInfo; // Information about the object hit by the ray
+        RaycastHit hitInfo ; // Information about the object hit by the ray
 
-        Debug.Log(grabbeableObj);
 
         if (grabbeableObj != null)
         {
@@ -54,10 +53,10 @@ public class PlayerInteract : MonoBehaviour
             // Perform the raycast
             if (Physics.Raycast(ray, out hitInfo, raycastDistance, layerMask))
             {
-
                 // Check if the hit object implements the IInteract interface
                 IInteractable interactableObject = hitInfo.collider.gameObject.GetComponent<IInteractable>();
-                Debug.Log(interactableObject);
+                Debug.Log(hitInfo.collider.gameObject);
+
                 if (interactableObject != null)
                 {
                     Debug.Log("Interact");
