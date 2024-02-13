@@ -6,9 +6,11 @@ using TMPro;
 using UnityEngine.Purchasing.MiniJSON;
 using System.Xml.Schema;
 using System.Linq;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class Quiz : MonoBehaviour
 {
+    [Header("Quiz UI")]
     [SerializeField] private TMP_Text questionText;
     [SerializeField] private TMP_Text a1Text;
     [SerializeField] private TMP_Text a2Text;
@@ -18,9 +20,11 @@ public class Quiz : MonoBehaviour
     [SerializeField] private GameObject nextButton;
 
     private QuestionData questionsData;
-    private List<int> answersIndex = new List<int>();
-    private bool startGame;
+    private int[] answersIndex;
+    private int currentIndex;
 
+
+    #region Classes
     [System.Serializable]
     public class Question
     {
@@ -34,55 +38,40 @@ public class Quiz : MonoBehaviour
     {
         public Question[] questions;
     }
-    public void SetStartGameBool(bool startGame)
+    #endregion
+
+
+    #region Metodos
+    public void SetJson(string json)
     {
-        this.startGame = startGame;
+        string rutaArchivo = Application.dataPath + "/Questions/QuestionsInJson/" + json + ".json";
+        string contenidoJSON = System.IO.File.ReadAllText(rutaArchivo);
+        questionsData = JsonUtility.FromJson<QuestionData>(contenidoJSON);
+        answersIndex = new int[questionsData.questions.Length];
+        MenuController.instance.StartQuestionMenu(questionsData.questions.Length);
     }
 
-    void Start()
+    public void AddAnswerPlayer(int index)
     {
-        startGame = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (startGame)
+        if (index < questionsData.questions.Length)
         {
-            StartGame();
+            answersIndex[currentIndex] = index;
+            MenuController.instance.QuestionAnswered(currentIndex);
+
         }
     }
 
-    public void SetJson(string json)
-    {
-        string rutaArchivo = Application.dataPath + "/Questions/QuestionsInJson/"+json+".json";
-        string contenidoJSON = System.IO.File.ReadAllText(rutaArchivo);
-        questionsData = JsonUtility.FromJson<QuestionData>(contenidoJSON);
-    }
 
-    public void addAnswerPlayer(int index)
-    {
-        answersIndex.Add(index);
-        startGame = true;
-    }
 
-    public void StartGame()
+    public void LoadQuestion()
     {
-        if(answersIndex.Count < questionsData.questions.Length)
+        Debug.Log(currentIndex);
+        if (currentIndex < questionsData.questions.Length)
         {
-            int i = 0;
-
-            if (answersIndex.Count == 0)
+            MenuController.instance.CurrentQuestion(currentIndex);
+            if (questionsData.questions[currentIndex].question.Contains(";"))
             {
-                i = 0;
-            }
-            else
-            {
-                i = answersIndex.Count;
-            }
-            if (questionsData.questions[i].question.Contains(";"))
-            {
-                string[] subs = questionsData.questions[i].question.Split(';');
+                string[] subs = questionsData.questions[currentIndex].question.Split(';');
                 questionText.text = "";
                 questionText.alignment = TextAlignmentOptions.Justified;
                 foreach (string sub in subs)
@@ -93,30 +82,69 @@ public class Quiz : MonoBehaviour
             else
             {
                 questionText.alignment = TextAlignmentOptions.Center;
-                questionText.text = questionsData.questions[i].question;
+                questionText.text = questionsData.questions[currentIndex].question;
             }
-            a1Text.text = questionsData.questions[i].answers[0];
-            a2Text.text = questionsData.questions[i].answers[1];
-            a3Text.text = questionsData.questions[i].answers[2];
-            a4Text.text = questionsData.questions[i].answers[3];
+            a1Text.text = questionsData.questions[currentIndex].answers[0];
+            a2Text.text = questionsData.questions[currentIndex].answers[1];
+            a3Text.text = questionsData.questions[currentIndex].answers[2];
+            a4Text.text = questionsData.questions[currentIndex].answers[3];
         }
         else
         {
-            int score = 0;
-            for (int i = 0; i < answersIndex.Count; i++)
-            {
-                if (answersIndex[i] == questionsData.questions[i].correctIndex)
-                {
-                    score += 10;
-                }
-            }
-            int totalScore = questionsData.questions.Length * 10;
-            GetComponent<ScorePlayer>().SetTotalScoreQuiz(totalScore);
-
-            GetComponent<ScorePlayer>().SetScoreQuiz(score);
-
-            nextButton.SetActive(true);
+            CheckScore();
         }
-        startGame = false;
     }
+    public void NextQuestion()
+    {
+        if (currentIndex < questionsData.questions.Length)
+        {
+            currentIndex++;
+        }
+        LoadQuestion();
+    }
+    public void PrevQuestion()
+    {
+        if (currentIndex > 0)
+        {
+            currentIndex--;
+        }
+
+        LoadQuestion();
+    }
+
+    public void CheckScore()
+    {
+        int score = 0;
+        for (int i = 0; i < answersIndex.Length; i++)
+        {
+            if (answersIndex[i] == questionsData.questions[i].correctIndex)
+            {
+                score += 10;
+            }
+        }
+        int totalScore = questionsData.questions.Length * 10;
+        GetComponent<ScorePlayer>().SetTotalScoreQuiz(totalScore);
+
+        GetComponent<ScorePlayer>().SetScoreQuiz(score);
+
+        nextButton.SetActive(true);
+    }
+
+    public void RestartQuiz()
+    {
+        questionsData.questions = null;
+        answersIndex = null;
+    }
+
+    public int GetQuestionAmount()
+    {
+        return questionsData.questions.Length;
+    }
+
+    public void GoToQuestion(int question)
+    {
+        currentIndex = question;
+        LoadQuestion();
+    }
+    #endregion
 }
