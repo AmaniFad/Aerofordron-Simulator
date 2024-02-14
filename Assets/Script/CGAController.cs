@@ -13,20 +13,17 @@ public class CGAController : MonoBehaviour
     [SerializeField] private TMP_Text a2;
     [SerializeField] private TMP_Text a3;
     [SerializeField] private TMP_Text a4;
+
+    [SerializeField] private TMP_Text score_Text;
+    [SerializeField] private TMP_Text rongAnswers_Text;
+    [SerializeField] private TMP_Text aproveTheoric_Text;
     private QuestionData questionsData;
     private List<int> answersIndex = new List<int>();
-    int i;
     void Start()
     {
          SetJson(Json);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-
-    }
     public void SetJson(string json)
     {
         questionsData = CallJson.FindJson(json);
@@ -43,5 +40,28 @@ public class CGAController : MonoBehaviour
     public void PlayAudio()
     {
         audioSource.Play();
+    }
+
+    public void AddAnswers(int index)
+    {
+        answersIndex.Add(index);
+    }
+
+    public void CheckAnswer()
+    {
+        int score = 0;
+
+        for(int i = 1; i < answersIndex.Count; i++)
+        {
+            if (answersIndex[i] == questionsData.questions[i].correctIndex)
+            {
+                score += 10;
+            }
+        }
+        int totalScore = questionsData.questions.Length * 10;
+
+        ScorePlayer.Instance.SetTotalScorePractic(totalScore);
+        ScorePlayer.Instance.SetScoreInteractive(score);
+        ScorePlayer.Instance.SetInfoTextPractic(score_Text, rongAnswers_Text, aproveTheoric_Text);
     }
 }

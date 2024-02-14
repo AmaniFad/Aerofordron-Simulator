@@ -272,7 +272,19 @@ MonoBehaviour:
   m_VerticalScrollbarSpacing: -3
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &24225413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,7 +932,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3704f892ac932274286a7f63ffba50e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   isTaked:
     m_PersistentCalls:
       m_Calls:
@@ -1422,6 +1433,9 @@ MonoBehaviour:
   a2: {fileID: 1580255604}
   a3: {fileID: 1577694383}
   a4: {fileID: 731905481}
+  score_Text: {fileID: 0}
+  rongAnswers_Text: {fileID: 0}
+  aproveTheoric_Text: {fileID: 0}
 --- !u!1 &192889830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1769,6 +1783,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: drop
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 189028629}
+        m_TargetAssemblyTypeName: CGAController, Assembly-CSharp
+        m_MethodName: AddAnswers
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &241857648
@@ -2188,6 +2214,18 @@ MonoBehaviour:
           m_StringArgument: Drop
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 189028629}
+        m_TargetAssemblyTypeName: CGAController, Assembly-CSharp
+        m_MethodName: AddAnswers
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &308748592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2337,6 +2375,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: CheckPoint, Assembly-CSharp
         m_MethodName: CheckPointPassed
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 189028629}
+        m_TargetAssemblyTypeName: CGAController, Assembly-CSharp
+        m_MethodName: AddAnswers
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4145,6 +4195,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 189028629}
+        m_TargetAssemblyTypeName: CGAController, Assembly-CSharp
+        m_MethodName: AddAnswers
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &469249930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4500,6 +4562,18 @@ MonoBehaviour:
           m_StringArgument: Drop
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 189028629}
+        m_TargetAssemblyTypeName: CGAController, Assembly-CSharp
+        m_MethodName: AddAnswers
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &521339336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4844,6 +4918,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Drop
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 189028629}
+        m_TargetAssemblyTypeName: CGAController, Assembly-CSharp
+        m_MethodName: AddAnswers
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &604383373
@@ -5478,6 +5564,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Drop
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 189028629}
+        m_TargetAssemblyTypeName: CGAController, Assembly-CSharp
+        m_MethodName: AddAnswers
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &691007639
@@ -10331,6 +10429,18 @@ MonoBehaviour:
           m_StringArgument: drop
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 189028629}
+        m_TargetAssemblyTypeName: CGAController, Assembly-CSharp
+        m_MethodName: AddAnswers
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 1645689873}
         m_TargetAssemblyTypeName: CheckPoint, Assembly-CSharp
         m_MethodName: CheckPointPassed
@@ -11358,7 +11468,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 189028629}
+        m_TargetAssemblyTypeName: CGAController, Assembly-CSharp
+        m_MethodName: AddAnswers
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1804367873
 MonoBehaviour:
