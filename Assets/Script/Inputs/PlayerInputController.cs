@@ -25,16 +25,13 @@ public class PlayerInputController : MonoBehaviour
 
     public void OnInteract(InputValue inputValue)
     {
-        if (inputValue.isPressed)
-        {
-            isInteracting = true;
-        }
-        else
-        {
-            isInteracting = false;
-        }
+        isInteracting = true;
     }
    
+    public void HasInteracted()
+    {
+        isInteracting = false;
+    }
     public bool IsInteracting()
     {
         return isInteracting;
