@@ -9,20 +9,26 @@ public class CheckPoint : MonoBehaviour
     [SerializeField] private UnityEvent onCheckPoint;
     private void OnTriggerEnter(Collider other)
     {
-        Time.timeScale = 0f;
-        onCheckPoint.Invoke();
-        StartCoroutine(_isCP());
+        if (other.CompareTag("Player"))
+        { 
+            onCheckPoint.Invoke();
+            StartCoroutine(_isCP());
+        }
     }
 
     IEnumerator _isCP()
     {
-        yield return new WaitForSeconds(0.3f);
-        Time.timeScale = 0f;
+        yield return new WaitForSeconds(0.1f);
+        PlayerStateController.instance.StopMoving();
+        PlayerStateController.instance.StopCameraMovement();
+        Cursor.visible = true;
     }
 
     public void CheckPointPassed()
     {
-        Time.timeScale = 1f;
+        PlayerStateController.instance.ResumeMoving();
+        PlayerStateController.instance.ResumeCameraMovement();
+        Cursor.visible = false;
         Destroy(gameObject);
     }
 }

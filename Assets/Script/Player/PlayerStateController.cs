@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class PlayerStateController : MonoBehaviour
 {
-    public static PlayerStateController instance { get;private set; }
+    public static PlayerStateController instance { get; private set; }
     [SerializeField] CinemachineVirtualCamera playerCamera;
     [SerializeField] CinemachineVirtualCamera staticCamera;
+    [SerializeField] CinemachineVirtualCamera dronCamera;
     [SerializeField] private GameObject player;
     private bool canMove;
     // Start is called before the first frame update
@@ -53,9 +54,21 @@ public class PlayerStateController : MonoBehaviour
 
     public void CameraToDron(GameObject dron)
     {
-        if (dron == null)
+        if (dron != null)
         {
-            playerCamera.LookAt = dron.transform;
+            dronCamera.Priority = 11;
+            dronCamera.LookAt = dron.transform;
+            playerCamera.Priority = 10;
         }
+    }
+
+    public void CameraToPlayer()
+    {
+
+
+        playerCamera.Priority = 11;
+        dronCamera.Priority = 10;
+
+
     }
 }

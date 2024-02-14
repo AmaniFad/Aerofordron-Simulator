@@ -17,7 +17,7 @@ public class DronController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (BatteryController.Instance.HasBattery() && canMove)
+        if (canMove)
         {
             Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
             float verticalDirection = DronInputController.Instance.GetVerticalInput();
@@ -48,6 +48,7 @@ public class DronController : MonoBehaviour
     {
         PlayerStateController.instance.CameraToDron(new GameObject());
         PlayerStateController.instance.ResumeMoving();
+        canMove = false;
     }
 }
 
