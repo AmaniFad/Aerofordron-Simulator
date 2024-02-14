@@ -1800,7 +1800,7 @@ Transform:
   m_GameObject: {fileID: 156589645}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.43, y: 0.509, z: -1.84}
+  m_LocalPosition: {x: -0.618917, y: 0.509, z: 9.77293}
   m_LocalScale: {x: 1, y: 1, z: 0.9459279}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3861,7 +3861,7 @@ Transform:
   m_GameObject: {fileID: 430947932}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.70000005, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0.70000005, z: 0.20000076}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6830,7 +6830,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1931257420}
         m_TargetAssemblyTypeName: Quiz, Assembly-CSharp
-        m_MethodName: NextQuestion
+        m_MethodName: LoadQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7247,7 +7247,7 @@ Transform:
   m_GameObject: {fileID: 830553323}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.048917, y: 0, z: 11.61293}
   m_LocalScale: {x: 1, y: 1, z: 2.5417}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9249,6 +9249,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  InteractionZone: {fileID: 0}
 --- !u!4 &1048305373 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4851007696652854419, guid: 6b69c2714d17738488726629194f7461, type: 3}
@@ -10128,11 +10129,23 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1931257420}
         m_TargetAssemblyTypeName: Quiz, Assembly-CSharp
-        m_MethodName: NextQuestion
+        m_MethodName: LoadQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1931257419}
+        m_TargetAssemblyTypeName: Quiz, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -11759,7 +11772,7 @@ Transform:
   m_GameObject: {fileID: 1311672328}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1345841, y: 0.7565603, z: -10.55274}
+  m_LocalPosition: {x: -3.85, y: 0.7565603, z: 1.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12952,7 +12965,7 @@ Transform:
   m_GameObject: {fileID: 1505497602}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.498917, y: -6.104041, z: -3.7929294}
+  m_LocalPosition: {x: 5.45, y: -6.104041, z: 7.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14653,6 +14666,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1689151904}
   - component: {fileID: 1689151905}
+  - component: {fileID: 1689151906}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -14690,6 +14704,18 @@ MonoBehaviour:
   playerCamera: {fileID: 1997833318}
   staticCamera: {fileID: 430947935}
   player: {fileID: 1048305362}
+--- !u!114 &1689151906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689151903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95049ab658c72584686224cbca0025ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1705470847
 GameObject:
   m_ObjectHideFlags: 0
@@ -17153,7 +17179,7 @@ Transform:
   m_GameObject: {fileID: 1960204506}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.707, z: 0.2}
+  m_LocalPosition: {x: -5.048917, y: 1.707, z: 11.81293}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17577,7 +17603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4851007696652854419, guid: 6b69c2714d17738488726629194f7461, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.048917
       objectReference: {fileID: 0}
     - target: {fileID: 4851007696652854419, guid: 6b69c2714d17738488726629194f7461, type: 3}
       propertyPath: m_LocalPosition.y
@@ -17585,7 +17611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4851007696652854419, guid: 6b69c2714d17738488726629194f7461, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 11.61293
       objectReference: {fileID: 0}
     - target: {fileID: 4851007696652854419, guid: 6b69c2714d17738488726629194f7461, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17629,7 +17655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8163620643828317558, guid: 6b69c2714d17738488726629194f7461, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.2
+      value: 0.19999981
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18239,7 +18265,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1931257420}
         m_TargetAssemblyTypeName: Quiz, Assembly-CSharp
-        m_MethodName: NextQuestion
+        m_MethodName: LoadQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18247,6 +18273,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1931257420}
+        m_TargetAssemblyTypeName: Quiz, Assembly-CSharp
+        m_MethodName: SetLevel
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: CGALevel
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &2013029347

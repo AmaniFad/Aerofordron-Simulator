@@ -8,6 +8,7 @@ public class DronController : MonoBehaviour
     [SerializeField] private float maxHeight;
     [SerializeField] private float maxDistanceFromPlayer;
     private bool isDronPlatformOn;
+    private bool canMove;
     private MovementBehaviour mMovementBehaviour;
     void Start()
     {
@@ -16,7 +17,7 @@ public class DronController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (BatteryController.Instance.HasBattery())
+        if (BatteryController.Instance.HasBattery() && canMove)
         {
             Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
             float verticalDirection = DronInputController.Instance.GetVerticalInput();
@@ -35,4 +36,19 @@ public class DronController : MonoBehaviour
             mMovementBehaviour.Rotate(DronInputController.Instance.GetRotationalInput());
         }
     }
+
+    public void StartDron()
+    {
+        PlayerStateController.instance.CameraToDron(gameObject);
+        PlayerStateController.instance.StopMoving();
+        canMove = true;
+    }
+
+    public void StopDron()
+    {
+        PlayerStateController.instance.CameraToDron(new GameObject());
+        PlayerStateController.instance.ResumeMoving();
+    }
 }
+
+

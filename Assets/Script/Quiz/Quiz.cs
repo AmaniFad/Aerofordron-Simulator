@@ -6,7 +6,6 @@ using TMPro;
 using UnityEngine.Purchasing.MiniJSON;
 using System.Xml.Schema;
 using System.Linq;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class Quiz : MonoBehaviour
 {
@@ -22,7 +21,7 @@ public class Quiz : MonoBehaviour
     private QuestionData questionsData;
     private int[] answersIndex;
     private int currentIndex;
-
+    private string levelName;
 
     #region Classes
     [System.Serializable]
@@ -60,6 +59,7 @@ public class Quiz : MonoBehaviour
 
         }
     }
+
 
 
 
@@ -145,6 +145,16 @@ public class Quiz : MonoBehaviour
     {
         currentIndex = question;
         LoadQuestion();
+    }
+
+    public void SetLevel(string sceneName)
+    {
+        levelName = sceneName;
+    }
+
+    public string GetLevelName()
+    {
+        return levelName;
     }
     #endregion
 }

@@ -50,4 +50,12 @@ public class PlayerStateController : MonoBehaviour
         playerCamera.gameObject.SetActive(true);
         staticCamera.gameObject.SetActive(false);
     }
+
+    public void CameraToDron(GameObject dron)
+    {
+        if (dron == null)
+        {
+            playerCamera.LookAt = dron.transform;
+        }
+    }
 }

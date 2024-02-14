@@ -8,7 +8,7 @@ public class ScorePlayer : MonoBehaviour
     [SerializeField] private TMP_Text score_Text;
     [SerializeField] private TMP_Text rongAnswers_Text;
     [SerializeField] private TMP_Text aproveTheoric_Text;
-
+    private Quiz quizManager;
     private int scoreQuiz;
     private int scoreInteractive;
 
@@ -17,7 +17,8 @@ public class ScorePlayer : MonoBehaviour
 
     private bool aproveTheoric;
 
-    private int rongAnswers;
+    private int wrongAnswers;
+
     public void SetScoreQuiz(int scoreQuiz)
     {
         this.scoreQuiz = scoreQuiz;
@@ -34,6 +35,7 @@ public class ScorePlayer : MonoBehaviour
 
     void Start()
     {
+        quizManager = GetComponent<Quiz>();
         scoreInteractive = 0;
         scoreQuiz = 0;
     }
@@ -52,18 +54,19 @@ public class ScorePlayer : MonoBehaviour
             aproveTheoric = true;
         }
 
-        rongAnswers = (totalScoreQuiz / 10) - (scoreQuiz / 10);
+        wrongAnswers = (totalScoreQuiz / 10) - (scoreQuiz / 10);
     }
 
     public void SetInfoText()
     {
         CheckTheoricRequisites();
-
+        LevelLoader.Instance.LoadLevel(quizManager.GetLevelName());
         score_Text.text = scoreQuiz.ToString();
-        rongAnswers_Text.text = rongAnswers.ToString();
+        rongAnswers_Text.text = wrongAnswers.ToString();
         if(aproveTheoric)
         {
             aproveTheoric_Text.text = "COMPLETADO";
+
         }
         else
         {

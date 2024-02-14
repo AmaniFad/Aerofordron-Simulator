@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CGAContrller : MonoBehaviour
+public class CGAController : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
 
