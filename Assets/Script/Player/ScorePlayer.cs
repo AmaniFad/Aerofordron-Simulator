@@ -70,7 +70,7 @@ public class ScorePlayer : MonoBehaviour
         wrongAnswers = (totalScoreQuiz / 10) - (scoreQuiz / 10);
     }
 
-    public void CheckPracticRequisites()
+    public void CheckPracticRequisites(int wrongA)
     {
         int percentageOfTotalScorePractic = (scoreInteractive * 100) / totalScorePractic;
         if(percentageOfTotalScorePractic >= 50)
@@ -78,15 +78,21 @@ public class ScorePlayer : MonoBehaviour
             aprovePractic = true;
         }
 
-        wrongAnswers = (totalScorePractic / 10) - (scoreInteractive / 10);
+        wrongAnswers = wrongA;
+        Debug.Log(wrongAnswers + "wrongA");
     }
 
-    public void SetInfoTextPractic(TMP_Text score_T, TMP_Text wrongA_T, TMP_Text aproveP) 
+    public void SetInfoTextPractic(TMP_Text score_T, TMP_Text wrongA_T, TMP_Text aproveP, int wrongA) 
     {
-        CheckPracticRequisites();
-
+        CheckPracticRequisites(wrongA);
+        
+        if(scoreInteractive < 0)
+        {
+            scoreInteractive = 0;
+        }
         score_T.text = scoreInteractive.ToString();
         wrongA_T.text = wrongAnswers.ToString();
+
         if (aprovePractic)
         {
             aproveP.text = "COMPLETADO";
