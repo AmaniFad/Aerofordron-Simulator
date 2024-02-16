@@ -57,7 +57,15 @@ public class ScorePlayer : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    public void ResetValues()
+    {
+        scoreInteractive = 0;
+        scoreQuiz = 0;
+        totalScorePractic = 0;
+        totalScoreQuiz = 0;
+        aproveTheoric = false;
+        aprovePractic = false;
+}
     public void CheckTheoricRequisites()
     {
         int percentageOfTotalScoreQuiz = (scoreQuiz * 100) / totalScoreQuiz;
@@ -121,5 +129,10 @@ public class ScorePlayer : MonoBehaviour
         {
             aproveTheoric_Text.text = "NO COMPLETADO";
         }
+    }
+
+    public void SaveInfo(string level, int score)
+    {
+        PlayerPrefs.SetInt(level, score);
     }
 }

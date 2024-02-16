@@ -84,6 +84,8 @@ public class CGAController : MonoBehaviour
         ScorePlayer.Instance.SetTotalScorePractic(totalScore);
         ScorePlayer.Instance.SetScoreInteractive(score);
         ScorePlayer.Instance.SetInfoTextPractic(score_Text, rongAnswers_Text, aproveTheoric_Text, wrong);
+
+        ScorePlayer.Instance.SaveInfo("CGA Pratic", score);
     }
 
     public void SetCursor(bool visible)

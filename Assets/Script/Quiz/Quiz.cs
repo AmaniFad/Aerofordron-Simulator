@@ -22,6 +22,7 @@ public class Quiz : MonoBehaviour
     private int[] answersIndex;
     private int currentIndex;
     private string levelName;
+    private string jsonLevel;
 
     #region Classes
     [System.Serializable]
@@ -43,6 +44,7 @@ public class Quiz : MonoBehaviour
     #region Metodos
     public void SetJson(string json)
     {
+        jsonLevel = json;
         string rutaArchivo = Application.dataPath + "/Questions/QuestionsInJson/" + json + ".json";
         string contenidoJSON = System.IO.File.ReadAllText(rutaArchivo);
         questionsData = JsonUtility.FromJson<QuestionData>(contenidoJSON);
@@ -122,9 +124,14 @@ public class Quiz : MonoBehaviour
             }
         }
         int totalScore = questionsData.questions.Length * 10;
+
+        GetComponent<ScorePlayer>().ResetValues();
+
         GetComponent<ScorePlayer>().SetTotalScoreQuiz(totalScore);
 
         GetComponent<ScorePlayer>().SetScoreQuiz(score);
+
+        GetComponent<ScorePlayer>().SaveInfo(jsonLevel + " Theoric", score);
 
         nextButton.SetActive(true);
     }
