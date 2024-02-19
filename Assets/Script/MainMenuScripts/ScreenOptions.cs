@@ -28,9 +28,10 @@ public class ScreenOptions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CheckIfPlayerPrefsContainsPlayerConfiguration();
+        playerPrefOptions = GetCurrentPlayerPrefsOptions();
         currentPlayerOptions = new int[3];
         ComproveIfConfigChanged();
-        playerPrefOptions = GetCurrentPlayerPrefsOptions();
         screenModeOptions = new string[2];
         screenModeOptions[0] = "On";
         screenModeOptions[1] = "Off";
@@ -63,7 +64,8 @@ public class ScreenOptions : MonoBehaviour
     }
     public void ChangeResolutionOption(int direction)
     {
-        currentResolutionOption = ChangeOption(direction,currentResolutionOption,resolutionOptions.Length);
+        Debug.Log(resolutionOptions);
+        currentResolutionOption = ChangeOption(direction, currentResolutionOption, resolutionOptions.Length);
         currentPlayerOptions[0] = currentResolutionOption;
         resolutionText.text = resolutionOptions[currentResolutionOption];
         ComproveIfConfigChanged();
@@ -81,7 +83,7 @@ public class ScreenOptions : MonoBehaviour
     //Direction es -1 o 1 dependiendo si tira para alante en la array o al reves
     private int ChangeOption(int direction, int currentOption, int maxArrayIndex)
     {
-        if (currentOption  + direction >= 0 && currentOption + direction < maxArrayIndex)
+        if (currentOption + direction >= 0 && currentOption + direction < maxArrayIndex)
         {
             currentOption += direction;
 
@@ -90,7 +92,7 @@ public class ScreenOptions : MonoBehaviour
         {
             currentOption = maxArrayIndex - 1;
         }
-        else if (currentOption + direction > maxArrayIndex -1)
+        else if (currentOption + direction > maxArrayIndex - 1)
         {
             currentOption = 0;
         }
@@ -191,9 +193,47 @@ public class ScreenOptions : MonoBehaviour
         }
     }
 
-    public void LoadDefaultConfigToPlayerPrefs()
+    //Miro si el jugador ha tenido alguna configuracion previa y sino le asigno la default
+    public void CheckIfPlayerPrefsContainsPlayerConfiguration()
     {
+        if (!PlayerPrefs.HasKey("currentResolutionOption"))
+        {
+            PlayerPrefs.SetInt("currentResolutionOption", currentResolutionOption);
 
+        }
+        if (!PlayerPrefs.HasKey("currentRefreshRateOption"))
+        {
+            PlayerPrefs.SetInt("currentRefreshRateOption", currentRefreshRateOption);
+            PlayerPrefs.SetInt("RefreshRate", 60);
+        }
+        if (!PlayerPrefs.HasKey("currentScreenModeOption"))
+        {
+            PlayerPrefs.SetInt("currentScreenModeOption", currentScreenModeOption);
+            PlayerPrefs.SetInt("Fullscreen", 0);
+        }
     }
 
+    public void ChangeVsync()
+    {
+        if (QualitySettings.vSyncCount == 0)
+        {
+            QualitySettings.vSyncCount = 1;
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 0;
+        }
+    }
+
+    public void ChangeAntiAlising()
+    {
+        if (QualitySettings.antiAliasing == 0)
+        {
+            QualitySettings.vSyncCount = 1;
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 0;
+        }
+    }
 }
