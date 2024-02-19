@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.Purchasing.MiniJSON;
 using System.Xml.Schema;
 using System.Linq;
+using UnityEngine.UIElements;
 
 public class Quiz : MonoBehaviour
 {
@@ -23,31 +24,12 @@ public class Quiz : MonoBehaviour
     private int currentIndex;
     private string levelName;
 
-    #region Classes
-    [System.Serializable]
-    public class Question
-    {
-        public string question;
-        public string[] answers;
-        public int correctIndex;
-    }
-
-    [System.Serializable]
-    public class QuestionData
-    {
-        public Question[] questions;
-    }
-    #endregion
-
-
     #region Metodos
     public void SetJson(string json)
     {
-        string rutaArchivo = Application.dataPath + "/Questions/QuestionsInJson/" + json + ".json";
-        string contenidoJSON = System.IO.File.ReadAllText(rutaArchivo);
-        questionsData = JsonUtility.FromJson<QuestionData>(contenidoJSON);
+        questionsData = CallJson.FindJson(json);
+        currentIndex = 0;
         answersIndex = new int[questionsData.questions.Length];
-        MenuController.instance.StartQuestionMenu(questionsData.questions.Length);
     }
 
     public void AddAnswerPlayer(int index)
@@ -59,9 +41,6 @@ public class Quiz : MonoBehaviour
 
         }
     }
-
-
-
 
     public void LoadQuestion()
     {

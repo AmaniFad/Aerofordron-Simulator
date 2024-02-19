@@ -39,6 +39,7 @@ public class DronController : MonoBehaviour
 
     public void StartDron()
     {
+        PlayerReferences.instance.SetDron(gameObject);
         PlayerStateController.instance.CameraToDron(gameObject);
         PlayerStateController.instance.StopMoving();
         canMove = true;
@@ -46,6 +47,7 @@ public class DronController : MonoBehaviour
 
     public void StopDron()
     {
+        PlayerReferences.instance.SetDron(new GameObject());
         PlayerStateController.instance.CameraToDron(new GameObject());
         PlayerStateController.instance.ResumeMoving();
         canMove = false;
