@@ -69,12 +69,10 @@ public class CGAController : MonoBehaviour
             if (answersIndex[i] == questionsData.questions[i].correctIndex)
             {
                 score += 10;
-                Debug.Log("bien" + i);
             }
             else
             {
                 score -= 5;
-                Debug.Log("mal" + i);
 
                 wrong++;
             }

@@ -40,16 +40,16 @@ public class PlayerStateController : MonoBehaviour
 
     public void StopCameraMovement()
     {
-        staticCamera.transform.position = Camera.main.transform.position;
-        staticCamera.transform.rotation = Camera.main.transform.rotation;
+        //staticCamera.transform.position = Camera.main.transform.position;
+        //staticCamera.transform.rotation = Camera.main.transform.rotation;
         playerCamera.gameObject.SetActive(false);
-        staticCamera.gameObject.SetActive(true);
+        //staticCamera.gameObject.SetActive(true);
     }
 
     public void ResumeCameraMovement()
     {
         playerCamera.gameObject.SetActive(true);
-        staticCamera.gameObject.SetActive(false);
+        //staticCamera.gameObject.SetActive(false);
     }
 
     public void CameraToDron(GameObject dron)
