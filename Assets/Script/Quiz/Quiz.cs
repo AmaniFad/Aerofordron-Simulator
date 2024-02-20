@@ -43,6 +43,7 @@ public class Quiz : MonoBehaviour
 
     public void LoadQuestion()
     {
+        Debug.Log(currentIndex);
         if (currentIndex < questionsData.questions.Length)
         {
             MenuController.instance.CurrentQuestion(currentIndex);

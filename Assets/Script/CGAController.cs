@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
 
 public class CGAController : MonoBehaviour
 {
@@ -14,80 +13,35 @@ public class CGAController : MonoBehaviour
     [SerializeField] private TMP_Text a2;
     [SerializeField] private TMP_Text a3;
     [SerializeField] private TMP_Text a4;
-
-    [SerializeField] private TMP_Text score_Text;
-    [SerializeField] private TMP_Text rongAnswers_Text;
-    [SerializeField] private TMP_Text aproveTheoric_Text;
     private QuestionData questionsData;
     private List<int> answersIndex = new List<int>();
-
-    int indexArray;
+    int i;
     void Start()
     {
-        SetJson(Json);
-        indexArray = 0;
+         SetJson(Json);
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+
+    }
     public void SetJson(string json)
     {
         questionsData = CallJson.FindJson(json);
     }
     public void setQuestion()
     {
-        int j = 3;
-        question.text = questionsData.questions[j].question;
-        a1.text = questionsData.questions[j].answers[0];
-        a2.text = questionsData.questions[j].answers[1];
-        a3.text = questionsData.questions[j].answers[2];
-        a4.text = questionsData.questions[j].answers[3];
+        int i = 4;
+        question.text = questionsData.questions[i].question;
+        a1.text = questionsData.questions[i].answers[0];
+        a2.text = questionsData.questions[i].answers[1];
+        a3.text = questionsData.questions[i].answers[2];
+        a4.text = questionsData.questions[i].answers[3];
     }
     public void PlayAudio()
     {
         audioSource.Play();
-    }
-
-    public void AddAnswers(int index)
-    {
-        answersIndex.Add(index);
-    }
-    public void SetIndex(int index)
-    {
-        indexArray = index;
-        Debug.Log(indexArray);
-    }
-    public void AddAnswerDrop()
-    {
-        AddAnswers(indexArray);
-    }
-    public void CheckAnswer()
-    {
-        int score = 0;
-        int wrong = 0;
-
-        for(int i = 0; i < answersIndex.Count; i++)
-        {
-            if (answersIndex[i] == questionsData.questions[i].correctIndex)
-            {
-                score += 10;
-                Debug.Log("bien" + i);
-            }
-            else
-            {
-                score -= 5;
-                Debug.Log("mal" + i);
-
-                wrong++;
-            }
-        }
-        int totalScore = questionsData.questions.Length * 10;
-
-        ScorePlayer.Instance.SetTotalScorePractic(totalScore);
-        ScorePlayer.Instance.SetScoreInteractive(score);
-        ScorePlayer.Instance.SetInfoTextPractic(score_Text, rongAnswers_Text, aproveTheoric_Text, wrong);
-    }
-
-    public void SetCursor(bool visible)
-    {
-        Cursor.visible = visible;
     }
 }
