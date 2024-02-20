@@ -56,7 +56,6 @@ public class PlayerInteract : MonoBehaviour
             {
                 // Check if the hit object implements the IInteract interface
                 IInteractable interactableObject = hitInfo.collider.gameObject.GetComponent<IInteractable>();
-                Debug.Log(hitInfo.collider.gameObject);
 
                 if (interactableObject != null)
                 {

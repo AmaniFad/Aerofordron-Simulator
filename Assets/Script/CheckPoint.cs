@@ -14,6 +14,10 @@ public class CheckPoint : MonoBehaviour
             onCheckPoint.Invoke();
             StartCoroutine(_isCP());
         }
+        else if (other.CompareTag("Dron"))
+        {
+            onCheckPoint.Invoke();
+        }
     }
 
     IEnumerator _isCP()
