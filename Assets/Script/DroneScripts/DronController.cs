@@ -10,8 +10,12 @@ public class DronController : MonoBehaviour
     private bool isDronPlatformOn;
     private bool canMove;
     private MovementBehaviour mMovementBehaviour;
+    private bool isPlaying;
+
+    private FMOD.Studio.EventInstance helixSound;
     void Start()
     {
+        isPlaying = false;
         mMovementBehaviour = GetComponent<MovementBehaviour>();
     }
 
@@ -19,6 +23,11 @@ public class DronController : MonoBehaviour
     {
         if (canMove)
         {
+            if (!isPlaying)
+            {
+                PlayDroneSound();
+                isPlaying = true;
+            }
             Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
             float verticalDirection = DronInputController.Instance.GetVerticalInput();
             if (transform.position.y >= maxHeight)
@@ -35,10 +44,15 @@ public class DronController : MonoBehaviour
             mMovementBehaviour.Move(new Vector3(direction.x, verticalDirection, direction.z));
             mMovementBehaviour.Rotate(DronInputController.Instance.GetRotationalInput());
         }
+        else
+        {
+            StopPlayDroneSound();
+        }
     }
 
     public void StartDron()
     {
+        PlayerReferences.instance.SetDron(gameObject);
         PlayerStateController.instance.CameraToDron(gameObject);
         PlayerStateController.instance.StopMoving();
         canMove = true;
@@ -46,9 +60,24 @@ public class DronController : MonoBehaviour
 
     public void StopDron()
     {
+        PlayerReferences.instance.SetDron(new GameObject());
         PlayerStateController.instance.CameraToDron(new GameObject());
         PlayerStateController.instance.ResumeMoving();
         canMove = false;
+    }
+
+    private void PlayDroneSound()
+    {
+        helixSound = FMODUnity.RuntimeManager.CreateInstance("event:/DronHelix");
+        helixSound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        helixSound.start();
+    }
+
+    private void StopPlayDroneSound()
+    {
+        helixSound = FMODUnity.RuntimeManager.CreateInstance("event:/DronHelix");
+        helixSound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        helixSound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 }
 
