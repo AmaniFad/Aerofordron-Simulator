@@ -34,11 +34,10 @@ public class Quiz : MonoBehaviour
 
     public void AddAnswerPlayer(int index)
     {
-        if (index < questionsData.questions.Length)
+        if (currentIndex < answersIndex.Length)
         {
             answersIndex[currentIndex] = index;
             MenuController.instance.QuestionAnswered(currentIndex);
-
         }
     }
 

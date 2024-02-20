@@ -60,6 +60,7 @@ public class ScorePlayer : MonoBehaviour
     public void SetInfoText()
     {
         CheckTheoricRequisites();
+        LevelLoader.Instance.UnloadCurrentLevel();
         LevelLoader.Instance.LoadLevel(quizManager.GetLevelName());
         score_Text.text = scoreQuiz.ToString();
         rongAnswers_Text.text = wrongAnswers.ToString();

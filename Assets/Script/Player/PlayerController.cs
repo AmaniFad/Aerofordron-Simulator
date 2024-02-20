@@ -9,9 +9,11 @@ public class PlayerController : MonoBehaviour
     private Transform cameraTransform;
     private MovementBehaviour MB;
     private PlayerInteract playerInteract;
-
+    private FMOD.Studio.EventInstance foosteps;
+    private Coroutine isMoving;
     void Start()
     {
+        isMoving = null;
         MB = GetComponent<MovementBehaviour>();
         cameraTransform = Camera.main.transform;
         Cursor.visible = false;
@@ -38,7 +40,25 @@ public class PlayerController : MonoBehaviour
             cameraForward.Normalize();
             cameraRight.Normalize();
             Vector3 input = cameraForward * playerWasd.y + cameraRight * playerWasd.x;
+            if (isMoving == null && input != Vector3.zero)
+            {
+                isMoving = StartCoroutine(_PlayFootstep());
+            }
             MB.MoveRB3D(input);
         }
     }
+
+
+    private IEnumerator _PlayFootstep()
+    {
+        foosteps = FMODUnity.RuntimeManager.CreateInstance("event:/Footsteps");
+        foosteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        foosteps.start();
+        foosteps.release();
+        yield return new WaitForSeconds(0.4f);
+        isMoving = null;
+    }
+
+
+
 }

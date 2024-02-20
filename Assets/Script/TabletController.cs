@@ -22,14 +22,7 @@ public class TabletController : MonoBehaviour
 
     private IEnumerator _DeactivateTablet()
     {
-
         yield return new WaitForSeconds(animationTimer);
-
-
         gameObject.SetActive(false);
-
-
-
-
     }
 }
