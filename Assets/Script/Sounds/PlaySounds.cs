@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,18 +6,23 @@ using UnityEngine;
 
 public class PlaySounds : MonoBehaviour
 {
-    private StudioBankLoader bankLoader;
-    private FMOD.Studio.Bus musicBank;
-    private FMOD.Studio.Bus sfxBank;
-    private FMOD.Studio.Bus masterBank;
     private FMOD.Studio.EventInstance foosteps;
+    const string VCAPath = "vca:/";
+    const string generalVCAPath = "General";
+    const string musicVCAPath = "Music";
+    const string SFXVCAPath = "SFX";
 
-    private void Start()
+
+    VCA generalVCA;
+    VCA sfxVCA;
+    VCA musicVCA;
+
+
+    public void Start()
     {
-        masterBank = FMODUnity.RuntimeManager.GetBus("bus:/");
-        musicBank = FMODUnity.RuntimeManager.GetBus("bus:/Music");
-        sfxBank = FMODUnity.RuntimeManager.GetBus("bus:/SFX");
-
+        generalVCA = FMODUnity.RuntimeManager.GetVCA(VCAPath + generalVCAPath);
+        sfxVCA = FMODUnity.RuntimeManager.GetVCA(VCAPath + musicVCAPath);
+        musicVCA = FMODUnity.RuntimeManager.GetVCA(VCAPath + SFXVCAPath);
     }
     private void PlayFootstep()
     {
@@ -32,16 +38,16 @@ public class PlaySounds : MonoBehaviour
 
     public void ChangeVolumeMusic(float volume)
     {
-        musicBank.setVolume(volume);
+        musicVCA.setVolume(volume);
     }
 
     public void ChangeVolumeSFX(float volume)
     {
-        sfxBank.setVolume(volume);
+        sfxVCA.setVolume(volume);
     }
     public void ChangeVolumeMaster(float volume)
     {
-        masterBank.setVolume(volume);
+        generalVCA.setVolume(volume);
     }
 
 

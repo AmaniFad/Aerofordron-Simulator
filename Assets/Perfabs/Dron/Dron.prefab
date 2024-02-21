@@ -94,6 +94,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ac5cbe9c7c26269418e8cf4016bfbc45, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6357686158806793802}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ac5cbe9c7c26269418e8cf4016bfbc45, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6962797749137560601}
   m_SourcePrefab: {fileID: 100100000, guid: ac5cbe9c7c26269418e8cf4016bfbc45, type: 3}
 --- !u!1 &3701365833662557203 stripped
 GameObject:
@@ -125,7 +128,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 32
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &1964536408801971044
 BoxCollider:
@@ -176,6 +179,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHeight: 120
   maxDistanceFromPlayer: 0
+  soundReference:
+    Guid:
+      Data1: -2005427756
+      Data2: 1240890071
+      Data3: -1081665381
+      Data4: 736160112
+    Path: event:/DronHelix
+  tiltAngle: 20
 --- !u!114 &2267011201237281908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,3 +229,34 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &6962797749137560601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3701365833662557203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1

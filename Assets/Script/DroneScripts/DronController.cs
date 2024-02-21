@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +12,13 @@ public class DronController : MonoBehaviour
     private bool canMove;
     private MovementBehaviour mMovementBehaviour;
     private bool isPlaying;
-
+    [SerializeField] private EventReference soundReference;
     private FMOD.Studio.EventInstance helixSound;
+    private StudioEventEmitter eventEmitter;
+    [SerializeField] private float tiltAngle;
     void Start()
     {
+        eventEmitter = GetComponent<StudioEventEmitter>();
         isPlaying = false;
         mMovementBehaviour = GetComponent<MovementBehaviour>();
     }
@@ -43,6 +47,10 @@ public class DronController : MonoBehaviour
 
             mMovementBehaviour.Move(new Vector3(direction.x, verticalDirection, direction.z));
             mMovementBehaviour.Rotate(DronInputController.Instance.GetRotationalInput());
+            float tiltAroundZ = -inputDirection.x * tiltAngle; // Left-right tilt
+            float tiltAroundX = +inputDirection.y * tiltAngle; // Forward-backward tilt
+            Quaternion targetRotation = Quaternion.Euler(tiltAroundX, 0f, tiltAroundZ);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
         }
         else
         {
@@ -68,16 +76,16 @@ public class DronController : MonoBehaviour
 
     private void PlayDroneSound()
     {
-        helixSound = FMODUnity.RuntimeManager.CreateInstance("event:/DronHelix");
-        helixSound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-        helixSound.start();
+
+        eventEmitter.EventReference = soundReference;
+        eventEmitter.Play();
+
     }
 
     private void StopPlayDroneSound()
     {
-        helixSound = FMODUnity.RuntimeManager.CreateInstance("event:/DronHelix");
-        helixSound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-        helixSound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        eventEmitter.Event = "event:/DronHelix";
+        eventEmitter.Stop();
     }
 }
 
