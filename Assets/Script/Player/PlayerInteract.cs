@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,12 +8,13 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private float raycastDistance = 10f;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private Transform InteractionZone;
-
     private InteractableMando grabbeableObj;
     private Vector3 grabbeableObjOriginalScale;
+    private PlaySounds sound;
 
     private void Start()
     {
+        sound = GetComponent<PlaySounds>();
         grabbeableObj = null;
     }
     public void GrabItem(InteractableMando grabbeable)
@@ -43,7 +45,7 @@ public class PlayerInteract : MonoBehaviour
         Debug.DrawRay(Camera.main.transform.position,ray.direction);
         RaycastHit hitInfo ; // Information about the object hit by the ray
 
-
+        
         if (grabbeableObj != null)
         {
             grabbeableObj.GetDropped(grabbeableObj);
@@ -59,6 +61,7 @@ public class PlayerInteract : MonoBehaviour
 
                 if (interactableObject != null)
                 {
+                    sound.CallOneShot("event:/Grab");
                     Debug.Log("Interact");
                     // Call the Interact method on the hit object
                     interactableObject.Interact();
