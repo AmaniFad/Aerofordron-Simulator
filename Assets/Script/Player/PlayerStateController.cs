@@ -66,11 +66,11 @@ public class PlayerStateController : MonoBehaviour
 
     public void CameraToPlayer()
     {
-
-
         playerCamera.Priority = 11;
         dronCamera.Priority = 10;
-
-
+    }
+    public CinemachineVirtualCamera GetDronCamera()
+    {
+        return dronCamera;
     }
 }

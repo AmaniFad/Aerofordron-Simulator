@@ -20,9 +20,9 @@ public class MovementBehaviour : MonoBehaviour
         rb.AddForce(movementDirection.normalized * speed * Time.deltaTime , ForceMode.Force);
     }
 
-    public void Rotate(float rotation)
+    public void Rotate(Vector3 rotation)
     {
-        rb.gameObject.transform.Rotate(new Vector3(0f,rotation * rotationSpeed,0f));
+        rb.gameObject.transform.Rotate(rotation * rotationSpeed);
     }
 
     //Esto es para que haga hover cuando lo dejes quieto

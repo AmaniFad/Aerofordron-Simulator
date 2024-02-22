@@ -81,6 +81,9 @@ PrefabInstance:
       addedObject: {fileID: 5230312765170151597}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ac5cbe9c7c26269418e8cf4016bfbc45, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 3303113829807310727}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ac5cbe9c7c26269418e8cf4016bfbc45, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1964536408801971044}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ac5cbe9c7c26269418e8cf4016bfbc45, type: 3}
       insertIndex: -1
@@ -130,6 +133,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &3303113829807310727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3701365833662557203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a83e5e0bd5cbc24197b14c23696bb97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDistanceForZoom: 20
 --- !u!65 &1964536408801971044
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -179,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHeight: 120
   maxDistanceFromPlayer: 0
+  groundedRayDistance: 0.5
   soundReference:
     Guid:
       Data1: -2005427756
@@ -187,6 +204,7 @@ MonoBehaviour:
       Data4: 736160112
     Path: event:/DronHelix
   tiltAngle: 20
+  rotationSpeed: 75
 --- !u!114 &2267011201237281908
 MonoBehaviour:
   m_ObjectHideFlags: 0

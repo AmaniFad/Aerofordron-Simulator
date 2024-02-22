@@ -8,7 +8,6 @@ public class PlayerReferences : MonoBehaviour
 
     [SerializeField] private GameObject Player;
     private GameObject dron;
-    
     private Rigidbody rb;
     void Start()
     {

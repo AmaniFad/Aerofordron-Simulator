@@ -6922,7 +6922,7 @@ GameObject:
   - component: {fileID: 807144597}
   - component: {fileID: 807144596}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Level3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10271,7 +10271,7 @@ GameObject:
   - component: {fileID: 1180688862}
   - component: {fileID: 1180688861}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Level1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10350,7 +10350,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Limitaciones del Rendimiento Humano
+          m_StringArgument: Atenuacion en aire
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1919162595}
@@ -10389,16 +10389,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1931257419}
+      - m_Target: {fileID: 1931257420}
         m_TargetAssemblyTypeName: Quiz, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: SetLevel
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: AtenuacionAireLevel
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1689151908}
@@ -13649,6 +13649,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509405017}
   m_CullTransparentMesh: 1
+--- !u!1 &1518931872 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 489691716106009057, guid: 6b69c2714d17738488726629194f7461, type: 3}
+  m_PrefabInstance: {fileID: 1997833317}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1534247950
 GameObject:
   m_ObjectHideFlags: 0
@@ -14957,7 +14962,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1675489635}
   m_Layer: 5
-  m_Name: Button
+  m_Name: LevelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15903,12 +15908,28 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 831894895107864414, guid: 6b69c2714d17738488726629194f7461, type: 3}
   m_PrefabInstance: {fileID: 1997833317}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1518931872}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1827875910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518931872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4700f9f03ad19f94baf0367cb7a9c988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Width: 2
+  m_Damping: 2.69
+  m_MinFOV: 60
+  m_MaxFOV: 60
 --- !u!1 &1828268919
 GameObject:
   m_ObjectHideFlags: 0
@@ -18491,7 +18512,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 489691716106009057, guid: 6b69c2714d17738488726629194f7461, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1827875910}
   m_SourcePrefab: {fileID: 100100000, guid: 6b69c2714d17738488726629194f7461, type: 3}
 --- !u!114 &1997833318 stripped
 MonoBehaviour:
@@ -18963,7 +18987,7 @@ GameObject:
   - component: {fileID: 2013029347}
   - component: {fileID: 2013029346}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Level2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
