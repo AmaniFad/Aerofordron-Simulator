@@ -4695,7 +4695,6 @@ RectTransform:
   - {fileID: 1061244803}
   - {fileID: 602209129}
   - {fileID: 1881359272}
-  - {fileID: 902161110}
   m_Father: {fileID: 1919162596}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -8217,16 +8216,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902161109}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3507574, y: 1.3507574, z: 1.3507574}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00035762796}
+  m_LocalScale: {x: 1.3507574, y: 1.3507572, z: 1.3507574}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 901750559}
-  m_Father: {fileID: 558643281}
+  m_Father: {fileID: 1919162596}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -33, y: -504}
+  m_AnchoredPosition: {x: -13.999624, y: -504}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &902161111
@@ -8320,6 +8319,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: event:/InterfaceClick
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1844545639}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &902161112
 MonoBehaviour:
@@ -8650,7 +8661,7 @@ GameObject:
   - component: {fileID: 967341991}
   - component: {fileID: 967341990}
   m_Layer: 5
-  m_Name: QuestionButtons
+  m_Name: QuestionLittleButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15216,6 +15227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1048305362}
+  dronHud: {fileID: 1224679932}
 --- !u!114 &1689151908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16314,7 +16326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1844545640
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17426,6 +17438,7 @@ RectTransform:
   - {fileID: 261656811}
   - {fileID: 2036651058}
   - {fileID: 558643281}
+  - {fileID: 902161110}
   - {fileID: 2085720329}
   - {fileID: 615062371}
   - {fileID: 1969845832}

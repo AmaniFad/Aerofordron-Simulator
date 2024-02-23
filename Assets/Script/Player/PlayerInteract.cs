@@ -50,6 +50,7 @@ public class PlayerInteract : MonoBehaviour
         {
             grabbeableObj.GetDropped(grabbeableObj);
             DropObject();
+            sound.CallOneShot("event:/Grab");
         }
         else
         {

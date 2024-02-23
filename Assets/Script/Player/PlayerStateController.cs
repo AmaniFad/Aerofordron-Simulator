@@ -62,6 +62,11 @@ public class PlayerStateController : MonoBehaviour
             dronCamera.LookAt = dron.transform;
             playerCamera.Priority = 10;
         }
+        else
+        {
+            dronCamera.Priority = 10;
+            playerCamera.Priority = 11;
+        }
     }
 
     public void CameraToPlayer()

@@ -111,14 +111,16 @@ public class DronController : MonoBehaviour
         PlayerStateController.instance.CameraToDron(gameObject);
         PlayerStateController.instance.StopMoving();
         canMove = true;
+        PlayerReferences.instance.GetHUD().SetActive(true);
     }
 
     public void StopDron()
     {
         PlayerReferences.instance.SetDron(new GameObject());
-        PlayerStateController.instance.CameraToDron(new GameObject());
+        PlayerStateController.instance.CameraToDron(null);
         PlayerStateController.instance.ResumeMoving();
         canMove = false;
+        PlayerReferences.instance.GetHUD().SetActive(false);
     }
 
     private void PlayDroneSound()

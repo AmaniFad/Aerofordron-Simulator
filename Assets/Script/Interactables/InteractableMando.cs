@@ -11,6 +11,7 @@ public class InteractableMando : MonoBehaviour, IInteractable
     [SerializeField] private GameObject dron;
     DronController controller;
     private bool isPickable;
+    private Vector3 previousPosition;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class InteractableMando : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        previousPosition = transform.position;
         isPickable = false;
         player.GrabItem(this);
         controller.StartDron();
@@ -32,6 +34,7 @@ public class InteractableMando : MonoBehaviour, IInteractable
         {
             isTaked.Invoke();
         }
+        
     }
 
     // Start is called before the first frame update
@@ -41,9 +44,10 @@ public class InteractableMando : MonoBehaviour, IInteractable
     {
         if (grabbeable != null)
         {
+            controller.StopDron();
             grabbeable.GetComponent<InteractableMando>().isPickable = true;
             grabbeable.transform.SetParent(null);
-
+            transform.position = previousPosition;
             grabbeable.GetComponent<Rigidbody>().useGravity = true;
             grabbeable.GetComponent<Rigidbody>().isKinematic = false;
             grabbeable.GetComponent<BoxCollider>().isTrigger = false;

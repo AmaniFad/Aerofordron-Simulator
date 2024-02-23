@@ -7,6 +7,7 @@ public class PlayerReferences : MonoBehaviour
     public static PlayerReferences instance;
 
     [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject dronHud;
     private GameObject dron;
     private Rigidbody rb;
     void Start()
@@ -44,4 +45,10 @@ public class PlayerReferences : MonoBehaviour
     {
         return dron;
     }
+
+    public GameObject GetHUD()
+    {
+        return dronHud;
+    }
+
 }
