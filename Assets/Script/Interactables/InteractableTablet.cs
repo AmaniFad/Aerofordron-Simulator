@@ -8,6 +8,12 @@ public class InteractableTablet : MonoBehaviour, IInteractable
     [SerializeField] private GameObject hudTablet;
 
     [SerializeField] private GameObject tabletPlaceholder;
+
+    public void DropInteractable()
+    {
+        return;
+    }
+
     public void Interact()
     {
         tabletPlaceholder.SetActive(false);

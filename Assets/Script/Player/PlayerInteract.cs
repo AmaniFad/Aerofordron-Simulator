@@ -8,7 +8,7 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private float raycastDistance = 10f;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private Transform InteractionZone;
-    private InteractableMando grabbeableObj;
+    private GameObject grabbeableObj;
     private Vector3 grabbeableObjOriginalScale;
     private PlaySounds sound;
 
@@ -17,9 +17,8 @@ public class PlayerInteract : MonoBehaviour
         sound = GetComponent<PlaySounds>();
         grabbeableObj = null;
     }
-    public void GrabItem(InteractableMando grabbeable)
+    public void GrabItem(GameObject grabbeable)
     {
-        grabbeableObjOriginalScale = grabbeable.transform.localScale;
         Quaternion rotation = grabbeable.transform.rotation;
 
         grabbeable.transform.rotation = Quaternion.identity;
@@ -32,7 +31,6 @@ public class PlayerInteract : MonoBehaviour
     }
     internal void DropObject()
     {
-        grabbeableObj.transform.localScale = grabbeableObjOriginalScale;
         grabbeableObj = null;
 
     }
@@ -41,14 +39,13 @@ public class PlayerInteract : MonoBehaviour
         Debug.Log("InteractStart");
         // Cast a ray from the position of this object forward
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-        Debug.Log(ray.direction);
         Debug.DrawRay(Camera.main.transform.position,ray.direction);
         RaycastHit hitInfo ; // Information about the object hit by the ray
 
         
         if (grabbeableObj != null)
         {
-            grabbeableObj.GetDropped(grabbeableObj);
+            grabbeableObj.GetComponent<IInteractable>().DropInteractable();
             DropObject();
             sound.CallOneShot("event:/Grab");
         }

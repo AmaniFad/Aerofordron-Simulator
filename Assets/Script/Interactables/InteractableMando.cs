@@ -12,9 +12,12 @@ public class InteractableMando : MonoBehaviour, IInteractable
     DronController controller;
     private bool isPickable;
     private Vector3 previousPosition;
+    private Rigidbody rigidBody;
+    private Collider dronPartCollider;
 
     void Start()
     {
+        rigidBody = GetComponent<Rigidbody>();
         controller = dron.GetComponent<DronController>();
         isPickable = true;
         player = PlayerReferences.instance.GetPlayer().GetComponent<PlayerInteract>();
@@ -24,33 +27,30 @@ public class InteractableMando : MonoBehaviour, IInteractable
     {
         previousPosition = transform.position;
         isPickable = false;
-        player.GrabItem(this);
+        player.GrabItem(this.gameObject);
         controller.StartDron();
         //this.transform.localRotation = rotationOffset;
-        GetComponent<Rigidbody>().useGravity = false;
-        GetComponent<Rigidbody>().isKinematic = true;
-        GetComponent<BoxCollider>().isTrigger = true;
+        rigidBody.useGravity = false;
+        rigidBody.isKinematic = true;
+        dronPartCollider.isTrigger = true;
         if (!isPickable)
         {
             isTaked.Invoke();
         }
-        
+
     }
 
     // Start is called before the first frame update
 
 
-    public void GetDropped(InteractableMando grabbeable)
+    public void DropInteractable()
     {
-        if (grabbeable != null)
-        {
-            controller.StopDron();
-            grabbeable.GetComponent<InteractableMando>().isPickable = true;
-            grabbeable.transform.SetParent(null);
-            transform.position = previousPosition;
-            grabbeable.GetComponent<Rigidbody>().useGravity = true;
-            grabbeable.GetComponent<Rigidbody>().isKinematic = false;
-            grabbeable.GetComponent<BoxCollider>().isTrigger = false;
-        }
+        controller.StopDron();
+        isPickable = true;
+        transform.SetParent(null);
+        transform.position = previousPosition;
+        rigidBody.useGravity = true;
+        rigidBody.isKinematic = false;
+        dronPartCollider.isTrigger = false;
     }
 }
