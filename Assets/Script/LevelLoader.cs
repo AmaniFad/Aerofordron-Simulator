@@ -36,4 +36,9 @@ public class LevelLoader : MonoBehaviour
     {
         SceneManager.UnloadSceneAsync(currentLevel);
     }
+
+    public string GetCurrentLevel()
+    {
+        return currentLevel;
+    }
 }

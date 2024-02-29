@@ -7,11 +7,12 @@ public class PlayerReferences : MonoBehaviour
     public static PlayerReferences instance;
 
     [SerializeField] private GameObject Player;
-    [SerializeField] private GameObject dronHud;
+    [SerializeField]private GameObject dronHud;
     private GameObject dron;
     private Rigidbody rb;
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         if (instance == null)
         {
             instance = this;

@@ -16,6 +16,7 @@ public class TabletController : MonoBehaviour
         tabletAnimator.SetTrigger("dropTablet");
         animationTimer = tabletAnimator.GetCurrentAnimatorStateInfo(0).length;
         StartCoroutine(_DeactivateTablet());
+        PlayerStateController.instance.ResumeMoving();
         PlayerStateController.instance.ResumeCameraMovement();
         Cursor.visible = false;
     }

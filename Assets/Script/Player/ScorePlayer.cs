@@ -115,6 +115,10 @@ public class ScorePlayer : MonoBehaviour
     {
         CheckTheoricRequisites();
         //cargo nivel
+        if (LevelLoader.Instance.GetCurrentLevel() != null)
+        {
+            LevelLoader.Instance.UnloadCurrentLevel();
+        }
         LevelLoader.Instance.LoadLevel(quizManager.GetLevelName());
 
         score_Text.text = scoreQuiz.ToString();
@@ -131,6 +135,10 @@ public class ScorePlayer : MonoBehaviour
         }
     }
 
+    public void FinishTest()
+    {
+        PlayerStateController.instance.ResumeMoving();
+    }
     public void SaveInfo(string level, int score)
     {
         PlayerPrefs.SetInt(level, score);
