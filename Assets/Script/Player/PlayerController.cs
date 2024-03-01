@@ -6,6 +6,7 @@ using UnityEngine.PlayerLoop;
 
 public class PlayerController : MonoBehaviour
 {
+    private static PlayerController Instance;
     [SerializeField] private float runMultiplier;
     private Transform cameraTransform;
     private MovementBehaviour MB;
@@ -14,6 +15,14 @@ public class PlayerController : MonoBehaviour
     private Coroutine isMoving;
     void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else 
+        {
+            Destroy(gameObject);
+        }
         DontDestroyOnLoad(this.gameObject);
         isMoving = null;
         MB = GetComponent<MovementBehaviour>();

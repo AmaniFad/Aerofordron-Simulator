@@ -5,11 +5,24 @@ using UnityEngine;
 public class DoorModeLoaders : MonoBehaviour
 {
     [SerializeField] private string sceneToLoad;
+    private bool canTrigger;
 
 
-
+    private void Start()
+    {
+        canTrigger = true;
+    }
     private void OnTriggerEnter(Collider other)
     {
-        SceneLoader.Instance.SceneLoad(sceneToLoad);
+        if (canTrigger)
+        {
+            SceneLoader.Instance.SceneLoad(sceneToLoad);
+            canTrigger = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        canTrigger = true;
     }
 }

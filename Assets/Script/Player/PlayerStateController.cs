@@ -10,7 +10,7 @@ public class PlayerStateController : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera staticCamera;
     [SerializeField] CinemachineVirtualCamera dronCamera;
     [SerializeField] private GameObject player;
-    private bool canMove;
+    [SerializeField] private bool canMove;
     // Start is called before the first frame update
 
     private void Start()
@@ -20,6 +20,7 @@ public class PlayerStateController : MonoBehaviour
             instance = this;
         }
         ResumeMoving();
+        DontDestroyOnLoad(gameObject);
     }
 
     public void StopMoving()
