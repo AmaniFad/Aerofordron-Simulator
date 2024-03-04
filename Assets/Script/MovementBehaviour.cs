@@ -37,4 +37,11 @@ public class MovementBehaviour : MonoBehaviour
         Vector3 velocityXZ = input.normalized * speed;
         rb.velocity = new Vector3(velocityXZ.x, rb.velocity.y, velocityXZ.z);
     }
+    public void RunRB(Vector3 input,float runMultiplier)
+    {
+
+        input.y = 0;
+        Vector3 velocityXZ = input.normalized * speed * runMultiplier;
+        rb.velocity = new Vector3(velocityXZ.x, rb.velocity.y, velocityXZ.z);
+    }
 }

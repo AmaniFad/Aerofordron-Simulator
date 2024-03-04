@@ -6,6 +6,8 @@ using UnityEngine.PlayerLoop;
 
 public class PlayerController : MonoBehaviour
 {
+    private static PlayerController Instance;
+    [SerializeField] private float runMultiplier;
     private Transform cameraTransform;
     private MovementBehaviour MB;
     private PlayerInteract playerInteract;
@@ -13,6 +15,15 @@ public class PlayerController : MonoBehaviour
     private Coroutine isMoving;
     void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else 
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
         isMoving = null;
         MB = GetComponent<MovementBehaviour>();
         cameraTransform = Camera.main.transform;
@@ -22,6 +33,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (cameraTransform == null)
+        {
+            cameraTransform = Camera.main.transform;
+        }
         if (PlayerInputController.Instance.IsInteracting())
         {
             playerInteract.TryToInteract();
@@ -44,7 +59,14 @@ public class PlayerController : MonoBehaviour
             {
                 isMoving = StartCoroutine(_PlayFootstep());
             }
-            MB.MoveRB3D(input);
+            if (PlayerInputController.Instance.IsRunning())
+            {
+                MB.RunRB(input, runMultiplier);
+            }
+            else
+            {
+                MB.MoveRB3D(input);
+            }
         }
     }
 

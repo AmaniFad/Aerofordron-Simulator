@@ -48,7 +48,7 @@ public class ScreenOptions : MonoBehaviour
         }
         else
         {
-            applyButton.interactable = true;
+            //applyButton.interactable = true;
         }
     }
     public void AddResolutionsToArray()

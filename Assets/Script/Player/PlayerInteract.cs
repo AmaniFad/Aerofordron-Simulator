@@ -7,7 +7,7 @@ public class PlayerInteract : MonoBehaviour
 {
     [SerializeField] private float raycastDistance = 10f;
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] private Transform InteractionZone;
+    private Transform interactionZone;
     private GameObject grabbeableObj;
     private Vector3 grabbeableObjOriginalScale;
     private PlaySounds sound;
@@ -19,13 +19,15 @@ public class PlayerInteract : MonoBehaviour
     }
     public void GrabItem(GameObject grabbeable)
     {
+        interactionZone = InteractionZone.Instance.GetInteractionZone();
+
         Quaternion rotation = grabbeable.transform.rotation;
 
         grabbeable.transform.rotation = Quaternion.identity;
-        grabbeable.transform.SetParent(InteractionZone, true);
+        grabbeable.transform.SetParent(interactionZone, true);
 
         // grabbeable.transform.rotation = rotation;
-        grabbeable.transform.position = InteractionZone.position;
+        grabbeable.transform.position = interactionZone.position;
 
         grabbeableObj = grabbeable;
     }
