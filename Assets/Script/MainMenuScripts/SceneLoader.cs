@@ -10,6 +10,7 @@ public class SceneLoader : MonoBehaviour
     public static SceneLoader Instance { get; private set; }
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
         if (Instance == null)
         {
             Instance = this;
@@ -40,13 +41,11 @@ public class SceneLoader : MonoBehaviour
         GameObject b = Instantiate(sceneTransitions);
         DontDestroyOnLoad(b);
         b.GetComponent<Animator>().SetTrigger("leaveTransition");
-        PlayerStateController.instance.StopMoving();
 
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
-        PlayerStateController.instance.ResumeMoving();
         b.GetComponent<Animator>().SetTrigger("enterTransition");
     }
     public void AddScene(string scene)
