@@ -20,6 +20,11 @@ public class MovementBehaviour : MonoBehaviour
         rb.AddForce(movementDirection.normalized * speed * Time.deltaTime , ForceMode.Force);
     }
 
+    public void MoveWithoutSpeed(Vector3 movementDirection)
+    {
+        rb.AddForce(movementDirection * Time.deltaTime, ForceMode.Force);
+
+    }
     public void Rotate(Vector3 rotation)
     {
         rb.gameObject.transform.Rotate(rotation * rotationSpeed);

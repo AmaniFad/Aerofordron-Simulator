@@ -73,7 +73,13 @@ public class DronController : MonoBehaviour
 
             mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z));
             SendDronRotation(inputDirection);
+            if (WindControlller.Instance != null)
+            {
+                Debug.Log(WindControlller.Instance.GetWindForce());
+                mMovementBehaviour.MoveWithoutSpeed(WindControlller.Instance.GetWindForce());
+            }
         }
+
         //if (CheckIfGrounded() && inputDirection != Vector2.zero)
         //{
         //    playerOnGroundFeedback.SetActive(true);

@@ -38,7 +38,6 @@ public class DronZoom : MonoBehaviour
 
             // Calculate the percentage decrease based on distance
             float decreasePercentage = (distance - minDistanceForZoom) / currentMinFOV;
-            Debug.Log(decreasePercentage);
             // Calculate the new minimum FOV with percentage decrease
             float newMinFOV = currentMinFOV * (1 - decreasePercentage); // Decrease relative to current FOV
 
