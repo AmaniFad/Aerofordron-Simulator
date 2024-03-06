@@ -10,6 +10,8 @@ public class WindControlller : MonoBehaviour
     [SerializeField] private float frontWind;
     [SerializeField] private float backWind;
     [SerializeField] private GameObject windEffect;
+
+    private float windEffectDuration = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,8 +70,18 @@ public class WindControlller : MonoBehaviour
         //Spawn wind here
         if (leftWind - rightWind != 0 || frontWind - backWind != 0)
         {
-            Instantiate(windEffect);
-            //Implement rotation and position of the effect
+            Vector3 windDirection = GetWindForce().normalized;
+
+            Vector3 cameraPosition = Camera.main.transform.position;
+            Vector3 spawnPosition = cameraPosition + Camera.main.transform.forward * Random.Range(5f, 10f);
+
+            Quaternion rotation = Quaternion.LookRotation(windDirection);
+            rotation *= Quaternion.Euler(-90, 0, 0);
+
+            GameObject windInstance = Instantiate(windEffect, spawnPosition, rotation);
+
+            Destroy(windInstance, windEffectDuration);
+            Debug.Log("se hace");
         }
         StartCoroutine(_SpawnWindEffects());
     }

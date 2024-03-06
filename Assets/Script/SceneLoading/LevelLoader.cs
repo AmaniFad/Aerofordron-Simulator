@@ -23,7 +23,7 @@ public class LevelLoader : MonoBehaviour
     }
     public void LoadLevel(string sceneName)
     {
-        SceneManager.LoadSceneAsync(sceneName,LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         currentLevel = sceneName;
     }
 
