@@ -9,10 +9,11 @@ public class WindControlller : MonoBehaviour
     [SerializeField] private float rightWind;
     [SerializeField] private float frontWind;
     [SerializeField] private float backWind;
+    [SerializeField] private GameObject windEffect;
     // Start is called before the first frame update
     void Start()
     {
-
+        StartCoroutine(_SpawnWindEffects());
         if (Instance == null)
         {
             Instance = this;
@@ -24,7 +25,10 @@ public class WindControlller : MonoBehaviour
     }
 
     // Update is called once per frame
+    private void Update()
+    {
 
+    }
 
     public void SetWind(float frontWind, float backWind, float rightWind, float leftWind)
     {
@@ -56,5 +60,17 @@ public class WindControlller : MonoBehaviour
     public Vector3 GetWindForce()
     {
         return new Vector3(rightWind - leftWind, 0f, frontWind - backWind);
+    }
+
+    private IEnumerator _SpawnWindEffects()
+    {
+        yield return new WaitForSeconds(Random.Range(3,7));
+        //Spawn wind here
+        if (leftWind - rightWind != 0 || frontWind - backWind != 0)
+        {
+            Instantiate(windEffect);
+            //Implement rotation and position of the effect
+        }
+        StartCoroutine(_SpawnWindEffects());
     }
 }
