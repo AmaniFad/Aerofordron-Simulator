@@ -24,6 +24,7 @@ public class ScreenOptions : MonoBehaviour
     private bool isConfigSaved;
     private int[] playerPrefOptions;
     private int[] currentPlayerOptions;
+    Resolution[] resolutions;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class ScreenOptions : MonoBehaviour
         screenModeOptions = new string[2];
         screenModeOptions[0] = "On";
         screenModeOptions[1] = "Off";
+        resolutions = Screen.resolutions;
         resolutionOptions = new string[Screen.resolutions.Length];
         AddResolutionsToArray();
         currentResolutionOption = 0;
@@ -48,30 +50,54 @@ public class ScreenOptions : MonoBehaviour
         }
         else
         {
-            //applyButton.interactable = true;
+            applyButton.interactable = true;
         }
     }
+
+    /// <summary>
+    /// Consigue todas las resoluciones de la pantalla y guarda en la array solo las que tengan una resolucion diferente y no hercios diferentes
+    /// </summary>
     public void AddResolutionsToArray()
     {
-        Resolution[] resolutions = Screen.resolutions;
+        List<Resolution> list = new List<Resolution>();
+        Debug.Log(resolutions.Length);
         int counter = 0;
-        foreach (Resolution resolution in resolutions)
-        {
-            string option = $"{resolution.width} x {resolution.height}";
-            resolutionOptions[counter] = option;
-            counter++;
-        }
+
+            foreach (Resolution resolution in Screen.resolutions)
+            {
+
+                if (resolution.refreshRate >= 59.0f && resolution.refreshRate <= 60.0f)
+                {
+                    list.Add(resolution);
+                    string option = $"{resolution.width} x {resolution.height}";
+                    resolutionOptions[counter] = option;
+                }
+
+            }
+
+        counter++;
+        resolutions = list.ToArray();
     }
+
+    /// <summary>
+    /// Le mandas por el parametro direction 1 o -1 y se calculara automaticamente la siguiente resolucion en la array, esto se tiene que atar a un boton y hacer que el boton mande el parametro
+    /// </summary>
+    /// <param name="direction"></param>
     public void ChangeResolutionOption(int direction)
     {
-        Debug.Log(resolutionOptions);
         currentResolutionOption = ChangeOption(direction, currentResolutionOption, resolutionOptions.Length);
         currentPlayerOptions[0] = currentResolutionOption;
+        Debug.Log(resolutionOptions.Length);
+        Debug.Log(resolutionOptions[currentResolutionOption]);
         resolutionText.text = resolutionOptions[currentResolutionOption];
         ComproveIfConfigChanged();
         SetResolution(currentResolutionOption);
     }
 
+    /// <summary>
+    /// Le mandas por el parametro direction 1 o -1 y se calculara automaticamente la siguiente tasa de refresco de la array
+    /// </summary>
+    /// <param name="direction"></param> La direccion hacia la que quieras ir en la array 1 hacia delante -1 hacia atras
     public void ChangeRefreshRate(int direction)
     {
         currentRefreshRateOption = ChangeOption(direction, currentRefreshRateOption, refreshRate.Length);
@@ -80,7 +106,14 @@ public class ScreenOptions : MonoBehaviour
         ComproveIfConfigChanged();
 
     }
-    //Direction es -1 o 1 dependiendo si tira para alante en la array o al reves
+    
+    /// <summary>
+    /// Le pasas un numero y luego dos numeros entre los que tenga que estar y se encarga de que cuando el numero sea mas pequeño que el minimo el numero se convierta en el maximo y viceversa
+    /// </summary>
+    /// <param name="direction"></param> 
+    /// <param name="currentOption"></param>
+    /// <param name="maxArrayIndex"></param>
+    /// <returns></returns>
     private int ChangeOption(int direction, int currentOption, int maxArrayIndex)
     {
         if (currentOption + direction >= 0 && currentOption + direction < maxArrayIndex)
@@ -103,7 +136,6 @@ public class ScreenOptions : MonoBehaviour
     public void SetResolution(int index)
     {
 
-        Resolution[] resolutions = Screen.resolutions;
         Resolution selectedResolution = resolutions[index];
         PlayerPrefs.SetInt("currentResolutionOption", index);
         PlayerPrefs.SetInt("ResolutionWidth", selectedResolution.width);
