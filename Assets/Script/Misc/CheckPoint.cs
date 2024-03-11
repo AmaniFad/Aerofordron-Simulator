@@ -35,4 +35,9 @@ public class CheckPoint : MonoBehaviour
         Cursor.visible = false;
         Destroy(gameObject);
     }
+
+    public void Sound()
+    {
+        GetComponent<PlaySounds>().CallOneShot("event:/Checkpoint");
+    }
 }
