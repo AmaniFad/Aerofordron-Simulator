@@ -26,11 +26,13 @@ public class InteractableMando : MonoBehaviour, IInteractable
     {
         previousPosition = transform.position;
         isPickable = false;
+        transform.rotation = Quaternion.identity;
         player.GrabItem(this.gameObject);
         controller.StartDron();
         //this.transform.localRotation = rotationOffset;
         rigidBody.useGravity = false;
         rigidBody.isKinematic = true;
+        GetComponent<Collider>().isTrigger = true;
         if (!isPickable)
         {
             isTaked.Invoke();
@@ -45,6 +47,7 @@ public class InteractableMando : MonoBehaviour, IInteractable
     {
         controller.StopDron();
         isPickable = true;
+        GetComponent<Collider>().isTrigger = false;
         transform.SetParent(null);
         transform.position = previousPosition;
         rigidBody.useGravity = true;
