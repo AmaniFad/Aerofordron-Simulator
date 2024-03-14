@@ -19,7 +19,6 @@ public class PlayerStateController : MonoBehaviour
         {
             instance = this;
         }
-        ResumeMoving();
         DontDestroyOnLoad(gameObject);
     }
 
