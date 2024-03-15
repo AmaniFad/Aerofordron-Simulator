@@ -5,9 +5,9 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuController : MonoBehaviour
+public class MenusController : MonoBehaviour
 {
-    public static MenuController instance { get;private set; }
+    public static MenusController instance { get;private set; }
     [SerializeField] private Quiz quiz;
     [SerializeField] GameObject questionButtonContainer;
     private Button[] questionButtons;

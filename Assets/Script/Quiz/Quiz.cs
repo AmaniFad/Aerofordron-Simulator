@@ -37,7 +37,7 @@ public class Quiz : MonoBehaviour
         if (currentIndex < answersIndex.Length)
         {
             answersIndex[currentIndex] = index;
-            MenuController.instance.QuestionAnswered(currentIndex);
+            MenusController.instance.QuestionAnswered(currentIndex);
         }
     }
 
@@ -46,7 +46,7 @@ public class Quiz : MonoBehaviour
         Debug.Log(currentIndex);
         if (currentIndex < questionsData.questions.Length)
         {
-            MenuController.instance.CurrentQuestion(currentIndex);
+            MenusController.instance.CurrentQuestion(currentIndex);
             if (questionsData.questions[currentIndex].question.Contains(";"))
             {
                 string[] subs = questionsData.questions[currentIndex].question.Split(';');
