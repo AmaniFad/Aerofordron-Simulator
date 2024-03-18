@@ -4,10 +4,11 @@ using UnityEngine.UI;
 
 public class AutoSelectFirstButton : MonoBehaviour
 {
+
     public void Select()
     {
-        // Find all buttons in the scene
-        Button[] buttons = FindObjectsOfType<Button>();
+        // Find all buttons among the children of this GameObject
+        Button[] buttons = GetComponentsInChildren<Button>();
 
         // Loop through all buttons to find the first active one
         foreach (Button button in buttons)
@@ -17,10 +18,11 @@ public class AutoSelectFirstButton : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(button.gameObject);
                 // Select the first active button
 
-                break; // Stop the loop after selecting the first active button
+                return; // Stop the loop after selecting the first active button
             }
         }
     }
+
 
     private void Update()
     {

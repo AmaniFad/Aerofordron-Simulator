@@ -9,6 +9,7 @@ public class PlayerInputController : MonoBehaviour
     private Vector2 playerInput;
     private bool isInteracting;
     private bool isRunning;
+    private bool isPausing;
     void Start()
     {
         Instance = this;
@@ -17,6 +18,7 @@ public class PlayerInputController : MonoBehaviour
     public void OnMove(InputValue move)
     {
         playerInput = move.Get<Vector2>();
+        Debug.Log("GotInput");
     }
 
     public Vector2 GetPlayerInput()
@@ -53,5 +55,20 @@ public class PlayerInputController : MonoBehaviour
     public bool IsRunning()
     {
         return isRunning;
+    }
+    public void OnPause(InputValue value)
+    {
+        if (value.isPressed)
+        Debug.Log("Pausa");
+        isPausing = true;
+    }
+
+    public void HasPaused()
+    {
+        isPausing = false;
+    }
+    public bool IsPausing()
+    {
+        return isPausing;
     }
 }
