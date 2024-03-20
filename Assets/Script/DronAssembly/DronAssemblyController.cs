@@ -19,7 +19,6 @@ public class DronAssemblyController : MonoBehaviour
     {
         bool aux = false;
         int i = FindEqual(dronPart);
-        Debug.Log("FoundEqual");
         Debug.Log(Vector3.Distance(dronPart.transform.position, transparentDronPartsList[i].transform.position));
         if (Vector3.Distance(dronPart.transform.position, transparentDronPartsList[i].transform.position) < assemblyDistance)
         {
@@ -38,8 +37,11 @@ public class DronAssemblyController : MonoBehaviour
         int aux = 0;
         for (int i = 0; i < normalDronPartList.Length; i++)
         {
+            Debug.Log("Try");
             if (normalDronPartList[i].gameObject == dronPart)
             {
+                Debug.Log("FoundEqual");
+
                 aux = i;
             }
         }

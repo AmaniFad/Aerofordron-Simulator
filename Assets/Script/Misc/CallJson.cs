@@ -17,7 +17,7 @@ public class CallJson : MonoBehaviour
             string contenidoJSON = jsonFile.text;
             // Parse JSON content
             questionsData = JsonUtility.FromJson<QuestionData>(contenidoJSON);
-            MenuController.instance.StartQuestionMenu(questionsData.questions.Length);
+            MenusController.instance.StartQuestionMenu(questionsData.questions.Length);
         }
         else
         {
