@@ -11,6 +11,7 @@ public class DronPartInteract : MonoBehaviour, IInteractable
     private Transform startParent;
     private Rigidbody rigidBody;
     private Collider dronPartCollider;
+    public bool interacted;
     [SerializeField] private DronAssemblyController assemblyController;
     private bool isPut;
     void Start()
@@ -36,20 +37,24 @@ public class DronPartInteract : MonoBehaviour, IInteractable
     }
     public void Interact()
     {
+        interacted = true;
         player.GrabItem(this.gameObject);
-
+        GetComponent<DronPartFeedback>().DeactivateFeedback();
         if (isPickable)
         {
+            rigidBody.velocity = Vector3.zero;
             isTaken.Invoke();
             isPickable = false;
             rigidBody.useGravity = false;
             dronPartCollider.isTrigger = true;
+            transform.rotation = Quaternion.identity;
         }
 
     }
 
     public void DropInteractable()
     {
+        interacted = false;
         //Para diferenciar si lo has soltado o lo has puesto donde debias
         if (isPut)
         {
