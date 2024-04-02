@@ -10,6 +10,7 @@ public class PlayerInputController : MonoBehaviour
     private bool isInteracting;
     private bool isRunning;
     private bool isPausing;
+    private bool fullView;
     void Start()
     {
         Instance = this;
@@ -70,5 +71,15 @@ public class PlayerInputController : MonoBehaviour
     public bool IsPausing()
     {
         return isPausing;
+    }
+
+    public void OnFullView(InputValue value)
+    {
+        fullView = !fullView;
+    }
+
+    public bool IsFullView()
+    {
+        return fullView;
     }
 }

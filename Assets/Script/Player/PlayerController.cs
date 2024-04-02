@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(this.gameObject);
         isMoving = null;
         MB = GetComponent<MovementBehaviour>();
         cameraTransform = Camera.main.transform;

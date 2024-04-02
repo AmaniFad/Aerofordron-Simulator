@@ -12,7 +12,7 @@ public class CheckPoint : MonoBehaviour
         if (other.CompareTag("Player"))
         { 
             onCheckPoint.Invoke();
-            StartCoroutine(_isCP());
+            PlayerReferences.instance.StartCoroutine(_isCP());
         }
         else if (other.CompareTag("Dron"))
         {

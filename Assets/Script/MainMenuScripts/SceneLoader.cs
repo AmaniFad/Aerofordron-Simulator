@@ -10,7 +10,6 @@ public class SceneLoader : MonoBehaviour
     public static SceneLoader Instance { get; private set; }
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
         if (Instance == null)
         {
             Instance = this;

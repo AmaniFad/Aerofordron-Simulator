@@ -12,7 +12,6 @@ public class PlayerReferences : MonoBehaviour
     private Rigidbody rb;
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
         if (instance == null)
         {
             instance = this;
