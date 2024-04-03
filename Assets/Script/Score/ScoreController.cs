@@ -9,7 +9,7 @@ public class ScoreController : MonoBehaviour
 
     public static event Action<int> OnUpdateScore = delegate { };
 
-    public void UpdateSocre()
+    public void UpdateScore()
     {
         OnUpdateScore.Invoke(score);
     }
