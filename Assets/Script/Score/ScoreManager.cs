@@ -6,8 +6,9 @@ using UnityEngine.Events;
 public class ScoreManager : MonoBehaviour
 {
     private int score;
-    public int maximScore;
-    public UnityEvent<int> OnUpdateCanvasScore;
+    [SerializeField] private int maximScore;
+    [SerializeField] private UnityEvent<int> OnUpdateCanvasScore;
+    [SerializeField] private UnityEvent OnWin;
 
     private void OnEnable()
     {
@@ -21,11 +22,16 @@ public class ScoreManager : MonoBehaviour
     public void Start()
     {
         score = 0;
+        maximScore = SpawnCPController.Instance.GetCpTotal();
     }
 
     public void UpdateScore(int scoreM)
     {
         score += scoreM;
         OnUpdateCanvasScore.Invoke(score);
+        if(score == maximScore)
+        {
+            OnWin.Invoke();
+        }
     }
 }

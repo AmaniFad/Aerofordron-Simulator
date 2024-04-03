@@ -17,6 +17,10 @@ public class SpawnCPController : MonoBehaviour
             Instance = this;
         }
     }
+    public int GetCpTotal()
+    {
+        return cpList.Count;
+    }
 
    public void AddCP(GameObject cp)
    {
