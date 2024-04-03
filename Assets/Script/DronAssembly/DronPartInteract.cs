@@ -25,6 +25,7 @@ public class DronPartInteract : MonoBehaviour, IInteractable
 
     private void Update()
     {
+        Debug.Log("UpdateInteract");
         //Mientras este pickeado el item comprueba si esta cerca
         if (!isPickable)
         {
@@ -37,7 +38,9 @@ public class DronPartInteract : MonoBehaviour, IInteractable
     }
     public void Interact()
     {
+        Debug.Log("Interact");
         interacted = true;
+
         player.GrabItem(this.gameObject);
         GetComponent<DronPartFeedback>().DeactivateFeedback();
         if (isPickable)
@@ -54,7 +57,9 @@ public class DronPartInteract : MonoBehaviour, IInteractable
 
     public void DropInteractable()
     {
+        Debug.Log("DropInteractable");
         interacted = false;
+        GetComponent<DronPartFeedback>().ActivateFeedback();
         //Para diferenciar si lo has soltado o lo has puesto donde debias
         if (isPut)
         {

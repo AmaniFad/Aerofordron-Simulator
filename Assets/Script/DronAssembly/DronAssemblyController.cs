@@ -14,23 +14,16 @@ public class DronAssemblyController : MonoBehaviour
     private void Start()
     {
         currentPart = 0;
+        normalDronPartList[currentPart].GetComponent<DronPartFeedback>().ActivateFeedback();
         FindEqual(new GameObject());
     }
 
     private void Update()
     {
-        if (!normalDronPartList[currentPart].GetComponent<DronPartInteract>().interacted)
-        {
-            normalDronPartList[currentPart].GetComponent<DronPartFeedback>().ActivateFeedback();
-        }
-        else
-        {
-            normalDronPartList[currentPart].GetComponent<DronPartFeedback>().DeactivateFeedback();
-
-        }
     }
     public bool CheckIfClose(GameObject dronPart)
     {
+        Debug.Log("CheckIfClose");
         bool aux = false;
         int i = FindEqual(dronPart);
         Debug.Log(Vector3.Distance(dronPart.transform.position, transparentDronPartsList[i].transform.position));
@@ -47,6 +40,7 @@ public class DronAssemblyController : MonoBehaviour
 
     public int FindEqual(GameObject dronPart)
     {
+        Debug.Log("FindEqual");
         int aux = 0;
         for (int i = 0; i < normalDronPartList.Length; i++)
         {
@@ -72,6 +66,7 @@ public class DronAssemblyController : MonoBehaviour
 
     public void MountPart(GameObject grabbedPart, GameObject targetPart)
     {
+        Debug.Log("MountPart");
         int i = FindEqual(grabbedPart);
         transparentDronPartsList[i].gameObject.SetActive(false);
         normalDronPartList[currentPart].GetComponent<DronPartFeedback>().DeactivateFeedback();
@@ -81,6 +76,7 @@ public class DronAssemblyController : MonoBehaviour
 
     public IEnumerator PutPartInPlace(GameObject grabbedPart, GameObject targetPart)
     {
+        Debug.Log("PutPartInPlace");
         yield return new WaitForEndOfFrame();
         grabbedPart.GetComponent<Rigidbody>().velocity = Vector3.zero;
         grabbedPart.transform.position = targetPart.transform.position;

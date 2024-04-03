@@ -40,10 +40,11 @@ public class PauseController : MonoBehaviour
                 pauseMenuInstance.SetActive(true);
                 Time.timeScale = 0f;
                 PlayerInputController.Instance.HasPaused();
-
+                Cursor.visible = true;
             }
             else
             {
+                Cursor.visible = false;
                 Time.timeScale = 1f;
                 isPausing = false;
                 pauseMenuInstance.SetActive(false);
@@ -51,5 +52,13 @@ public class PauseController : MonoBehaviour
             }
         }
 
+    }
+
+    public void StopPause()
+    {
+        Cursor.visible = false;
+        Time.timeScale = 1f;
+        isPausing = false;
+        PlayerInputController.Instance.HasPaused();
     }
 }
