@@ -11,6 +11,8 @@ public class PlayerInputController : MonoBehaviour
     private bool isRunning;
     private bool isPausing;
     private bool fullView;
+    private bool isUsingKeyboard;
+    private bool isUsingGamepad;
     void Start()
     {
         Instance = this;
@@ -81,5 +83,35 @@ public class PlayerInputController : MonoBehaviour
     public bool IsFullView()
     {
         return fullView;
+    }
+
+    public void OnControlsChanged(PlayerInput playerInput)
+    {
+        Debug.Log(playerInput.currentControlScheme);
+
+        if (playerInput.currentControlScheme.Equals("Keyboard&Mouse"))
+        {
+            isUsingKeyboard = true;
+            isUsingGamepad = false;
+        }
+        if (playerInput.currentControlScheme.Equals("Gamepad"))
+        {
+            isUsingGamepad = true;
+            isUsingKeyboard = false;
+        }
+        else
+        {
+            Debug.LogWarning("Unknown control scheme: " + playerInput.currentControlScheme);
+        }
+    }
+
+    public bool IsUsingGamepad()
+    {
+        return isUsingGamepad;
+    }
+
+    public bool IsUsingKeyboard()
+    {
+        return isUsingKeyboard;
     }
 }
