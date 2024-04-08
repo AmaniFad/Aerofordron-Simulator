@@ -30,7 +30,7 @@ public class DronPartInteract : MonoBehaviour, IInteractable
         if (!isPickable)
         {
             isPut = assemblyController.CheckIfClose(this.gameObject);
-            if (isPut)
+            if (isPut && assemblyController.IsCurrentPart(this.gameObject))
             {
                 DropInteractable();
             }
@@ -59,7 +59,10 @@ public class DronPartInteract : MonoBehaviour, IInteractable
     {
         Debug.Log("DropInteractable");
         interacted = false;
-        GetComponent<DronPartFeedback>().ActivateFeedback();
+        if (assemblyController.IsCurrentPart(this.gameObject))
+        {
+            GetComponent<DronPartFeedback>().ActivateFeedback();
+        }
         //Para diferenciar si lo has soltado o lo has puesto donde debias
         if (isPut)
         {
