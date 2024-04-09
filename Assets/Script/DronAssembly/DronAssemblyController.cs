@@ -73,11 +73,11 @@ public class DronAssemblyController : MonoBehaviour
         {
             transparentDronPartsList[i].gameObject.SetActive(false);
             normalDronPartList[currentPart].GetComponent<DronPartFeedback>().DeactivateFeedback();
-            currentPart++;
             StartCoroutine(PutPartInPlace(grabbedPart, targetPart));
         }
         else
         {
+            Debug.Log("Current Part + " + currentPart + " Dron Part " + i);
             incorrectPartMessage.SetActive(true);
             StartCoroutine(_DeactivateIncorrectMessage(grabbedPart));
         }
@@ -106,6 +106,7 @@ public class DronAssemblyController : MonoBehaviour
         grabbedPart.GetComponent<Rigidbody>().velocity = Vector3.zero;
         grabbedPart.transform.position = targetPart.transform.position;
         grabbedPart.transform.rotation = targetPart.transform.rotation;
+        currentPart++;
     }
 
 }

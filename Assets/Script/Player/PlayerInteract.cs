@@ -35,12 +35,13 @@ public class PlayerInteract : MonoBehaviour
                 {
                     currentFeedback.SetActive(true);
                 }
-            
-
         }
         else
         {
-            currentFeedback.SetActive(false);
+            if (currentFeedback != null)
+            {
+                currentFeedback.SetActive(false);
+            }
         }
 
     }
