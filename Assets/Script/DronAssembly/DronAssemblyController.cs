@@ -7,13 +7,14 @@ public class DronAssemblyController : MonoBehaviour
     [SerializeField] private GameObject normalDronPartsContainer;
     [SerializeField] private GameObject transparentDronPartsContainer;
     [SerializeField] private float assemblyDistance;
-    [SerializeField]private Transform[] normalDronPartList;
-    [SerializeField]private Transform[] transparentDronPartsList;
+    [SerializeField] private Transform[] normalDronPartList;
+    [SerializeField] private Transform[] transparentDronPartsList;
     [SerializeField] private GameObject incorrectPartMessage;
     [SerializeField] private int currentPart;
     // Start is called before the first frame update
     private void Start()
     {
+        transform.rotation = Quaternion.identity;
         currentPart = 0;
         normalDronPartList[currentPart].GetComponent<DronPartFeedback>().ActivateFeedback();
         FindEqual(new GameObject());
@@ -47,7 +48,11 @@ public class DronAssemblyController : MonoBehaviour
         {
             if (normalDronPartList[i].gameObject == dronPart)
             {
-                transparentDronPartsList[i].GetComponent<DronPartFeedback>().ActivateFeedback();
+                if (!normalDronPartList[i].GetComponent<DronPartInteract>().IsMounted())
+                    {
+
+                }
+
                 Debug.Log("FoundEqual");
 
                 aux = i;
@@ -73,6 +78,9 @@ public class DronAssemblyController : MonoBehaviour
         {
             transparentDronPartsList[i].gameObject.SetActive(false);
             normalDronPartList[currentPart].GetComponent<DronPartFeedback>().DeactivateFeedback();
+            normalDronPartList[currentPart].GetComponent<DronPartInteract>().Mounted();
+
+            transparentDronPartsList[currentPart].GetComponent<DronPartFeedback>().DeactivateFeedback();
             StartCoroutine(PutPartInPlace(grabbedPart, targetPart));
         }
         else
@@ -101,12 +109,15 @@ public class DronAssemblyController : MonoBehaviour
     }
     public IEnumerator PutPartInPlace(GameObject grabbedPart, GameObject targetPart)
     {
+        normalDronPartList[currentPart].GetComponent<DronPartFeedback>().DeactivateFeedback();
         Debug.Log("PutPartInPlace");
         yield return new WaitForEndOfFrame();
         grabbedPart.GetComponent<Rigidbody>().velocity = Vector3.zero;
         grabbedPart.transform.position = targetPart.transform.position;
         grabbedPart.transform.rotation = targetPart.transform.rotation;
+        transparentDronPartsList[currentPart].GetComponent<DronPartFeedback>().DeactivateFeedback();
         currentPart++;
+
     }
 
 }

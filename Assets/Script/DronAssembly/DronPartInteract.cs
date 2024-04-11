@@ -14,8 +14,10 @@ public class DronPartInteract : MonoBehaviour, IInteractable
     public bool interacted;
     [SerializeField] private DronAssemblyController assemblyController;
     private bool isPut;
+    private bool isMounted;
     void Start()
     {
+        isMounted = false;
         startParent = transform.parent;
         rigidBody = GetComponent<Rigidbody>();
         isPickable = true;
@@ -38,19 +40,22 @@ public class DronPartInteract : MonoBehaviour, IInteractable
     }
     public void Interact()
     {
-        Debug.Log("Interact");
-        interacted = true;
-
-        player.GrabItem(this.gameObject);
-        GetComponent<DronPartFeedback>().DeactivateFeedback();
-        if (isPickable)
+        if (!isMounted)
         {
-            rigidBody.velocity = Vector3.zero;
-            isTaken.Invoke();
-            isPickable = false;
-            rigidBody.useGravity = false;
-            dronPartCollider.isTrigger = true;
-            transform.rotation = Quaternion.identity;
+            Debug.Log("Interact");
+            interacted = true;
+
+            player.GrabItem(this.gameObject);
+            GetComponent<DronPartFeedback>().DeactivateFeedback();
+            if (isPickable)
+            {
+                rigidBody.velocity = Vector3.zero;
+                isTaken.Invoke();
+                isPickable = false;
+                rigidBody.useGravity = false;
+                dronPartCollider.isTrigger = true;
+                transform.rotation = Quaternion.identity;
+            }
         }
 
     }
@@ -59,7 +64,7 @@ public class DronPartInteract : MonoBehaviour, IInteractable
     {
         Debug.Log("DropInteractable");
         interacted = false;
-        if (assemblyController.IsCurrentPart(this.gameObject))
+        if (assemblyController.IsCurrentPart(this.gameObject) && !isMounted)
         {
             GetComponent<DronPartFeedback>().ActivateFeedback();
         }
@@ -79,6 +84,14 @@ public class DronPartInteract : MonoBehaviour, IInteractable
 
     }
 
+    public void Mounted()
+    {
+        isMounted = true;
+    }
 
+    public bool IsMounted()
+    {
+        return isMounted;
+    }
 
 }
