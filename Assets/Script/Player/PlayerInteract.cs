@@ -7,6 +7,8 @@ public class PlayerInteract : MonoBehaviour
 {
     [SerializeField] private float raycastDistance = 10f;
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] private GameObject interactFeedback;
+    private GameObject currentFeedback;
     private Transform interactionZone;
     private GameObject grabbeableObj;
     private Vector3 grabbeableObjOriginalScale;
@@ -16,6 +18,32 @@ public class PlayerInteract : MonoBehaviour
     {
         sound = GetComponent<PlaySounds>();
         grabbeableObj = null;
+    }
+
+    private void Update()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+        if (Physics.Raycast(ray,raycastDistance, layerMask) && grabbeableObj == null)
+        {
+
+            
+                if (currentFeedback == null)
+                {
+                    currentFeedback = Instantiate(interactFeedback);
+                }
+                else
+                {
+                    currentFeedback.SetActive(true);
+                }
+        }
+        else
+        {
+            if (currentFeedback != null)
+            {
+                currentFeedback.SetActive(false);
+            }
+        }
+
     }
     public void GrabItem(GameObject grabbeable)
     {
@@ -42,7 +70,6 @@ public class PlayerInteract : MonoBehaviour
         Debug.Log("InteractStart");
         // Cast a ray from the position of this object forward
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-        Debug.DrawRay(Camera.main.transform.position, ray.direction);
         RaycastHit hitInfo; // Information about the object hit by the ray
 
 
