@@ -51,10 +51,14 @@ public class PlayerInteract : MonoBehaviour
 
         Quaternion rotation = grabbeable.transform.rotation;
 
-        grabbeable.transform.rotation = Quaternion.identity;
+        //grabbeable.transform.rotation = Quaternion.identity;
         grabbeable.transform.SetParent(interactionZone, true);
+        if (TryGetComponent<InteractableMando>(out InteractableMando mando))
+        {
+            grabbeable.transform.rotation = Quaternion.Euler(mando.desiredRotation);
 
-        grabbeable.transform.rotation = Quaternion.identity;
+        }
+
         // grabbeable.transform.rotation = rotation;
         grabbeable.transform.position = interactionZone.position;
 

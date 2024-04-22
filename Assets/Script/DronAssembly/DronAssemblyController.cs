@@ -11,6 +11,7 @@ public class DronAssemblyController : MonoBehaviour
     [SerializeField] private Transform[] transparentDronPartsList;
     [SerializeField] private GameObject incorrectPartMessage;
     [SerializeField] private int currentPart;
+    [SerializeField] private GameObject onMountFeedback;
     // Start is called before the first frame update
     private void Start()
     {
@@ -22,6 +23,10 @@ public class DronAssemblyController : MonoBehaviour
 
     private void Update()
     {
+        if (currentPart == normalDronPartList.Length - 1)
+        {
+
+        }
     }
     public bool CheckIfClose(GameObject dronPart)
     {
