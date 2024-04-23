@@ -13,7 +13,7 @@ public class InteractableMando : MonoBehaviour, IInteractable
     private bool isPickable;
     private Vector3 previousPosition;
     private Rigidbody rigidBody;
-
+    public Vector3 desiredRotation;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
