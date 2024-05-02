@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Windows;
 
 public class DronController : MonoBehaviour
@@ -22,6 +23,10 @@ public class DronController : MonoBehaviour
     [Header("Rotations")]
     [SerializeField] private float tiltAngle;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private GameObject dronView;
+    [SerializeField] private float maxDronViewRotation;
+    [SerializeField] private float minDronViewRotation;
+    [SerializeField] private float cameraMovementSpeed;
     private bool isGrounded;
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
@@ -65,7 +70,7 @@ public class DronController : MonoBehaviour
         {
             mMovementBehaviour.StopMovingOnY();
         }
-        mMovementBehaviour.Move(new Vector3(0, verticalDirection,0));
+        mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0));
 
         if (!CheckIfGrounded())
         {
@@ -75,8 +80,27 @@ public class DronController : MonoBehaviour
             SendDronRotation(inputDirection);
             if (WindControlller.Instance != null)
             {
-                Debug.Log(WindControlller.Instance.GetWindForce());
                 mMovementBehaviour.MoveWithoutSpeed(WindControlller.Instance.GetWindForce());
+            }
+        }
+        float cameraMovement = DronInputController.Instance.GetCameraMovement();
+        if (cameraMovement != 0)
+        {
+            if (cameraMovement > 0 && dronView.transform.rotation.x * 100 < maxDronViewRotation)
+            {
+                Quaternion rotation = gameObject.transform.rotation;
+                rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
+                Debug.Log("Rotation " + rotation);
+
+                dronView.transform.Rotate(new Vector3(rotation.x, 0, 0), rotation.x * 10, Space.Self);
+            }
+            else if (cameraMovement < 0 && dronView.transform.rotation.x * 100 > minDronViewRotation)
+            {
+
+                Quaternion rotation = gameObject.transform.rotation;
+                rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
+                Debug.Log("Rotation " + rotation);
+                dronView.transform.Rotate(new Vector3(-rotation.x,0,0),rotation.x * 10,Space.Self);
             }
         }
 
@@ -90,6 +114,9 @@ public class DronController : MonoBehaviour
         //}
     }
 
+    private void RotateDronView()
+    {
+    }
     private void SendDronRotation(Vector2 inputDirection)
     {
         //Necesario sino vuelve a 0 la rotation para los lados el momento que dejes de pulsar
@@ -110,7 +137,10 @@ public class DronController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
 
     }
+    private void MoveCamera()
+    {
 
+    }
     public void StartDron()
     {
         PlayerReferences.instance.SetDron(gameObject);
@@ -122,7 +152,7 @@ public class DronController : MonoBehaviour
 
     public void StopDron()
     {
-        PlayerReferences.instance.SetDron(new GameObject());
+        PlayerReferences.instance.SetDron(null);
         PlayerStateController.instance.CameraToDron(null);
         PlayerStateController.instance.ResumeMoving();
         canMove = false;

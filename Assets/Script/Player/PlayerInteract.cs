@@ -53,11 +53,7 @@ public class PlayerInteract : MonoBehaviour
 
         //grabbeable.transform.rotation = Quaternion.identity;
         grabbeable.transform.SetParent(interactionZone, true);
-        if (TryGetComponent<InteractableMando>(out InteractableMando mando))
-        {
-            grabbeable.transform.rotation = Quaternion.Euler(mando.desiredRotation);
 
-        }
 
         // grabbeable.transform.rotation = rotation;
         grabbeable.transform.position = interactionZone.position;
@@ -71,7 +67,6 @@ public class PlayerInteract : MonoBehaviour
     }
     public void TryToInteract()
     {
-        Debug.Log("InteractStart");
         // Cast a ray from the position of this object forward
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
         RaycastHit hitInfo; // Information about the object hit by the ray
@@ -94,7 +89,6 @@ public class PlayerInteract : MonoBehaviour
                 if (interactableObject != null)
                 {
                     sound.CallOneShot("event:/Grab");
-                    Debug.Log("Interact");
                     // Call the Interact method on the hit object
                     interactableObject.Interact();
                 }

@@ -35,7 +35,6 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator LoadSceneAsync(string scene)
     {
-        Debug.Log(sceneTransitions);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
         GameObject b = Instantiate(sceneTransitions);
         DontDestroyOnLoad(b);
