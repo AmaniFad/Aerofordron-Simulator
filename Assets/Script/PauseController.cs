@@ -9,7 +9,7 @@ public class PauseController : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     private bool isPausing;
-    private GameObject pauseMenuInstance;
+    [SerializeField] private GameObject pauseMenuInstance;
     // Start is called before the first frame update
     void Start()
     {
