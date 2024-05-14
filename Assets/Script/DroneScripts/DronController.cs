@@ -172,6 +172,20 @@ public class DronController : MonoBehaviour
         eventEmitter.EventReference = soundReference;
         eventEmitter.Stop();
     }
+
+    public void StopMovingDron()
+    {
+        canMove = false;
+    }
+
+    public void StartMovingDron()
+    {
+        canMove = true;
+    }
+    public bool IsGrounded()
+    {
+        return isGrounded;
+    }
 }
 
 
