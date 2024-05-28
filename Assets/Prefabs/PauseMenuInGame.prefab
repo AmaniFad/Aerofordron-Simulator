@@ -3899,7 +3899,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dejar Juego
+  m_text: Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 30c1214a0809f1d4b874c09e8518dc62, type: 2}
   m_sharedMaterial: {fileID: -1375483596228576378, guid: 30c1214a0809f1d4b874c09e8518dc62, type: 2}
@@ -4253,7 +4253,7 @@ GameObject:
   - component: {fileID: 1431185953595884161}
   - component: {fileID: 912278306096581906}
   m_Layer: 5
-  m_Name: PauseMenu
+  m_Name: PauseMenuInGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4422,6 +4422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 0}
+  pauseMenuInstance: {fileID: 0}
 --- !u!1 &7280494910621569442
 GameObject:
   m_ObjectHideFlags: 0
@@ -4813,28 +4814,28 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1431185953595884161}
-        m_TargetAssemblyTypeName: MenuOptions, Assembly-CSharp
-        m_MethodName: ExitGame
+      - m_Target: {fileID: 912278306096581906}
+        m_TargetAssemblyTypeName: PauseController, Assembly-CSharp
+        m_MethodName: TryPause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: event:/InterfaceClick
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlaySounds, Assembly-CSharp
-        m_MethodName: CallOneShot
+      - m_Target: {fileID: 1431185953595884161}
+        m_TargetAssemblyTypeName: MenuOptions, Assembly-CSharp
+        m_MethodName: StartNewScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: event:/InterfaceClick
+          m_StringArgument: Start
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &8199147311780362856

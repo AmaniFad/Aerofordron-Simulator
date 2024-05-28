@@ -30,5 +30,10 @@ public class AutoSelectFirstButton : MonoBehaviour
         {
             Select();
         }
+        if (EventSystem.current.currentSelectedGameObject != null)
+        {
+            if (!EventSystem.current.currentSelectedGameObject.activeInHierarchy)
+                Select();
+        }
     }
 }
