@@ -1,0 +1,47 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+public class OutlineWhenSelected : MonoBehaviour
+{
+    private Outline currentOutline;
+    [SerializeField] private GameObject outsideObject;
+    [SerializeField] private bool isOutlineObjectNotThis;
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Debug.Log(EventSystem.current.currentSelectedGameObject);
+        if (EventSystem.current.currentSelectedGameObject == this.gameObject)
+        {
+            Debug.Log("Enters");
+            if (TryGetComponent<Outline>(out Outline outline))
+            {
+                
+
+                    currentOutline = outline;
+                    outline.OutlineWidth = 10;
+                
+            }
+            else
+            {
+                currentOutline = gameObject.AddComponent<Outline>();
+                currentOutline.OutlineWidth = 10;
+            }
+        }
+        else
+        {
+            if (currentOutline)
+            currentOutline.OutlineWidth = 0;
+        }
+
+    }
+
+}
