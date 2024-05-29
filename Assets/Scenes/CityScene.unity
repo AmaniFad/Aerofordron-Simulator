@@ -11094,7 +11094,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -12309,7 +12309,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 2041398176}
   destroyedDron: {fileID: 6494901858668957110, guid: 55d191125eb2cf54ba672b762f97d45e, type: 3}
   thirrdPersonViewCamera: {fileID: 452553887}
-  speedThreshold: 10
+  speedThreshold: 50
 --- !u!1001 &996952987
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19192,6 +19192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00543631a302276489c6d7663dd7916c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outsideObject: {fileID: 0}
+  isOutlineObjectNotThis: 0
 --- !u!1 &1610528888
 GameObject:
   m_ObjectHideFlags: 0
@@ -22329,6 +22331,55 @@ Transform:
   - {fileID: 752098814}
   - {fileID: 634570683}
   m_Father: {fileID: 256609957}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1784525537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1784525539}
+  - component: {fileID: 1784525538}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1784525538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784525537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 407b2edd22692804cbffe499bd9b981d, type: 2}
+--- !u!4 &1784525539
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784525537}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.081642, y: -4.8226485, z: 72.59231}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1799389546
 GameObject:
@@ -26015,3 +26066,4 @@ SceneRoots:
   - {fileID: 97759815}
   - {fileID: 1241636780}
   - {fileID: 2041398176}
+  - {fileID: 1784525539}
