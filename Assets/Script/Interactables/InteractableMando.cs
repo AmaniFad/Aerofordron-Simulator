@@ -26,8 +26,8 @@ public class InteractableMando : MonoBehaviour, IInteractable
     {
         previousPosition = transform.position;
         isPickable = false;
-        Quaternion rotate = new Quaternion(0,0,0,0);
-        transform.rotation = rotate;
+        //Quaternion rotate = new Quaternion(0,0,0,0);
+        //transform.rotation = rotate;
         player.GrabItem(this.gameObject);
         controller.StartDron();
         //this.transform.localRotation = rotationOffset;
@@ -38,7 +38,7 @@ public class InteractableMando : MonoBehaviour, IInteractable
         {
             isTaked.Invoke();
         }
-        transform.rotation = rotate;
+        //transform.rotation = rotate;
     }
 
     // Start is called before the first frame update
