@@ -471,6 +471,8 @@ MonoBehaviour:
         m_CallState: 2
   panel1: {fileID: 0}
   panel2: {fileID: 0}
+  isFirstPart: 0
+  isSecondPart: 0
 --- !u!1 &163811549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,6 +1547,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 516995550}
+        m_TargetAssemblyTypeName: TutorialController, Assembly-CSharp
+        m_MethodName: SetFirstRound
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   OnSecondPart:
     m_PersistentCalls:
       m_Calls:
@@ -1598,6 +1612,8 @@ MonoBehaviour:
         m_CallState: 2
   panel1: {fileID: 458975608}
   panel2: {fileID: 741966077}
+  isFirstPart: 0
+  isSecondPart: 0
 --- !u!1001 &396577899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2331,6 +2347,8 @@ MonoBehaviour:
         m_CallState: 2
   panel1: {fileID: 0}
   panel2: {fileID: 0}
+  isFirstPart: 0
+  isSecondPart: 0
 --- !u!1 &458975608
 GameObject:
   m_ObjectHideFlags: 0
@@ -2609,7 +2627,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.93
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &475192563
 MonoBehaviour:
@@ -2688,9 +2706,23 @@ MonoBehaviour:
         m_CallState: 2
   OnSecondPart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 516995551}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: SceneLoad
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Start
+          m_BoolArgument: 0
+        m_CallState: 2
   panel1: {fileID: 0}
   panel2: {fileID: 0}
+  isFirstPart: 0
+  isSecondPart: 0
 --- !u!1 &495168859
 GameObject:
   m_ObjectHideFlags: 0
@@ -2932,6 +2964,66 @@ MonoBehaviour:
         m_CallState: 2
   panel1: {fileID: 0}
   panel2: {fileID: 0}
+  isFirstPart: 0
+  isSecondPart: 0
+--- !u!1 &516995548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 516995549}
+  - component: {fileID: 516995550}
+  - component: {fileID: 516995551}
+  m_Layer: 0
+  m_Name: TutorialManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &516995549
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516995548}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 188.83316, y: 2.921957, z: 146.2598}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &516995550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516995548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7969d26d2698e4499ae4b2b2c0834fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &516995551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516995548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db354237de82bcf459d36e0f02425f84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneTransitions: {fileID: 8506445941066691912, guid: deda53826161e65428ca94e1c35114c6, type: 3}
 --- !u!1 &530295316
 GameObject:
   m_ObjectHideFlags: 0
@@ -4377,7 +4469,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 0}
   destroyedDron: {fileID: 6494901858668957110, guid: 55d191125eb2cf54ba672b762f97d45e, type: 3}
   thirrdPersonViewCamera: {fileID: 2020914734}
-  speedThreshold: 10
+  speedThreshold: 72.85
 --- !u!114 &760058536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9389,3 +9481,4 @@ SceneRoots:
   - {fileID: 1840043079}
   - {fileID: 636340543}
   - {fileID: 2022339779}
+  - {fileID: 516995549}

@@ -10,33 +10,26 @@ public class Cone : MonoBehaviour
     [SerializeField] private GameObject panel1; 
     [SerializeField] private GameObject panel2;
 
-    private bool isfirstPart;
-    private bool isSecondPart;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public bool isFirstPart;
+    public bool isSecondPart;
+    
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (!isfirstPart)
+            if (!isFirstPart)
             {
                 OnFirstPart.Invoke();
-                isfirstPart = true;
+                isFirstPart = true;
             }
-            else if (!isSecondPart)
+            else if (TutorialController.instance.GetFirstRound())
             {
-                OnSecondPart.Invoke();
-                isSecondPart = true;    
+                if (!isSecondPart)
+                {
+                    OnSecondPart.Invoke();
+                    isSecondPart = true;
+                }
             }
         }
     }
