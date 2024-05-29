@@ -1197,6 +1197,18 @@ MonoBehaviour:
           m_StringArgument: CityScene
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1386770489}
+        m_TargetAssemblyTypeName: PlaySounds, Assembly-CSharp
+        m_MethodName: CallOneShot
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: event:/Click2
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &368196360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2308,6 +2320,18 @@ MonoBehaviour:
           m_StringArgument: ForestScene
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1386770489}
+        m_TargetAssemblyTypeName: PlaySounds, Assembly-CSharp
+        m_MethodName: CallOneShot
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: event:/Click2
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1225515099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2864,6 +2888,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db354237de82bcf459d36e0f02425f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1386770489 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7125231171942002723, guid: 9b28ee20edd01de449496ea5059b801a, type: 3}
+  m_PrefabInstance: {fileID: 1386770484}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386770485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fc84d524e392bf4bb405b74a718cb8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1389577430
 GameObject:
   m_ObjectHideFlags: 0
@@ -3043,16 +3078,28 @@ MonoBehaviour:
           m_StringArgument: MountDron
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2073814547}
-        m_TargetAssemblyTypeName: AutoSelectFirstButton, Assembly-CSharp
-        m_MethodName: Select
+      - m_Target: {fileID: 1386770489}
+        m_TargetAssemblyTypeName: PlaySounds, Assembly-CSharp
+        m_MethodName: CallOneShot
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: event:/Click2
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1386770486}
+        m_TargetAssemblyTypeName: PlayerStateController, Assembly-CSharp
+        m_MethodName: ResumeMoving
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MountDron
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1386770486}
@@ -3806,6 +3853,69 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642336635}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1680730993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1680730995}
+  - component: {fileID: 1680730994}
+  m_Layer: 0
+  m_Name: AmbientSounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1680730994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680730993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1481268693
+      Data2: 1272248680
+      Data3: 696091548
+      Data4: -1253477179
+    Path: event:/ForestAmbient
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!4 &1680730995
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680730993}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.107081, y: 1.1543672, z: -26.310844}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1718250774
 GameObject:
   m_ObjectHideFlags: 0
@@ -4683,6 +4793,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1386770489}
+        m_TargetAssemblyTypeName: PlaySounds, Assembly-CSharp
+        m_MethodName: CallOneShot
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: event:/Click2
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2073814547}
         m_TargetAssemblyTypeName: AutoSelectFirstButton, Assembly-CSharp
         m_MethodName: Select
@@ -4823,7 +4945,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1966597105
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7062,3 +7184,4 @@ SceneRoots:
   - {fileID: 526668998}
   - {fileID: 1615642130}
   - {fileID: 1903627707}
+  - {fileID: 1680730995}
