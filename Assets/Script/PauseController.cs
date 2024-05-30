@@ -31,6 +31,8 @@ public class PauseController : MonoBehaviour
         if (pauseMenuInstance == null)
         {
             pauseMenuInstance = Instantiate(pauseMenu);
+            pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
+
         }
         else
         {
@@ -38,6 +40,7 @@ public class PauseController : MonoBehaviour
             {
                 isPausing = true;
                 pauseMenuInstance.SetActive(true);
+                pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
                 Time.timeScale = 0f;
                 PlayerInputController.Instance.HasPaused();
                 Cursor.visible = true;

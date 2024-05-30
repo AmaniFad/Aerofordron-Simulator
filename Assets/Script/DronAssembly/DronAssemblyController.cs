@@ -19,7 +19,8 @@ public class DronAssemblyController : MonoBehaviour
     {
         transform.rotation = Quaternion.identity;
         currentPart = 0;
-        normalDronPartList[currentPart].GetComponent<DronPartFeedback>().ActivateFeedback();
+        normalDronPartList[currentPart].GetComponent<Outline>().OutlineWidth = 10;
+        transparentDronPartsList[currentPart].GetComponent<Outline>().OutlineWidth = 10;
         FindEqual(new GameObject());
     }
 
@@ -37,6 +38,10 @@ public class DronAssemblyController : MonoBehaviour
         if (Vector3.Distance(dronPart.transform.position, transparentDronPartsList[i].transform.position) < assemblyDistance)
         {
             MountPart(dronPart, transparentDronPartsList[i].gameObject);
+            normalDronPartList[i].GetComponent<Outline>().OutlineWidth = 0;
+            transparentDronPartsList[i].GetComponent<Outline>().OutlineWidth = 0;
+            normalDronPartList[i + 1].GetComponent<Outline>().OutlineWidth = 10;
+            transparentDronPartsList[i + 1].GetComponent<Outline>().OutlineWidth = 10;
             dronPart.GetComponent<Collider>().isTrigger = true;
             dronPart.GetComponent<Rigidbody>().useGravity = false;
             aux = true;
@@ -64,7 +69,6 @@ public class DronAssemblyController : MonoBehaviour
             {
                 if (i != 0)
                 {
-                    transparentDronPartsList[i].GetComponent<DronPartFeedback>().DeactivateFeedback();
                 }
 
             }
@@ -78,10 +82,7 @@ public class DronAssemblyController : MonoBehaviour
         if (i == currentPart)
         {
             transparentDronPartsList[i].gameObject.SetActive(false);
-            normalDronPartList[currentPart].GetComponent<DronPartFeedback>().DeactivateFeedback();
             normalDronPartList[currentPart].GetComponent<DronPartInteract>().Mounted();
-
-            transparentDronPartsList[currentPart].GetComponent<DronPartFeedback>().DeactivateFeedback();
             StartCoroutine(PutPartInPlace(grabbedPart, targetPart, 0.5f));
         }
         else
@@ -110,7 +111,6 @@ public class DronAssemblyController : MonoBehaviour
     public IEnumerator PutPartInPlace(GameObject grabbedPart, GameObject targetPart, float duration)
     {
         // Deactivate feedback for the current part
-        normalDronPartList[currentPart].GetComponent<DronPartFeedback>().DeactivateFeedback();
 
         // Ensure the coroutine waits for the end of frame
         yield return new WaitForEndOfFrame();
@@ -147,7 +147,6 @@ public class DronAssemblyController : MonoBehaviour
         grabbedPart.transform.rotation = targetRotation;
 
         // Deactivate feedback for the transparent part
-        transparentDronPartsList[currentPart].GetComponent<DronPartFeedback>().DeactivateFeedback();
 
         // Increment the current part index
         currentPart++;

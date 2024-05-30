@@ -44,7 +44,7 @@ public class DronPartInteract : MonoBehaviour, IInteractable
             interacted = true;
 
             player.GrabItem(this.gameObject);
-            GetComponent<DronPartFeedback>().DeactivateFeedback();
+            GetComponent<Outline>().OutlineWidth = 0;
             if (isPickable)
             {
                 rigidBody.velocity = Vector3.zero;
@@ -63,7 +63,7 @@ public class DronPartInteract : MonoBehaviour, IInteractable
         interacted = false;
         if (assemblyController.IsCurrentPart(this.gameObject) && !isMounted)
         {
-            GetComponent<DronPartFeedback>().ActivateFeedback();
+            GetComponent<Outline>().OutlineWidth = 10;
         }
         //Para diferenciar si lo has soltado o lo has puesto donde debias
         if (isPut)

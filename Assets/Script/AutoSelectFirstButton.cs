@@ -13,7 +13,7 @@ public class AutoSelectFirstButton : MonoBehaviour
         // Loop through all buttons to find the first active one
         foreach (Button button in buttons)
         {
-            if (button.gameObject.activeInHierarchy)
+            if (button.gameObject.activeInHierarchy && button.interactable)
             {
                 EventSystem.current.SetSelectedGameObject(button.gameObject);
                 // Select the first active button
