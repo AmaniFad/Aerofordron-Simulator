@@ -17,10 +17,8 @@ public class OutlineWhenSelected : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(EventSystem.current.currentSelectedGameObject);
         if (EventSystem.current.currentSelectedGameObject == this.gameObject)
         {
-            Debug.Log("Enters");
             if (TryGetComponent<Outline>(out Outline outline))
             {
                 

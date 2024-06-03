@@ -10,22 +10,43 @@ public class PauseController : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     private bool isPausing;
     [SerializeField] private GameObject pauseMenuInstance;
+    private bool canPause;
     // Start is called before the first frame update
     void Start()
     {
         isPausing = false;
+        canPause = true;
     }
 
 
     private void Update()
     {
+        if (!pauseMenu.activeInHierarchy)
+        {
+            Time.timeScale = 1f;
+        }
+        else
+        {
+            Time.timeScale = 0f;
+        }
         if (PlayerInputController.Instance.IsPausing())
         {
-            Debug.Log("Entra");
-            TryPause();
+            Debug.Log(canPause);
+            if (canPause) {
+                TryPause();
+
+            }
+
+
         }
     }
 
+    private IEnumerator _EnablePauseAgain(float time)
+    {
+        canPause = false;
+        yield return new WaitForSeconds(time);
+        canPause = true;
+    }
     public void TryPause()
     {
         if (pauseMenuInstance == null)
@@ -54,6 +75,8 @@ public class PauseController : MonoBehaviour
                 PlayerInputController.Instance.HasPaused();
             }
         }
+        PlayerInputController.Instance.HasPaused();
+        StartCoroutine(_EnablePauseAgain(0.2f));
 
     }
 

@@ -72,7 +72,8 @@ public class DronController : MonoBehaviour
         {
             mMovementBehaviour.StopMovingOnY();
         }
-        mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0));
+        if (verticalDirection < -0.2f || verticalDirection > 0.05f)
+            mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0));
 
         if (!CheckIfGrounded())
         {
@@ -149,9 +150,7 @@ public class DronController : MonoBehaviour
         PlayerStateController.instance.CameraToDron(gameObject);
         PlayerStateController.instance.StopMoving();
         canMove = true;
-        PlayerReferences.instance.GetPlayer().GetComponent<PlayerInput>().enabled = false;
-        GetComponent<PlayerInput>().enabled = false;
-        GetComponent<PlayerInput>().enabled = true;
+        GetComponent<Animator>().SetBool("flying", true);
         PlayerReferences.instance.GetHUD().SetActive(true);
     }
 
@@ -161,8 +160,7 @@ public class DronController : MonoBehaviour
         PlayerStateController.instance.CameraToDron(null);
         PlayerStateController.instance.ResumeMoving();
         canMove = false;
-        GetComponent<PlayerInput>().enabled = false;
-        PlayerReferences.instance.GetPlayer().GetComponent<PlayerInput>().enabled = true;
+        GetComponent<Animator>().SetBool("flying", false);
         PlayerReferences.instance.GetHUD().SetActive(false);
     }
 

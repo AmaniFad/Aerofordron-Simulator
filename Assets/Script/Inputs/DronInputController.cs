@@ -41,16 +41,32 @@ public class DronInputController : MonoBehaviour
     }
     public float GetVerticalInput()
     {
-        return verticalInput;
+        if (verticalInput > -0.2f && verticalInput < 0.1f)
+        {
+            verticalInput = 0;
+        }
+            return verticalInput;
     }
 
     public float GetRotationalInput()
     {
+        if (rotationalInput > -0.2f && rotationalInput < 0.1f)
+        {
+            rotationalInput = 0;
+        }
         return rotationalInput;
     }
 
     public Vector2 GetDirectionInput()
     {
+        if (directionInput.x > -0.1f && directionInput.x < 0.1f)
+        {
+            directionInput.x = 0;
+        }
+        if (directionInput.y > -0.1f && directionInput.y < 0.1f)
+        {
+            directionInput.y = 0;
+        }
         return directionInput;
     }
 

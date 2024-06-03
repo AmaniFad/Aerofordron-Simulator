@@ -13,6 +13,7 @@ public class PlayerInteract : MonoBehaviour
     private GameObject grabbeableObj;
     private Vector3 grabbeableObjOriginalScale;
     private PlaySounds sound;
+    private bool onlyThisFrame;
 
     private void Start()
     {
@@ -23,18 +24,18 @@ public class PlayerInteract : MonoBehaviour
     private void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-        if (Physics.Raycast(ray,raycastDistance, layerMask) && grabbeableObj == null)
+        if (Physics.Raycast(ray, raycastDistance, layerMask) && grabbeableObj == null)
         {
 
-            
-                if (currentFeedback == null)
-                {
-                    currentFeedback = Instantiate(interactFeedback);
-                }
-                else
-                {
-                    currentFeedback.SetActive(true);
-                }
+
+            if (currentFeedback == null)
+            {
+                currentFeedback = Instantiate(interactFeedback);
+            }
+            else
+            {
+                currentFeedback.SetActive(true);
+            }
         }
         else
         {
@@ -67,32 +68,46 @@ public class PlayerInteract : MonoBehaviour
     }
     public void TryToInteract()
     {
-        // Cast a ray from the position of this object forward
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-        RaycastHit hitInfo; // Information about the object hit by the ray
+        if (!onlyThisFrame)
+        {
 
 
-        if (grabbeableObj != null)
-        {
-            grabbeableObj.GetComponent<IInteractable>().DropInteractable();
-            DropObject();
-            sound.CallOneShot("event:/Grab");
-        }
-        else
-        {
-            // Perform the raycast
-            if (Physics.Raycast(ray, out hitInfo, raycastDistance, layerMask))
+            Debug.Log("TryToInteract");
+            // Cast a ray from the position of this object forward
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+            RaycastHit hitInfo; // Information about the object hit by the ray
+
+
+            if (grabbeableObj != null)
             {
-                // Check if the hit object implements the IInteract interface
-                IInteractable interactableObject = hitInfo.collider.gameObject.GetComponent<IInteractable>();
-
-                if (interactableObject != null)
+                grabbeableObj.GetComponent<IInteractable>().DropInteractable();
+                DropObject();
+                sound.CallOneShot("event:/Grab");
+            }
+            else
+            {
+                // Perform the raycast
+                if (Physics.Raycast(ray, out hitInfo, raycastDistance, layerMask))
                 {
-                    sound.CallOneShot("event:/Grab");
-                    // Call the Interact method on the hit object
-                    interactableObject.Interact();
+                    // Check if the hit object implements the IInteract interface
+                    IInteractable interactableObject = hitInfo.collider.gameObject.GetComponent<IInteractable>();
+
+                    if (interactableObject != null)
+                    {
+                        sound.CallOneShot("event:/Grab");
+                        // Call the Interact method on the hit object
+                        interactableObject.Interact();
+                    }
                 }
             }
+            StartCoroutine(ChangeBoolInSeconds(0.2f));
         }
+    }
+
+    private IEnumerator ChangeBoolInSeconds(float time)
+    {
+        onlyThisFrame = true;
+        yield return new WaitForSeconds(time);
+        onlyThisFrame = false;
     }
 }
