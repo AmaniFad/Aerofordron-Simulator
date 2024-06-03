@@ -26,8 +26,12 @@ public class DronAssemblyController : MonoBehaviour
 
     private void Update()
     {
-        if (currentPart == normalDronPartList.Length - 1)
+        if (currentPart == normalDronPartList.Length)
         {
+            if (MountDronController.instance)
+            {
+                MountDronController.instance.NextInstruction();
+            }
             OnMount.Invoke();
         }
     }
@@ -39,9 +43,13 @@ public class DronAssemblyController : MonoBehaviour
         {
             MountPart(dronPart, transparentDronPartsList[i].gameObject);
             normalDronPartList[i].GetComponent<Outline>().OutlineWidth = 0;
+            if (i+ 1 < normalDronPartList.Length)
+            {
+                normalDronPartList[i + 1].GetComponent<Outline>().OutlineWidth = 10;
+                transparentDronPartsList[i + 1].GetComponent<Outline>().OutlineWidth = 10;
+            }
             transparentDronPartsList[i].GetComponent<Outline>().OutlineWidth = 0;
-            normalDronPartList[i + 1].GetComponent<Outline>().OutlineWidth = 10;
-            transparentDronPartsList[i + 1].GetComponent<Outline>().OutlineWidth = 10;
+
             dronPart.GetComponent<Collider>().isTrigger = true;
             dronPart.GetComponent<Rigidbody>().useGravity = false;
             aux = true;
