@@ -21,7 +21,6 @@ public class PlayerInputController : MonoBehaviour
     public void OnMove(InputValue move)
     {
         playerInput = move.Get<Vector2>();
-        Debug.Log("GotInput");
     }
 
     public Vector2 GetPlayerInput()
