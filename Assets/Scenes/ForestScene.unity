@@ -1242,6 +1242,7 @@ GameObject:
   - component: {fileID: 926755100}
   - component: {fileID: 926755103}
   - component: {fileID: 926755104}
+  - component: {fileID: 926755105}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1402,6 +1403,19 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &926755105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926755099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1001 &926940336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2364,7 +2378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3613636164322160352, guid: 9c7229bbc4448e74cbe1ffa5a2641297, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.98
+      value: 13.709
       objectReference: {fileID: 0}
     - target: {fileID: 3613636164322160352, guid: 9c7229bbc4448e74cbe1ffa5a2641297, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2372,7 +2386,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3613636164322160352, guid: 9c7229bbc4448e74cbe1ffa5a2641297, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -26.89
+      value: -26.478
       objectReference: {fileID: 0}
     - target: {fileID: 3613636164322160352, guid: 9c7229bbc4448e74cbe1ffa5a2641297, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2532,7 +2546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed4713da9ded964f8ca58152bf5c6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHeight: 120
+  maxHeight: 5000
   maxDistanceFromPlayer: 0
   groundedRayDistance: 0.5
   soundReference:
@@ -3359,6 +3373,10 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 7110887480503317339, guid: 8d22301391839bb469f633f475dd5936, type: 3}
+    - target: {fileID: 6342763576972913862, guid: 9b28ee20edd01de449496ea5059b801a, type: 3}
+      propertyPath: dron
+      value: 
+      objectReference: {fileID: 1444666935}
     - target: {fileID: 6342763576972913862, guid: 9b28ee20edd01de449496ea5059b801a, type: 3}
       propertyPath: Player
       value: 

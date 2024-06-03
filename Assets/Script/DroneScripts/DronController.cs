@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Windows;
 
@@ -62,6 +63,7 @@ public class DronController : MonoBehaviour
     {
         Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
         float verticalDirection = DronInputController.Instance.GetVerticalInput();
+
         if (transform.position.y >= maxHeight)
         {
             verticalDirection = 0;
@@ -147,6 +149,9 @@ public class DronController : MonoBehaviour
         PlayerStateController.instance.CameraToDron(gameObject);
         PlayerStateController.instance.StopMoving();
         canMove = true;
+        PlayerReferences.instance.GetPlayer().GetComponent<PlayerInput>().enabled = false;
+        GetComponent<PlayerInput>().enabled = false;
+        GetComponent<PlayerInput>().enabled = true;
         PlayerReferences.instance.GetHUD().SetActive(true);
     }
 
@@ -156,6 +161,8 @@ public class DronController : MonoBehaviour
         PlayerStateController.instance.CameraToDron(null);
         PlayerStateController.instance.ResumeMoving();
         canMove = false;
+        GetComponent<PlayerInput>().enabled = false;
+        PlayerReferences.instance.GetPlayer().GetComponent<PlayerInput>().enabled = true;
         PlayerReferences.instance.GetHUD().SetActive(false);
     }
 
