@@ -10,9 +10,8 @@ public class Cone : MonoBehaviour
     [SerializeField] private GameObject panel1; 
     [SerializeField] private GameObject panel2;
 
-    public bool isFirstPart;
-    public bool isSecondPart;
-    
+    private bool isFirstPart;
+    private bool isSecondPart;
 
     private void OnTriggerEnter(Collider other)
     {
