@@ -44,14 +44,18 @@ public class ScreenOptions : MonoBehaviour
 
     private void Update()
     {
-        if (isConfigSaved)
+        if (applyButton)
         {
-            applyButton.interactable = false;
+            if (isConfigSaved)
+            {
+                applyButton.interactable = false;
+            }
+            else
+            {
+                applyButton.interactable = true;
+            }
         }
-        else
-        {
-            applyButton.interactable = true;
-        }
+
     }
 
     /// <summary>
