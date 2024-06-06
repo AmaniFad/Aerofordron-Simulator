@@ -39,4 +39,15 @@ public abstract class Timer : MonoBehaviour
         int sec = Mathf.FloorToInt(elapsedTime % 60);
         timerTextCanvaWin.text = string.Format("{0:00}:{1:00}", min, sec);
     }
+
+    public void RestartTime()
+    {
+        Time.timeScale = 1.0f;
+        Cursor.visible = false;
+    }
+    public void StopTime()
+    {
+        Time.timeScale = 0.0f;
+        Cursor.visible = true;
+    }
 }

@@ -73,21 +73,4 @@ public class TimerModoCarrera : Timer
     {
         elapsedTime = 0;
     }
-    public void RestartTime()
-    {
-        Time.timeScale = 1.0f; 
-        Cursor.visible = false;
-    }
-    public void StopTime()
-    {
-        Time.timeScale = 0.0f;
-        Cursor.visible = true;
-    }
-
-    public void setTextTime()
-    {
-        int min = Mathf.FloorToInt(elapsedTime / 60);
-        int sec = Mathf.FloorToInt(elapsedTime % 60);
-        timerTextCanvaWin.text = string.Format("{0:00}:{1:00}", min, sec);
-    }
 }
