@@ -60,10 +60,14 @@ public class DroneCrash : MonoBehaviour
         yield return new WaitForSeconds(time);
         InteractionZone.Instance.gameObject.SetActive(true);
         thirrdPersonViewCamera.Priority = 10;
-        controller.StartMovingDron();
+
         virtualCamera.Priority = 12;
         thirrdPersonViewCamera.LookAt = transform;
         thirrdPersonViewCamera.Follow = previousTransform;
+        if (controller.transform.parent.TryGetComponent<InteractionZone>(out InteractionZone zone))
+        {
+            controller.StartMovingDron();
+        }
     }
 
     private IEnumerator DestroyFeedback()
