@@ -12,7 +12,7 @@ public class Poster : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (Timer.instance.GetModoCarrera())
+            if (TimerModoCarrera.instance.GetModoCarrera())
             {
                 onPasPosterMC.Invoke();
             }

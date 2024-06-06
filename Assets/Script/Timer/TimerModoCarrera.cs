@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Timer : MonoBehaviour
+public class TimerModoCarrera : Timer
 {
-    [SerializeField] private TMP_Text timerText;
-    [SerializeField] private float remainingTime;
 
     [Header("Canva")]
     [SerializeField] private GameObject canvaLose;
-    [SerializeField] private TMP_Text timerTextCanvaWin;
-    private float elapsedTime;
+
     public bool modoCarrera;
-    public static Timer instance;
+    public static TimerModoCarrera instance;
 
     private float saveRemainingTime;
     private bool startGame;
@@ -46,11 +43,7 @@ public class Timer : MonoBehaviour
         {
             if (modoCarrera)
             {
-                remainingTime -= Time.deltaTime;
-                int min = Mathf.FloorToInt(remainingTime / 60);
-                int sec = Mathf.FloorToInt(remainingTime % 60);
-                timerText.text = string.Format("{0:00}:{1:00}", min, sec);
-                elapsedTime += Time.deltaTime;
+                base.cuentaAtras();
 
                 if (remainingTime < 14)
                 {
@@ -63,10 +56,7 @@ public class Timer : MonoBehaviour
             }
             else
             {
-                elapsedTime += Time.deltaTime;
-                int min = Mathf.FloorToInt(elapsedTime / 60);
-                int sec = Mathf.FloorToInt(elapsedTime % 60);
-                timerText.text = string.Format("{0:00}:{1:00}", min, sec);
+                base.cuentaAdelante();
             }
         }
     }
@@ -93,6 +83,7 @@ public class Timer : MonoBehaviour
         Time.timeScale = 0.0f;
         Cursor.visible = true;
     }
+
     public void setTextTime()
     {
         int min = Mathf.FloorToInt(elapsedTime / 60);
