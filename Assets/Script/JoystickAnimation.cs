@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class JoystickAnimation : MonoBehaviour
 {
+    [SerializeField] private PlaySounds soundPlayer;
     [SerializeField] private Animator leftStickAnimator;
     [SerializeField] private Animator rightStickAnimator;
     private Coroutine checker;
+    private AnimatorClipInfo[] currentAnimation;
     // Start is called before the first frame update
     void Start()
     {
+        currentAnimation = GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
     }
 
     // Update is called once per frame
@@ -18,7 +21,10 @@ public class JoystickAnimation : MonoBehaviour
     {
         AnimationsLeftStick();
         AnimationsRightStick();
+
     }
+
+
 
     private void AnimationsLeftStick()
     {
