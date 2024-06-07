@@ -6,19 +6,23 @@ using Random = System.Random;
 public class CarsSpawner : MonoBehaviour
 {
     [Header("SpawnList")]
-    [SerializeField] private List<Transform> spawnList = new List<Transform>();
-    [SerializeField] private Transform defaultSpawn;
-    private Transform spawn;
+    [SerializeField] private Transform spawn;
 
     [Header("Prefab")]
     [SerializeField] private List<GameObject> prefabList = new List<GameObject>();
     [SerializeField] private GameObject defaultPrefab;
     private GameObject prefab;
 
-    [Header("Time to Shoot")]
     float coolDown = 0;
+    [Header("Time to Shoot")]
     [SerializeField] float timeBetween;
     private bool isTime;
+
+    [Header("ConvinationPath")]
+    [SerializeField] private List<Transform> pathList1 = new List<Transform>();
+    [SerializeField] private List<Transform> pathList2 = new List<Transform>();
+    [SerializeField] private List<Transform> pathList3 = new List<Transform>();
+    [SerializeField] private List<Transform> pathList4 = new List<Transform>();
 
     void Start()
     {
@@ -38,17 +42,6 @@ public class CarsSpawner : MonoBehaviour
         {
             if(coolDown <= 0)
             {
-                //elegimos sapwn
-                if(spawnList.Count > 0)
-                {
-                    Random rSpawn = new Random();
-                    int nSpawn = rSpawn.Next(0, spawnList.Count);
-                    spawn = spawnList[nSpawn];
-                }
-                else
-                {
-                    spawn = defaultSpawn;
-                }
                 //elegimos automovil
                 if(prefabList.Count > 0)
                 {
@@ -64,7 +57,35 @@ public class CarsSpawner : MonoBehaviour
                 //instanciamos
                 GameObject autoM = Instantiate(prefab);
                 autoM.transform.position = spawn.position;
-
+                Random rList = new Random();
+                int nList = rList.Next(0, 4);
+                switch (nList)
+                {
+                    case 0:
+                        for (int i = 0; i < pathList1.Count; i++)
+                        {
+                            autoM.GetComponent<CarsController>().AddInList(pathList1[i]);
+                        }
+                    break;
+                    case 1:
+                        for (int i = 0; i < pathList2.Count; i++)
+                        {
+                            autoM.GetComponent<CarsController>().AddInList(pathList2[i]);
+                        }
+                    break;
+                    case 2:
+                        for (int i = 0; i < pathList3.Count; i++)
+                        {
+                            autoM.GetComponent<CarsController>().AddInList(pathList3[i]);
+                        }
+                    break;
+                    case 3:
+                        for (int i = 0; i < pathList4.Count; i++)
+                        {
+                            autoM.GetComponent<CarsController>().AddInList(pathList4[i]);
+                        }
+                    break;
+                }
                 coolDown = timeBetween;
                 isTime = true;
             }
