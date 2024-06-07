@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000023CEEC82898 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0000019E2CAB53A8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -16,9 +16,184 @@
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] SystemI::createSound                     : filename = AerofordronSimFMOD/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] Thread::initThread                       : Init FMOD nonblocking thread (0). Affinity: 0x4000000000000003, Priority: 0xFFFF7FFC, Stack Size: 114688, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000019F59263AD8, queue head = 0000019F0ECD6DA8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000019F59263AD8
+[LOG] SystemI::createSoundInternal             :     Create name='AerofordronSimFMOD/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1326752
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 9984
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000019DE506E810
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='ConcreteFootsteps', format=5, channels=2, frequency=48000, lengthbytes=166112, lengthpcm=952946, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.139435.
+[LOG] Thread::initThread                       :     Init FMOD file thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFC, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000019F59263AD8
+[LOG] SystemI::createSound                     : filename = AerofordronSimFMOD/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000019F06FF8C58, queue head = 0000019F0ECD6DA8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000019F06FF8C58
+[LOG] SystemI::createSoundInternal             :     Create name='AerofordronSimFMOD/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1326752
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 9984
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000019F5EA7A1F0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='ConcreteFootsteps', format=5, channels=2, frequency=48000, lengthbytes=166112, lengthpcm=952946, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.139435.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000019F06FF8C58
+[LOG] SoundI::release                          : ConcreteFootsteps (0000019F59263AD8)
+[LOG] SoundI::release                          :     ConcreteFootsteps (0000019DEFA4AAE8)
+[LOG] SoundI::release                          :     ConcreteFootsteps (0000019F06FF8748)
+[LOG] SoundI::release                          : ConcreteFootsteps (0000019F06FF8C58)
+[LOG] SoundI::release                          :     ConcreteFootsteps (0000019DEFA4CB68)
+[LOG] SoundI::release                          :     ConcreteFootsteps (0000019E26E35A78)
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 1326752
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 9984
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000006A16BBEFC8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFB06EB3F70
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFB06EB3F30
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFB06EB4050
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFB06EB4110
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000019D42533B28
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='grabSound', format=5, channels=2, frequency=48000, lengthbytes=1728, lengthpcm=6438, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.982666.
+[LOG] SystemI::createSound                     : filename = AerofordronSimFMOD/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000019DF01EAA18, queue head = 0000019F0ECD6DA8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000019DF01EAA18
+[LOG] SystemI::createSoundInternal             :     Create name='AerofordronSimFMOD/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1326752
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 9984
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000019DF0432A00
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='dronSound', format=5, channels=2, frequency=48000, lengthbytes=757856, lengthpcm=3191040, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.494934.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000019DF01EAA18
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 1326752
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 9984
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000006A16BBEFC8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFB06EB3F70
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFB06EB3F30
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFB06EB4050
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFB06EB4110
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000019D42534788
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='232841__xavimuse__spark-sounds', format=5, channels=2, frequency=48000, lengthbytes=109696, lengthpcm=372705, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.545288.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 1326752
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 9984
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000006A16BBEFC8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFB06EB3F70
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFB06EB3F30
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFB06EB4050
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFB06EB4110
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000019D42534788
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='hit', format=5, channels=1, frequency=48000, lengthbytes=2368, lengthpcm=13305, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] SystemI::createSound                     : filename = AerofordronSimFMOD/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000019F0E8F4F58, queue head = 0000019F0ECD6DA8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000019F0E8F4F58
+[LOG] SystemI::createSoundInternal             :     Create name='AerofordronSimFMOD/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1326752
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 9984
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000019DB1E90A20
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='365862__jandre160108__smoke', format=5, channels=2, frequency=48000, lengthbytes=268672, lengthpcm=877254, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.086897.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000019F0E8F4F58
+[LOG] SoundI::release                          : dronSound (0000019DF01EAA18)
+[LOG] SoundI::release                          :     dronSound (0000019DEFA4D1E8)
+[LOG] SoundI::release                          :     dronSound (0000019F06FF8748)
+[LOG] SoundI::release                          : 365862__jandre160108__smoke (0000019F0E8F4F58)
+[LOG] SoundI::release                          :     365862__jandre160108__smoke (0000019DEFA495C8)
+[LOG] SoundI::release                          :     365862__jandre160108__smoke (0000019DB1E917D8)
+[LOG] SystemI::createSound                     : filename = AerofordronSimFMOD/Build/Desktop/Music.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000019DF01EA1A8, queue head = 0000019F0ECD6DA8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000019DF01EA1A8
+[LOG] SystemI::createSoundInternal             :     Create name='AerofordronSimFMOD/Build/Desktop/Music.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 395968
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 1504
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000019DF0432C80
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='forestAmbient2', format=5, channels=2, frequency=48000, lengthbytes=395616, lengthpcm=1415610, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.139809.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000019DF01EA1A8
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 1326752
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 9984
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000006A16BBEFC8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFB06EB3F70
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFB06EB3F30
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFB06EB4050
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFB06EB4110
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000019D42538FB8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='buttonClick', format=5, channels=2, frequency=48000, lengthbytes=1888, lengthpcm=6687, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.640778.
+[LOG] SoundI::release                          : forestAmbient2 (0000019DF01EA1A8)
+[LOG] SoundI::release                          :     forestAmbient2 (0000019DEFA49AA8)
+[LOG] SoundI::release                          :     forestAmbient2 (0000019DB5401038)
+[LOG] SoundI::release                          :  (0000019E27357B38)
+[LOG] SoundI::release                          :     grabSound (0000019DEFA4BB28)
+[LOG] SoundI::release                          :  (0000019E27357CA8)
+[LOG] SoundI::release                          :     232841__xavimuse__spark-sounds (0000019DEFA4AE28)
+[LOG] SoundI::release                          :  (0000019F593D9A58)
+[LOG] SoundI::release                          :     hit (0000019DEFA4D528)
+[LOG] SoundI::release                          :  (0000019F593DA018)
+[LOG] SoundI::release                          :     buttonClick (0000019DEFA4AFC8)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -26,3 +201,5 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.
