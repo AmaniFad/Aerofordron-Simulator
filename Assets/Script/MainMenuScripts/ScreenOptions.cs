@@ -63,18 +63,15 @@ public class ScreenOptions : MonoBehaviour
     /// </summary>
     public void AddResolutionsToArray()
     {
-        List<Resolution> list = new List<Resolution>();
-        Debug.Log(resolutions.Length);
         int counter = 0;
 
         foreach (Resolution resolution in Screen.resolutions)
         {
-            list.Add(resolution);
             string option = $"{resolution.width} x {resolution.height}";
             resolutionOptions[counter] = option;
-            Debug.Log(resolution);
+            counter++;
         }
-        resolutions = list.ToArray();
+        resolutions = Screen.resolutions;
     }
 
     /// <summary>
@@ -85,7 +82,6 @@ public class ScreenOptions : MonoBehaviour
     {
         currentResolutionOption = ChangeOption(direction, currentResolutionOption, resolutionOptions.Length);
         currentPlayerOptions[0] = currentResolutionOption;
-        Debug.Log(resolutionOptions.Length);
         Debug.Log(resolutionOptions[currentResolutionOption]);
         resolutionText.text = resolutionOptions[currentResolutionOption];
         ComproveIfConfigChanged();
