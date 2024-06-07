@@ -64,10 +64,7 @@ public class DroneCrash : MonoBehaviour
         virtualCamera.Priority = 12;
         thirrdPersonViewCamera.LookAt = transform;
         thirrdPersonViewCamera.Follow = previousTransform;
-        if (controller.transform.parent.TryGetComponent<InteractionZone>(out InteractionZone zone))
-        {
-            controller.StartMovingDron();
-        }
+        controller.StartMovingDron();
     }
 
     private IEnumerator DestroyFeedback()

@@ -10,49 +10,53 @@ public class PauseController : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     private bool isPausing;
     [SerializeField] private GameObject pauseMenuInstance;
-    private bool canPause;
     // Start is called before the first frame update
     void Start()
     {
         isPausing = false;
-        canPause = true;
     }
 
 
     private void Update()
     {
-        if (!pauseMenu.activeInHierarchy)
+        //Si el menu de pausa no es nulo mira si esta activo, si esta activo pausa el juego y sino despausalo, esto podrias generar problemas a futuro pero es una forma de
+        //asegurarse que el juego este pausado cuando toca
+        if (pauseMenuInstance)
         {
-            Time.timeScale = 1f;
+            if (!pauseMenuInstance.activeInHierarchy)
+            {
+                Time.timeScale = 1f;
+            }
+            else
+            {
+                Time.timeScale = 0f;
+            }
         }
-        else
-        {
-            Time.timeScale = 0f;
-        }
+
+        //el bool canPause es para que no si le llegan dos inputs en un lapso de tiempo muy corto no se abre y se cierre el menu de pausa
         if (PlayerInputController.Instance.IsPausing())
         {
-            Debug.Log(canPause);
-            if (canPause) {
+            
                 TryPause();
-
-            }
-
-
+            
         }
     }
 
-    private IEnumerator _EnablePauseAgain(float time)
-    {
-        canPause = false;
-        yield return new WaitForSeconds(time);
-        canPause = true;
-    }
+
+    
     public void TryPause()
     {
-        if (pauseMenuInstance == null)
+        //Mira si existe una instancia del menu de pausa si no exista la instancia y si existe simplemente la activa o desactiva dependiendom, este metodo es un toggle
+        if (!pauseMenuInstance)
         {
             pauseMenuInstance = Instantiate(pauseMenu);
             pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
+            isPausing = true;
+            pauseMenuInstance.SetActive(true);
+            pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
+            Time.timeScale = 0f;
+            PlayerInputController.Instance.HasPaused();
+            Cursor.visible = true;
 
         }
         else
@@ -76,7 +80,6 @@ public class PauseController : MonoBehaviour
             }
         }
         PlayerInputController.Instance.HasPaused();
-        StartCoroutine(_EnablePauseAgain(0.2f));
 
     }
 

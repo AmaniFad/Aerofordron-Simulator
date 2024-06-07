@@ -44,14 +44,18 @@ public class ScreenOptions : MonoBehaviour
 
     private void Update()
     {
-        if (isConfigSaved)
+        if (applyButton)
         {
-            applyButton.interactable = false;
+            if (isConfigSaved)
+            {
+                applyButton.interactable = false;
+            }
+            else
+            {
+                applyButton.interactable = true;
+            }
         }
-        else
-        {
-            applyButton.interactable = true;
-        }
+
     }
 
     /// <summary>
@@ -59,24 +63,15 @@ public class ScreenOptions : MonoBehaviour
     /// </summary>
     public void AddResolutionsToArray()
     {
-        List<Resolution> list = new List<Resolution>();
-        Debug.Log(resolutions.Length);
         int counter = 0;
 
-            foreach (Resolution resolution in Screen.resolutions)
-            {
-
-                if (resolution.refreshRate >= 59.0f && resolution.refreshRate <= 60.0f)
-                {
-                    list.Add(resolution);
-                    string option = $"{resolution.width} x {resolution.height}";
-                    resolutionOptions[counter] = option;
-                }
-
-            }
-
-        counter++;
-        resolutions = list.ToArray();
+        foreach (Resolution resolution in Screen.resolutions)
+        {
+            string option = $"{resolution.width} x {resolution.height}";
+            resolutionOptions[counter] = option;
+            counter++;
+        }
+        resolutions = Screen.resolutions;
     }
 
     /// <summary>
@@ -87,7 +82,6 @@ public class ScreenOptions : MonoBehaviour
     {
         currentResolutionOption = ChangeOption(direction, currentResolutionOption, resolutionOptions.Length);
         currentPlayerOptions[0] = currentResolutionOption;
-        Debug.Log(resolutionOptions.Length);
         Debug.Log(resolutionOptions[currentResolutionOption]);
         resolutionText.text = resolutionOptions[currentResolutionOption];
         ComproveIfConfigChanged();
@@ -106,7 +100,7 @@ public class ScreenOptions : MonoBehaviour
         ComproveIfConfigChanged();
 
     }
-    
+
     /// <summary>
     /// Le pasas un numero y luego dos numeros entre los que tenga que estar y se encarga de que cuando el numero sea mas pequeño que el minimo el numero se convierta en el maximo y viceversa
     /// </summary>
@@ -135,7 +129,6 @@ public class ScreenOptions : MonoBehaviour
 
     public void SetResolution(int index)
     {
-
         Resolution selectedResolution = resolutions[index];
         PlayerPrefs.SetInt("currentResolutionOption", index);
         PlayerPrefs.SetInt("ResolutionWidth", selectedResolution.width);
