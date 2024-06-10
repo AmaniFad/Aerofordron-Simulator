@@ -18,14 +18,12 @@ public class DronInputController : MonoBehaviour
     public void OnDroneRightStick(InputValue inputValue)
     {
         directionInput = inputValue.Get<Vector2>();
-        Debug.Log("VerticalInput " + verticalInput);
     }
 
     public void OnDroneLeftStick(InputValue inputValue)
     {
 
         verticalInput = inputValue.Get<Vector2>().y;
-        Debug.Log("VerticalInput " + verticalInput);
         rotationalInput = inputValue.Get<Vector2>().x;
 
     }

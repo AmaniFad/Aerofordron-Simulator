@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -41,14 +40,12 @@ public class MenuNavigation : MonoBehaviour
         int aux = 0;
         for (int i = 0; i < previousMenus.Length; i++)
         {
-            Debug.Log("Index " + i + " PreviousMenus " + previousMenus[i]);
             if (previousMenus[i] != -1)
             {
                 aux = i;
             }
 
         }
-        Debug.Log("SearchLastMenu returns " + aux);
         return aux;
     }
 

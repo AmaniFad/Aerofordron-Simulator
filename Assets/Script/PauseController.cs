@@ -19,6 +19,7 @@ public class PauseController : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("TimeScale" + Time.timeScale);
         //Si el menu de pausa no es nulo mira si esta activo, si esta activo pausa el juego y sino despausalo, esto podrias generar problemas a futuro pero es una forma de
         //asegurarse que el juego este pausado cuando toca
         if (pauseMenuInstance)
@@ -31,6 +32,10 @@ public class PauseController : MonoBehaviour
             {
                 Time.timeScale = 0f;
             }
+        }
+        else
+        {
+            Time.timeScale = 1f;
         }
 
         //el bool canPause es para que no si le llegan dos inputs en un lapso de tiempo muy corto no se abre y se cierre el menu de pausa
