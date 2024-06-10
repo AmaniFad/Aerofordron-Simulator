@@ -5,7 +5,7 @@ using UnityEngine;
 public class CarsController : MonoBehaviour
 {
     [Header("Points")]
-    private List<Transform> points = new List<Transform>();
+    [SerializeField] private List<Transform> points = new List<Transform>();
     private Vector3 direction;
     private int i;
 
@@ -36,10 +36,12 @@ public class CarsController : MonoBehaviour
 
     void Update()
     {
-        movement();
         compreobeOthersCars();
     }
-
+    private void FixedUpdate()
+    {
+        movement();
+    }
     public void AddInList(Transform path)
     {
         points.Add(path);
@@ -48,22 +50,23 @@ public class CarsController : MonoBehaviour
     {
         if (i < points.Count - 1)
         {
-            if (Vector2.Distance(transform.position, points[i].position) < 0.1f)
+            if (Vector2.Distance(transform.position, points[i].position) < 0.04f)
             {
+                Debug.Log("Entra " + i);
                 i++;
                 direction = points[i].position - transform.position;
-                if (direction != Vector3.zero)
+                /*if (direction != Vector3.zero)
                 {
                     targetRotation = Quaternion.LookRotation(direction);
                     transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-                }
+                }*/
             }
         }
-        if (direction != Vector3.zero)
+        /*if (direction != Vector3.zero)
         {
             targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-        }
+        }*/
         direction = points[i].position - transform.position;
         MB.MoveRB3D(direction);
     }
