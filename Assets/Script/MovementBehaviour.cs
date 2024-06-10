@@ -49,4 +49,14 @@ public class MovementBehaviour : MonoBehaviour
         Vector3 velocityXZ = input.normalized * speed * runMultiplier;
         rb.velocity = new Vector3(velocityXZ.x, rb.velocity.y, velocityXZ.z);
     }
+    public void Deceleration(float deceleration)
+    {
+        speed -= deceleration;
+
+        // Limita la velocidad a 0 para evitar que el objeto se mueva hacia atrás
+        speed = Mathf.Max(speed, 0);
+
+        // Aplica la velocidad al objeto
+        rb.velocity = transform.forward * speed;
+    }
 }
