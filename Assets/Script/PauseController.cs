@@ -9,46 +9,64 @@ public class PauseController : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     private bool isPausing;
+    [SerializeField] private bool pauseWithoutPauseMenu;
     [SerializeField] private GameObject pauseMenuInstance;
     // Start is called before the first frame update
     void Start()
     {
+        pauseWithoutPauseMenu = false;
         isPausing = false;
     }
 
 
     private void Update()
     {
-        Debug.Log("TimeScale" + Time.timeScale);
         //Si el menu de pausa no es nulo mira si esta activo, si esta activo pausa el juego y sino despausalo, esto podrias generar problemas a futuro pero es una forma de
         //asegurarse que el juego este pausado cuando toca
-        if (pauseMenuInstance)
+        if (pauseWithoutPauseMenu)
         {
-            if (!pauseMenuInstance.activeInHierarchy)
+            if (pauseMenuInstance)
             {
-                Time.timeScale = 1f;
+                if (!pauseMenuInstance.activeInHierarchy)
+                {
+                    Time.timeScale = 1f;
+                }
+                else
+                {
+                    Time.timeScale = 0f;
+                }
             }
             else
             {
-                Time.timeScale = 0f;
+                Time.timeScale = 1f;
             }
+            
         }
-        else
-        {
-            Time.timeScale = 1f;
-        }
+
 
         //el bool canPause es para que no si le llegan dos inputs en un lapso de tiempo muy corto no se abre y se cierre el menu de pausa
         if (PlayerInputController.Instance.IsPausing())
         {
-            
-                TryPause();
-            
+
+            TryPause();
+
         }
     }
 
 
-    
+    public void PauseWihoutPauseMenu()
+    {
+        pauseWithoutPauseMenu = true;
+        Time.timeScale = 0;
+
+    }
+
+    public void UnPauseWithoutMenu()
+    {
+        pauseWithoutPauseMenu = false;
+        Time.timeScale = 1;
+    }
+
     public void TryPause()
     {
         //Mira si existe una instancia del menu de pausa si no exista la instancia y si existe simplemente la activa o desactiva dependiendom, este metodo es un toggle
