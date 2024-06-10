@@ -37,7 +37,7 @@ public class DroneCrash : MonoBehaviour
     }
 
 
-    private void Respawn()
+    public void Respawn()
     {
         currentDestroyedDronFeedback = Instantiate(destroyedDron);
         currentDestroyedDronFeedback.transform.position = transform.position;
