@@ -77,6 +77,7 @@ public class DronPartInteract : MonoBehaviour, IInteractable
             rigidBody.useGravity = true;
         }
         isPickable = true;
+        player.DropObject();
         transform.SetParent(startParent);
 
     }

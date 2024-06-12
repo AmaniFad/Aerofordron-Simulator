@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -36,6 +37,15 @@ public class SceneLoader : MonoBehaviour
     IEnumerator LoadSceneAsync(string scene)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
+        GameObject instanceForControl = Instantiate(new GameObject());
+        instanceForControl.AddComponent<AlwaysLookAtGameobject>().StartCoroutine(_TransitionControl(scene,instanceForControl));  
+        DontDestroyOnLoad(instanceForControl);
+        yield return new WaitForEndOfFrame();
+    }
+
+    IEnumerator _TransitionControl(string scene, GameObject transitionController)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
         GameObject b = Instantiate(sceneTransitions);
         DontDestroyOnLoad(b);
         b.GetComponent<Animator>().SetTrigger("leaveTransition");
@@ -44,7 +54,9 @@ public class SceneLoader : MonoBehaviour
         {
             yield return null;
         }
+        Debug.Log("Works");
         b.GetComponent<Animator>().SetTrigger("enterTransition");
+        Destroy(transitionController);
     }
     public void AddScene(string scene)
     {
