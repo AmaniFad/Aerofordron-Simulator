@@ -49,6 +49,7 @@ public class SpawnCarController : MonoBehaviour
                 Debug.Log("Instanciamos");
                 GameObject autoM = Instantiate(prefab);
                 autoM.transform.position = this.gameObject.transform.position;
+                Debug.Log(this.gameObject);
                 autoM.transform.rotation = Quaternion.identity;
 
                 // elegimos destino
