@@ -57,6 +57,7 @@ public class CarsSpawner : MonoBehaviour
                 //instanciamos
                 GameObject autoM = Instantiate(prefab);
                 autoM.transform.position = spawn.position;
+                autoM.transform.rotation = Quaternion.identity;
                 Random rList = new Random();
                 int nList = rList.Next(0, 4);
                 switch (nList)
