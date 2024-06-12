@@ -37,6 +37,15 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""MoveCamera"",
+                    ""type"": ""Value"",
+                    ""id"": ""a0185d9b-7317-48a6-99fa-9dd9a8d9568f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""DroneLeftStick"",
                     ""type"": ""Value"",
                     ""id"": ""55f38448-be06-41c4-b4a4-34f1460eecf0"",
@@ -613,6 +622,50 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""action"": ""DroneLeftStick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8e2a38f-e42d-48ba-b605-b727c3584a23"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""MoveCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""6216401e-2dc0-4981-991b-bd518bc6e036"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveCamera"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c8697c83-96d4-48b8-8171-71a10c828e99"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MoveCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""e2f695c8-ebc7-4808-a589-60a0c787b1d3"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MoveCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -1233,6 +1286,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_MoveCamera = m_Player.FindAction("MoveCamera", throwIfNotFound: true);
         m_Player_DroneLeftStick = m_Player.FindAction("DroneLeftStick", throwIfNotFound: true);
         m_Player_DroneRightStick = m_Player.FindAction("DroneRightStick", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
@@ -1320,6 +1374,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_MoveCamera;
     private readonly InputAction m_Player_DroneLeftStick;
     private readonly InputAction m_Player_DroneRightStick;
     private readonly InputAction m_Player_Run;
@@ -1334,6 +1389,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         private @EduPlayerImput m_Wrapper;
         public PlayerActions(@EduPlayerImput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @MoveCamera => m_Wrapper.m_Player_MoveCamera;
         public InputAction @DroneLeftStick => m_Wrapper.m_Player_DroneLeftStick;
         public InputAction @DroneRightStick => m_Wrapper.m_Player_DroneRightStick;
         public InputAction @Run => m_Wrapper.m_Player_Run;
@@ -1355,6 +1411,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @MoveCamera.started += instance.OnMoveCamera;
+            @MoveCamera.performed += instance.OnMoveCamera;
+            @MoveCamera.canceled += instance.OnMoveCamera;
             @DroneLeftStick.started += instance.OnDroneLeftStick;
             @DroneLeftStick.performed += instance.OnDroneLeftStick;
             @DroneLeftStick.canceled += instance.OnDroneLeftStick;
@@ -1389,6 +1448,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @MoveCamera.started -= instance.OnMoveCamera;
+            @MoveCamera.performed -= instance.OnMoveCamera;
+            @MoveCamera.canceled -= instance.OnMoveCamera;
             @DroneLeftStick.started -= instance.OnDroneLeftStick;
             @DroneLeftStick.performed -= instance.OnDroneLeftStick;
             @DroneLeftStick.canceled -= instance.OnDroneLeftStick;
@@ -1675,6 +1737,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnLook(InputAction.CallbackContext context);
+        void OnMoveCamera(InputAction.CallbackContext context);
         void OnDroneLeftStick(InputAction.CallbackContext context);
         void OnDroneRightStick(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);

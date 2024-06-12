@@ -27,12 +27,14 @@ public class DronController : MonoBehaviour
     [SerializeField] private GameObject dronView;
     [SerializeField] private float maxDronViewRotation;
     [SerializeField] private float minDronViewRotation;
+    private float currentCameraRotationSimplified;
     [SerializeField] private float cameraMovementSpeed;
     private bool isGrounded;
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
     void Start()
     {
+        currentCameraRotationSimplified = 0;
         eventEmitter = GetComponent<StudioEventEmitter>();
         isPlaying = false;
         mMovementBehaviour = GetComponent<MovementBehaviour>();
@@ -89,20 +91,22 @@ public class DronController : MonoBehaviour
         float cameraMovement = DronInputController.Instance.GetCameraMovement();
         if (cameraMovement != 0)
         {
-            if (cameraMovement > 0 && dronView.transform.rotation.x * 100 < maxDronViewRotation)
+            Debug.Log(currentCameraRotationSimplified);
+            if (cameraMovement > 0 && currentCameraRotationSimplified < maxDronViewRotation)
             {
                 Quaternion rotation = gameObject.transform.rotation;
                 rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
                 Debug.Log("Rotation " + rotation);
-
+                currentCameraRotationSimplified += rotation.x + 10;
                 dronView.transform.Rotate(new Vector3(rotation.x, 0, 0), rotation.x * 10, Space.Self);
             }
-            else if (cameraMovement < 0 && dronView.transform.rotation.x * 100 > minDronViewRotation)
+            else if (cameraMovement < 0 && currentCameraRotationSimplified > minDronViewRotation)
             {
 
                 Quaternion rotation = gameObject.transform.rotation;
                 rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
                 Debug.Log("Rotation " + rotation);
+                currentCameraRotationSimplified -= rotation.x + 10;
                 dronView.transform.Rotate(new Vector3(-rotation.x,0,0),rotation.x * 10,Space.Self);
             }
         }
