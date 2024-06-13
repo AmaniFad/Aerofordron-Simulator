@@ -3,6 +3,7 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlaySounds : MonoBehaviour
 {
@@ -11,7 +12,9 @@ public class PlaySounds : MonoBehaviour
     const string generalVCAPath = "General";
     const string musicVCAPath = "Music";
     const string SFXVCAPath = "SFX";
-
+    [SerializeField] private Slider MasterSlider;
+    [SerializeField] private Slider MusicSlider;
+    [SerializeField] private Slider SfxSlider;
 
     VCA generalVCA;
     VCA sfxVCA;
@@ -20,9 +23,14 @@ public class PlaySounds : MonoBehaviour
 
     public void Start()
     {
+
         generalVCA = FMODUnity.RuntimeManager.GetVCA(VCAPath + generalVCAPath);
         sfxVCA = FMODUnity.RuntimeManager.GetVCA(VCAPath + musicVCAPath);
         musicVCA = FMODUnity.RuntimeManager.GetVCA(VCAPath + SFXVCAPath);
+        if (MasterSlider && MusicSlider && SfxSlider)
+        {
+            SetSliders();
+        }
     }
     private void PlayFootstep()
     {
@@ -48,6 +56,19 @@ public class PlaySounds : MonoBehaviour
     public void ChangeVolumeMaster(float volume)
     {
         generalVCA.setVolume(volume);
+    }
+
+    public void SetSliders()
+    {
+        generalVCA.getVolume(out float volume);
+        musicVCA.getVolume(out float musicVolume);
+        sfxVCA.getVolume(out float sfxVolume);
+        Debug.Log(volume);
+        MasterSlider.value = volume;
+        MusicSlider.value = musicVolume;
+        SfxSlider.value = sfxVolume;
+
+        
     }
 
 

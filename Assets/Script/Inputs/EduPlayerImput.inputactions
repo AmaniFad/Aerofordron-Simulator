@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "MoveCamera",
+                    "type": "Value",
+                    "id": "a0185d9b-7317-48a6-99fa-9dd9a8d9568f",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "DroneLeftStick",
                     "type": "Value",
                     "id": "55f38448-be06-41c4-b4a4-34f1460eecf0",
@@ -591,6 +600,50 @@
                     "action": "DroneLeftStick",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f8e2a38f-e42d-48ba-b605-b727c3584a23",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "MoveCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "6216401e-2dc0-4981-991b-bd518bc6e036",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveCamera",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "c8697c83-96d4-48b8-8171-71a10c828e99",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MoveCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "e2f695c8-ebc7-4808-a589-60a0c787b1d3",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MoveCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
