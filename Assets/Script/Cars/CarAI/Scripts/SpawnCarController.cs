@@ -50,12 +50,12 @@ public class SpawnCarController : MonoBehaviour
                 GameObject autoM = Instantiate(prefab);
                 autoM.transform.position = this.gameObject.transform.position;
                 Debug.Log(this.gameObject);
-                autoM.transform.rotation = Quaternion.identity;
 
                 // elegimos destino
                 Random rList = new Random();
                 int nList = rList.Next(0, spawnList.Count);
                 autoM.GetComponent<CarAI>().CustomDestination = spawnList[nList];
+                Debug.Log($"CustomDestination set to: {spawnList[nList].position}");
 
                 coolDown = timeBetween;
                 isTime = true;
