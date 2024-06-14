@@ -11,7 +11,12 @@ public class OutlineWhenSelected : MonoBehaviour
     [SerializeField] private bool isOutlineObjectNotThis;
     void Start()
     {
-        
+        if (TryGetComponent<Image>(out Image image))
+        {
+            Color previousColor = image.color;
+            previousColor.a = 0;
+            image.color = previousColor;
+        }
     }
 
     // Update is called once per frame
@@ -25,18 +30,36 @@ public class OutlineWhenSelected : MonoBehaviour
 
                     currentOutline = outline;
                     outline.OutlineWidth = 10;
+                    if (TryGetComponent<Image>(out Image image))
+                {
+                    Color previousColor = image.color;
+                    previousColor.a = 255;
+                    image.color = previousColor;
+                }
                 
             }
             else
             {
                 currentOutline = gameObject.AddComponent<Outline>();
                 currentOutline.OutlineWidth = 10;
+                if (TryGetComponent<Image>(out Image image))
+                {
+                    Color previousColor = image.color;
+                    previousColor.a = 255;
+                    image.color = previousColor;
+                }
             }
         }
         else
         {
             if (currentOutline)
             currentOutline.OutlineWidth = 0;
+            if (TryGetComponent<Image>(out Image image))
+            {
+                Color previousColor = image.color;
+                previousColor.a = 0;
+                image.color = previousColor;
+            }
         }
 
     }
