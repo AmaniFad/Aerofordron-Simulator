@@ -61,9 +61,24 @@ public class DronController : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        if (canMove)
+        {
+            if (!CheckIfGrounded())
+            {
+                Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
+
+                SendDronRotation(inputDirection);
+            }
+
+        }
+    }
+
     private void TryToMoveDron()
     {
         Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
+
         float verticalDirection = DronInputController.Instance.GetVerticalInput();
 
         if (transform.position.y >= maxHeight)
@@ -82,7 +97,6 @@ public class DronController : MonoBehaviour
             Vector3 direction = transform.right * inputDirection.x + transform.forward * inputDirection.y;
 
             mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z));
-            SendDronRotation(inputDirection);
             if (WindControlller.Instance != null)
             {
                 mMovementBehaviour.MoveWithoutSpeed(WindControlller.Instance.GetWindForce());
@@ -107,7 +121,7 @@ public class DronController : MonoBehaviour
                 rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
                 Debug.Log("Rotation " + rotation);
                 currentCameraRotationSimplified -= rotation.x + 10;
-                dronView.transform.Rotate(new Vector3(-rotation.x,0,0),rotation.x * 10,Space.Self);
+                dronView.transform.Rotate(new Vector3(-rotation.x, 0, 0), rotation.x * 10, Space.Self);
             }
         }
 
@@ -142,6 +156,7 @@ public class DronController : MonoBehaviour
 
         // Apply the rotation with slerp
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+
 
     }
     private void MoveCamera()
