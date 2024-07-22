@@ -305,11 +305,6 @@ public class CarAI : MonoBehaviour
     void Movement() // moves the car forward and backward depending on the input
     {
         if (move == true && allowMovement == true)
-            allowMovement = true;
-        else
-            allowMovement = false;
-
-        if (allowMovement == true)
         {
             frontLeft.brakeTorque = 0;
             frontRight.brakeTorque = 0;
@@ -334,10 +329,12 @@ public class CarAI : MonoBehaviour
             }
             else
                 ApplyBrakes();
-            
         }
         else
+        {
+            allowMovement = false;
             ApplyBrakes();
+        }
     }
 
     void debug(string text, bool IsCritical)

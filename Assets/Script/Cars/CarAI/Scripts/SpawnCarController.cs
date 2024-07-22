@@ -6,7 +6,6 @@ using Random = System.Random;
 public class SpawnCarController : MonoBehaviour
 {
     [Header("Prefab")]
-    [SerializeField] private List<GameObject> prefabList = new List<GameObject>();
     [SerializeField] private GameObject defaultPrefab;
     private GameObject prefab;
 
@@ -24,8 +23,8 @@ public class SpawnCarController : MonoBehaviour
     }
     void Update()
     {
-        coolDown -= Time.deltaTime;
         respawn();
+        coolDown -= Time.deltaTime;
     }
     private void respawn()
     {
@@ -34,29 +33,20 @@ public class SpawnCarController : MonoBehaviour
             if (coolDown <= 0)
             {
                 //elegimos automovil
-                if (prefabList.Count > 0)
-                {
-                    Random rPrefab = new Random();
-                    int nPrefab = rPrefab.Next(0, prefabList.Count);
-                    prefab = prefabList[nPrefab];
-                }
-                else
-                {
-                    prefab = defaultPrefab;
-                }
 
                 //instanciamos
                 Debug.Log("Instanciamos");
-                GameObject autoM = Instantiate(prefab);
+                GameObject autoM = Instantiate(defaultPrefab);
                 autoM.transform.position = this.gameObject.transform.position;
                 Debug.Log(this.gameObject);
 
                 // elegimos destino
-                Random rList = new Random();
-                int nList = rList.Next(0, spawnList.Count);
-                autoM.GetComponent<CarAI>().CustomDestination = spawnList[nList];
-                Debug.Log($"CustomDestination set to: {spawnList[nList].position}");
-
+                if(spawnList.Count > 0)
+                {
+                    Random rList = new Random();
+                    int nList = rList.Next(0, spawnList.Count);
+                    autoM.GetComponent<CarAI>().CustomDestination = spawnList[nList];
+                }
                 coolDown = timeBetween;
                 isTime = true;
             }
