@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SwitchToFullView : MonoBehaviour
 {
+    public static SwitchToFullView instance;
     [SerializeField] private GameObject fullViewCamera;
 
     // Update is called once per frame
@@ -11,11 +12,23 @@ public class SwitchToFullView : MonoBehaviour
     {
         if (PlayerInputController.Instance.IsFullView())
         {
-            fullViewCamera.SetActive(true);
+            EnterFullView();
         }
         else
         {
-            fullViewCamera.SetActive(false);
+            ExitFullView();
         }
+    }
+
+    public void EnterFullView()
+    {
+        fullViewCamera.SetActive(true);
+
+    }
+
+    public void ExitFullView()
+    {
+        fullViewCamera.SetActive(false);
+
     }
 }

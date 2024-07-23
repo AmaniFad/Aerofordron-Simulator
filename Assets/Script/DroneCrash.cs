@@ -51,6 +51,7 @@ public class DroneCrash : MonoBehaviour
         thirrdPersonViewCamera.Follow = currentDestroyedDronFeedback.transform;
         thirrdPersonViewCamera.LookAt = currentDestroyedDronFeedback.transform;
         controller.StopMovingDron();
+        SwitchToFullView.instance.ExitFullView();
         StartCoroutine(RecoverCamera(4));
         StartCoroutine(DestroyFeedback());
     }

@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     [SerializeField] private GameObject sceneTransitions;
+    private float previousVolume;
     public static SceneLoader Instance { get; private set; }
     private void Start()
     {
@@ -26,6 +27,9 @@ public class SceneLoader : MonoBehaviour
     {
         if (sceneTransitions != null)
         {
+            FMODUnity.RuntimeManager.GetVCA("vca:/General").getVolume(out float volume);
+            previousVolume = volume;
+            FMODUnity.RuntimeManager.GetVCA("vca:/General").setVolume(0);
             StartCoroutine(LoadSceneAsync(scene));
         }
         else
@@ -56,6 +60,7 @@ public class SceneLoader : MonoBehaviour
         }
         Debug.Log("Works");
         b.GetComponent<Animator>().SetTrigger("enterTransition");
+        FMODUnity.RuntimeManager.GetVCA("vca:/General").setVolume(previousVolume);
         Destroy(transitionController);
     }
     public void AddScene(string scene)

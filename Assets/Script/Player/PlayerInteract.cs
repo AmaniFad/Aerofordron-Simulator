@@ -72,7 +72,6 @@ public class PlayerInteract : MonoBehaviour
         {
 
 
-            Debug.Log("TryToInteract");
             // Cast a ray from the position of this object forward
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
             RaycastHit hitInfo; // Information about the object hit by the ray

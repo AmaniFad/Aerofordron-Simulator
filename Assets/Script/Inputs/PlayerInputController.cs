@@ -86,7 +86,6 @@ public class PlayerInputController : MonoBehaviour
 
     public void OnControlsChanged(PlayerInput playerInput)
     {
-        Debug.Log(playerInput.currentControlScheme);
 
         if (playerInput.currentControlScheme.Equals("Keyboard&Mouse"))
         {
