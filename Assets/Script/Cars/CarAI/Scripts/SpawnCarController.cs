@@ -5,55 +5,47 @@ using Random = System.Random;
 
 public class SpawnCarController : MonoBehaviour
 {
-    [Header("Prefab")]
-    [SerializeField] private GameObject defaultPrefab;
-    private GameObject prefab;
-
-    float coolDown = 0;
+    public List<CarAI> carList = new List<CarAI>();
+    
     [Header("Time to Shoot")]
     [SerializeField] float timeBetween;
     private bool isTime;
+    float coolDown = 0;
 
-    [Header("Spawns")]
-    [SerializeField] private List<Transform> spawnList = new List<Transform>();
+    [Header("Transform")]
+    [SerializeField] private Transform destination;
 
     void Start()
     {
         isTime = false;
+        CarAI[] carIAComponents = GetComponentsInChildren<CarAI>();
+        Debug.Log(carIAComponents.Length);
+        foreach (CarAI carIA in carIAComponents)
+        {
+            carList.Add(carIA);
+        }
+        for (int i = 0; i < carList.Count; i++)
+        {
+            carList[i].gameObject.SetActive(false);
+        }
+        respawn();
     }
     void Update()
     {
-        respawn();
         coolDown -= Time.deltaTime;
     }
-    private void respawn()
+    public void respawn()
     {
-        if (!isTime)
-        {
-            if (coolDown <= 0)
-            {
-                //elegimos automovil
-
-                //instanciamos
-                Debug.Log("Instanciamos");
-                GameObject autoM = Instantiate(defaultPrefab);
-                autoM.transform.position = this.gameObject.transform.position;
-                Debug.Log(this.gameObject);
-
-                // elegimos destino
-                if(spawnList.Count > 0)
-                {
-                    Random rList = new Random();
-                    int nList = rList.Next(0, spawnList.Count);
-                    autoM.GetComponent<CarAI>().CustomDestination = spawnList[nList];
-                }
-                coolDown = timeBetween;
-                isTime = true;
-            }
-        }
-        else
-        {
-            isTime = false;
-        }
+        carList[0].gameObject.SetActive(true);
+        carList[0].CustomDestination = destination;
+        coolDown = timeBetween;
+    }
+    public void removeCar(CarAI car)
+    {
+        carList.Remove(car);
+    }
+    public void AddCar(CarAI car)
+    {
+        carList.Add(car);
     }
 }

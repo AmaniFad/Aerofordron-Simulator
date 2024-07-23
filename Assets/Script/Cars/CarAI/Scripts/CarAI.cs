@@ -37,6 +37,7 @@ public class CarAI : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent OnReachLastPoint;
+    public GameObject myFirstPoint;
 
     [HideInInspector] public bool move;// Look at the documentation for a detailed explanation
 
@@ -57,6 +58,7 @@ public class CarAI : MonoBehaviour
         currentWayPoint = 0;
         allowMovement = true;
         move = true;
+        this.gameObject.transform.position = myFirstPoint.transform.position;
     }
 
     void Start()
@@ -116,7 +118,11 @@ public class CarAI : MonoBehaviour
                 if (Vector3.Distance(carFront.position, waypoints[waypoints.Count - 1]) < 2)
                 {
                     hasReachedLastPoint = true;
+                    myFirstPoint.GetComponent<SpawnCarController>().removeCar(this);
+                    myFirstPoint.GetComponent<SpawnCarController>().respawn();
+                    myFirstPoint.GetComponent<SpawnCarController>().AddCar(this);
                     OnReachLastPoint?.Invoke();
+                    this.gameObject.transform.position = myFirstPoint.transform.position;
                 }
             }
         }
@@ -176,6 +182,7 @@ public class CarAI : MonoBehaviour
             {
                 if (CheckForAngle(path.corners[1], sourcePostion, direction))
                 {
+
                     waypoints.AddRange(path.corners.ToList());
                     debug("Random Path generated successfully", false);
                 }
@@ -381,5 +388,17 @@ public class CarAI : MonoBehaviour
             Gizmos.DrawRay(carFront.position, leftRayDirection * rayRange);
             Gizmos.DrawRay(carFront.position, rightRayDirection * rayRange);
         }
+        
+    }
+
+    public void Reset()
+    {
+        currentWayPoint = 0;
+        allowMovement = true;
+        move = true;
+
+        this.gameObject.transform.position = myFirstPoint.transform.position;
+        GetComponent<Rigidbody>().centerOfMass = Vector3.zero;
+        CalculateNavMashLayerBite();
     }
 }
