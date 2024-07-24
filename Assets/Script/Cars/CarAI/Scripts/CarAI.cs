@@ -112,16 +112,17 @@ public class CarAI : MonoBehaviour
 
             if (currentWayPoint >= waypoints.Count - 3)
                 CreatePath();
-
+       
             if (!hasReachedLastPoint && currentWayPoint >= waypoints.Count && waypoints.Count > 0)
             {
                 if (Vector3.Distance(carFront.position, waypoints[waypoints.Count - 1]) < 2)
                 {
                     hasReachedLastPoint = true;
+                    Reset();
                     myFirstPoint.GetComponent<SpawnCarController>().removeCar(this);
                     myFirstPoint.GetComponent<SpawnCarController>().respawn();
                     myFirstPoint.GetComponent<SpawnCarController>().AddCar(this);
-                    OnReachLastPoint?.Invoke();
+                    OnReachLastPoint.Invoke();
                     this.gameObject.transform.position = myFirstPoint.transform.position;
                 }
             }
@@ -224,7 +225,7 @@ public class CarAI : MonoBehaviour
             Vector3 direction = (waypoints[waypoints.Count - 1] - waypoints[waypoints.Count - 2]).normalized;
             Calculate(destination.position, sourcePostion, direction, NavMeshLayerBite);
         }
-        Debug.Log($"Calculating path from {sourcePostion} to {destination.position}");
+        //Debug.Log($"Calculating path from {sourcePostion} to {destination.position}");
 
         void Calculate(Vector3 destination, Vector3 sourcePostion, Vector3 direction, int NavMeshAreaBite)
         {
@@ -396,6 +397,7 @@ public class CarAI : MonoBehaviour
         currentWayPoint = 0;
         allowMovement = true;
         move = true;
+        hasReachedLastPoint = false;
 
         this.gameObject.transform.position = myFirstPoint.transform.position;
         GetComponent<Rigidbody>().centerOfMass = Vector3.zero;

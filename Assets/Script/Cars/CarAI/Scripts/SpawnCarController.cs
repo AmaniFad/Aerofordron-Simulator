@@ -5,21 +5,14 @@ using Random = System.Random;
 
 public class SpawnCarController : MonoBehaviour
 {
-    public List<CarAI> carList = new List<CarAI>();
-    
-    [Header("Time to Shoot")]
-    [SerializeField] float timeBetween;
-    private bool isTime;
-    float coolDown = 0;
-
     [Header("Transform")]
-    [SerializeField] private Transform destination;
+    [SerializeField] private List<Transform> destinations = new List<Transform>();
+
+    [SerializeField] private List<CarAI> carList = new List<CarAI>();
 
     void Start()
     {
-        isTime = false;
         CarAI[] carIAComponents = GetComponentsInChildren<CarAI>();
-        Debug.Log(carIAComponents.Length);
         foreach (CarAI carIA in carIAComponents)
         {
             carList.Add(carIA);
@@ -30,15 +23,13 @@ public class SpawnCarController : MonoBehaviour
         }
         respawn();
     }
-    void Update()
-    {
-        coolDown -= Time.deltaTime;
-    }
     public void respawn()
     {
-        carList[0].gameObject.SetActive(true);
-        carList[0].CustomDestination = destination;
-        coolDown = timeBetween;
+        Random rand = new Random();
+        int r = rand.Next(0, destinations.Count);
+
+        carList[0].CustomDestination = destinations[r];
+        carList[0].gameObject.SetActive(true); 
     }
     public void removeCar(CarAI car)
     {
