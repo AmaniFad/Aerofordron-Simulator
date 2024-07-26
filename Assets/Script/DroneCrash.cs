@@ -39,6 +39,8 @@ public class DroneCrash : MonoBehaviour
 
     public void Respawn()
     {
+        SwitchToFullView.instance.ExitFullView();
+        PlayerInputController.Instance.SetFullView(false);
         currentDestroyedDronFeedback = Instantiate(destroyedDron);
         currentDestroyedDronFeedback.transform.position = transform.position;
         gameObject.transform.rotation = Quaternion.identity;

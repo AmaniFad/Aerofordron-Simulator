@@ -87,8 +87,10 @@ public class DronAssemblyController : MonoBehaviour
     public void MountPart(GameObject grabbedPart, GameObject targetPart)
     {
         int i = FindEqual(grabbedPart);
+        print(i);
         if (i == currentPart)
         {
+            print("hola1");
             transparentDronPartsList[i].gameObject.SetActive(false);
             normalDronPartList[currentPart].GetComponent<DronPartInteract>().Mounted();
             StartCoroutine(PutPartInPlace(grabbedPart, targetPart, 0.5f));
@@ -96,7 +98,7 @@ public class DronAssemblyController : MonoBehaviour
         else
         {
             incorrectPartMessage.SetActive(true);
-            StartCoroutine(_DeactivateIncorrectMessage(grabbedPart));
+            StartCoroutine(_DeactivateIncorrectMessage(incorrectPartMessage));
         }
 
     }

@@ -84,9 +84,12 @@ public class PlayerInputController : MonoBehaviour
         return fullView;
     }
 
+    public void SetFullView(bool fullView)
+    {
+        this.fullView = fullView;
+    }
     public void OnControlsChanged(PlayerInput playerInput)
     {
-        Debug.Log(playerInput.currentControlScheme);
 
         if (playerInput.currentControlScheme.Equals("Keyboard&Mouse"))
         {

@@ -28,7 +28,14 @@ public class HUDController : MonoBehaviour
         {
             float speed = Mathf.Floor(dron.GetComponent<Rigidbody>().velocity.magnitude * (60f * 60f) / 1000); // KMH
             speedDisplay.text = speed + " KM/H";
-            heightDisplay.text = Mathf.Floor(dron.transform.position.y) + " ft";
+            if (Mathf.Floor(dron.transform.position.y) < 0)
+            {
+                heightDisplay.text = 0 + " ft";
+            }
+            else
+            { 
+                heightDisplay.text = Mathf.Floor(dron.transform.position.y) + " ft";
+            }
         }
         else
         {

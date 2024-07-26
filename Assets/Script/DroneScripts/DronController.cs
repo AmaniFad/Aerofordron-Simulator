@@ -121,8 +121,9 @@ public class DronController : MonoBehaviour
         //}
     }
 
-    private void RotateDronView()
+    private void OnDestroy()
     {
+        StopPlayDroneSound();
     }
     private void SendDronRotation(Vector2 inputDirection)
     {

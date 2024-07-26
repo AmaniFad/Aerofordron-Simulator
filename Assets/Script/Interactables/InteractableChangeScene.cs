@@ -14,7 +14,7 @@ public class InteractableChangeScene :MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        SceneManager.LoadScene(newSceneName);
+        SceneLoader.Instance.SceneLoad(newSceneName);
     }
 
 }

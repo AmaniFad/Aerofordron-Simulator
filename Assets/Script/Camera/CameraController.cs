@@ -9,7 +9,6 @@ public class CameraController : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera playerCamera;
     [SerializeField] CinemachineVirtualCamera droneCamera;
 
-    //Para un projecto mas grande con mas camaras esto no se haria asi, esto es bastante cutre pero nos sirve
     void Update()
     {
         if (DronInputController.Instance.CanChangeCamera())
