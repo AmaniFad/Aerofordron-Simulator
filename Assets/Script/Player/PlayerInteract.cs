@@ -8,7 +8,7 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private float raycastDistance = 10f;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private GameObject interactFeedback;
-    private GameObject currentFeedback;
+    [SerializeField] private GameObject currentFeedback;
     private Transform interactionZone;
     private GameObject grabbeableObj;
     private Vector3 grabbeableObjOriginalScale;

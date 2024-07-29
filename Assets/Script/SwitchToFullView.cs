@@ -31,7 +31,6 @@ public class SwitchToFullView : MonoBehaviour
 
     public void ExitFullView()
     {
-        print("Hola");
         fullViewCamera.SetActive(false);
 
     }

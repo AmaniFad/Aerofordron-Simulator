@@ -20,7 +20,6 @@ public class SpawnCP : MonoBehaviour
             GameObject cPObj = Instantiate(cPprefab);
             cPObj.transform.position = this.transform.position;
             SpawnCPController.Instance.AddCP(cPObj);
-            Debug.Log(PlayerReferences.instance.GetDron());
             cPObj.GetComponent<AlwaysLookAtGameobject>().SetObjective(PlayerReferences.instance.GetDron());
             cPObj.GetComponent<AlwaysLookAtGameobject>().ConstraintX(true);
 
