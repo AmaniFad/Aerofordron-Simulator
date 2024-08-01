@@ -51,7 +51,7 @@ public class DronAssemblyController : MonoBehaviour
             transparentDronPartsList[i].GetComponent<Outline>().OutlineWidth = 0;
 
             dronPart.GetComponent<Collider>().isTrigger = true;
-            dronPart.GetComponent<Rigidbody>().useGravity = false;
+            //dronPart.GetComponent<Rigidbody>().useGravity = false;
             aux = true;
         }
 
@@ -134,11 +134,11 @@ public class DronAssemblyController : MonoBehaviour
         Quaternion targetRotation = targetPart.transform.rotation;
 
         // Ensure the Rigidbody has zero velocity
-        Rigidbody grabbedRigidbody = grabbedPart.GetComponent<Rigidbody>();
-        if (grabbedRigidbody != null)
-        {
-            grabbedRigidbody.velocity = Vector3.zero;
-        }
+        //Rigidbody grabbedRigidbody = grabbedPart.GetComponent<Rigidbody>();
+        //if (grabbedRigidbody != null)
+        //{
+        //    grabbedRigidbody.velocity = Vector3.zero;
+        //}
 
         // Interpolate over the specified duration
         float elapsedTime = 0;

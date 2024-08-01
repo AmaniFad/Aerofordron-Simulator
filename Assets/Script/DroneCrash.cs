@@ -45,10 +45,10 @@ public class DroneCrash : MonoBehaviour
         currentDestroyedDronFeedback.transform.position = transform.position;
         gameObject.transform.rotation = Quaternion.identity;
         gameObject.transform.position = spawnPoint.position;
-        virtualCamera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
-        virtualCamera.Priority = 10;
-        thirrdPersonViewCamera.Priority = 12;
-        previousTransform = virtualCamera.Follow;
+
+        previousTransform = Camera.main.transform.parent.transform;
+        Camera.main.transform.parent.transform.position = thirrdPersonViewCamera.transform.position;
+        Camera.main.transform.parent.transform.rotation = thirrdPersonViewCamera.transform.rotation;
         InteractionZone.Instance.gameObject.SetActive(false);
         thirrdPersonViewCamera.Follow = currentDestroyedDronFeedback.transform;
         thirrdPersonViewCamera.LookAt = currentDestroyedDronFeedback.transform;
@@ -60,10 +60,10 @@ public class DroneCrash : MonoBehaviour
     private IEnumerator RecoverCamera(float time)
     {
         yield return new WaitForSeconds(time);
+        Camera.main.transform.parent.transform.position = previousTransform.transform.position;
+        Camera.main.transform.parent.transform.rotation = previousTransform.transform.rotation;
         InteractionZone.Instance.gameObject.SetActive(true);
-        thirrdPersonViewCamera.Priority = 10;
 
-        virtualCamera.Priority = 12;
         thirrdPersonViewCamera.LookAt = transform;
         thirrdPersonViewCamera.Follow = previousTransform;
         controller.StartMovingDron();

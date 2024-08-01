@@ -19,7 +19,7 @@ public class DronPartInteract : MonoBehaviour, IInteractable
     {
         isMounted = false;
         startParent = transform.parent;
-        rigidBody = GetComponent<Rigidbody>();
+        //rigidBody = GetComponent<Rigidbody>();
         isPickable = true;
         player = PlayerReferences.instance.GetPlayer().GetComponent<PlayerInteract>();
         dronPartCollider = GetComponent<Collider>();
@@ -47,10 +47,10 @@ public class DronPartInteract : MonoBehaviour, IInteractable
             GetComponent<Outline>().OutlineWidth = 0;
             if (isPickable)
             {
-                rigidBody.velocity = Vector3.zero;
+                //rigidBody.velocity = Vector3.zero;
                 isTaken.Invoke();
                 isPickable = false;
-                rigidBody.useGravity = false;
+                //rigidBody.useGravity = false;
                 dronPartCollider.isTrigger = true;
                 transform.rotation = Quaternion.identity;
             }
@@ -69,12 +69,12 @@ public class DronPartInteract : MonoBehaviour, IInteractable
         if (isPut)
         {
             dronPartCollider.isTrigger = true;
-            rigidBody.useGravity = false;
+            //rigidBody.useGravity = false;
         }
         else
         {
             dronPartCollider.isTrigger = false;
-            rigidBody.useGravity = true;
+            //rigidBody.useGravity = true;
         }
         isPickable = true;
         player.DropObject();
