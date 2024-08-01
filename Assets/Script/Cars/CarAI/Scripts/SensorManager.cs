@@ -9,7 +9,7 @@ public class SensorManager : MonoBehaviour
 
     void Start()
     {
-        carAI = gameObject.GetComponent<CarAI>();
+        carAI = gameObject.GetComponentInParent<CarAI>();
     }
 
     private void OnTriggerEnter(Collider car)

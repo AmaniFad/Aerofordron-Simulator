@@ -5,65 +5,38 @@ using Random = System.Random;
 
 public class SpawnCarController : MonoBehaviour
 {
-    [Header("Prefab")]
-    [SerializeField] private List<GameObject> prefabList = new List<GameObject>();
-    [SerializeField] private GameObject defaultPrefab;
-    private GameObject prefab;
+    [Header("Transform")]
+    [SerializeField] private List<Transform> destinations = new List<Transform>();
 
-    float coolDown = 0;
-    [Header("Time to Shoot")]
-    [SerializeField] float timeBetween;
-    private bool isTime;
-
-    [Header("Spawns")]
-    [SerializeField] private List<Transform> spawnList = new List<Transform>();
+    [SerializeField] private List<CarAI> carList = new List<CarAI>();
 
     void Start()
     {
-        isTime = false;
-    }
-    void Update()
-    {
-        coolDown -= Time.deltaTime;
+        CarAI[] carIAComponents = GetComponentsInChildren<CarAI>();
+        foreach (CarAI carIA in carIAComponents)
+        {
+            carList.Add(carIA);
+        }
+        for (int i = 0; i < carList.Count; i++)
+        {
+            carList[i].gameObject.SetActive(false);
+        }
         respawn();
     }
-    private void respawn()
+    public void respawn()
     {
-        if (!isTime)
-        {
-            if (coolDown <= 0)
-            {
-                //elegimos automovil
-                if (prefabList.Count > 0)
-                {
-                    Random rPrefab = new Random();
-                    int nPrefab = rPrefab.Next(0, prefabList.Count);
-                    prefab = prefabList[nPrefab];
-                }
-                else
-                {
-                    prefab = defaultPrefab;
-                }
+        Random rand = new Random();
+        int r = rand.Next(0, destinations.Count);
 
-                //instanciamos
-                Debug.Log("Instanciamos");
-                GameObject autoM = Instantiate(prefab);
-                autoM.transform.position = this.gameObject.transform.position;
-                Debug.Log(this.gameObject);
-
-                // elegimos destino
-                Random rList = new Random();
-                int nList = rList.Next(0, spawnList.Count);
-                autoM.GetComponent<CarAI>().CustomDestination = spawnList[nList];
-                Debug.Log($"CustomDestination set to: {spawnList[nList].position}");
-
-                coolDown = timeBetween;
-                isTime = true;
-            }
-        }
-        else
-        {
-            isTime = false;
-        }
+        carList[0].CustomDestination = destinations[r];
+        carList[0].gameObject.SetActive(true); 
+    }
+    public void removeCar(CarAI car)
+    {
+        carList.Remove(car);
+    }
+    public void AddCar(CarAI car)
+    {
+        carList.Add(car);
     }
 }
