@@ -1,35 +1,44 @@
 using PlayFab;
 using PlayFab.ClientModels;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-
+[Serializable]
+public class InitialUsersList
+{
+    public List<User> Users = new List<User>();
+}
+[Serializable]
+public class User
+{
+    public string UserName;
+    public string Password;
+}
 public class PlayFabLogin : MonoBehaviour
 {
+    private string playerName;
+    private string playerPassword;
     public void Start()
     {
-        if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.TitleId))
-        {
-            /*
-            Please change the titleId below to your own titleId from PlayFab Game Manager.
-            If you have already set the value in the Editor Extensions, this can be skipped.
-            */
-            PlayFabSettings.staticSettings.TitleId = "42";
-        }
-        var request = new LoginWithCustomIDRequest { CustomId = "GettingStartedGuide", CreateAccount = true };
-        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
+       
     }
 
     private void OnLoginSuccess(LoginResult result)
     {
         GetTitleDataRequest request = new GetTitleDataRequest
         {
-            Keys = new List<string>() {"InitialUserData"}
+            Keys = new List<string>() {"InitialUsersList"}
         };
         PlayFabClientAPI.GetTitleData(request, dataResult =>
         {
-            Debug.Log(dataResult.Data["InitialUserData"]);
+            var data = dataResult.Data["InitialUsersList"];
+            var initialusersList = JsonUtility.FromJson<InitialUsersList>(data);
+
+            Debug.Log(initialusersList.Users[0].UserName);
         }, error => { });
         Debug.Log("Congratulations, you made your first successful API call!");
     }
@@ -39,5 +48,35 @@ public class PlayFabLogin : MonoBehaviour
         Debug.LogWarning("Something went wrong with your first API call.  :(");
         Debug.LogError("Here's some debug information:");
         Debug.LogError(error.GenerateErrorReport());
+    }
+
+    public void GetName(TMP_InputField playerNameInput)
+    {
+        if(playerNameInput != null)
+        {
+            playerName = playerNameInput.text;
+            Debug.Log(playerName);
+        }
+    }
+    public void GetPassword(TMP_InputField playerPasswordInput)
+    {
+        if (playerPasswordInput != null)
+        {
+            playerPassword = playerPasswordInput.text;
+            Debug.Log(playerPassword);
+        }
+    }
+    public void PressedLoading()
+    {
+        if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.TitleId))
+        {
+            /*
+            Please change the titleId below to your own titleId from PlayFab Game Manager.
+            If you have already set the value in the Editor Extensions, this can be skipped.
+            */
+            PlayFabSettings.staticSettings.TitleId = "6CC33";
+        }
+        var request = new LoginWithCustomIDRequest { CustomId = "GettingStartedGuide", CreateAccount = true };
+        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
     }
 }
