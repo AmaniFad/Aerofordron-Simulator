@@ -1,6 +1,7 @@
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
@@ -20,11 +21,16 @@ public class User
 }
 public class PlayFabLogin : MonoBehaviour
 {
+    [SerializeField] private TMP_Text incorrectUserText;
+    [SerializeField] private TMP_InputField playerPasswordInput;
+    [SerializeField] private TMP_InputField playerNameInput;
     private string playerName;
     private string playerPassword;
+
+    private bool isLoggedIn;
     public void Start()
     {
-       
+       isLoggedIn = false;
     }
 
     private void OnLoginSuccess(LoginResult result)
@@ -38,7 +44,29 @@ public class PlayFabLogin : MonoBehaviour
             var data = dataResult.Data["InitialUsersList"];
             var initialusersList = JsonUtility.FromJson<InitialUsersList>(data);
 
-            Debug.Log(initialusersList.Users[0].UserName);
+            if(playerName != null && playerPassword != null)
+            {
+                isLoggedIn = false;
+                for (int i = 0; i < initialusersList.Users.Count; i++)
+                {
+                    if (initialusersList.Users[i].UserName.Equals(playerName)
+                    && initialusersList.Users[i].Password.Equals(playerPassword))
+                    {
+                        isLoggedIn = true;
+                    }
+                }
+                if (isLoggedIn)
+                {
+                    Debug.Log("entrando als simulador");
+                }
+                else
+                {
+                    incorrectUserText.text = "Incorrect User or Password";
+                    playerNameInput.text = string.Empty;
+                    playerPasswordInput.text = string.Empty;
+                    StartCoroutine(DeleteText());
+                }
+            } 
         }, error => { });
         Debug.Log("Congratulations, you made your first successful API call!");
     }
@@ -50,20 +78,20 @@ public class PlayFabLogin : MonoBehaviour
         Debug.LogError(error.GenerateErrorReport());
     }
 
-    public void GetName(TMP_InputField playerNameInput)
+    public void GetName()
     {
         if(playerNameInput != null)
         {
             playerName = playerNameInput.text;
-            Debug.Log(playerName);
+            Debug.Log("player name" + playerName);
         }
     }
-    public void GetPassword(TMP_InputField playerPasswordInput)
+    public void GetPassword()
     {
         if (playerPasswordInput != null)
         {
             playerPassword = playerPasswordInput.text;
-            Debug.Log(playerPassword);
+            Debug.Log(" player password" + playerPassword);
         }
     }
     public void PressedLoading()
@@ -78,5 +106,10 @@ public class PlayFabLogin : MonoBehaviour
         }
         var request = new LoginWithCustomIDRequest { CustomId = "GettingStartedGuide", CreateAccount = true };
         PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
+    }
+    private IEnumerator DeleteText()
+    {
+        yield return new WaitForSeconds(3f);
+        incorrectUserText.text = string.Empty;
     }
 }
