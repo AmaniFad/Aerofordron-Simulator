@@ -27,15 +27,39 @@ public class PlayerInteract : MonoBehaviour
         if (Physics.Raycast(ray, raycastDistance, layerMask) && grabbeableObj == null)
         {
 
-
-            if (currentFeedback == null)
+            if (TryGetComponent<DronPartInteract>(out DronPartInteract dronPart))
             {
-                currentFeedback = Instantiate(interactFeedback);
+                if (!dronPart.IsMounted())
+                {
+                    if (currentFeedback == null)
+                    {
+                        currentFeedback = Instantiate(interactFeedback);
+                    }
+                    else
+                    {
+                        currentFeedback.SetActive(true);
+                    }
+                }
+                else
+                {
+                    if (currentFeedback != null)
+                    {
+                        currentFeedback.SetActive(false);
+                    }
+                }
             }
             else
             {
-                currentFeedback.SetActive(true);
+                if (currentFeedback == null)
+                {
+                    currentFeedback = Instantiate(interactFeedback);
+                }
+                else
+                {
+                    currentFeedback.SetActive(true);
+                }
             }
+
         }
         else
         {

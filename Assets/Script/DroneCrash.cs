@@ -46,10 +46,7 @@ public class DroneCrash : MonoBehaviour
         gameObject.transform.rotation = Quaternion.identity;
         gameObject.transform.position = spawnPoint.position;
 
-        previousTransform = Camera.main.transform.parent.transform;
-        Camera.main.transform.parent.transform.position = thirrdPersonViewCamera.transform.position;
-        Camera.main.transform.parent.transform.rotation = thirrdPersonViewCamera.transform.rotation;
-        InteractionZone.Instance.gameObject.SetActive(false);
+
         thirrdPersonViewCamera.Follow = currentDestroyedDronFeedback.transform;
         thirrdPersonViewCamera.LookAt = currentDestroyedDronFeedback.transform;
         controller.StopMovingDron();
@@ -60,9 +57,7 @@ public class DroneCrash : MonoBehaviour
     private IEnumerator RecoverCamera(float time)
     {
         yield return new WaitForSeconds(time);
-        Camera.main.transform.parent.transform.position = previousTransform.transform.position;
-        Camera.main.transform.parent.transform.rotation = previousTransform.transform.rotation;
-        InteractionZone.Instance.gameObject.SetActive(true);
+
 
         thirrdPersonViewCamera.LookAt = transform;
         thirrdPersonViewCamera.Follow = previousTransform;
