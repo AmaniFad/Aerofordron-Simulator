@@ -19,6 +19,11 @@ public class User
     public string UserName;
     public string Password;
 }
+[Serializable]
+public class UserInizalized
+{
+    public bool isInizalized;
+}
 public class PlayFabLogin : MonoBehaviour
 {
     [SerializeField] private TMP_Text incorrectUserText;
@@ -35,16 +40,47 @@ public class PlayFabLogin : MonoBehaviour
 
     private void OnLoginSuccess(LoginResult result)
     {
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest { Keys = new List<string> { "IsInitialized" } },
+           dataResult =>
+        {
+            if (!dataResult.Data.ContainsKey("IsInitialized"))
+            {
+                InizalizeUser();
+            }
+            else
+            {
+                string userName = dataResult.Data["username"].Value;
+                string userPassword = dataResult.Data["password"].Value;
+
+                if(userName.Equals(playerName) && userPassword.Equals(playerPassword))
+                {
+                    Debug.Log("entrando als simulador mas veces");
+                }
+                else
+                {
+                    incorrectUserText.text = "Incorrect User or Password";
+                    playerNameInput.text = string.Empty;
+                    playerPasswordInput.text = string.Empty;
+                    StartCoroutine(DeleteText());
+                }
+            }
+        }, error => {});
+
+       
+        Debug.Log("Congratulations, you made your first successful API call!");
+    }
+    private void InizalizeUser()
+    {
         GetTitleDataRequest request = new GetTitleDataRequest
         {
-            Keys = new List<string>() {"InitialUsersList"}
+            Keys = new List<string>() { "InitialUsersList" }
         };
         PlayFabClientAPI.GetTitleData(request, dataResult =>
         {
             var data = dataResult.Data["InitialUsersList"];
             var initialusersList = JsonUtility.FromJson<InitialUsersList>(data);
 
-            if(playerName != null && playerPassword != null)
+            if (playerName != null && playerPassword != null)
             {
                 isLoggedIn = false;
                 for (int i = 0; i < initialusersList.Users.Count; i++)
@@ -57,7 +93,27 @@ public class PlayFabLogin : MonoBehaviour
                 }
                 if (isLoggedIn)
                 {
-                    Debug.Log("entrando als simulador");
+                    Debug.Log("entrando als simulador primera vez");
+
+                    PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
+                    {
+                        Data = new Dictionary<string, string>
+                        {
+                            {
+                                "IsInizalized", 
+                                JsonUtility.ToJson(new UserInizalized{ isInizalized = true})
+                            },
+                            { 
+                                "username",
+                                JsonUtility.ToJson(playerName)
+                            },
+                            {
+                                "password",
+                                JsonUtility.ToJson(playerPassword)
+                            }
+                        },
+
+                    }, result => { }, error => { });
                 }
                 else
                 {
@@ -66,11 +122,9 @@ public class PlayFabLogin : MonoBehaviour
                     playerPasswordInput.text = string.Empty;
                     StartCoroutine(DeleteText());
                 }
-            } 
+            }
         }, error => { });
-        Debug.Log("Congratulations, you made your first successful API call!");
     }
-
     private void OnLoginFailure(PlayFabError error)
     {
         Debug.LogWarning("Something went wrong with your first API call.  :(");
