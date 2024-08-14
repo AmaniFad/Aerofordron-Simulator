@@ -34,4 +34,9 @@ public class ScoreManager : MonoBehaviour
             OnWin.Invoke();
         }
     }
+    
+    public void SaveScore()
+    {
+
+    }
 }

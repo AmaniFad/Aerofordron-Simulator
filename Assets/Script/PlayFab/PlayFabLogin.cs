@@ -44,7 +44,6 @@ public class PlayFabLogin : MonoBehaviour
     {
        isLoggedIn = false;
     }
-
     private void OnLoginSuccess(LoginResult result)
     {
         PlayFabClientAPI.GetUserData(new GetUserDataRequest { Keys = new List<string> { "IsInizalized" } },
@@ -56,16 +55,12 @@ public class PlayFabLogin : MonoBehaviour
            }
            else
            {
-
-                comrobeUserLogin();
-                
+                comprobeUserLogin();
            }
         }, error => {});
-
-       
         Debug.Log("Congratulations, you made your first successful API call!");
     }
-    private void comrobeUserLogin()
+    private void comprobeUserLogin()
     {
         PlayFabClientAPI.GetUserData(new GetUserDataRequest { Keys = new List<string> { "PlayerValues" } },
            dataResult =>
@@ -148,14 +143,12 @@ public class PlayFabLogin : MonoBehaviour
             }
         }, error => { });
     }
-    
     private void OnLoginFailure(PlayFabError error)
     {
         Debug.LogWarning("Something went wrong with your first API call.  :(");
         Debug.LogError("Here's some debug information:");
         Debug.LogError(error.GenerateErrorReport());
     }
-
     public void GetName()
     {
         if(playerNameInput != null)
