@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,12 @@ public class UserInizalized
 {
     public bool isInizalized;
 }
+[SerializeField]
+public class PlayerValues
+{
+    public string UserName;
+    public string Password;
+}
 public class PlayFabLogin : MonoBehaviour
 {
     [SerializeField] private TMP_Text incorrectUserText;
@@ -40,34 +47,54 @@ public class PlayFabLogin : MonoBehaviour
 
     private void OnLoginSuccess(LoginResult result)
     {
-        PlayFabClientAPI.GetUserData(new GetUserDataRequest { Keys = new List<string> { "IsInitialized" } },
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest { Keys = new List<string> { "IsInizalized" } },
            dataResult =>
         {
-            if (!dataResult.Data.ContainsKey("IsInitialized"))
-            {
+           if (dataResult.Data.ContainsKey("IsInizalized") == false)
+           {
                 InizalizeUser();
-            }
-            else
-            {
-                string userName = dataResult.Data["username"].Value;
-                string userPassword = dataResult.Data["password"].Value;
+           }
+           else
+           {
 
-                if(userName.Equals(playerName) && userPassword.Equals(playerPassword))
-                {
-                    Debug.Log("entrando als simulador mas veces");
-                }
-                else
-                {
-                    incorrectUserText.text = "Incorrect User or Password";
-                    playerNameInput.text = string.Empty;
-                    playerPasswordInput.text = string.Empty;
-                    StartCoroutine(DeleteText());
-                }
-            }
+                comrobeUserLogin();
+                
+           }
         }, error => {});
 
        
         Debug.Log("Congratulations, you made your first successful API call!");
+    }
+    private void comrobeUserLogin()
+    {
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest { Keys = new List<string> { "PlayerValues" } },
+           dataResult =>
+           {
+               if (dataResult.Data.ContainsKey("PlayerValues"))
+               {
+                   var playerValuesJson = dataResult.Data["PlayerValues"].Value;
+                   var playerValuesList = JsonUtility.FromJson<PlayerValues>(playerValuesJson);
+
+                   if (playerValuesList.UserName.Equals(playerName) && playerValuesList.Password.Equals(playerPassword))
+                   {
+                       Debug.Log("Entrando al simulador más veces");
+                   }
+                   else
+                   {
+                       incorrectUserText.text = "Incorrect User or Password";
+                       playerNameInput.text = string.Empty;
+                       playerPasswordInput.text = string.Empty;
+                       StartCoroutine(DeleteText());
+                   }
+               }
+               else
+               {
+                   Debug.LogWarning("No se encontraron los datos del jugador.");
+                   incorrectUserText.text = "User data not found";
+                   StartCoroutine(DeleteText());
+               }
+
+           }, error => { });
     }
     private void InizalizeUser()
     {
@@ -101,16 +128,12 @@ public class PlayFabLogin : MonoBehaviour
                         {
                             {
                                 "IsInizalized", 
-                                JsonUtility.ToJson(new UserInizalized{ isInizalized = true})
+                                JsonUtility.ToJson(new UserInizalized{isInizalized = true})
                             },
                             { 
-                                "username",
-                                JsonUtility.ToJson(playerName)
+                                "PlayerValues",
+                                JsonUtility.ToJson(new PlayerValues{UserName = playerName, Password = playerPassword})
                             },
-                            {
-                                "password",
-                                JsonUtility.ToJson(playerPassword)
-                            }
                         },
 
                     }, result => { }, error => { });
@@ -125,6 +148,7 @@ public class PlayFabLogin : MonoBehaviour
             }
         }, error => { });
     }
+    
     private void OnLoginFailure(PlayFabError error)
     {
         Debug.LogWarning("Something went wrong with your first API call.  :(");
@@ -158,7 +182,7 @@ public class PlayFabLogin : MonoBehaviour
             */
             PlayFabSettings.staticSettings.TitleId = "6CC33";
         }
-        var request = new LoginWithCustomIDRequest { CustomId = "GettingStartedGuide", CreateAccount = true };
+        var request = new LoginWithCustomIDRequest { CustomId = playerName, CreateAccount = true };
         PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
     }
     private IEnumerator DeleteText()
