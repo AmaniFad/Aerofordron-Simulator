@@ -28,8 +28,9 @@ public class PlayerInputController : MonoBehaviour
         return playerInput;
     }
 
-    public void OnInteract(InputValue inputValue)
+    public void OnSelect(InputValue inputValue)
     {
+        print("Hola");
         isInteracting = true;
     }
    

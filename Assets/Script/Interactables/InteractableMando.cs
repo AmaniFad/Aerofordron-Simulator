@@ -24,34 +24,42 @@ public class InteractableMando : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        previousPosition = transform.position;
-        isPickable = false;
-        Quaternion rotate = new Quaternion(0,0,0,0);
-        transform.rotation = rotate;
-        player.GrabItem(this.gameObject);
-        controller.StartDron();
-        //this.transform.localRotation = rotationOffset;
-        rigidBody.useGravity = false;
-        rigidBody.isKinematic = true;
-        GetComponent<Collider>().isTrigger = true;
-        if (!isPickable)
-        {
-            isTaked.Invoke();
-        }
-        transform.rotation = rotate;
+        //previousPosition = transform.position;
+        //isPickable = false;
+        //Quaternion rotate = new Quaternion(0,0,0,0);
+        //transform.rotation = rotate;
+        //player.GrabItem(this.gameObject);
+        //controller.StartDron();
+        ////this.transform.localRotation = rotationOffset;
+        //rigidBody.useGravity = false;
+        //rigidBody.isKinematic = true;
+        //GetComponent<Collider>().isTrigger = true;
+        //if (!isPickable)
+        //{
+        //    isTaked.Invoke();
+        //}
+        //transform.rotation = rotate;
     }
 
-    // Start is called before the first frame update
+
+    public void StartDronFromController()
+    {
+        controller.StartDron();
+    }
 
 
-    public void DropInteractable()
+    public void StopDronFromController()
     {
         controller.StopDron();
-        isPickable = true;
-        GetComponent<Collider>().isTrigger = false;
-        transform.SetParent(null);
-        transform.position = previousPosition;
-        rigidBody.useGravity = true;
-        rigidBody.isKinematic = false;
+    }
+    public void DropInteractable()
+    {
+        //controller.StopDron();
+        //isPickable = true;
+        //GetComponent<Collider>().isTrigger = false;
+        //transform.SetParent(null);
+        //transform.position = previousPosition;
+        //rigidBody.useGravity = true;
+        //rigidBody.isKinematic = false;
     }
 }
