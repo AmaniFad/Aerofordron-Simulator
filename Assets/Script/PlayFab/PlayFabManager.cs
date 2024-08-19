@@ -39,7 +39,7 @@ public class PlayFabManager : MonoBehaviour
                }
            }, error => { });
     }
-    public void SaveInfoPlayer(string sceneName, int score, float scoreTime)
+    private void SaveInfoPlayer(string sceneName, int score, float scoreTime)
     {
         PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
         {
@@ -53,7 +53,7 @@ public class PlayFabManager : MonoBehaviour
         }, result => { }, error => { });
     }
 
-    public void UpdateInfoPlayer(string sceneName, int score, float scoreTime)
+    private void UpdateInfoPlayer(string sceneName, int score, float scoreTime)
     {
         PlayFabClientAPI.GetUserData(new GetUserDataRequest { Keys = new List<string> { sceneName } },
             dataResult =>
