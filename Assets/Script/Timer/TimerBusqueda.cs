@@ -7,6 +7,7 @@ public class TimerBusqueda : Timer
 {
     [Header("Canva")]
     [SerializeField] private GameObject canvaLose;
+    [SerializeField] private TMP_Text timerTextCanvaNext;
 
     [Header("CountDownTimer")]
     [SerializeField] private GameObject canvasCountDown;
@@ -42,7 +43,7 @@ public class TimerBusqueda : Timer
             {
                 timerText.color = Color.red;
             }
-            if (elapsedTime <= 0)
+            if (remainingTime <= 0)
             {
                 Lose();
             }
@@ -65,12 +66,24 @@ public class TimerBusqueda : Timer
         countdownText.text = "GO!";
         canvasCountDown.SetActive(false);
         timerText.gameObject.SetActive(true);
-        startGame = true;
+        elapsedTime = 0; 
+        SetStartGame(true);
         BusquedaObjetosController.instance.SetObjectInSpawn();
     }
     private void Lose()
     {
+        SetStartGame(false);
         canvaLose.SetActive(true);
         StopTime();
+    }
+    public void setTextTimeNext()
+    {
+        int min = Mathf.FloorToInt(elapsedTime / 60);
+        int sec = Mathf.FloorToInt(elapsedTime % 60);
+        timerTextCanvaNext.text = string.Format("{0:00}:{1:00}", min, sec);
+        if (ScoreManager.instance)
+        {
+            ScoreManager.instance.SetFinalTime(elapsedTime);
+        }
     }
 }

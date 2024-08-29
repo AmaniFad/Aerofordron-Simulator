@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class ObjetoDeBusqueda : MonoBehaviour
 {
-    [SerializeField] private GameObject canvasNext;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-
+            BusquedaObjetosController.instance.ObjectFounded();
         }
     }
 }
