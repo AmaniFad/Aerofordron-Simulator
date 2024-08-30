@@ -16,6 +16,7 @@ public class DroneCrash : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera thirrdPersonViewCamera;
     [SerializeField] private float speedThreshold;
     private float currentSpeed;
+    private bool couldMoveBefore;
     void Start()
     {
         controller = GetComponent<DronController>();
@@ -49,8 +50,16 @@ public class DroneCrash : MonoBehaviour
 
         thirrdPersonViewCamera.Follow = currentDestroyedDronFeedback.transform;
         thirrdPersonViewCamera.LookAt = currentDestroyedDronFeedback.transform;
+        if (controller.CanMoveDron())
+        {
+            couldMoveBefore = true;
+        }
+        else
+        {
+            couldMoveBefore = false;
+        }
         controller.StopMovingDron();
-        StartCoroutine(RecoverCamera(4));
+        StartCoroutine(RecoverCamera(0.2f));
         StartCoroutine(DestroyFeedback());
     }
 
@@ -58,10 +67,12 @@ public class DroneCrash : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
-
+        if (couldMoveBefore)
+        {
+          controller.StartMovingDron();
+        }
         thirrdPersonViewCamera.LookAt = transform;
         thirrdPersonViewCamera.Follow = previousTransform;
-        controller.StartMovingDron();
     }
 
     private IEnumerator DestroyFeedback()

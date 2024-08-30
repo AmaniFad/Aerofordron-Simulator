@@ -192,6 +192,11 @@ public class DronController : MonoBehaviour
     {
         canMove = true;
     }
+
+    public bool CanMoveDron()
+    {
+        return canMove;
+    }
     public bool IsGrounded()
     {
         return isGrounded;

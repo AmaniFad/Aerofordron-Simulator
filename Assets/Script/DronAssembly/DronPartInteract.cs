@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class DronPartInteract : MonoBehaviour, IInteractable
 {
@@ -33,7 +34,8 @@ public class DronPartInteract : MonoBehaviour, IInteractable
             isPut = assemblyController.CheckIfClose(this.gameObject);
             if (isPut && assemblyController.IsCurrentPart(this.gameObject))
             {
-                DropInteractable();
+                GetComponent<Rigidbody>().isKinematic = true;
+                GetComponent<XRGrabInteractable>().enabled = false;
             }
         }
     }
@@ -43,7 +45,6 @@ public class DronPartInteract : MonoBehaviour, IInteractable
         {
             interacted = true;
 
-            player.GrabItem(this.gameObject);
             GetComponent<Outline>().OutlineWidth = 0;
             if (isPickable)
             {
@@ -68,20 +69,26 @@ public class DronPartInteract : MonoBehaviour, IInteractable
         //Para diferenciar si lo has soltado o lo has puesto donde debias
         if (isPut)
         {
-            dronPartCollider.isTrigger = true;
+            //dronPartCollider.isTrigger = true;
             //rigidBody.useGravity = false;
         }
         else
         {
-            dronPartCollider.isTrigger = false;
+            //dronPartCollider.isTrigger = false;
             //rigidBody.useGravity = true;
         }
         isPickable = true;
-        player.DropObject();
+        GetComponent<XRGrabInteractable>().enabled = false;
+        StartCoroutine(ReactivateInteractable(0.1f));
         transform.SetParent(startParent);
 
     }
 
+    private IEnumerator ReactivateInteractable(float time)
+    {
+        yield return new WaitForSeconds(time);
+        GetComponent<XRGrabInteractable>().enabled = true;
+    }
     public void Mounted()
     {
         isMounted = true;

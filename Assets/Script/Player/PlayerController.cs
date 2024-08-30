@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,14 @@ public class PlayerController : MonoBehaviour
     private PlayerInteract playerInteract;
     private FMOD.Studio.EventInstance foosteps;
     private Coroutine isMoving;
+    [SerializeField] private XRDirectInteractor interactor;
+
+
+
+    private void OnEnable()
+    {
+
+    }
     void Start()
     {
         if (Instance == null)

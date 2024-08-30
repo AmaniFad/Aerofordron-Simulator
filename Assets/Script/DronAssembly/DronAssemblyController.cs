@@ -50,7 +50,7 @@ public class DronAssemblyController : MonoBehaviour
             }
             transparentDronPartsList[i].GetComponent<Outline>().OutlineWidth = 0;
 
-            dronPart.GetComponent<Collider>().isTrigger = true;
+            //dronPart.GetComponent<Collider>().isTrigger = true;
             //dronPart.GetComponent<Rigidbody>().useGravity = false;
             aux = true;
         }
@@ -86,6 +86,7 @@ public class DronAssemblyController : MonoBehaviour
 
     public void MountPart(GameObject grabbedPart, GameObject targetPart)
     {
+        grabbedPart.GetComponent<Collider>().isTrigger = false;
         int i = FindEqual(grabbedPart);
         print(i);
         if (i == currentPart)
