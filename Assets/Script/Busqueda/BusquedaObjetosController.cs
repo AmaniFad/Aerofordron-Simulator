@@ -35,11 +35,24 @@ public class BusquedaObjetosController : MonoBehaviour
             {
                 if (objectFind != null)
                 {
-                    int randomValue = Random.Range(0, spawns.Count);
+                    int randomValue = 0;
+                    levels++;
+                    if (levels == 1)
+                    {
+                        randomValue = Random.Range(0, spawns.Count / 3);
+                    }
+                    else if(levels == 2)
+                    {
+                        randomValue = Random.Range(0, spawns.Count / 2);
+                    }
+                    else
+                    {
+                        randomValue = Random.Range(0, spawns.Count);
+                    }
+                    
                     Debug.Log(randomValue);
                     objectFind.transform.position = spawns[randomValue].transform.position;
                     objectFind.SetActive(true);
-                    levels++;
                 } 
             }
         }  
@@ -50,16 +63,14 @@ public class BusquedaObjetosController : MonoBehaviour
         {
             canvasWin.SetActive(true);
             TimerBusqueda.instance.setTextTime();
-            TimerBusqueda.instance.SetStartGame(false);
-            TimerBusqueda.instance.StopTime();
         }
         else
         {
             canvasNext.SetActive(true);
             TimerBusqueda.instance.setTextTimeNext();
-            TimerBusqueda.instance.SetStartGame(false);
-            TimerBusqueda.instance.StopTime();
         }
+        TimerBusqueda.instance.SetStartGame(false);
+        TimerBusqueda.instance.StopTime();
     }
     public void NextLeve()
     {

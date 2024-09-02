@@ -16,6 +16,7 @@ public class DroneCrash : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera thirrdPersonViewCamera;
     [SerializeField] private float speedThreshold;
     private float currentSpeed;
+    [SerializeField] private int damage;
     void Start()
     {
         controller = GetComponent<DronController>();
@@ -45,6 +46,10 @@ public class DroneCrash : MonoBehaviour
         currentDestroyedDronFeedback.transform.position = transform.position;
         gameObject.transform.rotation = Quaternion.identity;
         gameObject.transform.position = spawnPoint.position;
+        if(this.gameObject.GetComponent<HealthBehaviour>() != null )
+        {
+            gameObject.GetComponent<HealthBehaviour>().Damage(damage);
+        }
         virtualCamera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
         virtualCamera.Priority = 10;
         thirrdPersonViewCamera.Priority = 12;
