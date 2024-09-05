@@ -59,12 +59,4 @@ public class MovementBehaviour : MonoBehaviour
         // Aplica la velocidad al objeto
         rb.velocity = transform.forward * speed;
     }
-    public void MovementCar(Vector3 input, float power)
-    {
-        rb.AddForce(input.y * transform.forward * power);
-    }
-    public void TroqueCar(Vector3 input, float torque)
-    {
-        rb.AddTorque(input.x * Vector3.up * torque);
-    }
 }
