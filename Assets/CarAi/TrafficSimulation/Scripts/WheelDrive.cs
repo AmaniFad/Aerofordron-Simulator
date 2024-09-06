@@ -113,7 +113,7 @@ namespace TrafficSimulation{
                     Vector3 p;
                     wheel.GetWorldPose(out p, out q);
 
-                    Transform shapeTransform = wheel.transform.GetChild (0);
+                    Transform shapeTransform = wheel.transform.GetChild(0);
                     shapeTransform.position = p;
                     shapeTransform.rotation = q;
                 }

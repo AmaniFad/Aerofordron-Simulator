@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TrafficSimulation;
+using UnityEngine.InputSystem;
 
 public class Deactivate : MonoBehaviour
 {
@@ -10,27 +11,31 @@ public class Deactivate : MonoBehaviour
     GameObject[] vehicles;
     TrafficSystem ts;
 
-    void Start(){
+    void Start()
+    {
         vehicles = GameObject.FindGameObjectsWithTag("AutonomousVehicle");
         ts = GameObject.FindObjectOfType<TrafficSystem>();
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)){
-            if(isActive){
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            if (isActive)
+            {
                 isActive = false;
                 ts.SaveTrafficSystem();
-                foreach(GameObject vehicle in vehicles){
+                foreach (GameObject vehicle in vehicles)
+                {
                     vehicle.SetActive(false);
                 }
             }
-            else{
+            else
+            {
                 isActive = true;
-
-                foreach(GameObject vehicle in vehicles){
+                foreach (GameObject vehicle in vehicles)
+                {
                     vehicle.SetActive(true);
-                    
                 }
                 ts.ResumeTrafficSystem();
             }
