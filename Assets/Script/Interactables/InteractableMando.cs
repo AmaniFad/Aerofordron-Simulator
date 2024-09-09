@@ -14,14 +14,27 @@ public class InteractableMando : MonoBehaviour, IInteractable
     private Vector3 previousPosition;
     private Rigidbody rigidBody;
     public Vector3 desiredRotation;
+    private bool activateController;
     void Start()
     {
+        activateController = false;
         rigidBody = GetComponent<Rigidbody>();
         controller = dron.GetComponent<DronController>();
         isPickable = true;
         player = PlayerReferences.instance.GetPlayer().GetComponent<PlayerInteract>();
     }
 
+    private void Update()
+    {
+        if (activateController)
+        {
+            ActivateDron();
+        }
+        else
+        {
+            DeactivateDron();
+        }
+    }
     public void Interact()
     {
         //previousPosition = transform.position;
@@ -44,13 +57,24 @@ public class InteractableMando : MonoBehaviour, IInteractable
 
     public void StartDronFromController()
     {
+        activateController = true;
         controller.StartDron();
     }
 
+    private void ActivateDron()
+    {
+        if (controller != null)
+        controller.StartDron();
+    }
 
+    private void DeactivateDron()
+    {
+        if (controller != null)
+        controller.StopDron();
+    }
     public void StopDronFromController()
     {
-        controller.StopDron();
+        activateController = false;
     }
     public void DropInteractable()
     {

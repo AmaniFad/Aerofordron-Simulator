@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class DronInputController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class DronInputController : MonoBehaviour
     private float cameraMovement;
     private void Start()
     {
+
         Instance = this;
     }
     public void OnDroneRightStick(InputValue inputValue)
@@ -22,7 +24,7 @@ public class DronInputController : MonoBehaviour
 
     public void OnDroneLeftStick(InputValue inputValue)
     {
-
+        
         verticalInput = inputValue.Get<Vector2>().y;
         rotationalInput = inputValue.Get<Vector2>().x;
 
@@ -39,11 +41,7 @@ public class DronInputController : MonoBehaviour
     }
     public float GetVerticalInput()
     {
-        if (verticalInput > -0.2f && verticalInput < 0.1f)
-        {
-            verticalInput = 0;
-        }
-            return verticalInput;
+        return verticalInput;
     }
 
     public float GetRotationalInput()

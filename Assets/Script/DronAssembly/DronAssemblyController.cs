@@ -93,6 +93,7 @@ public class DronAssemblyController : MonoBehaviour
         {
             print("hola1");
             transparentDronPartsList[i].gameObject.SetActive(false);
+            StartCoroutine(TurnOnKinematics());
             normalDronPartList[currentPart].GetComponent<DronPartInteract>().Mounted();
             StartCoroutine(PutPartInPlace(grabbedPart, targetPart, 0.5f));
         }
@@ -104,6 +105,12 @@ public class DronAssemblyController : MonoBehaviour
 
     }
 
+    private IEnumerator TurnOnKinematics()
+    {
+        yield return new WaitForSeconds(0.1f);
+            normalDronPartList[currentPart].GetComponent<Rigidbody>().isKinematic = true;
+
+    }
     public bool IsCurrentPart(GameObject part)
     {
         int i = FindEqual(part);

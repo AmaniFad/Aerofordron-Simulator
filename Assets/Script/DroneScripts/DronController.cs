@@ -1,4 +1,5 @@
 using FMODUnity;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -14,7 +15,7 @@ public class DronController : MonoBehaviour
     [SerializeField] private float maxDistanceFromPlayer;
     [SerializeField] private float groundedRayDistance;
     private bool isDronPlatformOn;
-    private bool canMove;
+    [SerializeField]private bool canMove;
     private MovementBehaviour mMovementBehaviour;
     private bool isPlaying;
     [Header("References")]
@@ -30,6 +31,7 @@ public class DronController : MonoBehaviour
     private float currentCameraRotationSimplified;
     [SerializeField] private float cameraMovementSpeed;
     private bool isGrounded;
+    private float lastVerticalInput;
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
     void Start()
@@ -44,7 +46,19 @@ public class DronController : MonoBehaviour
     {
         return Physics.Raycast(transform.position, Vector3.down, groundedRayDistance);
     }
+    private void Update()
+    {
+
+    }
     private void FixedUpdate()
+    {
+        if (canMove)
+        {
+            TryToMoveDronHorizontally();
+        }
+
+    }
+    private void LateUpdate()
     {
         if (canMove)
         {
@@ -53,41 +67,38 @@ public class DronController : MonoBehaviour
                 PlayDroneSound();
                 isPlaying = true;
             }
-            TryToMoveDron();
+            TryToMoveDronVertically();
         }
         else
         {
             StopPlayDroneSound();
         }
     }
-
-    private void TryToMoveDron()
+    private void TryToMoveDronVertically()
     {
-        Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
-        float verticalDirection = DronInputController.Instance.GetVerticalInput();
-
-        if (transform.position.y >= maxHeight)
+        float verticalDirection = DisplayInputData.leftControllerDirection.y;
+        if (verticalDirection > -0.2f && verticalDirection < 0.2f)
         {
             verticalDirection = 0;
         }
+
+        print(verticalDirection);
+
+        //if (transform.position.y >= maxHeight)
+        //{
+        //    verticalDirection = 0;
+        //}
+
+
         if (verticalDirection == 0)
         {
             mMovementBehaviour.StopMovingOnY();
         }
-        if (verticalDirection < -0.2f || verticalDirection > 0.05f)
+        print("Direccion: " + verticalDirection);
             mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0));
+        
 
-        if (!CheckIfGrounded())
-        {
-            Vector3 direction = transform.right * inputDirection.x + transform.forward * inputDirection.y;
 
-            mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z));
-            SendDronRotation(inputDirection);
-            if (WindControlller.Instance != null)
-            {
-                mMovementBehaviour.MoveWithoutSpeed(WindControlller.Instance.GetWindForce());
-            }
-        }
         float cameraMovement = DronInputController.Instance.GetCameraMovement();
         if (cameraMovement != 0)
         {
@@ -111,6 +122,7 @@ public class DronController : MonoBehaviour
             }
         }
 
+        
         //if (CheckIfGrounded() && inputDirection != Vector2.zero)
         //{
         //    playerOnGroundFeedback.SetActive(true);
@@ -119,6 +131,31 @@ public class DronController : MonoBehaviour
         //{
         //    playerOnGroundFeedback.SetActive(false);
         //}
+    }
+
+    public void TryToMoveDronHorizontally()
+    {
+        Vector2 inputDirection = DisplayInputData.rightControllerDirection;
+        if (inputDirection.x > -0.2f && inputDirection.x < 0.2f)
+        {
+            inputDirection.x = 0;
+        }
+        if (inputDirection.y > -0.2f && inputDirection.y < 0.2f)
+        {
+            inputDirection.y = 0;
+        }
+
+        if (!CheckIfGrounded())
+        {
+            Vector3 direction = transform.right * inputDirection.x + transform.forward * inputDirection.y;
+
+            mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z));
+            SendDronRotation(inputDirection);
+            if (WindControlller.Instance != null)
+            {
+                mMovementBehaviour.MoveWithoutSpeed(WindControlller.Instance.GetWindForce());
+            }
+        }
     }
 
     private void OnDestroy()
@@ -138,7 +175,7 @@ public class DronController : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(tiltAroundX, currentYRotation, tiltAroundZ);
 
         // Aqui se pone la rotacion Recordatorio no utilizar time.DeltaTime en un fixedUpdate
-        float additionalRotationY = DronInputController.Instance.GetRotationalInput() * rotationSpeed;
+        float additionalRotationY = DisplayInputData.leftControllerDirection.x * rotationSpeed;
         targetRotation *= Quaternion.Euler(0, additionalRotationY, 0);
 
         // Apply the rotation with slerp
@@ -154,11 +191,16 @@ public class DronController : MonoBehaviour
         PlayerReferences.instance.SetDron(gameObject);
         PlayerStateController.instance.CameraToDron(gameObject);
         PlayerStateController.instance.StopMoving();
-        canMove = true;
+        StartCoroutine(DronCanMove());
         GetComponent<Animator>().SetBool("flying", true);
         PlayerReferences.instance.GetHUD().SetActive(true);
     }
 
+    private IEnumerator DronCanMove()
+    {
+        yield return new WaitForSeconds(0.3f);
+        canMove = true;
+    }
     public void StopDron()
     {
         PlayerReferences.instance.SetDron(null);

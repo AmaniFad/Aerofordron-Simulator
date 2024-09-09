@@ -63,6 +63,14 @@ public class PlayerController : MonoBehaviour
             cameraForward.Normalize();
             cameraRight.Normalize();
             Vector3 input = cameraForward * playerWasd.y + cameraRight * playerWasd.x;
+            if (input.x > -0.1f && input.x < 0.1f)
+            {
+                input.x = 0;
+            }
+            if (input.z > -0.1f && input.z < 0.1f)
+            {
+                input.z = 0;
+            }
             if (isMoving == null && input != Vector3.zero)
             {
                 isMoving = StartCoroutine(_PlayFootstep());

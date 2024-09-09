@@ -20,7 +20,6 @@ public class PlayerInputController : MonoBehaviour
 
     public void OnMove(InputValue move)
     {
-        print(move.Get<Vector2>());
         playerInput = move.Get<Vector2>();
     }
 
