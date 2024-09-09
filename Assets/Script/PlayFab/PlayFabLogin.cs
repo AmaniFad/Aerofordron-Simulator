@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 [Serializable]
@@ -36,6 +37,9 @@ public class PlayFabLogin : MonoBehaviour
     [SerializeField] private TMP_Text incorrectUserText;
     [SerializeField] private TMP_InputField playerPasswordInput;
     [SerializeField] private TMP_InputField playerNameInput;
+
+    [Header("Event")]
+    [SerializeField] private UnityEvent enterSimulator;
     private string playerName;
     private string playerPassword;
 
@@ -73,6 +77,7 @@ public class PlayFabLogin : MonoBehaviour
                    if (playerValuesList.UserName.Equals(playerName) && playerValuesList.Password.Equals(playerPassword))
                    {
                        Debug.Log("Entrando al simulador más veces");
+                       enterSimulator.Invoke();
                    }
                    else
                    {
@@ -132,6 +137,7 @@ public class PlayFabLogin : MonoBehaviour
                         },
 
                     }, result => { }, error => { });
+                    enterSimulator.Invoke();
                 }
                 else
                 {
