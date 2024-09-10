@@ -311,6 +311,7 @@ namespace TrafficSimulation {
         }
 
         public int GetSegmentVehicleIsIn(){
+
             int vehicleSegment = currentTarget.segment;
             bool isOnSegment = trafficSystem.segments[vehicleSegment].IsOnSegment(this.transform.position);
             if(!isOnSegment){
