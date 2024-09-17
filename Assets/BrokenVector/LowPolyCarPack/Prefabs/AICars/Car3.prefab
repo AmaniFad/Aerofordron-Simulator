@@ -190,7 +190,7 @@ WheelCollider:
     targetPosition: 0.1
   m_SuspensionDistance: 0.54
   m_ForceAppPointDistance: 0
-  m_Mass: 100
+  m_Mass: 150
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 1
@@ -265,13 +265,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downForce: 100
   maxAngle: 60
-  steeringLerp: 5
-  steeringSpeedMax: 8
+  steeringLerp: 7
+  steeringSpeedMax: 20
   maxTorque: 100
   brakeTorque: 100000
   unitType: 0
-  minSpeed: 7
-  maxSpeed: 17
+  minSpeed: 10
+  maxSpeed: 20
   leftWheelShape: {fileID: 7346138256150336851}
   rightWheelShape: {fileID: 7346138256150341111}
   animateWheels: 1
@@ -291,11 +291,11 @@ MonoBehaviour:
   trafficSystem: {fileID: 0}
   waypointThresh: 2.5
   raycastAnchor: {fileID: 6397487265665345958}
-  raycastLength: 3
+  raycastLength: 7
   raySpacing: 3
   raysNumber: 8
   emergencyBrakeThresh: 1.5
-  slowDownThresh: 5
+  slowDownThresh: 7
   vehicleStatus: 0
 --- !u!54 &3882222670692721216
 Rigidbody:
@@ -344,7 +344,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.728077, y: 1.5573078, z: 4.9695463}
-  m_Center: {x: -0, y: 0.054798305, z: 0}
+  m_Center: {x: -0, y: 0, z: 0}
 --- !u!1 &4919462969596436938
 GameObject:
   m_ObjectHideFlags: 0

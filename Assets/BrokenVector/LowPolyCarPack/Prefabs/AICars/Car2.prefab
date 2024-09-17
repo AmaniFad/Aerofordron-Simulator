@@ -292,7 +292,7 @@ WheelCollider:
     targetPosition: 0.1
   m_SuspensionDistance: 0.54
   m_ForceAppPointDistance: 0
-  m_Mass: 100
+  m_Mass: 150
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 1
@@ -367,13 +367,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downForce: 100
   maxAngle: 60
-  steeringLerp: 5
-  steeringSpeedMax: 8
+  steeringLerp: 7
+  steeringSpeedMax: 20
   maxTorque: 100
   brakeTorque: 100000
   unitType: 0
-  minSpeed: 7
-  maxSpeed: 17
+  minSpeed: 10
+  maxSpeed: 20
   leftWheelShape: {fileID: 9046768108864509153}
   rightWheelShape: {fileID: 9046768108864320105}
   animateWheels: 1
@@ -393,11 +393,11 @@ MonoBehaviour:
   trafficSystem: {fileID: 0}
   waypointThresh: 2.5
   raycastAnchor: {fileID: 6665485888738182510}
-  raycastLength: 3
+  raycastLength: 7
   raySpacing: 3
   raysNumber: 8
   emergencyBrakeThresh: 1.5
-  slowDownThresh: 5
+  slowDownThresh: 7
   vehicleStatus: 0
 --- !u!54 &203703572454919907
 Rigidbody:

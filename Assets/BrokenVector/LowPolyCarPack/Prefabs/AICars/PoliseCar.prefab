@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1177258564094048152}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 32.28116, y: 1.25, z: 13.784332}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -37,7 +37,7 @@ Transform:
   - {fileID: 8932289639949783728}
   - {fileID: 9209392264942670773}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5394551856986915553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,13 +52,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downForce: 100
   maxAngle: 60
-  steeringLerp: 5
-  steeringSpeedMax: 8
+  steeringLerp: 7
+  steeringSpeedMax: 20
   maxTorque: 100
   brakeTorque: 100000
   unitType: 0
-  minSpeed: 7
-  maxSpeed: 17
+  minSpeed: 10
+  maxSpeed: 20
   leftWheelShape: {fileID: 6148831414176396574}
   rightWheelShape: {fileID: 6148831414176394738}
   animateWheels: 1
@@ -78,11 +78,11 @@ MonoBehaviour:
   trafficSystem: {fileID: 0}
   waypointThresh: 2.5
   raycastAnchor: {fileID: 9209392264942670773}
-  raycastLength: 3
+  raycastLength: 7
   raySpacing: 3
   raysNumber: 8
   emergencyBrakeThresh: 1.5
-  slowDownThresh: 5
+  slowDownThresh: 7
   vehicleStatus: 0
 --- !u!54 &3541515973772039372
 Rigidbody:
@@ -130,8 +130,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.728077, y: 1.4477112, z: 4.628655}
-  m_Center: {x: 6.458224e-16, y: 0, z: 0.17044568}
+  m_Size: {x: 1.728077, y: 1.4477112, z: 4.4585185}
+  m_Center: {x: 0, y: 0, z: 0.059547663}
 --- !u!1 &1993008194666622084
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,7 +180,7 @@ WheelCollider:
     targetPosition: 0.1
   m_SuspensionDistance: 0.54
   m_ForceAppPointDistance: 0
-  m_Mass: 100
+  m_Mass: 150
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 1
