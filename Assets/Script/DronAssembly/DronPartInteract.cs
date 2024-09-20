@@ -61,6 +61,7 @@ public class DronPartInteract : MonoBehaviour, IInteractable
 
     public void DropInteractable()
     {
+        dronPartCollider.isTrigger = false;
         interacted = false;
         if (assemblyController.IsCurrentPart(this.gameObject) && !isMounted)
         {
@@ -69,7 +70,6 @@ public class DronPartInteract : MonoBehaviour, IInteractable
         //Para diferenciar si lo has soltado o lo has puesto donde debias
         if (isPut)
         {
-            //dronPartCollider.isTrigger = true;
             //rigidBody.useGravity = false;
         }
         else
