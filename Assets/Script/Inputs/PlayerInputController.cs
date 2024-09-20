@@ -62,7 +62,6 @@ public class PlayerInputController : MonoBehaviour
     public void OnPause(InputValue value)
     {
         if (value.isPressed)
-        Debug.Log("Pausa");
         isPausing = true;
     }
 

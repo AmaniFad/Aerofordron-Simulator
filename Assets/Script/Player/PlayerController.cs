@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private FMOD.Studio.EventInstance foosteps;
     private Coroutine isMoving;
     [SerializeField] private XRDirectInteractor interactor;
-
+    [SerializeField] private DynamicMoveProvider movement;
 
 
     private void OnEnable()
@@ -38,7 +39,17 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         playerInteract = GetComponent<PlayerInteract>();
     }
-
+    private void Update()
+    {
+        if (PlayerStateController.instance.CanMove())
+        {
+            movement.moveSpeed = 1;
+        }
+        else
+        {
+            movement.moveSpeed = 0;
+        }
+    }
     private void FixedUpdate()
     {
         if (cameraTransform == null)

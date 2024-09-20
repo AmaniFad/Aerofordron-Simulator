@@ -251,6 +251,17 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""eee9c22d-1a7d-4a3f-a979-8e72642cce13"",
+                    ""path"": ""<WMRSpatialController>{RightHand}/menu"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""2575243f-d723-4984-bae5-12d3ab4bd178"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -284,6 +295,17 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e2075435-9138-421a-a260-0c85f0c80612"",
+                    ""path"": ""<XRController>{RightHand}/menu"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""8b1f7ca6-91b0-414a-ba10-846bafd60b1f"",
                     ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
@@ -300,6 +322,17 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
+                    ""action"": ""FullView"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5a4aed06-ccd1-4bfe-9680-da517069a76b"",
+                    ""path"": ""<XRInputV1::Microsoft::WindowsMRControllerOpenXR>{LeftHand}/joystickclicked"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""FullView"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

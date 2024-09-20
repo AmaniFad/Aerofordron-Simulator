@@ -15,7 +15,7 @@ public class DronController : MonoBehaviour
     [SerializeField] private float maxDistanceFromPlayer;
     [SerializeField] private float groundedRayDistance;
     private bool isDronPlatformOn;
-    [SerializeField]private bool canMove;
+    [SerializeField] private bool canMove;
     private MovementBehaviour mMovementBehaviour;
     private bool isPlaying;
     [Header("References")]
@@ -31,11 +31,13 @@ public class DronController : MonoBehaviour
     private float currentCameraRotationSimplified;
     [SerializeField] private float cameraMovementSpeed;
     private bool isGrounded;
+    private Rigidbody rb;
     private float lastVerticalInput;
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         currentCameraRotationSimplified = 0;
         eventEmitter = GetComponent<StudioEventEmitter>();
         isPlaying = false;
@@ -82,7 +84,6 @@ public class DronController : MonoBehaviour
             verticalDirection = 0;
         }
 
-        print(verticalDirection);
 
         //if (transform.position.y >= maxHeight)
         //{
@@ -90,15 +91,16 @@ public class DronController : MonoBehaviour
         //}
 
 
+        print("Direccion: " + verticalDirection);
+        mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0));
+
+
+
         if (verticalDirection == 0)
         {
-            mMovementBehaviour.StopMovingOnY();
+            rb.useGravity = false;
+            //mMovementBehaviour.StopMovingOnY();
         }
-        print("Direccion: " + verticalDirection);
-            mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0));
-        
-
-
         float cameraMovement = DronInputController.Instance.GetCameraMovement();
         if (cameraMovement != 0)
         {
@@ -118,11 +120,11 @@ public class DronController : MonoBehaviour
                 rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
                 Debug.Log("Rotation " + rotation);
                 currentCameraRotationSimplified -= rotation.x + 10;
-                dronView.transform.Rotate(new Vector3(-rotation.x,0,0),rotation.x * 10,Space.Self);
+                dronView.transform.Rotate(new Vector3(-rotation.x, 0, 0), rotation.x * 10, Space.Self);
             }
         }
 
-        
+
         //if (CheckIfGrounded() && inputDirection != Vector2.zero)
         //{
         //    playerOnGroundFeedback.SetActive(true);
@@ -177,9 +179,16 @@ public class DronController : MonoBehaviour
         // Aqui se pone la rotacion Recordatorio no utilizar time.DeltaTime en un fixedUpdate
         float additionalRotationY = DisplayInputData.leftControllerDirection.x * rotationSpeed;
         targetRotation *= Quaternion.Euler(0, additionalRotationY, 0);
+        if (targetRotation.y < 0.15 && targetRotation.y > -0.15)
+        {
 
+        }
+        else
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+
+        }
         // Apply the rotation with slerp
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
 
     }
     private void MoveCamera()
