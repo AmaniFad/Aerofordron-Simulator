@@ -21,6 +21,10 @@ public abstract class Timer : MonoBehaviour
         }
         elapsedTime += Time.deltaTime;
     }
+    public float GetElapsedTime()
+    {
+        return elapsedTime;
+    }
 
     public void cuentaAdelante()
     {
@@ -38,6 +42,10 @@ public abstract class Timer : MonoBehaviour
         int min = Mathf.FloorToInt(elapsedTime / 60);
         int sec = Mathf.FloorToInt(elapsedTime % 60);
         timerTextCanvaWin.text = string.Format("{0:00}:{1:00}", min, sec);
+        if (ScoreManager.instance)
+        {
+            ScoreManager.instance.SetFinalTime(elapsedTime);
+        }
     }
 
     public void RestartTime()

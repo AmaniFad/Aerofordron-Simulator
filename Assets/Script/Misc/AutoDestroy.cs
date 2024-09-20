@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class AutoDestroy : MonoBehaviour
 {
-
     public void AutoDestroySelf()
     {
-        Destroy(gameObject);
+        Debug.Log("AutoDestroySelf was called");
+        Destroy(this.gameObject);
     }
 }

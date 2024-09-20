@@ -9,6 +9,10 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private int maximScore;
     [SerializeField] private UnityEvent<int> OnUpdateCanvasScore;
     [SerializeField] private UnityEvent OnWin;
+    [SerializeField] private string nameLevel;
+    private float finalTime;
+
+    public static ScoreManager instance;
 
     private void OnEnable()
     {
@@ -18,11 +22,21 @@ public class ScoreManager : MonoBehaviour
     {
         ScoreController.OnUpdateScore -= UpdateScore;
     }
+    
+    public void SetFinalTime(float finalTime)
+    {
+        this.finalTime = finalTime;
+    }
 
     public void Start()
     {
         score = 0;
         maximScore = SpawnCPController.Instance.GetCpTotal();
+
+        if(instance != null)
+        {
+            instance = this;
+        }
     }
 
     public void UpdateScore(int scoreM)
@@ -33,5 +47,10 @@ public class ScoreManager : MonoBehaviour
         {
             OnWin.Invoke();
         }
+    }
+    
+    public void SaveScore()
+    {
+        PlayFabManager.Instance.ComprobeTitleData(nameLevel, score, finalTime);
     }
 }

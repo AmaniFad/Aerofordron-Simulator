@@ -5,7 +5,6 @@ using TMPro;
 
 public class TimerModoCarrera : Timer
 {
-
     [Header("Canva")]
     [SerializeField] private GameObject canvaLose;
 
