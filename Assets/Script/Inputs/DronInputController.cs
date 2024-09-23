@@ -11,6 +11,7 @@ public class DronInputController : MonoBehaviour
     private Vector2 directionInput;
     private bool changeCamera;
     private float cameraMovement;
+    private int aguaInput;
     private void Start()
     {
         Instance = this;
@@ -32,7 +33,10 @@ public class DronInputController : MonoBehaviour
     {
         cameraMovement = inputValue.Get<Vector2>().y;
     }
-
+    public void OnAgua(InputValue inputValue)
+    {
+        aguaInput = inputValue.Get<int>();
+    }
     public float GetCameraMovement()
     {
         return cameraMovement;
@@ -84,5 +88,9 @@ public class DronInputController : MonoBehaviour
     public bool CanChangeCamera()
     {
         return changeCamera;
+    }
+    public int GetAguaInput()
+    {
+        return aguaInput;
     }
 }

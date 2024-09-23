@@ -125,6 +125,15 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Agua"",
+                    ""type"": ""Button"",
+                    ""id"": ""acfbdb18-efc0-4d74-bb60-69ac61bf7cd8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -666,6 +675,17 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""action"": ""MoveCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55113a85-f7bd-45dd-9722-2d3a5550201f"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Agua"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1296,6 +1316,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_FullView = m_Player.FindAction("FullView", throwIfNotFound: true);
+        m_Player_Agua = m_Player.FindAction("Agua", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1384,6 +1405,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_FullView;
+    private readonly InputAction m_Player_Agua;
     public struct PlayerActions
     {
         private @EduPlayerImput m_Wrapper;
@@ -1399,6 +1421,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @FullView => m_Wrapper.m_Player_FullView;
+        public InputAction @Agua => m_Wrapper.m_Player_Agua;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1441,6 +1464,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @FullView.started += instance.OnFullView;
             @FullView.performed += instance.OnFullView;
             @FullView.canceled += instance.OnFullView;
+            @Agua.started += instance.OnAgua;
+            @Agua.performed += instance.OnAgua;
+            @Agua.canceled += instance.OnAgua;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1478,6 +1504,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @FullView.started -= instance.OnFullView;
             @FullView.performed -= instance.OnFullView;
             @FullView.canceled -= instance.OnFullView;
+            @Agua.started -= instance.OnAgua;
+            @Agua.performed -= instance.OnAgua;
+            @Agua.canceled -= instance.OnAgua;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1747,6 +1776,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnFullView(InputAction.CallbackContext context);
+        void OnAgua(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
