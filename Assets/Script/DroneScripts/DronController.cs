@@ -179,7 +179,7 @@ public class DronController : MonoBehaviour
         // Aqui se pone la rotacion Recordatorio no utilizar time.DeltaTime en un fixedUpdate
         float additionalRotationY = DisplayInputData.leftControllerDirection.x * rotationSpeed;
         targetRotation *= Quaternion.Euler(0, additionalRotationY, 0);
-        if (targetRotation.y < 0.15 && targetRotation.y > -0.15)
+        if (additionalRotationY < 0.15 && additionalRotationY > -0.15)
         {
 
         }

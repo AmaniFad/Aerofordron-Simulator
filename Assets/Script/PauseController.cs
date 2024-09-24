@@ -33,7 +33,7 @@ public class PauseController : MonoBehaviour
                 }
                 else
                 {
-                    Time.timeScale = 0f;
+                    Time.timeScale = 1f;
                 }
             }
             else
@@ -57,7 +57,7 @@ public class PauseController : MonoBehaviour
     public void PauseWihoutPauseMenu()
     {
         pauseWithoutPauseMenu = true;
-        Time.timeScale = 0;
+        Time.timeScale = 1;
 
     }
 
@@ -77,7 +77,7 @@ public class PauseController : MonoBehaviour
             isPausing = true;
             pauseMenuInstance.SetActive(true);
             pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
-            Time.timeScale = 0f;
+            Time.timeScale = 1f;
             PlayerInputController.Instance.HasPaused();
             Cursor.visible = true;
 
@@ -89,7 +89,7 @@ public class PauseController : MonoBehaviour
                 isPausing = true;
                 pauseMenuInstance.SetActive(true);
                 pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
-                Time.timeScale = 0f;
+                Time.timeScale = 1f;
                 PlayerInputController.Instance.HasPaused();
                 Cursor.visible = true;
             }
