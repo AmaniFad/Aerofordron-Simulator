@@ -50,7 +50,6 @@ public class BusquedaObjetosController : MonoBehaviour
                         randomValue = Random.Range(0, spawns.Count);
                     }
                     
-                    Debug.Log(randomValue);
                     objectFind.transform.position = spawns[randomValue].transform.position;
                     objectFind.SetActive(true);
                 } 

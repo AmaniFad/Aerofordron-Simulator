@@ -8,6 +8,7 @@ public class TimerBusqueda : Timer
     [Header("Canva")]
     [SerializeField] private GameObject canvaLose;
     [SerializeField] private TMP_Text timerTextCanvaNext;
+    [SerializeField] private GameObject canvasSeBusca;
 
     [Header("CountDownTimer")]
     [SerializeField] private GameObject canvasCountDown;
@@ -66,6 +67,7 @@ public class TimerBusqueda : Timer
         countdownText.text = "GO!";
         canvasCountDown.SetActive(false);
         timerText.gameObject.SetActive(true);
+        canvasSeBusca.SetActive(true);
         elapsedTime = 0; 
         SetStartGame(true);
         BusquedaObjetosController.instance.SetObjectInSpawn();
