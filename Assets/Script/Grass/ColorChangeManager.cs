@@ -23,14 +23,9 @@ public class ColorChangeManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    void Start()
-    {
+        UpdateProgressText();
         totalObjects = 0;
         changedObjects = 0;
-
-        UpdateProgressText();
     }
 
     public void RegisterObject()
