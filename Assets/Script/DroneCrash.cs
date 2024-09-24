@@ -61,6 +61,16 @@ public class DroneCrash : MonoBehaviour
         StartCoroutine(RecoverCamera(4));
         StartCoroutine(DestroyFeedback());
     }
+    public void GoToFirstPosition()
+    {
+        SwitchToFullView.instance.ExitFullView();
+        PlayerInputController.Instance.SetFullView(false);
+        gameObject.transform.rotation = Quaternion.identity;
+        gameObject.transform.position = spawnPoint.position;
+
+        virtualCamera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
+        StartCoroutine(RecoverCamera(4));
+    }
 
     private IEnumerator RecoverCamera(float time)
     {

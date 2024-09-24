@@ -13,6 +13,7 @@ public class BusquedaObjetosController : MonoBehaviour
     [Header("Canvas")]
     [SerializeField] public GameObject canvasNext;
     [SerializeField] public GameObject canvasWin;
+    [SerializeField] private GameObject canvasSeBusca;
 
     [Header("ObjectsInScene")]
     [SerializeField] private GameObject dronObj;
@@ -68,6 +69,7 @@ public class BusquedaObjetosController : MonoBehaviour
             canvasNext.SetActive(true);
             TimerBusqueda.instance.setTextTimeNext();
         }
+        canvasSeBusca.SetActive(false);
         TimerBusqueda.instance.SetStartGame(false);
         TimerBusqueda.instance.StopTime();
     }
@@ -82,7 +84,6 @@ public class BusquedaObjetosController : MonoBehaviour
             TimerBusqueda.instance.SetRemainingTime(60);
         }
 
-        dronObj.transform.position = spawnDron.transform.position;
         canvasNext.SetActive(false);
         TimerBusqueda.instance.RestartTime();
         TimerBusqueda.instance.StartCountDown();

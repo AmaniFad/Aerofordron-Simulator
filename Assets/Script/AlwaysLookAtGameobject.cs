@@ -34,7 +34,7 @@ public class AlwaysLookAtGameobject : MonoBehaviour
 
         }
         else
-            Debug.Log("Falta asignarle un objeto al script AlwaysLookAtGameobject en " + gameObject);
+            Debug.Log("Falta asignarle un objeto al script AlwaysLookAtGameobject en " + gameObject.name);
     }
 
     public void SetObjective(GameObject objective)
