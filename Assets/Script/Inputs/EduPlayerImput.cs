@@ -128,12 +128,12 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Agua"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""acfbdb18-efc0-4d74-bb60-69ac61bf7cd8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
