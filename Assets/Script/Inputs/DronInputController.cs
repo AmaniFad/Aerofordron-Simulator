@@ -12,6 +12,8 @@ public class DronInputController : MonoBehaviour
     private bool changeCamera;
     private float cameraMovement;
     private float aguaInput;
+
+    private bool buttonPressed = false;
     private void Start()
     {
         Instance = this;
@@ -35,13 +37,14 @@ public class DronInputController : MonoBehaviour
     }
     public void OnAgua(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && !buttonPressed)
         {
-            aguaInput = 1;
+            aguaInput = (aguaInput == 0) ? 1 : 0;
+            buttonPressed = true;
         }
-        else
+        else if (!value.isPressed)
         {
-            aguaInput = 0;
+            buttonPressed = false;
         }
     }
     public float GetCameraMovement()

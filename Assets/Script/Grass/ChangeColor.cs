@@ -8,7 +8,7 @@ public class ChangeColor : MonoBehaviour
     public Color endColor = Color.green;     
     public float colorChangeSpeed = 0.5f;    
 
-    private Color currentColor;
+    public Color currentColor;
     private float t = 0f;
     private bool hasChanged = false;
 
