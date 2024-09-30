@@ -55,6 +55,7 @@ public class PlayFabManager : MonoBehaviour
 
     private void UpdateInfoPlayer(string sceneName, int score, float scoreTime)
     {
+        Debug.Log("updateinfo" + " " + sceneName + " " + score + " " + scoreTime);
         PlayFabClientAPI.GetUserData(new GetUserDataRequest { Keys = new List<string> { sceneName } },
             dataResult =>
             {

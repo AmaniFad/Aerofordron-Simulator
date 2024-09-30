@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43718317, g: 0.75444984, b: 1.0290304, a: 1}
+  m_IndirectSpecularColor: {r: 0.4384963, g: 0.7540146, b: 1.0313286, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9159,6 +9159,50 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 90d284ef85934684a93a8e5a4067911b, type: 3}
   m_PrefabInstance: {fileID: 1387956731}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &172325310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 172325311}
+  - component: {fileID: 172325312}
+  m_Layer: 0
+  m_Name: PlayFabManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &172325311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172325310}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 380690827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &172325312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172325310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c0c3d1770da0f841ad0c1d2de6c8939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &173923671
 GameObject:
   m_ObjectHideFlags: 0
@@ -18965,6 +19009,7 @@ Transform:
   - {fileID: 1566235754}
   - {fileID: 88692519}
   - {fileID: 2137357081}
+  - {fileID: 172325311}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &384666104
@@ -75002,7 +75047,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1566235754}
   - component: {fileID: 1566235755}
-  - component: {fileID: 1566235756}
   m_Layer: 0
   m_Name: ScoreManager
   m_TagString: Untagged
@@ -75116,21 +75160,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nameLevel: 
---- !u!114 &1566235756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1566235753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00543631a302276489c6d7663dd7916c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outsideObject: {fileID: 0}
-  isOutlineObjectNotThis: 0
+      - m_Target: {fileID: 1566235755}
+        m_TargetAssemblyTypeName: ScoreManager, Assembly-CSharp
+        m_MethodName: SaveScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nameLevel: CheckPointCity
 --- !u!1 &1567081451
 GameObject:
   m_ObjectHideFlags: 0

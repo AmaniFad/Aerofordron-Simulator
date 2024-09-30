@@ -33,8 +33,9 @@ public class ScoreManager : MonoBehaviour
         score = 0;
         maximScore = SpawnCPController.Instance.GetCpTotal();
 
-        if(instance != null)
+        if(instance == null)
         {
+            Debug.Log("intance is this");
             instance = this;
         }
     }
