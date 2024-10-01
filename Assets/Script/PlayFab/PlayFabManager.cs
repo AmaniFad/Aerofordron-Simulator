@@ -10,7 +10,7 @@ public class ScoreValues
 {
     public string SceneName;
     public int Score;
-    public float ScoreTime;
+    public string ScoreTime;
 }
 public class PlayFabManager : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public class PlayFabManager : MonoBehaviour
         } 
     } 
 
-    public void ComprobeTitleData(string sceneName, int score, float scoreTime)
+    public void ComprobeTitleData(string sceneName, int score, string scoreTime)
     {
         PlayFabClientAPI.GetUserData(new GetUserDataRequest { Keys = new List<string> { sceneName } },
            dataResult =>
@@ -39,7 +39,7 @@ public class PlayFabManager : MonoBehaviour
                }
            }, error => { });
     }
-    private void SaveInfoPlayer(string sceneName, int score, float scoreTime)
+    private void SaveInfoPlayer(string sceneName, int score, string scoreTime)
     {
         PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
         {
@@ -53,28 +53,43 @@ public class PlayFabManager : MonoBehaviour
         }, result => { }, error => { });
     }
 
-    private void UpdateInfoPlayer(string sceneName, int score, float scoreTime)
+    private void UpdateInfoPlayer(string sceneName, int score, string scoreTime)
     {
-        Debug.Log("updateinfo" + " " + sceneName + " " + score + " " + scoreTime);
         PlayFabClientAPI.GetUserData(new GetUserDataRequest { Keys = new List<string> { sceneName } },
             dataResult =>
             {
-                var playerValuesJson = dataResult.Data[sceneName].Value;
-                var playerValuesList = JsonUtility.FromJson<ScoreValues>(playerValuesJson);
-
-                playerValuesList.Score = score;
-                playerValuesList.ScoreTime = scoreTime;
-
-                var request = new UpdateUserDataRequest
+                if (dataResult.Data.TryGetValue(sceneName, out var playerValuesJson))
                 {
-                    Data = new Dictionary<string, string>
+                    var playerValuesList = JsonUtility.FromJson<ScoreValues>(playerValuesJson.Value);
+                    playerValuesList.Score = score;
+                    playerValuesList.ScoreTime = scoreTime;
+
+                    var request = new UpdateUserDataRequest
                     {
-                        { 
-                            sceneName, 
-                            JsonUtility.ToJson(playerValuesList)
+                        Data = new Dictionary<string, string>
+                        {
+                        { sceneName, JsonUtility.ToJson(playerValuesList) }
                         }
-                    }
-                };
-            }, error => { });
+                    };
+                    PlayFabClientAPI.UpdateUserData(request,
+                        result =>
+                        {
+                            Debug.Log("UserData updated successfully");
+                            // Aquí puedes manejar cualquier acción adicional después de la actualización
+                        },
+                        error =>
+                        {
+                            Debug.LogError("UpdateUserData error: " + error.GenerateErrorReport());
+                        });
+                }
+                else
+                {
+                    Debug.LogError("UserData not found for key: " + sceneName);
+                }
+            },
+            error =>
+            {
+                Debug.LogError("GetUserData error: " + error.GenerateErrorReport());
+            });
     }
 }

@@ -42,11 +42,9 @@ public abstract class Timer : MonoBehaviour
         int min = Mathf.FloorToInt(elapsedTime / 60);
         int sec = Mathf.FloorToInt(elapsedTime % 60);
         timerTextCanvaWin.text = string.Format("{0:00}:{1:00}", min, sec);
-        Debug.Log("setTextCanva " + ScoreManager.instance);
         if (ScoreManager.instance != null)
         {
-            Debug.Log("isScoreManager");
-            ScoreManager.instance.SetFinalTime(elapsedTime);
+            ScoreManager.instance.SetFinalTime(string.Format("{0:00}:{1:00}", min, sec));
         }
     }
 

@@ -83,9 +83,6 @@ public class TimerBusqueda : Timer
         int min = Mathf.FloorToInt(elapsedTime / 60);
         int sec = Mathf.FloorToInt(elapsedTime % 60);
         timerTextCanvaNext.text = string.Format("{0:00}:{1:00}", min, sec);
-        if (ScoreManager.instance)
-        {
-            ScoreManager.instance.SetFinalTime(elapsedTime);
-        }
+        BusquedaObjetosController.instance.SetFinalTime(string.Format("{0:00}:{1:00}", min, sec));
     }
 }

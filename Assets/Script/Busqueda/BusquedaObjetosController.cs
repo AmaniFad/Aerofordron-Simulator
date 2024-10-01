@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class BusquedaObjetosController : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class BusquedaObjetosController : MonoBehaviour
     [SerializeField] private GameObject dronObj;
     [SerializeField] private GameObject spawnDron;
 
+    [Header("Score")]
+    [SerializeField] private string nameLevel;
+    private string finalTime;
+
     private int levels;
     void Start()
     {
@@ -27,6 +32,10 @@ public class BusquedaObjetosController : MonoBehaviour
             instance = this;
         }
         objectFind.SetActive(false);
+    }
+    public void SetFinalTime(string finalTime)
+    {
+        this.finalTime = finalTime;
     }
     public void SetObjectInSpawn()
     {
@@ -63,6 +72,7 @@ public class BusquedaObjetosController : MonoBehaviour
         {
             canvasWin.SetActive(true);
             TimerBusqueda.instance.setTextTime();
+            PlayFabManager.Instance.ComprobeTitleData(nameLevel, 100 , finalTime);
         }
         else
         {

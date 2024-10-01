@@ -10,7 +10,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private UnityEvent<int> OnUpdateCanvasScore;
     [SerializeField] private UnityEvent OnWin;
     [SerializeField] private string nameLevel;
-    private float finalTime;
+    private string finalTime;
 
     public static ScoreManager instance;
 
@@ -23,7 +23,7 @@ public class ScoreManager : MonoBehaviour
         ScoreController.OnUpdateScore -= UpdateScore;
     }
     
-    public void SetFinalTime(float finalTime)
+    public void SetFinalTime(string finalTime)
     {
         this.finalTime = finalTime;
     }
@@ -35,7 +35,6 @@ public class ScoreManager : MonoBehaviour
 
         if(instance == null)
         {
-            Debug.Log("intance is this");
             instance = this;
         }
     }

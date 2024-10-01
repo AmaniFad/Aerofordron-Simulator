@@ -62,7 +62,6 @@ public class PlayFabLogin : MonoBehaviour
                 comprobeUserLogin();
            }
         }, error => {});
-        Debug.Log("Congratulations, you made your first successful API call!");
     }
     private void comprobeUserLogin()
     {
@@ -76,7 +75,6 @@ public class PlayFabLogin : MonoBehaviour
 
                    if (playerValuesList.UserName.Equals(playerName) && playerValuesList.Password.Equals(playerPassword))
                    {
-                       Debug.Log("Entrando al simulador más veces");
                        enterSimulator.Invoke();
                    }
                    else
@@ -120,7 +118,6 @@ public class PlayFabLogin : MonoBehaviour
                 }
                 if (isLoggedIn)
                 {
-                    Debug.Log("entrando als simulador primera vez");
 
                     PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
                     {
@@ -160,7 +157,6 @@ public class PlayFabLogin : MonoBehaviour
         if(playerNameInput != null)
         {
             playerName = playerNameInput.text;
-            Debug.Log("player name" + playerName);
         }
     }
     public void GetPassword()
@@ -168,7 +164,6 @@ public class PlayFabLogin : MonoBehaviour
         if (playerPasswordInput != null)
         {
             playerPassword = playerPasswordInput.text;
-            Debug.Log(" player password" + playerPassword);
         }
     }
     public void PressedLoading()
