@@ -5,8 +5,11 @@ using UnityEngine;
 public class CosecharDron : MonoBehaviour
 {
     [SerializeField] private GameObject agua;
+    private bool canShower;
+    bool chorro = false;
     private void Start()
     {
+        canShower = true;
         agua.SetActive(false);
     }
     void Update()
@@ -15,15 +18,32 @@ public class CosecharDron : MonoBehaviour
     }
     public void SoltarAgua()
     {
-        float chorro = DronInputController.Instance.GetAguaInput();
-        if (chorro == 1)
+        if (canShower)
         {
-            agua.SetActive(true);
+            if (DisplayInputData.isPrimaryPressed)
+            {
+                StartCoroutine(Wait());
+                chorro = !chorro;
+                if (chorro)
+                {
+                    print("PRueba");
+                    agua.SetActive(true);
+                }
+                else
+                {
+                    agua.SetActive(false);
+                }
+            }
+
         }
-        else
-        {
-            agua.SetActive(false);
-        }
+
     }
 
+
+    private IEnumerator Wait()
+    {
+        canShower = false;
+        yield return new WaitForSeconds(0.3f);
+        canShower = true;
+    }
 }

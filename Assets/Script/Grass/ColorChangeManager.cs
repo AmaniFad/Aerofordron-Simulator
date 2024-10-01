@@ -8,7 +8,7 @@ public class ColorChangeManager : MonoBehaviour
 {
     public static ColorChangeManager instance;
 
-    private int totalObjects;
+    private int totalObjects = 0;
     private int changedObjects;
     [SerializeField] private TMP_Text progressText;
     [SerializeField] private GameObject finalCanvas;
@@ -24,10 +24,12 @@ public class ColorChangeManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    private void Update()
+    {
+        print("Objetos totales: " + totalObjects);
+    }
     void Start()
     {
-        totalObjects = 0;
         changedObjects = 0;
 
         UpdateProgressText();
@@ -42,6 +44,8 @@ public class ColorChangeManager : MonoBehaviour
     public void ObjectColorChanged()
     {
         changedObjects++;
+        print("Changed Objects: " + changedObjects + " TotalObjects: " + totalObjects);
+        
         UpdateProgressText();
 
         if (changedObjects >= totalObjects)

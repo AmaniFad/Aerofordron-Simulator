@@ -85,6 +85,8 @@ public class DronInputController : MonoBehaviour
         }
     }
 
+
+
     public void HasChangedCamera()
     {
         changeCamera = false;

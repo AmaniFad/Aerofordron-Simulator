@@ -6,6 +6,7 @@ public class SwitchToFullView : MonoBehaviour
 {
     public static SwitchToFullView instance;
     [SerializeField] private GameObject fullViewCamera;
+    private bool currentState = false;
 
     private void Start()
     {
@@ -14,13 +15,18 @@ public class SwitchToFullView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerInputController.Instance.IsFullView() && !PlayerStateController.instance.CanMove())
+        if (DisplayInputData.isChangeCameraPressed)
         {
-            EnterFullView();
-        }
-        else
-        {
-            ExitFullView();
+            currentState = !currentState;
+            if (currentState)
+            {
+
+                EnterFullView();
+            }
+            else
+            {
+                ExitFullView();
+            }
         }
     }
 

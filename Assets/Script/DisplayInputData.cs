@@ -15,6 +15,9 @@ public class DisplayInputData : MonoBehaviour
     private float _rightMaxScore = 0f;
     static public Vector2 leftControllerDirection;
     static public Vector2 rightControllerDirection;
+    static public bool isPrimaryPressed;
+    static public bool isChangeCameraPressed;
+    static public bool isMenuPressed;
     private void Start()
     {
         _inputData = GetComponent<InputData>();
@@ -30,6 +33,26 @@ public class DisplayInputData : MonoBehaviour
         if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 rightDirection))
         {
             rightControllerDirection = rightDirection;
+        }
+
+
+        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool isPressed))
+        {
+            isChangeCameraPressed = isPressed;
+        }
+        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.triggerButton, out bool pres))
+        {
+            isPrimaryPressed = pres;
+        }
+
+
+        //if (_inputData._rightController.TryGetFeatureValue(CommonUsages.menuButton, out bool menuButtonPress))
+        //{
+        //    isMenuPressed = menuButtonPress;
+        //}
+        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool menuButtonPress))
+        {
+            isMenuPressed = menuButtonPress;
         }
 
     }
