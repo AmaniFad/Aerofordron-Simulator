@@ -46,13 +46,13 @@ public class DisplayInputData : MonoBehaviour
         }
 
 
-        //if (_inputData._rightController.TryGetFeatureValue(CommonUsages.menuButton, out bool menuButtonPress))
-        //{
-        //    isMenuPressed = menuButtonPress;
-        //}
-        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool menuButtonPress))
+        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.menuButton, out bool menuButtonPress1))
         {
-            isMenuPressed = menuButtonPress;
+           isMenuPressed = menuButtonPress1;
+        }
+        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool menuButtonPress2))
+        {
+            isMenuPressed = menuButtonPress2;
         }
 
     }
