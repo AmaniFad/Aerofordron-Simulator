@@ -130,11 +130,11 @@ MonoBehaviour:
   components:
   - {fileID: -7679121126739441713}
   - {fileID: -6708239029789149677}
-  - {fileID: 870086860756711252}
   - {fileID: 3209940094358796950}
-  - {fileID: 5412541489319741616}
   - {fileID: -5747060757582927654}
---- !u!114 &870086860756711252
+  - {fileID: 39005486792419117}
+  - {fileID: 190480607791624064}
+--- !u!114 &39005486792419117
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,16 +146,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
   m_Name: LiftGammaGain
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   lift:
-    m_OverrideState: 1
-    m_Value: {x: 0.93324256, y: 1, z: 0.97738665, w: -0.046320047}
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 1, w: 0.052438382}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.81612986, z: 0.7894826, w: -0.019520653}
+    m_Value: {x: 1, y: 0.9768426, z: 0.9329116, w: -0.03670688}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 0.9326005, y: 1, z: 0.95415056, w: 0.02058672}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.036707036}
+--- !u!114 &190480607791624064
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70afe9e12c7a7ed47911bb608a23a8ff, type: 3}
+  m_Name: SplitToning
+  m_EditorClassIdentifier: 
+  active: 0
+  shadows:
+    m_OverrideState: 1
+    m_Value: {r: 0.6117647, g: 0.60205793, b: 0.5254902, a: 1}
+  highlights:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  balance:
+    m_OverrideState: 1
+    m_Value: 6.8
 --- !u!114 &3209940094358796950
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -168,38 +190,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
   m_Name: WhiteBalance
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   temperature:
     m_OverrideState: 1
-    m_Value: 8.4
+    m_Value: -12.1
   tint:
     m_OverrideState: 1
-    m_Value: 1.2
---- !u!114 &5412541489319741616
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
-  m_Name: ColorAdjustments
-  m_EditorClassIdentifier: 
-  active: 1
-  postExposure:
-    m_OverrideState: 1
-    m_Value: 0.1
-  contrast:
-    m_OverrideState: 1
-    m_Value: 40.4
-  colorFilter:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
-  hueShift:
-    m_OverrideState: 1
-    m_Value: 0
-  saturation:
-    m_OverrideState: 1
-    m_Value: 100
+    m_Value: 21.2
