@@ -18,11 +18,13 @@ public class SendHoverToHoveredObject : MonoBehaviour
     }
     public void OnHoverEntered(UIHoverEventArgs args)
     {
+        print("OnHover");
         args.uiObject.GetComponent<HighlightSignOsHover>().Hovered();
     }
 
     public void OnHoverExited(UIHoverEventArgs args)
     {
+        print("OnExitHover");
         args.uiObject.GetComponent<HighlightSignOsHover>().Unhovered();
     }
 

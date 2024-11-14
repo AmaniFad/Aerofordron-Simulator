@@ -24,16 +24,16 @@ public class HighlightSignOsHover : MonoBehaviour
     public void Hovered()
     {
         print("Hovered");
-        if (EventSystem.current.currentSelectedGameObject == this.gameObject)
-        {
+        
             if (!TryGetComponent<Outline>(out Outline outline))
             {
 
 
                 currentOutline = gameObject.AddComponent<Outline>();
+                currentOutline.OutlineWidth = 20;
 
-            }
-            else
+        }
+        else
             {
 
                 currentOutline = outline;
@@ -47,7 +47,7 @@ public class HighlightSignOsHover : MonoBehaviour
                 image.color = previousColor;
             }
 
-        }
+        
     }
 
     public void Unhovered()
