@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.15896621, g: 0.51753515, b: 1.0392404, a: 1}
+  m_IndirectSpecularColor: {r: 0.4384963, g: 0.7540146, b: 1.0313286, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -363,6 +363,7 @@ MonoBehaviour:
   elapsedTime: 0
   canvaLose: {fileID: 1350960057}
   timerTextCanvaNext: {fileID: 8492992531894477491}
+  canvasSeBusca: {fileID: 0}
   canvasCountDown: {fileID: 669535066}
   startCountdownFrom: 3
   countdownText: {fileID: 968519480}
@@ -750,7 +751,7 @@ PrefabInstance:
     - target: {fileID: 8914218738891115160, guid: 9f10d01cc6a8f7149b3232e51f039c32, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 2087367843}
+      objectReference: {fileID: 0}
     - target: {fileID: 8914218738891115160, guid: 9f10d01cc6a8f7149b3232e51f039c32, type: 3}
       propertyPath: m_RenderMode
       value: 1
@@ -2004,7 +2005,7 @@ PrefabInstance:
     - target: {fileID: 6305876802012801408, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 2087367843}
+      objectReference: {fileID: 0}
     - target: {fileID: 6305876802012801408, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
       propertyPath: m_PlaneDistance
       value: 0.5
@@ -3742,7 +3743,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 2087367843}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 1.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -4524,7 +4525,7 @@ PrefabInstance:
     - target: {fileID: 622448226244008688, guid: 3f5e5ac3ce534b84289f5ae1ff219834, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 2087367843}
+      objectReference: {fileID: 0}
     - target: {fileID: 622448226244008688, guid: 3f5e5ac3ce534b84289f5ae1ff219834, type: 3}
       propertyPath: m_RenderMode
       value: 1
@@ -5044,7 +5045,7 @@ PrefabInstance:
     - target: {fileID: 2280911409213657797, guid: 9c7229bbc4448e74cbe1ffa5a2641297, type: 3}
       propertyPath: m_InteractionManager
       value: 
-      objectReference: {fileID: 1796043075}
+      objectReference: {fileID: 0}
     - target: {fileID: 2325970673310002584, guid: 9c7229bbc4448e74cbe1ffa5a2641297, type: 3}
       propertyPath: dron
       value: 
@@ -5324,6 +5325,7 @@ MonoBehaviour:
   destroyedDron: {fileID: 6494901858668957110, guid: 55d191125eb2cf54ba672b762f97d45e, type: 3}
   thirrdPersonViewCamera: {fileID: 1789097533}
   speedThreshold: 50
+  damage: 0
 --- !u!114 &1444666937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5370,7 +5372,6 @@ MonoBehaviour:
   maxHeight: 5000
   maxDistanceFromPlayer: 0
   groundedRayDistance: 0.5
-  canMove: 0
   soundReference:
     Guid:
       Data1: -2005427756
@@ -5580,7 +5581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 1796043075}
+  m_InteractionManager: {fileID: 0}
   m_Colliders:
   - {fileID: 1444666942}
   m_InteractionLayerMask:
@@ -6687,7 +6688,7 @@ PrefabInstance:
     - target: {fileID: 6473429197456440068, guid: 8d22301391839bb469f633f475dd5936, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 2087367843}
+      objectReference: {fileID: 0}
     - target: {fileID: 6473429197456440068, guid: 8d22301391839bb469f633f475dd5936, type: 3}
       propertyPath: m_RenderMode
       value: 1
@@ -7207,17 +7208,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1796043075 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6786614184386620282, guid: 6b69c2714d17738488726629194f7461, type: 3}
-  m_PrefabInstance: {fileID: 1796043070}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83e4e6cca11330d4088d729ab4fc9d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1814136988
@@ -8355,13 +8345,10 @@ MonoBehaviour:
   objectFind: {fileID: 315178920}
   canvasNext: {fileID: 973231623166156476}
   canvasWin: {fileID: 1629968711}
+  canvasSeBusca: {fileID: 0}
   dronObj: {fileID: 1444666935}
   spawnDron: {fileID: 1533390016}
---- !u!20 &2087367843 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 8110357412952828251, guid: 6b69c2714d17738488726629194f7461, type: 3}
-  m_PrefabInstance: {fileID: 1796043070}
-  m_PrefabAsset: {fileID: 0}
+  nameLevel: 
 --- !u!1 &2087659669
 GameObject:
   m_ObjectHideFlags: 0
@@ -12139,7 +12126,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 2087367843}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 1.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
