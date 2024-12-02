@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangeColor : MonoBehaviour
+public class ChangeColorGrass : MonoBehaviour
 {
     public Color startColor = Color.yellow;  
     public Color endColor = Color.green;     
