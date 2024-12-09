@@ -17,6 +17,7 @@ public class PauseController : MonoBehaviour
     {
         pauseWithoutPauseMenu = false;
         isPausing = false;
+        canPause = true;
     }
 
 
@@ -48,7 +49,6 @@ public class PauseController : MonoBehaviour
         //el bool canPause es para que no si le llegan dos inputs en un lapso de tiempo muy corto no se abre y se cierre el menu de pausa
         if (DisplayInputData.isMenuPressed)
         {
-            print("hola");
             if (canPause)
             {
                 TryPause();

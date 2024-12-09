@@ -63,7 +63,6 @@ public class PlaySounds : MonoBehaviour
         generalVCA.getVolume(out float volume);
         musicVCA.getVolume(out float musicVolume);
         sfxVCA.getVolume(out float sfxVolume);
-        Debug.Log(volume);
         MasterSlider.value = volume;
         MusicSlider.value = musicVolume;
         SfxSlider.value = sfxVolume;

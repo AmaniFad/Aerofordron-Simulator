@@ -26,7 +26,6 @@ public class ColorChangeManager : MonoBehaviour
     }
     private void Update()
     {
-        print("Objetos totales: " + totalObjects);
     }
     void Start()
     {

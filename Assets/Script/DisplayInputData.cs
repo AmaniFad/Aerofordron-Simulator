@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.XR;
 using TMPro;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(InputData))]
 public class DisplayInputData : MonoBehaviour
@@ -18,6 +18,9 @@ public class DisplayInputData : MonoBehaviour
     static public bool isPrimaryPressed;
     static public bool isChangeCameraPressed;
     static public bool isMenuPressed;
+    static public bool cameraUP;
+    static public bool cameraDown;
+    [SerializeField] public InputAction tryInput;
     private void Start()
     {
         _inputData = GetComponent<InputData>();
@@ -25,34 +28,43 @@ public class DisplayInputData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_inputData._leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 direction))
+        Debug.Log(tryInput.IsPressed());
+        if (_inputData._leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out Vector2 direction))
         {
             leftControllerDirection = direction;
         }
 
-        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 rightDirection))
+        if (_inputData._rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out Vector2 rightDirection))
         {
             rightControllerDirection = rightDirection;
         }
 
 
-        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool isPressed))
+        if (_inputData._rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out bool isPressed))
         {
             isChangeCameraPressed = isPressed;
         }
-        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.triggerButton, out bool pres))
+        if (_inputData._rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.triggerButton, out bool pres))
         {
             isPrimaryPressed = pres;
         }
 
 
-        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.menuButton, out bool menuButtonPress1))
+        if (_inputData._rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.menuButton, out bool menuButtonPress1))
         {
            isMenuPressed = menuButtonPress1;
         }
-        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool menuButtonPress2))
+        if (_inputData._rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.secondaryButton, out bool menuButtonPress2))
         {
             isMenuPressed = menuButtonPress2;
+        }
+        if (_inputData._leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.secondaryButton, out bool cameraUp))
+        {
+            cameraUP = cameraUp;
+        }
+        if (_inputData._leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out bool isCameraDown))
+        {
+            cameraDown = isCameraDown;
         }
 
     }

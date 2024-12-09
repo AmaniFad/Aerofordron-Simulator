@@ -28,4 +28,16 @@ public class SendHoverToHoveredObject : MonoBehaviour
         args.uiObject.GetComponent<HighlightSignOsHover>().Unhovered();
     }
 
+    public void OnPhyisicalHoverEntered(HoverEnterEventArgs args)
+    {
+        print("OnHover");
+        args.interactableObject.transform.gameObject.GetComponent<HighlightOnHover>().Hovered();
+    }
+
+    public void OnPhysicalHoverExited(HoverExitEventArgs args)
+    {
+        print("OnExitHover");
+        args.interactableObject.transform.gameObject.GetComponent<HighlightOnHover>().Unhovered();
+    }
+
 }

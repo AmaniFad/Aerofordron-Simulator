@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class CosecharDron : MonoBehaviour
 {
-    [SerializeField] private GameObject agua;
+    [SerializeField] private GameObject[] agua;
     private bool canShower;
     bool chorro = false;
     private void Start()
     {
         canShower = true;
-        agua.SetActive(false);
+        foreach (GameObject i in agua)
+        {
+            i.SetActive(false);
+        }
     }
     void Update()
     {
@@ -26,12 +29,17 @@ public class CosecharDron : MonoBehaviour
                 chorro = !chorro;
                 if (chorro)
                 {
-                    print("PRueba");
-                    agua.SetActive(true);
+                    foreach (GameObject i in agua)
+                    {
+                        i.SetActive(true);
+                    }
                 }
                 else
                 {
-                    agua.SetActive(false);
+                    foreach (GameObject i in agua)
+                    {
+                        i.SetActive(false);
+                    }
                 }
             }
 

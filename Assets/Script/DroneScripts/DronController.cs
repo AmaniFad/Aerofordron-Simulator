@@ -26,9 +26,9 @@ public class DronController : MonoBehaviour
     [SerializeField] private float tiltAngle;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private GameObject dronView;
-    [SerializeField] private float maxDronViewRotation;
-    [SerializeField] private float minDronViewRotation;
-    private float currentCameraRotationSimplified;
+    [SerializeField] private float maxUpTilt = 300;
+    [SerializeField] private float maxDownTilt = -300;
+    private float currentCameraTilt;
     [SerializeField] private float cameraMovementSpeed;
     private bool isGrounded;
     private Rigidbody rb;
@@ -38,7 +38,7 @@ public class DronController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        currentCameraRotationSimplified = 0;
+        currentCameraTilt = 0;
         eventEmitter = GetComponent<StudioEventEmitter>();
         isPlaying = false;
         mMovementBehaviour = GetComponent<MovementBehaviour>();
@@ -50,7 +50,14 @@ public class DronController : MonoBehaviour
     }
     private void Update()
     {
-
+        if (DisplayInputData.cameraUP)
+        {
+            MoveCameraUp();
+        }
+        if (DisplayInputData.cameraDown)
+        {
+            MoveCameraDown();
+        }
     }
     private void FixedUpdate()
     {
@@ -102,27 +109,7 @@ public class DronController : MonoBehaviour
             //mMovementBehaviour.StopMovingOnY();
         }
         float cameraMovement = DronInputController.Instance.GetCameraMovement();
-        if (cameraMovement != 0)
-        {
-            Debug.Log(currentCameraRotationSimplified);
-            if (cameraMovement > 0 && currentCameraRotationSimplified < maxDronViewRotation)
-            {
-                Quaternion rotation = gameObject.transform.rotation;
-                rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
-                Debug.Log("Rotation " + rotation);
-                currentCameraRotationSimplified += rotation.x + 10;
-                dronView.transform.Rotate(new Vector3(rotation.x, 0, 0), rotation.x * 10, Space.Self);
-            }
-            else if (cameraMovement < 0 && currentCameraRotationSimplified > minDronViewRotation)
-            {
-
-                Quaternion rotation = gameObject.transform.rotation;
-                rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
-                Debug.Log("Rotation " + rotation);
-                currentCameraRotationSimplified -= rotation.x + 10;
-                dronView.transform.Rotate(new Vector3(-rotation.x, 0, 0), rotation.x * 10, Space.Self);
-            }
-        }
+ 
 
 
         //if (CheckIfGrounded() && inputDirection != Vector2.zero)
@@ -135,6 +122,10 @@ public class DronController : MonoBehaviour
         //}
     }
 
+    //public void TiltCamera()
+    //{
+
+    //}
     public void TryToMoveDronHorizontally()
     {
         Vector2 inputDirection = DisplayInputData.rightControllerDirection;
@@ -191,9 +182,32 @@ public class DronController : MonoBehaviour
         // Apply the rotation with slerp
 
     }
-    private void MoveCamera()
+    private void MoveCameraUp()
     {
+        
+            if (currentCameraTilt < maxUpTilt)
+            {
+                Quaternion rotation = gameObject.transform.rotation;
+                rotation.x += 1 * Time.deltaTime * cameraMovementSpeed;
+                Debug.Log("Rotation " + rotation);
+                currentCameraTilt += rotation.x + 10;
+                dronView.transform.Rotate(new Vector3(rotation.x, 0, 0), rotation.x * 10, Space.Self);
+            }
 
+        
+    }
+
+    private void MoveCameraDown()
+    {
+        if (currentCameraTilt > maxDownTilt)
+        {
+
+            Quaternion rotation = gameObject.transform.rotation;
+            rotation.x += -1 * Time.deltaTime * cameraMovementSpeed;
+            Debug.Log("Rotation " + rotation);
+            currentCameraTilt -= rotation.x + 10;
+            dronView.transform.Rotate(new Vector3(-rotation.x, 0, 0), rotation.x * 10, Space.Self);
+        }
     }
     public void StartDron()
     {
