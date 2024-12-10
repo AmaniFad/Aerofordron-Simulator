@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class PathLine : MonoBehaviour
 {
-    public Transform[] waypoints; // Array de puntos por donde pasará la línea
+    [SerializeField] private Transform[] waypoints; // Array de puntos por donde pasará la línea
     private LineRenderer lineRenderer;
 
+    public static PathLine instance;
+
+    public Transform[] GetPoints() { return waypoints; }
     void Start()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
         lineRenderer = GetComponent<LineRenderer>();
         if (waypoints != null && waypoints.Length > 0)
         {
