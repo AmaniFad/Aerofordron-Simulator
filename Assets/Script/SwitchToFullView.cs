@@ -7,26 +7,33 @@ public class SwitchToFullView : MonoBehaviour
     public static SwitchToFullView instance;
     [SerializeField] private GameObject fullViewCamera;
     private bool currentState = false;
-
+    private float changeCameraCooldown = 0.2f;
+    private bool canChangeCamera;
     private void Start()
     {
         instance = this;
+        canChangeCamera = true;
     }
     // Update is called once per frame
     void Update()
     {
         if (DisplayInputData.isChangeCameraPressed)
         {
-            currentState = !currentState;
-            if (currentState)
+            if (canChangeCamera)
             {
+                StartCoroutine(DoChangeCameraCooldown());
+                currentState = !currentState;
+                if (currentState)
+                {
 
-                EnterFullView();
+                    EnterFullView();
+                }
+                else
+                {
+                    ExitFullView();
+                }
             }
-            else
-            {
-                ExitFullView();
-            }
+
         }
     }
 
@@ -38,5 +45,12 @@ public class SwitchToFullView : MonoBehaviour
     public void ExitFullView()
     {
         fullViewCamera.SetActive(false);
+    }
+
+    private IEnumerator DoChangeCameraCooldown()
+    {
+        canChangeCamera = false;
+        yield return new WaitForSeconds(changeCameraCooldown);
+        canChangeCamera = true;
     }
 }

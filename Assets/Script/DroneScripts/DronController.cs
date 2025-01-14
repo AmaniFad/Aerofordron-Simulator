@@ -26,8 +26,8 @@ public class DronController : MonoBehaviour
     [SerializeField] private float tiltAngle;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private GameObject dronView;
-    [SerializeField] private float maxUpTilt = 300;
-    [SerializeField] private float maxDownTilt = -300;
+    private float maxUpTilt = 550;
+    private float maxDownTilt = -50;
     private float currentCameraTilt;
     [SerializeField] private float cameraMovementSpeed;
     private bool isGrounded;
@@ -82,6 +82,8 @@ public class DronController : MonoBehaviour
         {
             StopPlayDroneSound();
         }
+        Vector2 inputDirection = DisplayInputData.rightControllerDirection;
+        //DoDroneTilt(inputDirection);
     }
     private void TryToMoveDronVertically()
     {
@@ -160,12 +162,8 @@ public class DronController : MonoBehaviour
         //Necesario sino vuelve a 0 la rotation para los lados el momento que dejes de pulsar
         float currentYRotation = transform.rotation.eulerAngles.y;
 
-        //Esto es para que tire un poco hacia el lado que se esta moviendo
-        float tiltAroundZ = -inputDirection.x * tiltAngle;
-        float tiltAroundX = +inputDirection.y * tiltAngle;
 
-
-        Quaternion targetRotation = Quaternion.Euler(tiltAroundX, currentYRotation, tiltAroundZ);
+        Quaternion targetRotation = Quaternion.Euler(0, currentYRotation, 0);
 
         // Aqui se pone la rotacion Recordatorio no utilizar time.DeltaTime en un fixedUpdate
         float additionalRotationY = DisplayInputData.leftControllerDirection.x * rotationSpeed;
@@ -182,6 +180,23 @@ public class DronController : MonoBehaviour
         // Apply the rotation with slerp
 
     }
+
+    private void DoDroneTilt(Vector2 inputDirection)
+    {
+        float currentYRotation = transform.rotation.eulerAngles.y;
+
+        //Esto es para que tire un poco hacia el lado que se esta moviendo
+        float tiltAroundZ = -inputDirection.x * tiltAngle;
+        float tiltAroundX = +inputDirection.y * tiltAngle;
+
+        Quaternion targetRotation = Quaternion.Euler(tiltAroundX, currentYRotation, tiltAroundZ);
+
+        // Aqui se pone la rotacion Recordatorio no utilizar time.DeltaTime en un fixedUpdate
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+
+        
+    }
     private void MoveCameraUp()
     {
         
@@ -190,7 +205,7 @@ public class DronController : MonoBehaviour
                 Quaternion rotation = gameObject.transform.rotation;
                 rotation.x += 1 * Time.deltaTime * cameraMovementSpeed;
                 Debug.Log("Rotation " + rotation);
-                currentCameraTilt += rotation.x + 10;
+                currentCameraTilt += (float)10;
                 dronView.transform.Rotate(new Vector3(rotation.x, 0, 0), rotation.x * 10, Space.Self);
             }
 
@@ -205,7 +220,7 @@ public class DronController : MonoBehaviour
             Quaternion rotation = gameObject.transform.rotation;
             rotation.x += -1 * Time.deltaTime * cameraMovementSpeed;
             Debug.Log("Rotation " + rotation);
-            currentCameraTilt -= rotation.x + 10;
+            currentCameraTilt -= (float)10;
             dronView.transform.Rotate(new Vector3(-rotation.x, 0, 0), rotation.x * 10, Space.Self);
         }
     }
