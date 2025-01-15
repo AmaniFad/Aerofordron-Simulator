@@ -72,6 +72,7 @@ public class DronControllerAuto : MonoBehaviour
             {
                 isMoving = false;
                 Debug.Log("Drone has reached all waypoints.");
+                this.gameObject.SetActive(false);
             }
         }
     }
