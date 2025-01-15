@@ -52,6 +52,7 @@ public class DroneSelection : MonoBehaviour
         print("DisplayDroneModel");
         Destroy(currentUIDrone);
         currentUIDrone = Instantiate(dronModel, droneModelPlace.transform);
+        currentUIDrone.transform.localRotation = Quaternion.Euler(Vector3.zero);
         currentUIDrone.name = "dronModel";
     }
 
