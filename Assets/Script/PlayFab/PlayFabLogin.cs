@@ -72,7 +72,7 @@ public class PlayFabLogin : MonoBehaviour
                {
                    var playerValuesJson = dataResult.Data["PlayerValues"].Value;
                    var playerValuesList = JsonUtility.FromJson<PlayerValues>(playerValuesJson);
-
+                   print(playerValuesList.UserName + " Pass: " + playerValuesList.Password);
                    if (playerValuesList.UserName.Equals(playerName) && playerValuesList.Password.Equals(playerPassword))
                    {
                        enterSimulator.Invoke();
