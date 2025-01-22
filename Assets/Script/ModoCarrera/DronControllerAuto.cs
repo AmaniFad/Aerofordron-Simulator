@@ -14,7 +14,8 @@ public class DronControllerAuto : MonoBehaviour
     private int currentWaypointIndex = 0;
 
     [Header("References")]
-    [SerializeField] private MovementBehaviour mMovementBehaviour;
+    private MovementBehaviour MB
+        ;
 
     private bool isGrounded;
     private bool isMoving = true;
@@ -27,9 +28,9 @@ public class DronControllerAuto : MonoBehaviour
             isMoving = false;
         }
 
-        if (mMovementBehaviour == null)
+        if (MB == null)
         {
-            mMovementBehaviour = GetComponent<MovementBehaviour>();
+            MB = GetComponent<MovementBehaviour>();
         }
     }
 
@@ -56,7 +57,7 @@ public class DronControllerAuto : MonoBehaviour
         }
 
         // Move the drone
-        mMovementBehaviour.Move(direction);
+        MB.Move(direction);
 
         // Rotate the drone smoothly towards the waypoint
         Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -92,7 +93,7 @@ public class DronControllerAuto : MonoBehaviour
     public void StopDrone()
     {
         isMoving = false;
-        mMovementBehaviour.StopMovingOnY();
+        MB.StopMovingOnY();
         Debug.Log("Drone stopped.");
     }
 
