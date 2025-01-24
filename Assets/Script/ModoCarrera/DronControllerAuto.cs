@@ -15,7 +15,7 @@ public class DronControllerAuto : MonoBehaviour
 
     [Header("Waypoints")]
     [SerializeField] private List<Transform> waypoints;
-    private int currentWaypointIndex = 0;
+    public int currentWaypointIndex = 0;
 
     [Header("References")]
     private MovementBehaviour MB
@@ -66,13 +66,6 @@ public class DronControllerAuto : MonoBehaviour
         if (angle > 45f)
         {
             currentSpeed = reducedSpeed;
-        }
-
-
-        // Ensure the drone stays below the max height
-        if (transform.position.y >= maxHeight && direction.y > 0)
-        {
-            direction.y = 0;
         }
 
         // Move the drone
