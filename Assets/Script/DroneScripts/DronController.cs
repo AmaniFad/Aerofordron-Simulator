@@ -17,6 +17,9 @@ public class DronController : MonoBehaviour
     private bool canMove;
     private MovementBehaviour mMovementBehaviour;
     private bool isPlaying;
+    private float maxUpTilt = 550;
+    private float maxDownTilt = -50;
+    private float currentCameraTilt;
     [Header("References")]
     [SerializeField] private EventReference soundReference;
     private FMOD.Studio.EventInstance helixSound;
@@ -34,7 +37,8 @@ public class DronController : MonoBehaviour
     //[SerializeField] private GameObject playerOnGroundFeedback;
     void Start()
     {
-        currentCameraRotationSimplified = 0;
+        currentCameraTilt = 0;
+        //currentCameraRotationSimplified = 0;
         eventEmitter = GetComponent<StudioEventEmitter>();
         isPlaying = false;
         mMovementBehaviour = GetComponent<MovementBehaviour>();
@@ -44,7 +48,38 @@ public class DronController : MonoBehaviour
     {
         return Physics.Raycast(transform.position, Vector3.down, groundedRayDistance);
     }
-    private void FixedUpdate()
+    private void Update()
+    {
+
+        if (DronInputController.Instance.GetCameraMovement() > 0)
+        {
+            MoveCameraUp();
+        }
+        if (DronInputController.Instance.GetCameraMovement() < 0)
+        {
+            MoveCameraDown();
+        }
+
+    }
+
+    //private void FixedUpdate()
+    //{
+    //    if (canMove)
+    //    {
+    //        if (!isPlaying)
+    //        {
+    //            PlayDroneSound();
+    //            isPlaying = true;
+    //        }
+    //        TryToMoveDron();
+    //    }
+    //    else
+    //    {
+    //        StopPlayDroneSound();
+    //    }
+    //}
+
+    private void LateUpdate()
     {
         if (canMove)
         {
@@ -60,7 +95,6 @@ public class DronController : MonoBehaviour
             StopPlayDroneSound();
         }
     }
-
     private void TryToMoveDron()
     {
         Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
@@ -72,7 +106,8 @@ public class DronController : MonoBehaviour
         }
         if (verticalDirection == 0)
         {
-            mMovementBehaviour.StopMovingOnY();
+            GetComponent<Rigidbody>().useGravity = false;
+            //mMovementBehaviour.StopMovingOnY();
         }
         if (verticalDirection < -0.2f || verticalDirection > 0.05f)
             mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0));
@@ -89,27 +124,27 @@ public class DronController : MonoBehaviour
             }
         }
         float cameraMovement = DronInputController.Instance.GetCameraMovement();
-        if (cameraMovement != 0)
-        {
-            Debug.Log(currentCameraRotationSimplified);
-            if (cameraMovement > 0 && currentCameraRotationSimplified < maxDronViewRotation)
-            {
-                Quaternion rotation = gameObject.transform.rotation;
-                rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
-                Debug.Log("Rotation " + rotation);
-                currentCameraRotationSimplified += rotation.x + 10;
-                dronView.transform.Rotate(new Vector3(rotation.x, 0, 0), rotation.x * 10, Space.Self);
-            }
-            else if (cameraMovement < 0 && currentCameraRotationSimplified > minDronViewRotation)
-            {
+        //if (cameraMovement != 0)
+        //{
+        //    Debug.Log(currentCameraRotationSimplified);
+        //    if (cameraMovement > 0 && currentCameraRotationSimplified < maxDronViewRotation)
+        //    {
+        //        Quaternion rotation = gameObject.transform.rotation;
+        //        rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
+        //        Debug.Log("Rotation " + rotation);
+        //        currentCameraRotationSimplified += rotation.x + 10;
+        //        dronView.transform.Rotate(new Vector3(rotation.x, 0, 0), rotation.x * 10, Space.Self);
+        //    }
+        //    else if (cameraMovement < 0 && currentCameraRotationSimplified > minDronViewRotation)
+        //    {
 
-                Quaternion rotation = gameObject.transform.rotation;
-                rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
-                Debug.Log("Rotation " + rotation);
-                currentCameraRotationSimplified -= rotation.x + 10;
-                dronView.transform.Rotate(new Vector3(-rotation.x,0,0),rotation.x * 10,Space.Self);
-            }
-        }
+        //        Quaternion rotation = gameObject.transform.rotation;
+        //        rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
+        //        Debug.Log("Rotation " + rotation);
+        //        currentCameraRotationSimplified -= rotation.x + 10;
+        //        dronView.transform.Rotate(new Vector3(-rotation.x,0,0),rotation.x * 10,Space.Self);
+        //    }
+        //}
 
         //if (CheckIfGrounded() && inputDirection != Vector2.zero)
         //{
@@ -144,6 +179,34 @@ public class DronController : MonoBehaviour
         // Apply the rotation with slerp
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
 
+    }
+
+    private void MoveCameraUp()
+    {
+
+        if (currentCameraTilt < maxUpTilt)
+        {
+            Quaternion rotation = gameObject.transform.rotation;
+            rotation.x += 1 * Time.deltaTime * cameraMovementSpeed;
+            Debug.Log("Rotation " + rotation);
+            currentCameraTilt += (float)10;
+            dronView.transform.Rotate(new Vector3(rotation.x, 0, 0), rotation.x * 10, Space.Self);
+        }
+
+
+    }
+
+    private void MoveCameraDown()
+    {
+        if (currentCameraTilt > maxDownTilt)
+        {
+
+            Quaternion rotation = gameObject.transform.rotation;
+            rotation.x += -1 * Time.deltaTime * cameraMovementSpeed;
+            Debug.Log("Rotation " + rotation);
+            currentCameraTilt -= (float)10;
+            dronView.transform.Rotate(new Vector3(-rotation.x, 0, 0), rotation.x * 10, Space.Self);
+        }
     }
     private void MoveCamera()
     {
