@@ -9,12 +9,17 @@ public class DronControllerAuto : MonoBehaviour
     [SerializeField] private float groundedRayDistance;
     [SerializeField] private float waypointTolerance = 0.5f;
 
+    [Header("Speeds")]
+    [SerializeField] private float normalSpeed;
+    [SerializeField] private float reducedSpeed;
+
     [Header("Waypoints")]
     [SerializeField] private List<Transform> waypoints;
-    private int currentWaypointIndex = 0;
+    public int currentWaypointIndex = 0;
 
     [Header("References")]
-    [SerializeField] private MovementBehaviour mMovementBehaviour;
+    private MovementBehaviour MB
+        ;
 
     private bool isGrounded;
     private bool isMoving = true;
@@ -27,9 +32,9 @@ public class DronControllerAuto : MonoBehaviour
             isMoving = false;
         }
 
-        if (mMovementBehaviour == null)
+        if (MB == null)
         {
-            mMovementBehaviour = GetComponent<MovementBehaviour>();
+            MB = GetComponent<MovementBehaviour>();
         }
     }
 
@@ -49,14 +54,22 @@ public class DronControllerAuto : MonoBehaviour
         Vector3 direction = (targetWaypoint.position - transform.position).normalized;
         float distanceToWaypoint = Vector3.Distance(transform.position, targetWaypoint.position);
 
-        // Ensure the drone stays below the max height
-        if (transform.position.y >= maxHeight && direction.y > 0)
+        // Determine speed based on distance and angle
+        float currentSpeed = normalSpeed;
+        // Reduce speed near waypoint
+        if (distanceToWaypoint < waypointTolerance * 5)
         {
-            direction.y = 0;
+            currentSpeed = reducedSpeed;
+        }
+        // Reduce speed before sharp turns
+        float angle = Vector3.Angle(transform.forward, direction);
+        if (angle > 45f)
+        {
+            currentSpeed = reducedSpeed;
         }
 
         // Move the drone
-        mMovementBehaviour.Move(direction);
+        MB.MoveDronAuto(direction, currentSpeed);
 
         // Rotate the drone smoothly towards the waypoint
         Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -92,7 +105,7 @@ public class DronControllerAuto : MonoBehaviour
     public void StopDrone()
     {
         isMoving = false;
-        mMovementBehaviour.StopMovingOnY();
+        MB.StopMovingOnY();
         Debug.Log("Drone stopped.");
     }
 

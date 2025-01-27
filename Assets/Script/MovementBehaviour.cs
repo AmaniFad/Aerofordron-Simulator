@@ -19,12 +19,14 @@ public class MovementBehaviour : MonoBehaviour
     {
         rb.AddForce(movementDirection.normalized * speed * Time.deltaTime , ForceMode.Force);
     }
+    public void MoveDronAuto(Vector3 movementDirection, float speedAuto)
+    {
+        rb.AddForce(movementDirection.normalized * speedAuto * Time.deltaTime, ForceMode.Force);
+    }
     public void MoveDronGost(Vector3 movementDirection)
     {
         movementDirection.Normalize();
         transform.position = movementDirection * speed * Time.deltaTime;
-
-
     }
 
     public void MoveWithoutSpeed(Vector3 movementDirection)
