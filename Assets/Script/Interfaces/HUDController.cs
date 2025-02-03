@@ -30,11 +30,11 @@ public class HUDController : MonoBehaviour
             speedDisplay.text = speed + " KM/H";
             if (Mathf.Floor(dron.transform.position.y) < 0)
             {
-                heightDisplay.text = 0 + " ft";
+                heightDisplay.text = 0 + " m";
             }
             else
             { 
-                heightDisplay.text = Mathf.Floor(dron.transform.position.y) + " ft";
+                heightDisplay.text = Mathf.Floor(dron.transform.position.y) + " m";
             }
         }
         else
@@ -42,3 +42,4 @@ public class HUDController : MonoBehaviour
         }
     }
 }
+

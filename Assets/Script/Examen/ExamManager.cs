@@ -10,12 +10,19 @@ public class ExamManager : MonoBehaviour
     [SerializeField] private List<GameObject> listPanel;
     [SerializeField] private GameObject FadeInPanel;
 
+    [Header("GameObjectsLevels")]
+    [SerializeField] private GameObject detectorLaverl1;
+
+    [Header("Player")]
+    [SerializeField] private GameObject Player;
+
 
     private int countLevels;
     void Start()
     {
         countLevels = 0;
-        StartCoroutine(CountDown());
+        //StartCoroutine(CountDown());
+        CalculeDistancePoint(5f,2f);
     }
 
     void Update()
@@ -54,4 +61,16 @@ public class ExamManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         NextPanel.SetActive(true);
     }
+
+    private void CalculeDistancePoint(float distanceX, float distanceY)
+    {
+        Vector3 positionPlayer = Player.transform.position;
+        Vector3 escalaPlayer = Player.transform.localScale;
+
+        Vector3 newPositionX = Player.transform.forward * distanceX * escalaPlayer.x;
+        Vector3 newPositionY = Player.transform.up * distanceY * escalaPlayer.y;
+
+        detectorLaverl1.transform.position = positionPlayer + newPositionX + newPositionY;
+    }
+
 }
