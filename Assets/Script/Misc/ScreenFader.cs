@@ -7,19 +7,23 @@ public class ScreenFader : MonoBehaviour
     [SerializeField] private CanvasGroup fadeCanvasGroup;
     [SerializeField] private float fadeDuration;
 
-    private void Start()
+    public void FadeInCoroutine()
     {
         StartCoroutine(FadeIn());
     }
-
-    public IEnumerator FadeIn()
+    public void FadeOutCoroutine()
     {
-        yield return Fade(1, 0);
+        StartCoroutine(FadeOut());
     }
-
-    public IEnumerator FadeOut()
+    private IEnumerator FadeIn()
     {
         yield return Fade(0, 1);
+    }
+
+    private IEnumerator FadeOut()
+    {
+        yield return new WaitForSeconds(2f);
+        yield return Fade(1, 0);
     }
 
     private IEnumerator Fade(float startAlpha, float endAlpha)

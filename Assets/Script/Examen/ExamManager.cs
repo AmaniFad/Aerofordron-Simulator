@@ -21,8 +21,7 @@ public class ExamManager : MonoBehaviour
     void Start()
     {
         countLevels = 0;
-        //StartCoroutine(CountDown());
-        CalculeDistancePoint(5f,2f);
+        StartCoroutine(CountDown());  
     }
 
     void Update()
@@ -32,14 +31,17 @@ public class ExamManager : MonoBehaviour
     //hacer un repit level por si no consigue la prueba en x tiempos
     public void NextLevel()
     {
-        FadeInPanel.GetComponent<ScreenFader>().FadeIn();
-        
         switch (countLevels)
         {
             case 0:
                 listPanel[countLevels].SetActive(true);
+                CalculeDistancePoint(5f, 2f);
                 break;
             case 1:
+                FadeInPanel.SetActive(true);
+                FadeInPanel.GetComponent<ScreenFader>().FadeInCoroutine();
+                FadeInPanel.GetComponent<ScreenFader>().FadeOutCoroutine();
+
                 listPanel[countLevels-1].SetActive(false);
                 listPanel[countLevels].SetActive(true);
                 break; 
@@ -50,7 +52,6 @@ public class ExamManager : MonoBehaviour
             default:
                 break;
         }
-        FadeInPanel.GetComponent<ScreenFader>().FadeOut();
     }
 
     IEnumerator CountDown()
@@ -59,7 +60,14 @@ public class ExamManager : MonoBehaviour
         WelcomePanel.SetActive(false);
         NextPanel.SetActive(true);
         yield return new WaitForSeconds(2f);
-        NextPanel.SetActive(true);
+        NextPanel.GetComponent<Animator>().SetBool("ZoomOut", true);
+        yield return new WaitForSeconds(0.6f);
+        NextPanel.SetActive(false);
+    }
+
+    public void AddCount()
+    {
+        countLevels++;
     }
 
     private void CalculeDistancePoint(float distanceX, float distanceY)
@@ -68,7 +76,7 @@ public class ExamManager : MonoBehaviour
         Vector3 escalaPlayer = Player.transform.localScale;
 
         Vector3 newPositionX = Player.transform.forward * distanceX * escalaPlayer.x;
-        Vector3 newPositionY = Player.transform.up * distanceY * escalaPlayer.y;
+        Vector3 newPositionY = Player.transform.up * distanceY;
 
         detectorLaverl1.transform.position = positionPlayer + newPositionX + newPositionY;
     }
