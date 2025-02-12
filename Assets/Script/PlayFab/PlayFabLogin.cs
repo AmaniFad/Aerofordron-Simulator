@@ -84,8 +84,11 @@ public class PlayFabLogin : MonoBehaviour
             */
             PlayFabSettings.staticSettings.TitleId = "6CC33";
         }
-        var request = new LoginWithCustomIDRequest { CustomId = playerName, CreateAccount = true };
-        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
+        LoginWithPlayFabRequest request = new LoginWithPlayFabRequest();
+        request.Username = playerNameInput.text;
+        request.Password = playerPasswordInput.text;
+        request.TitleId = PlayFabSettings.staticSettings.TitleId;
+        PlayFabClientAPI.LoginWithPlayFab(request, OnLoginSuccess, OnLoginFailure);
     }
     private IEnumerator DeleteText()
     {
