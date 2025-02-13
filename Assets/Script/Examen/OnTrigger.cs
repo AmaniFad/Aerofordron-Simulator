@@ -8,7 +8,7 @@ public class OnTrigger : MonoBehaviour
     [SerializeField] private UnityEvent _Event;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("PLayer"))
+        if (other.gameObject.CompareTag("Player"))
         {
             _Event.Invoke();
         }

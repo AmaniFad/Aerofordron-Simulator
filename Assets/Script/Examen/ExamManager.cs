@@ -11,13 +11,15 @@ public class ExamManager : MonoBehaviour
     [SerializeField] private GameObject FadeInPanel;
 
     [Header("GameObjectsLevels")]
-    [SerializeField] private GameObject detectorLaverl1;
+    [SerializeField] private GameObject detectorLevel1;
+    [SerializeField] private GameObject detectorLevel2;
 
-    [Header("Player")]
+    [Header("Player & Dron")]
     [SerializeField] private GameObject Player;
-
+    [SerializeField] private GameObject Dron;
 
     private int countLevels;
+    private int countLine;
     void Start()
     {
         countLevels = 0;
@@ -35,16 +37,13 @@ public class ExamManager : MonoBehaviour
         {
             case 0:
                 listPanel[countLevels].SetActive(true);
-                CalculeDistancePoint(5f, 2f);
-                break;
+                CalculeDistancePoint(5f, 2f, detectorLevel1);
+            break;
             case 1:
-                FadeInPanel.SetActive(true);
-                FadeInPanel.GetComponent<ScreenFader>().FadeInCoroutine();
-                FadeInPanel.GetComponent<ScreenFader>().FadeOutCoroutine();
+                returToStart();
 
-                listPanel[countLevels-1].SetActive(false);
-                listPanel[countLevels].SetActive(true);
-                break; 
+                CalculeDistancePoint(5f, 20f, detectorLevel2);
+            break; 
             case 2:
                 break;
             case 3:
@@ -70,7 +69,7 @@ public class ExamManager : MonoBehaviour
         countLevels++;
     }
 
-    private void CalculeDistancePoint(float distanceX, float distanceY)
+    private void CalculeDistancePoint(float distanceX, float distanceY, GameObject point)
     {
         Vector3 positionPlayer = Player.transform.position;
         Vector3 escalaPlayer = Player.transform.localScale;
@@ -78,7 +77,37 @@ public class ExamManager : MonoBehaviour
         Vector3 newPositionX = Player.transform.forward * distanceX * escalaPlayer.x;
         Vector3 newPositionY = Player.transform.up * distanceY;
 
-        detectorLaverl1.transform.position = positionPlayer + newPositionX + newPositionY;
+        point.SetActive(true);
+        point.transform.position = positionPlayer + newPositionX + newPositionY;
+    }
+    private void returToStart()
+    {
+        FadeInPanel.SetActive(true);
+        FadeInPanel.GetComponent<ScreenFader>().FadeInCoroutine();
+
+        StartCoroutine(ChangePanels());
+
+        FadeInPanel.GetComponent<ScreenFader>().FadeOutCoroutine();
+    }
+     
+    IEnumerator ChangePanels()
+    {
+        yield return new WaitForSeconds(2);
+        listPanel[countLevels - 1].SetActive(false);
+        listPanel[countLevels].SetActive(true);
+
+        Dron.GetComponent<DroneCrash>().GoToFirstPosition();
+    }
+    public void addPointsLine()
+    {
+        countLine++;
+        Debug.Log(countLine);
+
+        if(countLine == 4)
+        {
+            AddCount();
+            NextLevel();
+        }
     }
 
 }
