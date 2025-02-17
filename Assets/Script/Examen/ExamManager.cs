@@ -11,8 +11,8 @@ public class ExamManager : MonoBehaviour
     [SerializeField] private GameObject FadeInPanel;
 
     [Header("GameObjectsLevels")]
-    [SerializeField] private GameObject detectorLevel1;
-    [SerializeField] private GameObject detectorLevel2;
+    [SerializeField] private List<GameObject> pointsDetector;
+    [SerializeField] private GameObject detectorPoint301;
 
     [Header("Player & Dron")]
     [SerializeField] private GameObject Player;
@@ -37,15 +37,17 @@ public class ExamManager : MonoBehaviour
         {
             case 0:
                 listPanel[countLevels].SetActive(true);
-                CalculeDistancePoint(5f, 2f, detectorLevel1);
+                CalculeDistancePoint(5f, 2f, pointsDetector[countLevels]);
             break;
             case 1:
                 returToStart();
 
-                CalculeDistancePoint(5f, 20f, detectorLevel2);
+                CalculeDistancePoint(5f, 20f, pointsDetector[countLevels]);
             break; 
             case 2:
-                break;
+                returToStart();
+                CalculeDistancePoint(20f, 40f, pointsDetector[countLevels]);
+            break;
             case 3:
                 break;
             default:
