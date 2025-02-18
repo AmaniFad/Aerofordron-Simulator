@@ -37,7 +37,7 @@ public class ExamManager : MonoBehaviour
         {
             case 0:
                 listPanel[countLevels].SetActive(true);
-                CalculeDistancePoint(5f, 2f, pointsDetector[countLevels]);
+                CalculeDistancePoint(5f, 1.5f, pointsDetector[countLevels]);
             break;
             case 1:
                 returToStart();
@@ -46,7 +46,9 @@ public class ExamManager : MonoBehaviour
             break; 
             case 2:
                 returToStart();
-                CalculeDistancePoint(20f, 40f, pointsDetector[countLevels]);
+                CalculeDistancePoint(40f, 40f, pointsDetector[countLevels]);
+                CalculeDistancePoint(7f, 20f, detectorPoint301);
+                detectorPoint301.SetActive(false);
             break;
             case 3:
                 break;

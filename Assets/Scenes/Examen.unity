@@ -575,6 +575,111 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52046145}
   m_Mesh: {fileID: 6255687079079774844, guid: d68af2f3adb715644ba8af83caf69d4f, type: 3}
+--- !u!1 &89219369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 89219372}
+  - component: {fileID: 89219371}
+  - component: {fileID: 89219370}
+  m_Layer: 0
+  m_Name: Point_Level3.1
+  m_TagString: Untagged
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!65 &89219370
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89219369}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 33.061783, y: 1.5, z: 1.5}
+  m_Center: {x: 2.9474716, y: 0, z: 0}
+--- !u!114 &89219371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89219369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cae41ba810f71c4e83e3b83caf53d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 720930516}
+        m_TargetAssemblyTypeName: ExamManager, Assembly-CSharp
+        m_MethodName: AddCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 720930516}
+        m_TargetAssemblyTypeName: ExamManager, Assembly-CSharp
+        m_MethodName: NextLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 89219369}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &89219372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89219369}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 179.75, y: 2.495, z: 178.13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &116584209
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,8 +854,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3, y: 3, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &167288217
 GameObject:
   m_ObjectHideFlags: 0
@@ -1867,8 +1972,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3, y: 3, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &337938822
 GameObject:
   m_ObjectHideFlags: 0
@@ -2208,8 +2313,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 0.371289, z: 5}
-  m_Center: {x: 0, y: 0.06957805, z: -2.5}
+  m_Size: {x: 1.5, y: 1, z: 5}
+  m_Center: {x: 0, y: 0, z: -2.5}
 --- !u!114 &349228906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3781,8 +3886,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3, y: 3, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &620242544
 GameObject:
   m_ObjectHideFlags: 0
@@ -4545,12 +4650,13 @@ MonoBehaviour:
   listPanel:
   - {fileID: 1979293677}
   - {fileID: 350468768}
+  - {fileID: 1786298363}
   FadeInPanel: {fileID: 1971269143}
   pointsDetector:
   - {fileID: 349228903}
   - {fileID: 1808056224}
   - {fileID: 726343974}
-  detectorPoint301: {fileID: 0}
+  detectorPoint301: {fileID: 89219369}
   Player: {fileID: 1067645933}
   Dron: {fileID: 835503453}
 --- !u!1 &726343974
@@ -4590,8 +4696,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 1.5, z: 1.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 50, y: 1.5, z: 50}
+  m_Center: {x: 8.523514, y: 0, z: -12.54}
 --- !u!114 &726343976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4631,7 +4737,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 720930514}
+      - m_Target: {fileID: 726343974}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 89219369}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -7897,8 +8015,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3, y: 3, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1261197542
 GameObject:
   m_ObjectHideFlags: 0
@@ -13586,4 +13704,5 @@ SceneRoots:
   - {fileID: 349228904}
   - {fileID: 1808056227}
   - {fileID: 726343977}
+  - {fileID: 89219372}
   - {fileID: 1183645785}
