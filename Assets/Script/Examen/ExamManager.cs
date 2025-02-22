@@ -107,7 +107,7 @@ public class ExamManager : MonoBehaviour
         countLine++;
         Debug.Log(countLine);
 
-        if(countLine == 4)
+        if(countLine == 8)
         {
             AddCount();
             NextLevel();
