@@ -11,33 +11,35 @@ public class RectangleDrawer : MonoBehaviour
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        ArrangeObjectsInRectangle();
-        DrawRectangle();
+        arrangeObjectsInRectangle();
+        drawRectangle();
     }
 
-    void ArrangeObjectsInRectangle()
+    void arrangeObjectsInRectangle()
     {
         if (objectsToArrange.Length < 4) return; // Se necesitan al menos 4 objetos
 
         Vector3 startPosition = objectsToArrange[0].transform.position;
-        Vector3[] corners = new Vector3[4]
+        Vector3[] corners = new Vector3[5]
         {
             startPosition,
             startPosition + new Vector3(rectangleSize.x, 0, 0),
             startPosition + new Vector3(rectangleSize.x, 0, -rectangleSize.y),
-            startPosition + new Vector3(0, 0, -rectangleSize.y)
+            startPosition + new Vector3(0, 0, -rectangleSize.y),
+            startPosition
         };
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < objectsToArrange.Length; i++)
         {
             if (i < objectsToArrange.Length)
             {
                 objectsToArrange[i].transform.position = corners[i];
+                objectsToArrange[i].GetComponent<BoxCollider>().enabled = true;
             }
         }
     }
 
-    void DrawRectangle()
+    void drawRectangle()
     {
         if (lineRenderer == null) return;
 
@@ -55,6 +57,13 @@ public class RectangleDrawer : MonoBehaviour
         };
 
         lineRenderer.SetPositions(points);
+    }
+     public void Restart()
+    {
+        for (int i = 0; i < objectsToArrange.Length; i++)
+        {
+            objectsToArrange[i].GetComponent<BoxCollider>().enabled = true;
+        }
     }
 }
 
