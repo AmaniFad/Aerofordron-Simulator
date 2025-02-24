@@ -33,7 +33,7 @@ public class ExamManager : MonoBehaviour
     void Start()
     {
         //countLevels = 0;
-        StartCoroutine(_CountDown());  
+        //StartCoroutine(_CountDown());  
     }
 
     void Update()
@@ -98,6 +98,11 @@ public class ExamManager : MonoBehaviour
     {
         countLevels++;
     }
+    public void SetTheLevel(int level)
+    {
+        countLevels = level;
+        NextLevel();
+    }
 
     private void calculeDistancePoint(float distanceX, float distanceY, GameObject point)
     {
@@ -151,5 +156,11 @@ public class ExamManager : MonoBehaviour
         point.transform.position = Dron.transform.position;
         is4Level = true;
     }
-
+    public void IsDronGounded()
+    {
+        if (!Dron.GetComponent<DroneCrash>().GetIsCrashed())
+        {
+            Debug.Log("aterriza");
+        }
+    }
 }

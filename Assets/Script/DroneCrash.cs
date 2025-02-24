@@ -17,6 +17,7 @@ public class DroneCrash : MonoBehaviour
     [SerializeField] private float speedThreshold;
     private float currentSpeed;
     [SerializeField] private int damage;
+    private bool isCrashed;
     void Start()
     {
         controller = GetComponent<DronController>();
@@ -29,11 +30,16 @@ public class DroneCrash : MonoBehaviour
         
     }
 
+    public bool GetIsCrashed()
+    {
+        return isCrashed;
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (!controller.IsGrounded() && !currentDestroyedDronFeedback && (currentSpeed > speedThreshold))
         {
             Respawn();
+            isCrashed = true;
         }
     }
 
@@ -82,6 +88,7 @@ public class DroneCrash : MonoBehaviour
         thirrdPersonViewCamera.LookAt = transform;
         thirrdPersonViewCamera.Follow = previousTransform;
         controller.StartMovingDron();
+        isCrashed = false;
     }
 
     private IEnumerator DestroyFeedback()
