@@ -13,13 +13,23 @@ public class ExamManager : MonoBehaviour
     [Header("GameObjectsLevels")]
     [SerializeField] private List<GameObject> pointsDetector;
     [SerializeField] private GameObject detectorPoint301;
+    [SerializeField] private GameObject rectangleLevel4;
 
     [Header("Player & Dron")]
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject Dron;
 
+    [Header("Scripts")]
+    [SerializeField] private HUDController HUDController;
+
     private int countLevels;
-    private int countLine;
+    private int countLine, finalPoint;
+    private bool is4Level;
+
+    public void SetLevel(bool is4Level)
+    {
+        this.is4Level = is4Level;
+    }
     void Start()
     {
         countLevels = 0;
@@ -28,9 +38,14 @@ public class ExamManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (is4Level)
+        {
+            if(HUDController.GetSpeed() > 5)
+            {
+                returnToStart();
+            }
+        }
     }
-    //hacer un repit level por si no consigue la prueba en x tiempos
     public void NextLevel()
     {
         switch (countLevels)
@@ -40,17 +55,22 @@ public class ExamManager : MonoBehaviour
                 CalculeDistancePoint(5f, 1.5f, pointsDetector[countLevels]);
             break;
             case 1:
-                returToStart();
+                returnToStart();
 
                 CalculeDistancePoint(5f, 20f, pointsDetector[countLevels]);
+                finalPoint = 8;
             break; 
             case 2:
-                returToStart();
+                returnToStart();
                 CalculeDistancePoint(40f, 40f, pointsDetector[countLevels]);
                 CalculeDistancePoint(7f, 20f, detectorPoint301);
                 detectorPoint301.SetActive(false);
             break;
             case 3:
+                returnToStart();
+                CalculeDistancePoint(5f, 30f, pointsDetector[countLevels]);
+                rectangleLevel4.transform.position = Dron.transform.position;
+                countLine = 0;
                 break;
             default:
                 break;
@@ -84,7 +104,7 @@ public class ExamManager : MonoBehaviour
         point.SetActive(true);
         point.transform.position = positionPlayer + newPositionX + newPositionY;
     }
-    private void returToStart()
+    private void returnToStart()
     {
         FadeInPanel.SetActive(true);
         FadeInPanel.GetComponent<ScreenFader>().FadeInCoroutine();
@@ -107,7 +127,7 @@ public class ExamManager : MonoBehaviour
         countLine++;
         Debug.Log(countLine);
 
-        if(countLine == 8)
+        if(countLine == finalPoint)
         {
             AddCount();
             NextLevel();
