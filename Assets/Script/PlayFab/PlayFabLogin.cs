@@ -46,20 +46,54 @@ public class PlayFabLogin : MonoBehaviour
     private bool isLoggedIn;
     public void Start()
     {
-       isLoggedIn = false;
+        DontDestroyOnLoad(this);
+        isLoggedIn = false;
     }
     private void OnLoginSuccess(LoginResult result)
     {
+
         LoginWithPlayFabRequest request = new LoginWithPlayFabRequest();
         request.Username = playerNameInput.text;
         request.Password = playerPasswordInput.text;
         request.TitleId = PlayFabSettings.staticSettings.TitleId;
-        PlayFabClientAPI.LoginWithPlayFab(request,LoginCallback,OnLoginFailure);
-        
+        PlayFabClientAPI.LoginWithPlayFab(request, LoginCallback, OnLoginFailure);
+
     }
     private void LoginCallback(LoginResult result)
     {
-        enterSimulator.Invoke();
+        GetUserDataRequest dataRequest = new GetUserDataRequest { PlayFabId = result.PlayFabId };
+
+        PlayFabClientAPI.GetUserData(dataRequest,
+   dataResult =>
+   {
+       if (dataResult.Data["TimeLeft"].Value == "0")
+       {
+           enterSimulator.Invoke();
+       }
+       else
+       {
+           DateTime dt1 = DateTime.Parse(dataResult.Data["TimeLeft"].Value);
+           DateTime dt2 = DateTime.Now;
+           if (dt1 > dt2)
+           {
+               enterSimulator.Invoke();
+           }
+
+           else
+           {
+               incorrectUserText.text = "Esta cuenta ya no es valida";
+               playerNameInput.text = string.Empty;
+               playerPasswordInput.text = string.Empty;
+               StartCoroutine(DeleteText());
+           }
+       }
+
+
+
+       Destroy(this);
+
+
+   }, error => { print("Error en la peticion de datos"); });
         print(result);
     }
 

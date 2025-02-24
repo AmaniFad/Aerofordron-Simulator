@@ -22,6 +22,7 @@ public class DronController : MonoBehaviour
     private float currentCameraTilt;
     [Header("References")]
     [SerializeField] private EventReference soundReference;
+    [SerializeField] private GameObject dronVisuals;
     private FMOD.Studio.EventInstance helixSound;
     private StudioEventEmitter eventEmitter;
     [Header("Rotations")]
@@ -177,7 +178,7 @@ public class DronController : MonoBehaviour
         targetRotation *= Quaternion.Euler(0, additionalRotationY, 0);
 
         // Apply the rotation with slerp
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+        dronVisuals.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
 
     }
 
