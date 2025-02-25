@@ -8,6 +8,7 @@ public class HUDController : MonoBehaviour
 {
 
     [SerializeField] TextMeshProUGUI speedDisplay;
+    private float speed;
     [SerializeField] TextMeshProUGUI heightDisplay;
     private GameObject player;
     private GameObject dron;
@@ -26,7 +27,7 @@ public class HUDController : MonoBehaviour
 
         if (dron != null)
         {
-            float speed = Mathf.Floor(dron.GetComponent<Rigidbody>().velocity.magnitude * (60f * 60f) / 1000); // KMH
+            speed = Mathf.Floor(dron.GetComponent<Rigidbody>().velocity.magnitude * (60f * 60f) / 1000); // KMH
             speedDisplay.text = speed + " KM/H";
             if (Mathf.Floor(dron.transform.position.y) < 0)
             {
@@ -40,5 +41,10 @@ public class HUDController : MonoBehaviour
         else
         {
         }
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
     }
 }
