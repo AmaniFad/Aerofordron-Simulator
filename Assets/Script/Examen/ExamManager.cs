@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class ExamManager : MonoBehaviour
 {
     [Header("Canvas")]
-    [SerializeField] private GameObject WelcomePanel;
-    [SerializeField] private GameObject NextPanel;
+    [SerializeField] private GameObject SelectLevel;
     [SerializeField] private List<GameObject> listPanel;
     [SerializeField] private GameObject FadeInPanel;
 
@@ -26,7 +25,7 @@ public class ExamManager : MonoBehaviour
     private int countLine, finalPoint;
     private bool is4Level;
 
-    public void SetLevel(bool is4Level)
+    public void SetIsLevel(bool is4Level)
     {
         this.is4Level = is4Level;
     }
@@ -48,55 +47,42 @@ public class ExamManager : MonoBehaviour
     }
     public void NextLevel()
     {
+        listPanel[countLevels].SetActive(true);
         switch (countLevels)
         {
             case 0:
-                listPanel[countLevels].SetActive(true);
                 calculeDistancePoint(5f, 1.5f, pointsDetector[countLevels]);
             break;
             case 1:
-                returnToStart();
 
                 calculeDistancePoint(5f, 20f, pointsDetector[countLevels]);
                 countLine = 0;
                 finalPoint = 8;
             break; 
             case 2:
-                returnToStart();
+
                 calculeDistancePoint(40f, 40f, pointsDetector[countLevels]);
                 calculeDistancePoint(7f, 20f, detectorPoint301);
                 detectorPoint301.SetActive(false);
             break;
             case 3:
-                returnToStart();
+
                 calculeDistancePoint(5f, 30f, pointsDetector[countLevels]);
                 
                 countLine = 0;
                 finalPoint = 5;
             break;
             case 4:
-                returnToStart();
+
                 calculeDistancePoint(5f, 50f, pointsDetector[countLevels]);
+            break;
+            case 5:
+                calculeDistancePoint(30f, 50f, pointsDetector[countLevels]);
                 break;
 
             default:
                 break;
         }
-    }
-    IEnumerator _CountDown()
-    {
-        yield return new WaitForSeconds(2.5f);
-        WelcomePanel.SetActive(false);
-        NextPanel.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        NextPanel.GetComponent<Animator>().SetBool("ZoomOut", true);
-        yield return new WaitForSeconds(0.6f);
-        NextPanel.SetActive(false);
-    }
-
-    public void AddCount()
-    {
-        countLevels++;
     }
     public void SetTheLevel(int level)
     {
@@ -115,7 +101,7 @@ public class ExamManager : MonoBehaviour
         point.SetActive(true);
         point.transform.position = positionPlayer + newPositionX + newPositionY;
     }
-    private void returnToStart()
+    public void ReturnToStart()
     {
         FadeInPanel.SetActive(true);
         FadeInPanel.GetComponent<ScreenFader>().FadeInCoroutine();
@@ -124,14 +110,14 @@ public class ExamManager : MonoBehaviour
 
         FadeInPanel.GetComponent<ScreenFader>().FadeOutCoroutine();
     }
-     
     IEnumerator _ChangePanels()
     {
         yield return new WaitForSeconds(2);
-        listPanel[countLevels - 1].SetActive(false);
-        listPanel[countLevels].SetActive(true);
-
+        listPanel[countLevels].SetActive(false);
         Dron.GetComponent<DroneCrash>().GoToFirstPosition();
+
+        yield return new WaitForSeconds(1);
+        SelectLevel.SetActive(true);
     }
     public void AddPointsLine()
     {
@@ -142,11 +128,11 @@ public class ExamManager : MonoBehaviour
     {
         if(countLine == finalPoint)
         {
-            AddCount();
-            NextLevel();
+            ReturnToStart();
         }
         else
         {
+            Dron.GetComponent<DroneCrash>().GoToFirstPosition();
             NextLevel();
         }
     }
@@ -160,7 +146,7 @@ public class ExamManager : MonoBehaviour
     {
         if (!Dron.GetComponent<DroneCrash>().GetIsCrashed())
         {
-            Debug.Log("aterriza");
+            ReturnToStart();
         }
     }
 }
