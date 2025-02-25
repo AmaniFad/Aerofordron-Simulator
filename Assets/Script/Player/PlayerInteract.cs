@@ -51,7 +51,7 @@ public class PlayerInteract : MonoBehaviour
             }
             else
             {
-                if (currentFeedback == null)
+                if (currentFeedback == null && interactFeedback != null)
                 {
                     currentFeedback = Instantiate(interactFeedback);
                 }
