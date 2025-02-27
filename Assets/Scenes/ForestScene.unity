@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.16007265, g: 0.5168968, b: 1.04459, a: 1}
+  m_IndirectSpecularColor: {r: 0.15884617, g: 0.51732993, b: 1.0391164, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -354,6 +354,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 87.056, z: 0}
+--- !u!1 &63391867 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7677052910944575397, guid: 6b69c2714d17738488726629194f7461, type: 3}
+  m_PrefabInstance: {fileID: 1796043070}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &72211267
 GameObject:
   m_ObjectHideFlags: 0
@@ -5464,7 +5469,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1536775629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7354,6 +7359,18 @@ PrefabInstance:
       propertyPath: m_RenderPostProcessing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4095971462401442713, guid: 6b69c2714d17738488726629194f7461, type: 3}
+      propertyPath: fullViewCameras.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4095971462401442713, guid: 6b69c2714d17738488726629194f7461, type: 3}
+      propertyPath: fullViewCameras.Array.data[0]
+      value: 
+      objectReference: {fileID: 63391867}
+    - target: {fileID: 4095971462401442713, guid: 6b69c2714d17738488726629194f7461, type: 3}
+      propertyPath: fullViewCameras.Array.data[1]
+      value: 
+      objectReference: {fileID: 2030577407}
     - target: {fileID: 4129534742823070030, guid: 6b69c2714d17738488726629194f7461, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -7467,7 +7484,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7976808130264900508, guid: 6b69c2714d17738488726629194f7461, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4851007696652854419, guid: 6b69c2714d17738488726629194f7461, type: 3}
       insertIndex: -1
@@ -8550,7 +8568,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030577407}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -8584,7 +8602,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8600000, guid: 16ba54b6f7b1f4d45b56585b02c9c005, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1

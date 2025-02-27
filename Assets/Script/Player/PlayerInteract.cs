@@ -24,51 +24,51 @@ public class PlayerInteract : MonoBehaviour
 
     private void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-        if (Physics.Raycast(ray, raycastDistance, layerMask) && grabbeableObj == null)
-        {
+        //Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+        //if (Physics.Raycast(ray, raycastDistance, layerMask) && grabbeableObj == null)
+        //{
 
-            if (TryGetComponent<DronPartInteract>(out DronPartInteract dronPart))
-            {
-                if (!dronPart.IsMounted())
-                {
-                    if (currentFeedback == null)
-                    {
-                        currentFeedback = Instantiate(interactFeedback);
-                    }
-                    else
-                    {
-                        currentFeedback.SetActive(true);
-                    }
-                }
-                else
-                {
-                    if (currentFeedback != null)
-                    {
-                        currentFeedback.SetActive(false);
-                    }
-                }
-            }
-            else
-            {
-                if (currentFeedback == null && interactFeedback != null)
-                {
-                    currentFeedback = Instantiate(interactFeedback);
-                }
-                else
-                {
-                    currentFeedback.SetActive(true);
-                }
-            }
+        //    if (TryGetComponent<DronPartInteract>(out DronPartInteract dronPart))
+        //    {
+        //        if (!dronPart.IsMounted())
+        //        {
+        //            if (currentFeedback == null)
+        //            {
+        //                currentFeedback = Instantiate(interactFeedback);
+        //            }
+        //            else
+        //            {
+        //                currentFeedback.SetActive(true);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (currentFeedback != null)
+        //            {
+        //                currentFeedback.SetActive(false);
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (currentFeedback == null && interactFeedback != null)
+        //        {
+        //            currentFeedback = Instantiate(interactFeedback);
+        //        }
+        //        else
+        //        {
+        //            currentFeedback.SetActive(true);
+        //        }
+        //    }
 
-        }
-        else
-        {
-            if (currentFeedback != null)
-            {
-                currentFeedback.SetActive(false);
-            }
-        }
+        //}
+        //else
+        //{
+        //    if (currentFeedback != null)
+        //    {
+        //        currentFeedback.SetActive(false);
+        //    }
+        //}
 
     }
     public void GrabItem(GameObject grabbeable)
