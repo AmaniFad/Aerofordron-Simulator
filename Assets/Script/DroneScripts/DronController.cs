@@ -2,6 +2,7 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor.Animations.Rigging;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -43,6 +44,8 @@ public class DronController : MonoBehaviour
         eventEmitter = GetComponent<StudioEventEmitter>();
         isPlaying = false;
         mMovementBehaviour = GetComponent<MovementBehaviour>();
+        tiltAngle = 40;
+        rotationSpeed = 150;
     }
 
     private bool CheckIfGrounded()
@@ -79,8 +82,7 @@ public class DronController : MonoBehaviour
     //        StopPlayDroneSound();
     //    }
     //}
-
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         if (canMove)
         {
@@ -95,6 +97,11 @@ public class DronController : MonoBehaviour
         {
             StopPlayDroneSound();
         }
+    }
+
+    private void LateUpdate()
+    {
+
     }
     private void TryToMoveDron()
     {
@@ -178,7 +185,7 @@ public class DronController : MonoBehaviour
         targetRotation *= Quaternion.Euler(0, additionalRotationY, 0);
 
         // Apply the rotation with slerp
-        dronVisuals.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
 
     }
 
