@@ -27,7 +27,7 @@ public class BusquedaObjetosController : MonoBehaviour
     private int levels;
     void Start()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -39,40 +39,37 @@ public class BusquedaObjetosController : MonoBehaviour
     }
     public void SetObjectInSpawn()
     {
-        if (levels < 3)
+        if (levels < 3 && spawns.Count != 0 && objectFind != null)
         {
-            if (spawns.Count != 0)
+
+            int randomValue = 0;
+            levels++;
+            if (levels == 1)
             {
-                if (objectFind != null)
-                {
-                    int randomValue = 0;
-                    levels++;
-                    if (levels == 1)
-                    {
-                        randomValue = Random.Range(0, spawns.Count / 3);
-                    }
-                    else if(levels == 2)
-                    {
-                        randomValue = Random.Range(0, spawns.Count / 2);
-                    }
-                    else
-                    {
-                        randomValue = Random.Range(0, spawns.Count);
-                    }
-                    
-                    objectFind.transform.position = spawns[randomValue].transform.position;
-                    objectFind.SetActive(true);
-                } 
+                randomValue = Random.Range(0, spawns.Count / 3);
             }
-        }  
+            else if (levels == 2)
+            {
+                randomValue = Random.Range(0, spawns.Count / 2);
+            }
+            else
+            {
+                randomValue = Random.Range(0, spawns.Count);
+            }
+
+            objectFind.transform.position = spawns[randomValue].transform.position;
+            objectFind.SetActive(true);
+        }
+
+
     }
     public void ObjectFounded()
     {
-        if(levels == 3)
+        if (levels == 3)
         {
             canvasWin.SetActive(true);
             TimerBusqueda.instance.setTextTime();
-            PlayFabManager.Instance.ComprobeTitleData(nameLevel, 100 , finalTime);
+            PlayFabManager.Instance.ComprobeTitleData(nameLevel, 100, finalTime);
         }
         else
         {
@@ -85,11 +82,11 @@ public class BusquedaObjetosController : MonoBehaviour
     }
     public void NextLeve()
     {
-        if(levels == 1)
+        if (levels == 1)
         {
             TimerBusqueda.instance.SetRemainingTime(90);
         }
-        if(levels == 2)
+        if (levels == 2)
         {
             TimerBusqueda.instance.SetRemainingTime(60);
         }

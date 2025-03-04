@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class CosecharDron : MonoBehaviour
 {
-    [SerializeField] private GameObject agua;
+    [SerializeField] private GameObject[] agua;
     private void Start()
     {
-        agua.SetActive(false);
+        foreach (GameObject go in agua)
+        {
+            go.SetActive(false);
+        }
     }
     void Update()
     {
@@ -18,11 +21,17 @@ public class CosecharDron : MonoBehaviour
         float chorro = DronInputController.Instance.GetAguaInput();
         if (chorro == 1)
         {
-            agua.SetActive(true);
+            foreach (GameObject go in agua)
+            {
+                go.SetActive(true);
+            }
         }
         else
         {
-            agua.SetActive(false);
+            foreach (GameObject go in agua)
+            {
+                go.SetActive(false);
+            }
         }
     }
 

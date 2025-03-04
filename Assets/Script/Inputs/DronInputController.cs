@@ -12,7 +12,6 @@ public class DronInputController : MonoBehaviour
     private bool changeCamera;
     private float cameraMovement;
     private float aguaInput;
-
     private bool buttonPressed = false;
     private void Start()
     {
