@@ -63,6 +63,7 @@ MonoBehaviour:
   - {fileID: 1132679071426114585}
   - {fileID: 3269049962318035597}
   - {fileID: 8342338919193878093}
+  - {fileID: 2629462044250159622}
 --- !u!114 &1132679071426114585
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -84,12 +85,59 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.12
+    m_Value: 0.295
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.414
+    m_Value: 0.535
   rounded:
     m_OverrideState: 0
+    m_Value: 0
+--- !u!114 &2629462044250159622
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
+  m_Name: Bloom
+  m_EditorClassIdentifier: 
+  active: 1
+  skipIterations:
+    m_OverrideState: 0
+    m_Value: 1
+  threshold:
+    m_OverrideState: 1
+    m_Value: 0.85
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.82
+  scatter:
+    m_OverrideState: 1
+    m_Value: 1
+  clamp:
+    m_OverrideState: 1
+    m_Value: 65472
+  tint:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 0.99506086, b: 0.95686275, a: 1}
+  highQualityFiltering:
+    m_OverrideState: 0
+    m_Value: 0
+  downscale:
+    m_OverrideState: 0
+    m_Value: 0
+  maxIterations:
+    m_OverrideState: 0
+    m_Value: 6
+  dirtTexture:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  dirtIntensity:
+    m_OverrideState: 1
     m_Value: 0
 --- !u!114 &3269049962318035597
 MonoBehaviour:
@@ -105,20 +153,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   postExposure:
+    m_OverrideState: 1
+    m_Value: 1.15
+  contrast:
     m_OverrideState: 0
     m_Value: 0
-  contrast:
-    m_OverrideState: 1
-    m_Value: 15
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
+    m_Value: {r: 1, g: 0.98114866, b: 0.92156863, a: 1}
   hueShift:
     m_OverrideState: 0
     m_Value: -8
   saturation:
     m_OverrideState: 1
-    m_Value: 12
+    m_Value: 0
 --- !u!114 &8342338919193878093
 MonoBehaviour:
   m_ObjectHideFlags: 3
