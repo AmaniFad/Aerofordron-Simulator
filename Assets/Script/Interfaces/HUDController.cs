@@ -43,14 +43,13 @@ public class HUDController : MonoBehaviour
             else
             { 
                 heightDisplay.text = Mathf.Floor(dron.transform.position.y) + " m";
-                heightDisplay.text = 0 + " ft";
-                fpvHeightDisplay.text = 0 + " ft";
+                fpvHeightDisplay.text = Mathf.Floor(dron.transform.position.y) + " m";
             }
-            else
+            /*else
             { 
                 heightDisplay.text = Mathf.Floor(dron.transform.position.y) + " ft";
                 fpvHeightDisplay.text = Mathf.Floor(dron.transform.position.y) + " ft";
-            }
+            }*/
         }
         else
         {
