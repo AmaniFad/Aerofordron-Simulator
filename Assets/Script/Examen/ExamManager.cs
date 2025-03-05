@@ -79,6 +79,10 @@ public class ExamManager : MonoBehaviour
             case 5:
                 calculeDistancePoint(30f, 50f, pointsDetector[countLevels]);
                 break;
+            case 6:
+                calculeDistancePoint(100f, 50f, pointsDetector[countLevels]);
+                break;
+
 
             default:
                 break;

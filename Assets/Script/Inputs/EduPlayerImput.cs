@@ -134,6 +134,15 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RemoteDron"",
+                    ""type"": ""Value"",
+                    ""id"": ""3d702754-4e15-4142-bd9a-48d25bd239c8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -695,6 +704,17 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Agua"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4850bf50-2f97-4363-aadb-2457fa8c1874"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RemoteDron"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1328,6 +1348,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_FullView = m_Player.FindAction("FullView", throwIfNotFound: true);
         m_Player_Agua = m_Player.FindAction("Agua", throwIfNotFound: true);
+        m_Player_RemoteDron = m_Player.FindAction("RemoteDron", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1417,6 +1438,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_FullView;
     private readonly InputAction m_Player_Agua;
+    private readonly InputAction m_Player_RemoteDron;
     public struct PlayerActions
     {
         private @EduPlayerImput m_Wrapper;
@@ -1433,6 +1455,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @FullView => m_Wrapper.m_Player_FullView;
         public InputAction @Agua => m_Wrapper.m_Player_Agua;
+        public InputAction @RemoteDron => m_Wrapper.m_Player_RemoteDron;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1478,6 +1501,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @Agua.started += instance.OnAgua;
             @Agua.performed += instance.OnAgua;
             @Agua.canceled += instance.OnAgua;
+            @RemoteDron.started += instance.OnRemoteDron;
+            @RemoteDron.performed += instance.OnRemoteDron;
+            @RemoteDron.canceled += instance.OnRemoteDron;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1518,6 +1544,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @Agua.started -= instance.OnAgua;
             @Agua.performed -= instance.OnAgua;
             @Agua.canceled -= instance.OnAgua;
+            @RemoteDron.started -= instance.OnRemoteDron;
+            @RemoteDron.performed -= instance.OnRemoteDron;
+            @RemoteDron.canceled -= instance.OnRemoteDron;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1788,6 +1817,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnFullView(InputAction.CallbackContext context);
         void OnAgua(InputAction.CallbackContext context);
+        void OnRemoteDron(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
