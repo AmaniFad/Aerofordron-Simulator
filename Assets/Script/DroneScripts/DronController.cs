@@ -2,7 +2,6 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using UnityEditor.Animations.Rigging;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
