@@ -88,6 +88,10 @@ public class DronInputController : MonoBehaviour
         {
             changeCamera = true;
         }
+        else
+        {
+            changeCamera = false;
+        }
     }
     public void OnRemoteDron(InputValue value)
     {
