@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DronControllerAuto : MonoBehaviour
 {
@@ -18,8 +19,10 @@ public class DronControllerAuto : MonoBehaviour
     public int currentWaypointIndex = 0;
 
     [Header("References")]
-    private MovementBehaviour MB
-        ;
+    private MovementBehaviour MB;
+
+    [Header("Event")]
+    [SerializeField] private UnityEvent _LastPointEvent;
 
     private bool isGrounded;
     private bool isMoving = true;
@@ -67,13 +70,19 @@ public class DronControllerAuto : MonoBehaviour
         {
             currentSpeed = reducedSpeed;
         }
+        if(targetWaypoint.gameObject.GetComponent<PointDown>() != null)
+        {
+            MB.MoveDronAuto(Vector3.down, currentSpeed);
+        }
+        else
+        {
+            // Move the drone
+            MB.MoveDronAuto(direction, currentSpeed);
 
-        // Move the drone
-        MB.MoveDronAuto(direction, currentSpeed);
-
-        // Rotate the drone smoothly towards the waypoint
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+            // Rotate the drone smoothly towards the waypoint
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+        }
 
         // Check if the drone has reached the waypoint
         if (distanceToWaypoint <= waypointTolerance)
@@ -84,8 +93,8 @@ public class DronControllerAuto : MonoBehaviour
             if (currentWaypointIndex >= waypoints.Count)
             {
                 isMoving = false;
-                Debug.Log("Drone has reached all waypoints.");
-                this.gameObject.SetActive(false);
+                Debug.Log("Drone has reached all waypoints.");;
+                _LastPointEvent.Invoke();
             }
         }
     }

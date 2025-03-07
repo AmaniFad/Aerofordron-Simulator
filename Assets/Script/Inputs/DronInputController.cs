@@ -88,16 +88,16 @@ public class DronInputController : MonoBehaviour
         {
             changeCamera = true;
         }
-        else
-        {
-            changeCamera = false;
-        }
     }
     public void OnRemoteDron(InputValue value)
     {
         if (value.isPressed)
         {
             isRemoteDron = true;
+        }
+        else
+        {
+            isRemoteDron = false;
         }
     }
     public bool GetRemoteDron()

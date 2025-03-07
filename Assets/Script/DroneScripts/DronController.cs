@@ -62,10 +62,7 @@ public class DronController : MonoBehaviour
         {
             MoveCameraDown();
         }
-        if (DronInputController.Instance.GetRemoteDron())
-        {
-            Debug.Log("R");
-        }
+        
     }
 
     //private void FixedUpdate()
