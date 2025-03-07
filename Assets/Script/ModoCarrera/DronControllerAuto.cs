@@ -26,7 +26,11 @@ public class DronControllerAuto : MonoBehaviour
 
     private bool isGrounded;
     private bool isMoving = true;
-
+    public void SetNormalSpeed(float normalSpeed)
+    {
+        this.normalSpeed = normalSpeed;
+        reducedSpeed = normalSpeed - 100;
+    }
     void Start()
     {
         if (waypoints == null || waypoints.Count == 0)

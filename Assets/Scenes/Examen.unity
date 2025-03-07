@@ -1402,6 +1402,7 @@ Transform:
   - {fileID: 2126340318}
   - {fileID: 1305125029}
   - {fileID: 1909573721}
+  - {fileID: 1533664424}
   - {fileID: 1183645785}
   - {fileID: 1807117538}
   - {fileID: 152221202}
@@ -2927,7 +2928,7 @@ Transform:
   m_GameObject: {fileID: 218996521}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.88, y: -4.42, z: 28.94}
+  m_LocalPosition: {x: 10.83, y: -6.481, z: 29.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4496,7 +4497,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -6.8045, y: -81.259186}
+  m_AnchoredPosition: {x: -6.8045, y: -81.25928}
   m_SizeDelta: {x: 1933.6, y: 162.5183}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &384984295
@@ -5096,10 +5097,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>SIMULACION DE FALLO DE UN MOTOR</b>
-
-    Descenso en espiral con velocidad
-    y toma "dura" de control'
+  m_text: "PERDIDA DE SE\xD1AL! PULSA EL BOTON DE MODO AUTOMATICO!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0b65c99348f068b49bef5db0bb76a6e4, type: 2}
   m_sharedMaterial: {fileID: 21809785584020342, guid: 0b65c99348f068b49bef5db0bb76a6e4, type: 2}
@@ -7277,7 +7275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -6.8045, y: -81.259186}
+  m_AnchoredPosition: {x: -6.8045, y: -81.25928}
   m_SizeDelta: {x: 1933.6, y: 162.5183}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &671701211
@@ -8133,8 +8131,9 @@ MonoBehaviour:
   detectorPoint301: {fileID: 89219369}
   Player: {fileID: 1067645933}
   Dron: {fileID: 835503453}
-  DronAuto: {fileID: 0}
+  DronAuto: {fileID: 1940577813}
   HUDController: {fileID: 701627988}
+  dronCamera: {fileID: 1067645929}
   countLevels: 4
 --- !u!1 &726278157
 GameObject:
@@ -8440,7 +8439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -6.8045, y: -81.259186}
+  m_AnchoredPosition: {x: -6.8045, y: -81.25928}
   m_SizeDelta: {x: 1933.6, y: 162.5183}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &733160411
@@ -9714,7 +9713,7 @@ Transform:
   m_GameObject: {fileID: 835503453}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 189.74, y: -0, z: 178.7}
+  m_LocalPosition: {x: 189.6, y: -0, z: 178.7}
   m_LocalScale: {x: 0.04016477, y: 0.04016477, z: 0.04016477}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12300,7 +12299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1154970584
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12340,10 +12339,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>SIMULACION DE FALLO DE UN MOTOR</b>
+  m_text: '<b>SIMULACION DE FALLO DE EQUIPO</b>
 
-    Despega 50 metros enciam de
-    la zona de emergencia '
+    Ascende 50 metros y dirigete
+    hacia el bosque de enfrente.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0b65c99348f068b49bef5db0bb76a6e4, type: 2}
   m_sharedMaterial: {fileID: 21809785584020342, guid: 0b65c99348f068b49bef5db0bb76a6e4, type: 2}
@@ -16138,6 +16137,147 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
+--- !u!1 &1533664423
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1533664424}
+  - component: {fileID: 1533664426}
+  - component: {fileID: 1533664425}
+  m_Layer: 0
+  m_Name: Point_Level7.1
+  m_TagString: Untagged
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1533664424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533664423}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 12.73, y: -1.04, z: -4.32}
+  m_LocalScale: {x: 1.0362854, y: 1.0362854, z: 1.0362854}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 107112979}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1533664425
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533664423}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6394653, y: 0.42481947, z: 2.5897827}
+  m_Center: {x: -0.5812683, y: -0.28759027, z: -0.20866394}
+--- !u!114 &1533664426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533664423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cae41ba810f71c4e83e3b83caf53d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 720930516}
+        m_TargetAssemblyTypeName: ExamManager, Assembly-CSharp
+        m_MethodName: ReturnToStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 583309636}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1940577813}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2137709471}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1533664423}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1533664423}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1537929922
 GameObject:
   m_ObjectHideFlags: 0
@@ -16666,7 +16806,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -6.8045, y: -81.259186}
+  m_AnchoredPosition: {x: -6.8045, y: -81.25928}
   m_SizeDelta: {x: 1933.6, y: 162.5183}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1575458613
@@ -17129,7 +17269,7 @@ Transform:
   m_GameObject: {fileID: 1623013037}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.87, y: 5.16, z: -3.53}
+  m_LocalPosition: {x: 3.87, y: 6.71, z: -3.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17825,7 +17965,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -6.8045, y: -81.259186}
+  m_AnchoredPosition: {x: -6.8045, y: -81.25928}
   m_SizeDelta: {x: 1933.6, y: 162.5183}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1726375213
@@ -19442,7 +19582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6895460103679041898, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -27.599976
+      value: -27.599854
       objectReference: {fileID: 0}
     - target: {fileID: 7247627941668124445, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
       propertyPath: m_IsActive
@@ -19938,6 +20078,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1902152573}
+  - component: {fileID: 1902152575}
+  - component: {fileID: 1902152574}
   m_Layer: 0
   m_Name: 3
   m_TagString: Untagged
@@ -19954,12 +20096,60 @@ Transform:
   m_GameObject: {fileID: 1902152572}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.41, y: 5.16, z: 31.14}
+  m_LocalPosition: {x: 9.35, y: 6.71, z: 23.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2137709472}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1902152574
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902152572}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1902152575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902152572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cae41ba810f71c4e83e3b83caf53d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1940577815}
+        m_TargetAssemblyTypeName: DronControllerAuto, Assembly-CSharp
+        m_MethodName: SetNormalSpeed
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 350
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1909573720
 GameObject:
   m_ObjectHideFlags: 0
@@ -20009,7 +20199,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -20030,6 +20220,18 @@ MonoBehaviour:
   _Event:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 583309637}
+        m_TargetAssemblyTypeName: SwitchToFullView, Assembly-CSharp
+        m_MethodName: ExitFullView
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 583309636}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -20053,6 +20255,54 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1154970583}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 440052791}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1533664423}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1909573720}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1928452721
 GameObject:
@@ -20305,9 +20555,10 @@ GameObject:
   - component: {fileID: 1940577816}
   - component: {fileID: 1940577815}
   - component: {fileID: 1940577814}
+  - component: {fileID: 1940577818}
   m_Layer: 0
   m_Name: DronTransparente
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20408,6 +20659,27 @@ Transform:
   - {fileID: 2048040203}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!65 &1940577818
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940577813}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2.386565, z: 1}
+  m_Center: {x: 0, y: 1.9961873, z: 0}
 --- !u!1 &1951612516
 GameObject:
   m_ObjectHideFlags: 0
@@ -24129,7 +24401,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -6.8045, y: -81.259186}
+  m_AnchoredPosition: {x: -6.8045, y: -81.25928}
   m_SizeDelta: {x: 1933.6, y: 162.5183}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2125814065
@@ -24420,7 +24692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2137709472
 Transform:
   m_ObjectHideFlags: 0
@@ -24474,7 +24746,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -6.8045, y: -81.259186}
+  m_AnchoredPosition: {x: -6.8045, y: -81.25928}
   m_SizeDelta: {x: 1933.6, y: 162.5183}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2140162746

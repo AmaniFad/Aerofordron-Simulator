@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class ExamManager : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class ExamManager : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private HUDController HUDController;
+
+    [Header("Camera")]
+    [SerializeField] private CinemachineVirtualCamera dronCamera;
 
     public int countLevels;
     private int countLine, finalPoint;
@@ -57,7 +61,7 @@ public class ExamManager : MonoBehaviour
                 Dron.SetActive(false);
                 DronAuto.transform.position = Dron.transform.position;
                 DronAuto.SetActive(true);
-                
+                dronCamera.LookAt = DronAuto.transform;
                 isDronAuto = false;
             }
         }
@@ -135,6 +139,9 @@ public class ExamManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         listPanel[countLevels].SetActive(false);
+        Dron.SetActive(true);
+        
+        dronCamera.LookAt = Dron.transform;
         Dron.GetComponent<DroneCrash>().GoToFirstPosition();
 
         yield return new WaitForSeconds(1);
