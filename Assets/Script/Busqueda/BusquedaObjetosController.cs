@@ -69,7 +69,7 @@ public class BusquedaObjetosController : MonoBehaviour
         {
             canvasWin.SetActive(true);
             TimerBusqueda.instance.setTextTime();
-            PlayFabManager.Instance.ComprobeTitleData(nameLevel, 100, finalTime);
+            //PlayFabManager.Instance.ComprobeTitleData(nameLevel, 100, finalTime);
         }
         else
         {
