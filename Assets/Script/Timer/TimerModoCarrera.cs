@@ -33,6 +33,7 @@ public class TimerModoCarrera : Timer
         }
         saveRemainingTime = remainingTime;
         elapsedTime = 0;
+        StopTime();
     }
 
     // Update is called once per frame

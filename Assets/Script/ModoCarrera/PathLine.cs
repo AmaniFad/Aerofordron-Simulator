@@ -23,7 +23,7 @@ public class PathLine : MonoBehaviour
             for (int i = 0; i < waypoints.Length; i++)
             {
                 lineRenderer.SetPosition(i, waypoints[i].position);
-                waypoints[i].gameObject.GetComponent<BoxCollider>().enabled = true;
+                //waypoints[i].gameObject.GetComponent<BoxCollider>().enabled = true;
             }
         }
     }
