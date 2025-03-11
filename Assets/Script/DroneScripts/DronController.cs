@@ -43,7 +43,7 @@ public class DronController : MonoBehaviour
         eventEmitter = GetComponent<StudioEventEmitter>();
         isPlaying = false;
         mMovementBehaviour = GetComponent<MovementBehaviour>();
-        tiltAngle = 40;
+        tiltAngle = 25;
         rotationSpeed = 150;
     }
 
