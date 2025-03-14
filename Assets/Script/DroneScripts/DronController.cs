@@ -43,6 +43,7 @@ public class DronController : MonoBehaviour
         currentCameraTilt = 0;
         eventEmitter = GetComponent<StudioEventEmitter>();
         isPlaying = false;
+        tiltAngle = 30;
         mMovementBehaviour = GetComponent<MovementBehaviour>();
     }
 
@@ -164,22 +165,19 @@ public class DronController : MonoBehaviour
         //Necesario sino vuelve a 0 la rotation para los lados el momento que dejes de pulsar
         float currentYRotation = transform.rotation.eulerAngles.y;
 
+        //Esto es para que tire un poco hacia el lado que se esta moviendo
+        float tiltAroundZ = -inputDirection.x * tiltAngle;
+        float tiltAroundX = +inputDirection.y * tiltAngle;
 
-        Quaternion targetRotation = Quaternion.Euler(0, currentYRotation, 0);
+
+        Quaternion targetRotation = Quaternion.Euler(tiltAroundX, currentYRotation, tiltAroundZ);
 
         // Aqui se pone la rotacion Recordatorio no utilizar time.DeltaTime en un fixedUpdate
-        float additionalRotationY = DisplayInputData.leftControllerDirection.x * rotationSpeed;
+        float additionalRotationY = DronInputController.Instance.GetRotationalInput() * rotationSpeed;
         targetRotation *= Quaternion.Euler(0, additionalRotationY, 0);
-        if (additionalRotationY < 0.15 && additionalRotationY > -0.15)
-        {
 
-        }
-        else
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
-
-        }
         // Apply the rotation with slerp
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
 
     }
 
