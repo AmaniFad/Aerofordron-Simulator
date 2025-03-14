@@ -40,7 +40,6 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator LoadSceneAsync(string scene)
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
         GameObject instanceForControl = Instantiate(new GameObject());
         instanceForControl.AddComponent<AlwaysLookAtGameobject>().StartCoroutine(_TransitionControl(scene,instanceForControl));  
         DontDestroyOnLoad(instanceForControl);
@@ -51,6 +50,7 @@ public class SceneLoader : MonoBehaviour
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
         GameObject b = Instantiate(sceneTransitions);
+        b.GetComponent<Canvas>().worldCamera = Camera.main;
         DontDestroyOnLoad(b);
         b.GetComponent<Animator>().SetTrigger("leaveTransition");
 

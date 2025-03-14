@@ -11,6 +11,7 @@ using UnityEngine.Windows;
 public class DronController : MonoBehaviour
 {
     [Header("Distances")]
+    public static DronController dronInstance;
     [SerializeField] private float maxHeight;
     [SerializeField] private float maxDistanceFromPlayer;
     [SerializeField] private float groundedRayDistance;
@@ -37,6 +38,7 @@ public class DronController : MonoBehaviour
     //[SerializeField] private GameObject playerOnGroundFeedback;
     void Start()
     {
+        dronInstance = this;
         rb = GetComponent<Rigidbody>();
         currentCameraTilt = 0;
         eventEmitter = GetComponent<StudioEventEmitter>();

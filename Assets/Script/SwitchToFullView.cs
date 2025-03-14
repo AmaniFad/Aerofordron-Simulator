@@ -9,7 +9,6 @@ public class SwitchToFullView : MonoBehaviour
     private bool currentState = false;
     private float changeCameraCooldown = 0.2f;
     private bool canChangeCamera;
-    
     private void Start()
     {
         instance = this;
@@ -20,7 +19,7 @@ public class SwitchToFullView : MonoBehaviour
     {
         if (DisplayInputData.isChangeCameraPressed)
         {
-            if (canChangeCamera)
+            if (canChangeCamera && DronController.dronInstance.CanMoveDron())
             {
                 StartCoroutine(DoChangeCameraCooldown());
                 currentState = !currentState;
@@ -35,6 +34,19 @@ public class SwitchToFullView : MonoBehaviour
                 }
             }
 
+        }
+        if (!DronController.dronInstance.CanMoveDron() && currentState)
+        {
+            currentState = !currentState;
+            if (currentState)
+            {
+
+                EnterFullView();
+            }
+            else
+            {
+                ExitFullView();
+            }
         }
     }
 
