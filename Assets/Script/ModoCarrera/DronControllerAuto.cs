@@ -24,12 +24,15 @@ public class DronControllerAuto : MonoBehaviour
     [Header("Event")]
     [SerializeField] private UnityEvent _LastPointEvent;
 
-    private bool isGrounded;
     private bool isMoving = true;
     public void SetNormalSpeed(float normalSpeed)
     {
         this.normalSpeed = normalSpeed;
         reducedSpeed = normalSpeed - 100;
+    }
+    public void SetCurrentWaypointIndex(int currentWaypointIndex)
+    {
+        this.currentWaypointIndex = currentWaypointIndex;
     }
     void Start()
     {
@@ -131,6 +134,5 @@ public class DronControllerAuto : MonoBehaviour
         }
 
         isMoving = true;
-        Debug.Log("Drone started.");
     }
 }

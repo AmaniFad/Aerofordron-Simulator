@@ -25,6 +25,7 @@ public class ExamManager : MonoBehaviour
 
     [Header("Camera")]
     [SerializeField] private CinemachineVirtualCamera dronCamera;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
     public int countLevels;
     private int countLine, finalPoint;
@@ -103,8 +104,9 @@ public class ExamManager : MonoBehaviour
             case 6:
                 calculeDistancePoint(100f, 50f, pointsDetector[countLevels]);
                 break;
-
-
+            case 7:
+                calculeDistancePoint(20f,50f, pointsDetector[countLevels]);
+                break;
             default:
                 break;
         }
@@ -150,7 +152,6 @@ public class ExamManager : MonoBehaviour
     public void AddPointsLine()
     {
         countLine++;
-        Debug.Log(countLine);
     }
     public void ComprobePointLine()
     {
@@ -176,5 +177,16 @@ public class ExamManager : MonoBehaviour
         {
             ReturnToStart();
         }
+    }
+
+    public void FrameVirtualCamera()
+    {
+        virtualCamera.gameObject.SetActive(true);
+        StartCoroutine(_IsCamera());
+    }
+    IEnumerator _IsCamera()
+    {
+        yield return new WaitForSeconds(5);
+        virtualCamera.gameObject.SetActive(false);
     }
 }
