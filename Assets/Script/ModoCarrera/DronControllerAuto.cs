@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class DronControllerAuto : MonoBehaviour
 {
+    #region variables
     [Header("Distances")]
     [SerializeField] private float maxHeight;
     [SerializeField] private float groundedRayDistance;
@@ -25,6 +26,8 @@ public class DronControllerAuto : MonoBehaviour
     [SerializeField] private UnityEvent _LastPointEvent;
 
     private bool isMoving = true;
+    #endregion
+    #region getters and setters
     public void SetNormalSpeed(float normalSpeed)
     {
         this.normalSpeed = normalSpeed;
@@ -34,6 +37,7 @@ public class DronControllerAuto : MonoBehaviour
     {
         this.currentWaypointIndex = currentWaypointIndex;
     }
+    #endregion
     void Start()
     {
         if (waypoints == null || waypoints.Count == 0)
@@ -60,43 +64,41 @@ public class DronControllerAuto : MonoBehaviour
     {
         Transform targetWaypoint = waypoints[currentWaypointIndex];
 
-        // Calculate direction to the waypoint
+        // direccion
         Vector3 direction = (targetWaypoint.position - transform.position).normalized;
         float distanceToWaypoint = Vector3.Distance(transform.position, targetWaypoint.position);
 
-        // Determine speed based on distance and angle
         float currentSpeed = normalSpeed;
-        // Reduce speed near waypoint
+        //reducir la velocidad
         if (distanceToWaypoint < waypointTolerance * 5)
         {
             currentSpeed = reducedSpeed;
         }
-        // Reduce speed before sharp turns
+        // reducir la velocidad antes de girar
         float angle = Vector3.Angle(transform.forward, direction);
         if (angle > 45f)
         {
             currentSpeed = reducedSpeed;
         }
+        //para que baje esteticamente
         if(targetWaypoint.gameObject.GetComponent<PointDown>() != null)
         {
             MB.MoveDronAuto(Vector3.down, currentSpeed);
         }
         else
         {
-            // Move the drone
             MB.MoveDronAuto(direction, currentSpeed);
 
-            // Rotate the drone smoothly towards the waypoint
+            // retacion suave
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
         }
 
-        // Check if the drone has reached the waypoint
+        //ultimo ounto
         if (distanceToWaypoint <= waypointTolerance)
         {
             currentWaypointIndex++;
 
-            // Stop moving if all waypoints are visited
             if (currentWaypointIndex >= waypoints.Count)
             {
                 isMoving = false;

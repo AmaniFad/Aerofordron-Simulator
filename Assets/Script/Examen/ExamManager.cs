@@ -6,19 +6,23 @@ using Cinemachine;
 
 public class ExamManager : MonoBehaviour
 {
+    #region variables
     [Header("Canvas")]
     [SerializeField] private GameObject SelectLevel;
     [SerializeField] private List<GameObject> listPanel;
     [SerializeField] private GameObject FadeInPanel;
+    [SerializeField] private GameObject panelAdvertecia;
 
     [Header("GameObjectsLevels")]
     [SerializeField] private List<GameObject> pointsDetector;
     [SerializeField] private GameObject detectorPoint301;
+    [SerializeField] private GameObject mando;
 
     [Header("Player & Dron")]
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject Dron;
-    [SerializeField] private GameObject DronAuto;
+    [SerializeField] private GameObject DronAutoLevel7;
+    [SerializeField] private GameObject DronAutoLevel8;
 
     [Header("Scripts")]
     [SerializeField] private HUDController HUDController;
@@ -27,19 +31,24 @@ public class ExamManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera dronCamera;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
-    public int countLevels;
-    private int countLine, finalPoint;
-    private bool is4Level;
-    private bool isDronAuto;
+    public int _countLevels;
+    private int _countLine, _finalPoint;
+    private bool _is4Level;
+    private bool _isDronAuto7;
+    private bool _isDronAuto8;
 
+    private float timeInPanel;
+    #endregion
+    #region getters and setters
     public void SetIsLevel(bool is4Level)
     {
-        this.is4Level = is4Level;
+        this._is4Level = is4Level;
     }
     public void SetIsDronAuto(bool isDronAuto)
     {
-        this.isDronAuto = isDronAuto;
+        this._isDronAuto7 = isDronAuto;
     }
+    #endregion
     void Start()
     {
         //countLevels = 0;
@@ -48,64 +57,82 @@ public class ExamManager : MonoBehaviour
 
     void Update()
     {
-        if (is4Level)
+        if (_is4Level)
         {
             if(HUDController.GetSpeed() > 18)
             {
                 NextLevel();
             }
         }
-        if (isDronAuto)
+        if (_isDronAuto7)
         {
             if (DronInputController.Instance.GetRemoteDron())
             {
                 Dron.SetActive(false);
-                DronAuto.transform.position = Dron.transform.position;
-                DronAuto.SetActive(true);
-                dronCamera.LookAt = DronAuto.transform;
-                isDronAuto = false;
+                DronAutoLevel7.transform.position = Dron.transform.position;
+                DronAutoLevel7.SetActive(true);
+                dronCamera.LookAt = DronAutoLevel7.transform;
+                _isDronAuto7 = false;
+            }
+        }
+        if (_isDronAuto8)
+        {
+            if(Vector3.Distance(DronAutoLevel8.transform.position, Dron.transform.position) > 10f)
+            {
+                panelAdvertecia.SetActive(true);
+                timeInPanel = Time.deltaTime;
+
+                if(timeInPanel > 4)
+                {
+                    //reset level
+                }
+            }
+            else
+            {
+                timeInPanel = 0;
+                panelAdvertecia.SetActive(false);
             }
         }
     }
     public void NextLevel()
     {
-        listPanel[countLevels].SetActive(true);
-        switch (countLevels)
+        listPanel[_countLevels].SetActive(true);
+        switch (_countLevels)
         {
             case 0:
-                calculeDistancePoint(5f, 1.5f, pointsDetector[countLevels]);
+                calculeDistancePoint(5f, 1.5f, pointsDetector[_countLevels]);
             break;
             case 1:
 
-                calculeDistancePoint(5f, 20f, pointsDetector[countLevels]);
-                countLine = 0;
-                finalPoint = 8;
+                calculeDistancePoint(5f, 20f, pointsDetector[_countLevels]);
+                _countLine = 0;
+                _finalPoint = 8;
             break; 
             case 2:
 
-                calculeDistancePoint(40f, 40f, pointsDetector[countLevels]);
+                calculeDistancePoint(40f, 40f, pointsDetector[_countLevels]);
                 calculeDistancePoint(7f, 20f, detectorPoint301);
                 detectorPoint301.SetActive(false);
             break;
             case 3:
 
-                calculeDistancePoint(5f, 30f, pointsDetector[countLevels]);
+                calculeDistancePoint(5f, 30f, pointsDetector[_countLevels]);
                 
-                countLine = 0;
-                finalPoint = 5;
+                _countLine = 0;
+                _finalPoint = 5;
             break;
             case 4:
 
-                calculeDistancePoint(5f, 50f, pointsDetector[countLevels]);
+                calculeDistancePoint(5f, 50f, pointsDetector[_countLevels]);
             break;
             case 5:
-                calculeDistancePoint(30f, 50f, pointsDetector[countLevels]);
+                calculeDistancePoint(30f, 50f, pointsDetector[_countLevels]);
                 break;
             case 6:
-                calculeDistancePoint(100f, 50f, pointsDetector[countLevels]);
+                calculeDistancePoint(100f, 50f, pointsDetector[_countLevels]);
                 break;
             case 7:
-                calculeDistancePoint(20f,50f, pointsDetector[countLevels]);
+                calculeDistancePoint(20f,50f, pointsDetector[_countLevels]);
                 break;
             default:
                 break;
@@ -113,7 +140,7 @@ public class ExamManager : MonoBehaviour
     }
     public void SetTheLevel(int level)
     {
-        countLevels = level;
+        _countLevels = level;
         NextLevel();
     }
 
@@ -140,7 +167,7 @@ public class ExamManager : MonoBehaviour
     IEnumerator _ChangePanels()
     {
         yield return new WaitForSeconds(2);
-        listPanel[countLevels].SetActive(false);
+        listPanel[_countLevels].SetActive(false);
         Dron.SetActive(true);
         
         dronCamera.LookAt = Dron.transform;
@@ -151,11 +178,11 @@ public class ExamManager : MonoBehaviour
     }
     public void AddPointsLine()
     {
-        countLine++;
+        _countLine++;
     }
     public void ComprobePointLine()
     {
-        if(countLine == finalPoint)
+        if(_countLine == _finalPoint)
         {
             ReturnToStart();
         }
@@ -169,7 +196,7 @@ public class ExamManager : MonoBehaviour
     public void PointToDron(Transform point)
     {
         point.transform.position = Dron.transform.position;
-        is4Level = true;
+        _is4Level = true;
     }
     public void IsDronGounded()
     {
@@ -182,11 +209,13 @@ public class ExamManager : MonoBehaviour
     public void FrameVirtualCamera()
     {
         virtualCamera.gameObject.SetActive(true);
+        mando.SetActive(false);
         StartCoroutine(_IsCamera());
     }
     IEnumerator _IsCamera()
     {
         yield return new WaitForSeconds(5);
         virtualCamera.gameObject.SetActive(false);
+        mando.SetActive(true);
     }
 }
