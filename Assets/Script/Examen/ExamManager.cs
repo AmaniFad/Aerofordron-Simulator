@@ -10,6 +10,7 @@ public class ExamManager : MonoBehaviour
     [Header("Canvas")]
     [SerializeField] private GameObject SelectLevel;
     [SerializeField] private List<GameObject> listPanel;
+    [SerializeField] private List<GameObject> buttonPanelSelect;
     [SerializeField] private GameObject FadeInPanel;
     [SerializeField] private GameObject panelAdvertecia;
 
@@ -23,6 +24,7 @@ public class ExamManager : MonoBehaviour
     [SerializeField] private GameObject Dron;
     [SerializeField] private GameObject DronAutoLevel7;
     [SerializeField] private GameObject DronAutoLevel8;
+    [SerializeField] private GameObject PersonaLevel9;
 
     [Header("Scripts")]
     [SerializeField] private HUDController HUDController;
@@ -36,6 +38,7 @@ public class ExamManager : MonoBehaviour
     private bool _is4Level;
     private bool _isDronAuto7;
     private bool _isDronAuto8;
+    private bool _isPersonaAuto;
 
     private float timeInPanel;
     #endregion
@@ -51,6 +54,10 @@ public class ExamManager : MonoBehaviour
     public void SetIsDronAuto8(bool isDronAuto8)
     {
         this._isDronAuto8 = isDronAuto8;
+    }
+    public void SetIsPerson9(bool _isPersonaAuto)
+    {
+        this._isPersonaAuto = _isPersonaAuto;
     }
     #endregion
     void Start()
@@ -81,7 +88,7 @@ public class ExamManager : MonoBehaviour
         }
         if (_isDronAuto8)
         {
-            if(Vector3.Distance(DronAutoLevel8.transform.position, Dron.transform.position) > 10f)
+            if (Vector3.Distance(DronAutoLevel8.transform.position, Dron.transform.position) > 10f)
             {
                 panelAdvertecia.SetActive(true);
                 /*timeInPanel += Time.deltaTime;
@@ -104,7 +111,18 @@ public class ExamManager : MonoBehaviour
                 timeInPanel = 0;
                 panelAdvertecia.SetActive(false);
             }
-        }
+        } 
+        else if (_isPersonaAuto)
+        {
+            if (Vector3.Distance(PersonaLevel9.transform.position, Dron.transform.position) > 10f)
+            {
+                panelAdvertecia.SetActive(true);
+            }
+            else
+            {
+                panelAdvertecia.SetActive(false);
+            }
+        }     
     }
     public void NextLevel()
     {
@@ -146,6 +164,9 @@ public class ExamManager : MonoBehaviour
             case 7:
                 calculeDistancePoint(20f,50f, pointsDetector[_countLevels]);
                 break;
+            case 8:
+                calculeDistancePoint(30f, 50f, pointsDetector[_countLevels]);
+                break;
             default:
                 break;
         }
@@ -186,6 +207,7 @@ public class ExamManager : MonoBehaviour
         Dron.GetComponent<DroneCrash>().GoToFirstPosition();
 
         yield return new WaitForSeconds(1);
+        buttonPanelSelect[_countLevels].GetComponent<Image>().color = Color.green;
         SelectLevel.SetActive(true);
     }
     public void AddPointsLine()

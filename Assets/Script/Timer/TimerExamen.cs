@@ -7,8 +7,10 @@ public class TimerExamen : Timer
 {
     public static TimerExamen Instance;
     [SerializeField] private bool isTime;
+    [SerializeField] private bool isLevel8;
 
-    [SerializeField] private UnityEvent _TimeFinish;
+    [SerializeField] private UnityEvent _TimeFinish8;
+    [SerializeField] private UnityEvent _TimeFinish9;
 
     private void Start()
     {
@@ -17,6 +19,10 @@ public class TimerExamen : Timer
     public void SetTime(bool time)
     {
         isTime = time;
+    }
+    public void SetLevel(bool level)
+    {
+        this.isLevel8 = level;
     }
     void Update()
     {
@@ -27,7 +33,14 @@ public class TimerExamen : Timer
             {
                 isTime = false;
                 timerText.gameObject.SetActive(false);
-                _TimeFinish.Invoke();
+                if (isLevel8)
+                {
+                    _TimeFinish8.Invoke();
+                }
+                else
+                {
+                    _TimeFinish9.Invoke();
+                }
             }
         }
     }
