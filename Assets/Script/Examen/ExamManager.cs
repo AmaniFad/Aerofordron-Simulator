@@ -243,6 +243,7 @@ public class ExamManager : MonoBehaviour
     public void FrameVirtualCamera()
     {
         virtualCamera.gameObject.SetActive(true);
+        virtualCamera.Priority = 20;
         mando.SetActive(false);
         StartCoroutine(_IsCamera());
     }
