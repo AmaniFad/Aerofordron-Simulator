@@ -48,6 +48,10 @@ public class ExamManager : MonoBehaviour
     {
         this._isDronAuto7 = isDronAuto;
     }
+    public void SetIsDronAuto8(bool isDronAuto8)
+    {
+        this._isDronAuto8 = isDronAuto8;
+    }
     #endregion
     void Start()
     {
@@ -80,12 +84,20 @@ public class ExamManager : MonoBehaviour
             if(Vector3.Distance(DronAutoLevel8.transform.position, Dron.transform.position) > 10f)
             {
                 panelAdvertecia.SetActive(true);
-                timeInPanel = Time.deltaTime;
+                /*timeInPanel += Time.deltaTime;
 
-                if(timeInPanel > 4)
+                if(timeInPanel > 10)
                 {
                     //reset level
-                }
+                    DronAutoLevel8.SetActive(false);
+                    TimerExamen.Instance.SetTime(false);
+                    TimerExamen.Instance.remainingTime = 45;
+                    Dron.GetComponent<DroneCrash>().GoToFirstPosition();
+                    NextLevel();
+                    timeInPanel = 0;
+                    panelAdvertecia.SetActive(false);
+
+                }*/
             }
             else
             {
