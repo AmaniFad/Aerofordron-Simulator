@@ -95,9 +95,11 @@ public class PlayerInputController : MonoBehaviour
         {
             isUsingKeyboard = true;
             isUsingGamepad = false;
+            print("Keyboard");
         }
         if (playerInput.currentControlScheme.Equals("Gamepad") || playerInput.currentControlScheme.Equals("Joystick"))
         {
+            print("Gamepad");
             isUsingGamepad = true;
             isUsingKeyboard = false;
         }
