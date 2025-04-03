@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,6 +22,27 @@ public class SceneLoader : MonoBehaviour
             Debug.Log("Ya existe otra instancia de SceneLoader");
             Destroy(gameObject);
         }
+
+    }
+
+    public void LoadSceneWithoutTransition(string scene)
+    {
+        FMODUnity.RuntimeManager.GetVCA("vca:/General").getVolume(out float volume);
+        previousVolume = volume;
+        FMODUnity.RuntimeManager.GetVCA("vca:/General").setVolume(0);
+        StartCoroutine(LoadingScene(scene));
+
+
+    }
+
+    private IEnumerator LoadingScene(string scene)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        FMODUnity.RuntimeManager.GetVCA("vca:/General").setVolume(previousVolume);
 
     }
     public void SceneLoad(string scene)
@@ -63,6 +85,7 @@ public class SceneLoader : MonoBehaviour
         FMODUnity.RuntimeManager.GetVCA("vca:/General").setVolume(previousVolume);
         Destroy(transitionController);
     }
+
     public void AddScene(string scene)
     {
         SceneManager.LoadScene(scene,LoadSceneMode.Additive);
