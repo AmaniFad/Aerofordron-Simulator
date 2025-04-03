@@ -10,6 +10,10 @@ public abstract class Timer : MonoBehaviour
     public TMP_Text timerTextCanvaWin;
 
     public float elapsedTime;
+    public void SetRemainingTime(float remainingTime)
+    {
+        this.remainingTime = remainingTime;
+    }
     public void cuentaAtras()
     {
         remainingTime -= Time.deltaTime;
