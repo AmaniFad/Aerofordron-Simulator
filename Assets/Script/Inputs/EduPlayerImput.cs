@@ -46,6 +46,15 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""DroneLeftStick"",
+                    ""type"": ""Value"",
+                    ""id"": ""55f38448-be06-41c4-b4a4-34f1460eecf0"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""DroneRightStick"",
                     ""type"": ""Value"",
                     ""id"": ""6a2a061d-49b5-43fd-b7dd-caf7db1cff63"",
@@ -118,19 +127,19 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DroneLeftStick"",
+                    ""name"": ""Agua"",
                     ""type"": ""Value"",
-                    ""id"": ""3b1fb493-9892-4045-a6b9-28610789a7a7"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""id"": ""acfbdb18-efc0-4d74-bb60-69ac61bf7cd8"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Agua"",
+                    ""name"": ""RemoteDron"",
                     ""type"": ""Value"",
-                    ""id"": ""c3ce9214-3fdd-4a4a-9fa2-2481a6a2c00c"",
-                    ""expectedControlType"": ""Button"",
+                    ""id"": ""3d702754-4e15-4142-bd9a-48d25bd239c8"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -260,17 +269,6 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""eee9c22d-1a7d-4a3f-a979-8e72642cce13"",
-                    ""path"": ""<WMRSpatialController>{RightHand}/menu"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""2575243f-d723-4984-bae5-12d3ab4bd178"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -293,50 +291,6 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e9bb2a2f-9f71-4d4d-a601-1d3d86b6217f"",
-                    ""path"": ""<WMRSpatialController>{LeftHand}/menu"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e2075435-9138-421a-a260-0c85f0c80612"",
-                    ""path"": ""<XRController>{RightHand}/menu"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""57bfc104-565d-4e2a-ba7a-2e1416ce2b55"",
-                    ""path"": ""<QuestProTouchController>/menu"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f062e3bd-6deb-40ec-b6f2-8cd640f74bf1"",
-                    ""path"": ""<QuestProTouchController>{LeftHand}/menu"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""8b1f7ca6-91b0-414a-ba10-846bafd60b1f"",
                     ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
@@ -353,17 +307,6 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""FullView"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5a4aed06-ccd1-4bfe-9680-da517069a76b"",
-                    ""path"": ""<XRInputV1::Microsoft::WindowsMRControllerOpenXR>{LeftHand}/joystickclicked"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
                     ""action"": ""FullView"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -480,12 +423,12 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b04a500f-cbe7-4f42-9d83-7a009bc64536"",
-                    ""path"": ""<Keyboard>/v"",
+                    ""id"": ""467984c7-bf95-4efe-a5a1-f9ab2ab16a9c"",
+                    ""path"": ""<Joystick>/stick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeCamera"",
+                    ""groups"": ""Joystick;Gamepad"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -525,10 +468,10 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""080feda8-edfd-4ad9-8f38-f83d6cefb45c"",
-                    ""path"": ""<XRController>{RightHand}/joystick"",
+                    ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""XR;Joystick"",
+                    ""groups"": """",
                     ""action"": ""DroneRightStick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -601,6 +544,72 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""7effc9b4-92cf-4fb1-9e72-cc90ed9ce51d"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DroneLeftStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""22e1476a-81d9-411d-a6cb-36fa63a1f044"",
+                    ""path"": ""Dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DroneLeftStick"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""17a966a1-6b42-4cad-98d7-0f25ff04bd61"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""DroneLeftStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""4c559529-daae-4723-aa16-5d662e53883e"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""DroneLeftStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""16972d53-1ea4-4b69-bacf-46419ea34849"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""DroneLeftStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""df523e06-13c7-442a-9bae-883865f1d0fa"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""DroneLeftStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
                     ""id"": ""f8e2a38f-e42d-48ba-b605-b727c3584a23"",
                     ""path"": ""<Gamepad>/dpad"",
                     ""interactions"": """",
@@ -645,122 +654,34 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d8f3c484-497a-4de3-9f4e-04d9450af3c5"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""id"": ""44bd9446-3a77-4241-baed-2210542c383c"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Agua"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4850bf50-2f97-4363-aadb-2457fa8c1874"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RemoteDron"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""94dbb2b5-5fb3-4339-a917-c21eb8bbbcf6"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""DroneLeftStick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""WASD"",
-                    ""id"": ""d4376202-eafc-4ae6-a9b7-08318cafc967"",
-                    ""path"": ""Dpad"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DroneLeftStick"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""e399dc70-2b26-4491-99c5-91afa12963ad"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""DroneLeftStick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""6758ce65-a434-4402-afbd-45f2ae7ab6ad"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""DroneLeftStick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""5fa4d71e-d477-4aee-af23-63270739dc04"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""DroneLeftStick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""d5fd4a00-1984-49ed-9fb5-ce5faafaddaf"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""DroneLeftStick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""21c6b3a2-41b1-4958-a8b9-bfa102a9c3ce"",
-                    ""path"": ""<XRController>{LeftHand}/joystick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR;Joystick"",
-                    ""action"": ""DroneLeftStick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""35cd80ff-bcca-4026-b1eb-8ef08feeca48"",
-                    ""path"": ""<QuestProTouchController>/primaryButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Agua"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6f215558-71c3-4133-9f49-4be43f34bec5"",
-                    ""path"": ""<WMRSpatialController>/touchpadClicked"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Agua"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f4bd7654-6b94-4048-a10f-43dfbda6e5d3"",
-                    ""path"": ""<XRInputV1::Microsoft::WindowsMRControllerOpenXR>{LeftHand}/touchpadclicked"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Agua"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""089a9626-8ef1-4c2b-b2bc-36dd5dbe56be"",
-                    ""path"": ""<XRInputV1::Microsoft::WindowsMRControllerOpenXR>{RightHand}/touchpad/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Agua"",
+                    ""action"": ""ChangeCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1384,6 +1305,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_MoveCamera = m_Player.FindAction("MoveCamera", throwIfNotFound: true);
+        m_Player_DroneLeftStick = m_Player.FindAction("DroneLeftStick", throwIfNotFound: true);
         m_Player_DroneRightStick = m_Player.FindAction("DroneRightStick", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_ChangeCamera = m_Player.FindAction("ChangeCamera", throwIfNotFound: true);
@@ -1392,8 +1314,8 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_FullView = m_Player.FindAction("FullView", throwIfNotFound: true);
-        m_Player_DroneLeftStick = m_Player.FindAction("DroneLeftStick", throwIfNotFound: true);
         m_Player_Agua = m_Player.FindAction("Agua", throwIfNotFound: true);
+        m_Player_RemoteDron = m_Player.FindAction("RemoteDron", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1473,6 +1395,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_MoveCamera;
+    private readonly InputAction m_Player_DroneLeftStick;
     private readonly InputAction m_Player_DroneRightStick;
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_ChangeCamera;
@@ -1481,14 +1404,15 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_FullView;
-    private readonly InputAction m_Player_DroneLeftStick;
     private readonly InputAction m_Player_Agua;
+    private readonly InputAction m_Player_RemoteDron;
     public struct PlayerActions
     {
         private @EduPlayerImput m_Wrapper;
         public PlayerActions(@EduPlayerImput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @MoveCamera => m_Wrapper.m_Player_MoveCamera;
+        public InputAction @DroneLeftStick => m_Wrapper.m_Player_DroneLeftStick;
         public InputAction @DroneRightStick => m_Wrapper.m_Player_DroneRightStick;
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @ChangeCamera => m_Wrapper.m_Player_ChangeCamera;
@@ -1497,8 +1421,8 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @FullView => m_Wrapper.m_Player_FullView;
-        public InputAction @DroneLeftStick => m_Wrapper.m_Player_DroneLeftStick;
         public InputAction @Agua => m_Wrapper.m_Player_Agua;
+        public InputAction @RemoteDron => m_Wrapper.m_Player_RemoteDron;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1514,6 +1438,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @MoveCamera.started += instance.OnMoveCamera;
             @MoveCamera.performed += instance.OnMoveCamera;
             @MoveCamera.canceled += instance.OnMoveCamera;
+            @DroneLeftStick.started += instance.OnDroneLeftStick;
+            @DroneLeftStick.performed += instance.OnDroneLeftStick;
+            @DroneLeftStick.canceled += instance.OnDroneLeftStick;
             @DroneRightStick.started += instance.OnDroneRightStick;
             @DroneRightStick.performed += instance.OnDroneRightStick;
             @DroneRightStick.canceled += instance.OnDroneRightStick;
@@ -1538,12 +1465,12 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @FullView.started += instance.OnFullView;
             @FullView.performed += instance.OnFullView;
             @FullView.canceled += instance.OnFullView;
-            @DroneLeftStick.started += instance.OnDroneLeftStick;
-            @DroneLeftStick.performed += instance.OnDroneLeftStick;
-            @DroneLeftStick.canceled += instance.OnDroneLeftStick;
             @Agua.started += instance.OnAgua;
             @Agua.performed += instance.OnAgua;
             @Agua.canceled += instance.OnAgua;
+            @RemoteDron.started += instance.OnRemoteDron;
+            @RemoteDron.performed += instance.OnRemoteDron;
+            @RemoteDron.canceled += instance.OnRemoteDron;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1554,6 +1481,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @MoveCamera.started -= instance.OnMoveCamera;
             @MoveCamera.performed -= instance.OnMoveCamera;
             @MoveCamera.canceled -= instance.OnMoveCamera;
+            @DroneLeftStick.started -= instance.OnDroneLeftStick;
+            @DroneLeftStick.performed -= instance.OnDroneLeftStick;
+            @DroneLeftStick.canceled -= instance.OnDroneLeftStick;
             @DroneRightStick.started -= instance.OnDroneRightStick;
             @DroneRightStick.performed -= instance.OnDroneRightStick;
             @DroneRightStick.canceled -= instance.OnDroneRightStick;
@@ -1578,12 +1508,12 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @FullView.started -= instance.OnFullView;
             @FullView.performed -= instance.OnFullView;
             @FullView.canceled -= instance.OnFullView;
-            @DroneLeftStick.started -= instance.OnDroneLeftStick;
-            @DroneLeftStick.performed -= instance.OnDroneLeftStick;
-            @DroneLeftStick.canceled -= instance.OnDroneLeftStick;
             @Agua.started -= instance.OnAgua;
             @Agua.performed -= instance.OnAgua;
             @Agua.canceled -= instance.OnAgua;
+            @RemoteDron.started -= instance.OnRemoteDron;
+            @RemoteDron.performed -= instance.OnRemoteDron;
+            @RemoteDron.canceled -= instance.OnRemoteDron;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1844,6 +1774,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
     {
         void OnLook(InputAction.CallbackContext context);
         void OnMoveCamera(InputAction.CallbackContext context);
+        void OnDroneLeftStick(InputAction.CallbackContext context);
         void OnDroneRightStick(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnChangeCamera(InputAction.CallbackContext context);
@@ -1852,8 +1783,8 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnFullView(InputAction.CallbackContext context);
-        void OnDroneLeftStick(InputAction.CallbackContext context);
         void OnAgua(InputAction.CallbackContext context);
+        void OnRemoteDron(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

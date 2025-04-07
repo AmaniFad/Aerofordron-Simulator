@@ -26,17 +26,17 @@ public class OutlineWhenSelected : MonoBehaviour
         {
             if (TryGetComponent<Outline>(out Outline outline))
             {
-                
 
-                    currentOutline = outline;
-                    outline.OutlineWidth = 10;
-                    if (TryGetComponent<Image>(out Image image))
+
+                currentOutline = outline;
+                outline.OutlineWidth = 10;
+                if (TryGetComponent<Image>(out Image image))
                 {
                     Color previousColor = image.color;
                     previousColor.a = 255;
                     image.color = previousColor;
                 }
-                
+
             }
             else
             {
@@ -53,7 +53,7 @@ public class OutlineWhenSelected : MonoBehaviour
         else
         {
             if (currentOutline)
-            currentOutline.OutlineWidth = 0;
+                currentOutline.OutlineWidth = 0;
             if (TryGetComponent<Image>(out Image image))
             {
                 Color previousColor = image.color;

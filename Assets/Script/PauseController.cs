@@ -11,13 +11,11 @@ public class PauseController : MonoBehaviour
     private bool isPausing;
     [SerializeField] private bool pauseWithoutPauseMenu;
     [SerializeField] private GameObject pauseMenuInstance;
-    bool canPause;
     // Start is called before the first frame update
     void Start()
     {
         pauseWithoutPauseMenu = false;
         isPausing = false;
-        canPause = true;
     }
 
 
@@ -35,26 +33,22 @@ public class PauseController : MonoBehaviour
                 }
                 else
                 {
-                    Time.timeScale = 1f;
+                    Time.timeScale = 0f;
                 }
             }
             else
             {
                 Time.timeScale = 1f;
             }
-
+            
         }
 
 
         //el bool canPause es para que no si le llegan dos inputs en un lapso de tiempo muy corto no se abre y se cierre el menu de pausa
-        if (DisplayInputData.isMenuPressed)
+        if (PlayerInputController.Instance.IsPausing())
         {
-            if (canPause)
-            {
-                TryPause();
-                StartCoroutine(Wait()); 
 
-            }
+            TryPause();
 
         }
     }
@@ -63,7 +57,7 @@ public class PauseController : MonoBehaviour
     public void PauseWihoutPauseMenu()
     {
         pauseWithoutPauseMenu = true;
-        Time.timeScale = 1;
+        Time.timeScale = 0;
 
     }
 
@@ -83,7 +77,8 @@ public class PauseController : MonoBehaviour
             isPausing = true;
             pauseMenuInstance.SetActive(true);
             pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
-            Time.timeScale = 1f;
+            Time.timeScale = 0f;
+            PlayerInputController.Instance.HasPaused();
             Cursor.visible = true;
 
         }
@@ -94,7 +89,8 @@ public class PauseController : MonoBehaviour
                 isPausing = true;
                 pauseMenuInstance.SetActive(true);
                 pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
-                Time.timeScale = 1f;
+                Time.timeScale = 0f;
+                PlayerInputController.Instance.HasPaused();
                 Cursor.visible = true;
             }
             else
@@ -103,8 +99,10 @@ public class PauseController : MonoBehaviour
                 Time.timeScale = 1f;
                 isPausing = false;
                 pauseMenuInstance.SetActive(false);
+                PlayerInputController.Instance.HasPaused();
             }
         }
+        PlayerInputController.Instance.HasPaused();
 
     }
 
@@ -113,12 +111,6 @@ public class PauseController : MonoBehaviour
         Cursor.visible = false;
         Time.timeScale = 1f;
         isPausing = false;
-    }
-
-    private IEnumerator Wait()
-    {
-        canPause = false;
-        yield return new WaitForSeconds(0.5f);
-        canPause = true;
+        PlayerInputController.Instance.HasPaused();
     }
 }

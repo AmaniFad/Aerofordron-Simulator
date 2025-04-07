@@ -28,9 +28,8 @@ public class PlayerInputController : MonoBehaviour
         return playerInput;
     }
 
-    public void OnSelect(InputValue inputValue)
+    public void OnInteract(InputValue inputValue)
     {
-        print("Hola");
         isInteracting = true;
     }
    
@@ -62,6 +61,7 @@ public class PlayerInputController : MonoBehaviour
     public void OnPause(InputValue value)
     {
         if (value.isPressed)
+        Debug.Log("Pausa");
         isPausing = true;
     }
 
@@ -95,9 +95,11 @@ public class PlayerInputController : MonoBehaviour
         {
             isUsingKeyboard = true;
             isUsingGamepad = false;
+            print("Keyboard");
         }
         if (playerInput.currentControlScheme.Equals("Gamepad") || playerInput.currentControlScheme.Equals("Joystick"))
         {
+            print("Gamepad");
             isUsingGamepad = true;
             isUsingKeyboard = false;
         }
