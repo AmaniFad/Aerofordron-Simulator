@@ -9,7 +9,8 @@ public class StartManager : MonoBehaviour
     private CinemachineVirtualCamera mainCamera;
     [SerializeField]
     private CinemachineVirtualCamera flySelectionCamera;
-
+    [SerializeField]
+    private GameObject forestCamera;
     [SerializeField]
     private GameObject mainButtons;
     [SerializeField]
@@ -42,6 +43,8 @@ public class StartManager : MonoBehaviour
     public void ChangeToFlySelectionCamera()
     {
         mainCamera.Priority = 9;
+        mainCamera.gameObject.SetActive(false);
+        flySelectionCamera.gameObject.SetActive(true);
         flySelectionCamera.Priority = 10;
         ChangeToFlySelection();
         currentSelectedCamera = flySelectionCamera;
@@ -49,6 +52,8 @@ public class StartManager : MonoBehaviour
 
     public void ChangeToMainCamera()
     {
+        flySelectionCamera.gameObject.SetActive(false);
+        mainCamera.gameObject.SetActive(true);
         currentSelectedCamera.Priority = 9;
         mainCamera.Priority = 10;
         currentSelectedCamera = mainCamera;
