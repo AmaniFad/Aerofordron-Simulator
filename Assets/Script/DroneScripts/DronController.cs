@@ -17,8 +17,8 @@ public class DronController : MonoBehaviour
     private bool canMove;
     private MovementBehaviour mMovementBehaviour;
     private bool isPlaying;
-    private float maxUpTilt = 550;
-    private float maxDownTilt = -50;
+    private float maxUpTilt = 1000;
+    private float maxDownTilt = -700;
     private float currentCameraTilt;
     [Header("References")]
     [SerializeField] private EventReference soundReference;
@@ -56,11 +56,11 @@ public class DronController : MonoBehaviour
 
         if (DronInputController.Instance.GetCameraMovement() > 0)
         {
-            MoveCameraUp();
+            MoveCameraDown();
         }
         if (DronInputController.Instance.GetCameraMovement() < 0)
         {
-            MoveCameraDown();
+            MoveCameraUp();
         }
         
     }
@@ -193,26 +193,19 @@ public class DronController : MonoBehaviour
 
         if (currentCameraTilt < maxUpTilt)
         {
-            Quaternion rotation = gameObject.transform.rotation;
-            rotation.x += 1 * Time.deltaTime * cameraMovementSpeed;
-            Debug.Log("Rotation " + rotation);
-            currentCameraTilt += (float)10;
-            dronView.transform.Rotate(new Vector3(rotation.x, 0, 0), rotation.x * 10, Space.Self);
+            float viewRotation = 1 * Time.deltaTime * cameraMovementSpeed;
+            currentCameraTilt += 10f; 
+            dronView.transform.Rotate(viewRotation, 0, 0, Space.Self);
         }
-
-
     }
 
     private void MoveCameraDown()
     {
         if (currentCameraTilt > maxDownTilt)
         {
-
-            Quaternion rotation = gameObject.transform.rotation;
-            rotation.x += -1 * Time.deltaTime * cameraMovementSpeed;
-            Debug.Log("Rotation " + rotation);
-            currentCameraTilt -= (float)10;
-            dronView.transform.Rotate(new Vector3(-rotation.x, 0, 0), rotation.x * 10, Space.Self);
+            float viewRotation = -1 * Time.deltaTime * cameraMovementSpeed;
+            currentCameraTilt -= 10f; 
+            dronView.transform.Rotate(viewRotation, 0, 0, Space.Self);
         }
     }
     private void MoveCamera()
