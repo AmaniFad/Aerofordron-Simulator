@@ -99,6 +99,6 @@ public class DroneCrash : MonoBehaviour
 
     private void LateUpdate()
     {
-        currentSpeed = dronRb.velocity.magnitude * (60 * 60) / 100;
+        currentSpeed = dronRb.linearVelocity.magnitude * (60 * 60) / 100;
     }
 }

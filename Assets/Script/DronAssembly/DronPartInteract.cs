@@ -47,7 +47,7 @@ public class DronPartInteract : MonoBehaviour, IInteractable
             GetComponent<Outline>().OutlineWidth = 0;
             if (isPickable)
             {
-                rigidBody.velocity = Vector3.zero;
+                rigidBody.linearVelocity = Vector3.zero;
                 isTaken.Invoke();
                 isPickable = false;
                 rigidBody.useGravity = false;

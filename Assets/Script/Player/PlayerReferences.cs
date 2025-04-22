@@ -33,7 +33,7 @@ public class PlayerReferences : MonoBehaviour
 
     public Vector3 GetPlayerVelocity()
     {
-        return rb.velocity;
+        return rb.linearVelocity;
     }
 
     public void SetDron(GameObject dron)

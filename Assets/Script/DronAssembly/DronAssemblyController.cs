@@ -137,7 +137,7 @@ public class DronAssemblyController : MonoBehaviour
         Rigidbody grabbedRigidbody = grabbedPart.GetComponent<Rigidbody>();
         if (grabbedRigidbody != null)
         {
-            grabbedRigidbody.velocity = Vector3.zero;
+            grabbedRigidbody.linearVelocity = Vector3.zero;
         }
 
         // Interpolate over the specified duration

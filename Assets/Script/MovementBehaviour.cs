@@ -49,23 +49,23 @@ public class MovementBehaviour : MonoBehaviour
     {
         input.y = 0;
         Vector3 velocityXZ = input.normalized * speed;
-        rb.velocity = new Vector3(velocityXZ.x, rb.velocity.y, velocityXZ.z);
+        rb.linearVelocity = new Vector3(velocityXZ.x, rb.linearVelocity.y, velocityXZ.z);
     }
     public void RunRB(Vector3 input,float runMultiplier)
     {
 
         input.y = 0;
         Vector3 velocityXZ = input.normalized * speed * runMultiplier;
-        rb.velocity = new Vector3(velocityXZ.x, rb.velocity.y, velocityXZ.z);
+        rb.linearVelocity = new Vector3(velocityXZ.x, rb.linearVelocity.y, velocityXZ.z);
     }
     public void Deceleration(float deceleration)
     {
         speed -= deceleration;
 
-        // Limita la velocidad a 0 para evitar que el objeto se mueva hacia atrás
+        // Limita la velocidad a 0 para evitar que el objeto se mueva hacia atrï¿½s
         speed = Mathf.Max(speed, 0);
 
         // Aplica la velocidad al objeto
-        rb.velocity = transform.forward * speed;
+        rb.linearVelocity = transform.forward * speed;
     }
 }
