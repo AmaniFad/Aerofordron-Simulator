@@ -53,6 +53,7 @@ public class StartManager : MonoBehaviour
     public void ChangeToMainCamera()
     {
         flySelectionCamera.gameObject.SetActive(false);
+        ChangeToMainSelection();
         mainCamera.gameObject.SetActive(true);
         currentSelectedCamera.Priority = 9;
         mainCamera.Priority = 10;
