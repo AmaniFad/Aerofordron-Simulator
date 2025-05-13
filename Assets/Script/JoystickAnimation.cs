@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -105,8 +106,14 @@ public class JoystickAnimation : MonoBehaviour
             rightStickAnimator.SetBool("LRight", false);
             rightStickAnimator.SetBool("LLeft", false);
 
-
         }
+    }
+
+    public void CallOneShot( )
+    {
+        StudioEventEmitter emitter = GetComponent<StudioEventEmitter>();
+        emitter.Play();
+        //FMODUnity.RuntimeManager.PlayOneShot(eventRoute);
     }
 
     private IEnumerator GraceTimeToReturnStickToPlace()
