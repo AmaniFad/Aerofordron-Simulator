@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +9,7 @@ public class BatteryFeedback : MonoBehaviour
 {
 
     [SerializeField] private Image batteryBar;
+    [SerializeField] private TextMeshProUGUI batteryPercentage;
     private float maxBattery;
 
     private void OnEnable()
@@ -19,7 +22,9 @@ public class BatteryFeedback : MonoBehaviour
         maxBattery = BatteryController.Instance.MaxBatteryAmount();
         if (BatteryController.Instance.HasBattery())
         {
-            batteryBar.fillAmount = BatteryController.Instance.BatteryAmount() / maxBattery;
+            float percentage = Mathf.Floor((BatteryController.Instance.BatteryAmount() / maxBattery) * 100 );
+            batteryPercentage.text = percentage.ToString() + "%" ;
+            batteryBar.fillAmount = percentage/100;
         }
         else
         {

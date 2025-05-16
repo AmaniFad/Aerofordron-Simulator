@@ -45,6 +45,13 @@ public class MovementBehaviour : MonoBehaviour
         rb.AddForce(new Vector3(0f,-Physics.gravity.y,0f));
     }
 
+    public void StopMoving()
+    {
+        Vector3 velocity = new Vector3(0,Physics.gravity.y,0);
+        rb.linearVelocity = velocity; 
+        
+    }
+
     public void MoveRB3D(Vector3 input)
     {
         input.y = 0;

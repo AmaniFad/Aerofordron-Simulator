@@ -38,6 +38,7 @@ public class SpawnCP : MonoBehaviour
                 SpawnCPController.Instance.AddCP(cPObj);
                 cPObj.GetComponent<AlwaysLookAtGameobject>().SetOffset(new Vector3(0, 90, 90));
                 cPObj.GetComponent<AlwaysLookAtGameobject>().ConstraintX(true);
+                print(PlayerReferences.instance.GetDron());
                 cPObj.GetComponent<AlwaysLookAtGameobject>().SetObjective(PlayerReferences.instance.GetDron());
 
             }
