@@ -67,6 +67,10 @@ public class PlayerController : MonoBehaviour
                 MB.MoveRB3D(input);
             }
         }
+        if (PlayerInputController.Instance.GetPlayerInput() == Vector2.zero)
+        {
+            MB.StopMoving();
+        }
     }
 
 
