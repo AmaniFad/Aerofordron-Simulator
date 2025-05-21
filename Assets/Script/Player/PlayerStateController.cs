@@ -23,7 +23,7 @@ public class PlayerStateController : MonoBehaviour
 
     public void StopMoving()
     {
-        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        player.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         canMove = false;
     }
 

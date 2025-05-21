@@ -14,6 +14,6 @@ public class PlayerLookAtMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(transform.position + rb.velocity);
+        transform.LookAt(transform.position + rb.linearVelocity);
     }
 }

@@ -121,12 +121,12 @@ namespace TrafficSimulation{
 
 
             //Apply speed
-            float s = GetSpeedUnit(rb.velocity.magnitude);
-            if(s > maxSpeed) rb.velocity = GetSpeedMS(maxSpeed) * rb.velocity.normalized;
+            float s = GetSpeedUnit(rb.linearVelocity.magnitude);
+            if(s > maxSpeed) rb.linearVelocity = GetSpeedMS(maxSpeed) * rb.linearVelocity.normalized;
 
             
             //Apply downforce
-            rb.AddForce(-transform.up * downForce * rb.velocity.magnitude);
+            rb.AddForce(-transform.up * downForce * rb.linearVelocity.magnitude);
         }
 
         public float GetSpeedMS(float _s){

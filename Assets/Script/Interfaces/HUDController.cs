@@ -33,7 +33,7 @@ public class HUDController : MonoBehaviour
 
         if (dron != null)
         {
-            speed = Mathf.Floor(dron.GetComponent<Rigidbody>().velocity.magnitude * (60f * 60f) / 1000); // KMH
+            speed = Mathf.Floor(dron.GetComponent<Rigidbody>().linearVelocity.magnitude * (60f * 60f) / 1000); // KMH
             speedDisplay.text = speed + " KM/H";
             fpvSpeedDisplay.text = speed + " KM/H";
             if (Mathf.Floor(dron.transform.position.y) < 0)

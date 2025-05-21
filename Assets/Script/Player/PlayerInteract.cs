@@ -2,7 +2,7 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
+
 
 public class PlayerInteract : MonoBehaviour
 {
@@ -101,7 +101,7 @@ public class PlayerInteract : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
             RaycastHit hitInfo; // Information about the object hit by the ray
 
-            XRGrabInteractable prueba = new XRGrabInteractable();
+            UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable prueba = new UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable();
             if (grabbeableObj != null)
             {
                 grabbeableObj.GetComponent<IInteractable>().DropInteractable();

@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInteract playerInteract;
     private FMOD.Studio.EventInstance foosteps;
     private Coroutine isMoving;
-    [SerializeField] private XRDirectInteractor interactor;
+    [SerializeField] private UnityEngine.XR.Interaction.Toolkit.Interactors.XRDirectInteractor interactor;
     [SerializeField] private DynamicMoveProvider movement;
 
 

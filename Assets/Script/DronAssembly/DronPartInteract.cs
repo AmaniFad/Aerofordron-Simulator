@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.XR.Interaction.Toolkit;
+
 
 public class DronPartInteract : MonoBehaviour, IInteractable
 {
@@ -35,7 +35,7 @@ public class DronPartInteract : MonoBehaviour, IInteractable
             if (isPut && assemblyController.IsCurrentPart(this.gameObject))
             {
                 GetComponent<Rigidbody>().isKinematic = true;
-                GetComponent<XRGrabInteractable>().enabled = false;
+                GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>().enabled = false;
             }
         }
     }
@@ -78,7 +78,7 @@ public class DronPartInteract : MonoBehaviour, IInteractable
             //rigidBody.useGravity = true;
         }
         isPickable = true;
-        GetComponent<XRGrabInteractable>().enabled = false;
+        GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>().enabled = false;
         StartCoroutine(ReactivateInteractable(0.1f));
         transform.SetParent(startParent);
 
@@ -87,7 +87,7 @@ public class DronPartInteract : MonoBehaviour, IInteractable
     private IEnumerator ReactivateInteractable(float time)
     {
         yield return new WaitForSeconds(time);
-        GetComponent<XRGrabInteractable>().enabled = true;
+        GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>().enabled = true;
     }
     public void Mounted()
     {
