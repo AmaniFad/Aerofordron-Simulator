@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerInteract : MonoBehaviour
 {
     [SerializeField] private float raycastDistance = 10f;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private GameObject interactFeedback;
-    private GameObject currentFeedback;
+    [SerializeField] private GameObject currentFeedback;
     private Transform interactionZone;
     private GameObject grabbeableObj;
     private Vector3 grabbeableObjOriginalScale;
@@ -23,27 +24,51 @@ public class PlayerInteract : MonoBehaviour
 
     private void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-        if (Physics.Raycast(ray, raycastDistance, layerMask) && grabbeableObj == null)
-        {
+        //Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+        //if (Physics.Raycast(ray, raycastDistance, layerMask) && grabbeableObj == null)
+        //{
 
+        //    if (TryGetComponent<DronPartInteract>(out DronPartInteract dronPart))
+        //    {
+        //        if (!dronPart.IsMounted())
+        //        {
+        //            if (currentFeedback == null)
+        //            {
+        //                currentFeedback = Instantiate(interactFeedback);
+        //            }
+        //            else
+        //            {
+        //                currentFeedback.SetActive(true);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (currentFeedback != null)
+        //            {
+        //                currentFeedback.SetActive(false);
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (currentFeedback == null && interactFeedback != null)
+        //        {
+        //            currentFeedback = Instantiate(interactFeedback);
+        //        }
+        //        else
+        //        {
+        //            currentFeedback.SetActive(true);
+        //        }
+        //    }
 
-            if (currentFeedback == null)
-            {
-                currentFeedback = Instantiate(interactFeedback);
-            }
-            else
-            {
-                currentFeedback.SetActive(true);
-            }
-        }
-        else
-        {
-            if (currentFeedback != null)
-            {
-                currentFeedback.SetActive(false);
-            }
-        }
+        //}
+        //else
+        //{
+        //    if (currentFeedback != null)
+        //    {
+        //        currentFeedback.SetActive(false);
+        //    }
+        //}
 
     }
     public void GrabItem(GameObject grabbeable)
@@ -71,11 +96,10 @@ public class PlayerInteract : MonoBehaviour
         if (!onlyThisFrame)
         {
 
-
+            print("Interact");
             // Cast a ray from the position of this object forward
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
             RaycastHit hitInfo; // Information about the object hit by the ray
-
 
             if (grabbeableObj != null)
             {
@@ -90,7 +114,6 @@ public class PlayerInteract : MonoBehaviour
                 {
                     // Check if the hit object implements the IInteract interface
                     IInteractable interactableObject = hitInfo.collider.gameObject.GetComponent<IInteractable>();
-
                     if (interactableObject != null)
                     {
                         sound.CallOneShot("event:/Grab");
