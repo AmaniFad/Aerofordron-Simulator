@@ -54,15 +54,15 @@ public class DronController : MonoBehaviour
     private void Update()
     {
 
-        if (DronInputController.Instance.GetCameraMovement() > 0)
-        {
-            MoveCameraDown();
-        }
-        if (DronInputController.Instance.GetCameraMovement() < 0)
+        if (DisplayInputData.cameraUP)
         {
             MoveCameraUp();
         }
-        
+        if (DisplayInputData.cameraDown)
+        {
+            MoveCameraDown();
+        }
+
     }
 
     //private void FixedUpdate()
@@ -104,9 +104,9 @@ public class DronController : MonoBehaviour
     }
     private void TryToMoveDron()
     {
-        Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
-        float verticalDirection = DronInputController.Instance.GetVerticalInput();
-
+        Vector2 inputDirection = DisplayInputData.rightControllerDirection;
+        float verticalDirection = DisplayInputData.leftControllerDirection.y;
+        print(verticalDirection);
         if (transform.position.y >= maxHeight)
         {
             verticalDirection = 0;
@@ -130,7 +130,6 @@ public class DronController : MonoBehaviour
                 mMovementBehaviour.MoveWithoutSpeed(WindControlller.Instance.GetWindForce());
             }
         }
-        float cameraMovement = DronInputController.Instance.GetCameraMovement();
         //if (cameraMovement != 0)
         //{
         //    Debug.Log(currentCameraRotationSimplified);
@@ -180,7 +179,7 @@ public class DronController : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(tiltAroundX, currentYRotation, tiltAroundZ);
 
         // Aqui se pone la rotacion Recordatorio no utilizar time.DeltaTime en un fixedUpdate
-        float additionalRotationY = DronInputController.Instance.GetRotationalInput() * rotationSpeed;
+        float additionalRotationY = DisplayInputData.leftControllerDirection.x * rotationSpeed;
         targetRotation *= Quaternion.Euler(0, additionalRotationY, 0);
 
         // Apply the rotation with slerp
@@ -220,6 +219,7 @@ public class DronController : MonoBehaviour
         canMove = true;
         GetComponent<Animator>().SetBool("flying", true);
         PlayerReferences.instance.GetHUD().SetActive(true);
+        print("StartDron");
     }
 
     public void StopDron()

@@ -28,7 +28,7 @@ public class HighlightSignOsHover : MonoBehaviour
             if (!TryGetComponent<Outline>(out Outline outline))
             {
 
-
+                EventSystem.current.SetSelectedGameObject(this.gameObject);
                 currentOutline = gameObject.AddComponent<Outline>();
                 currentOutline.OutlineWidth = 20;
 

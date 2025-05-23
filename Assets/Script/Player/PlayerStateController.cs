@@ -55,23 +55,23 @@ public class PlayerStateController : MonoBehaviour
 
     public void CameraToDron(GameObject dron)
     {
-        if (dron != null)
-        {
-            dronCamera.Priority = 11;
-            dronCamera.LookAt = dron.transform;
-            playerCamera.Priority = 10;
-        }
-        else
-        {
-            dronCamera.Priority = 10;
-            playerCamera.Priority = 11;
-        }
+        //if (dron != null)
+        //{
+        //    dronCamera.Priority = 11;
+        //    dronCamera.LookAt = dron.transform;
+        //    playerCamera.Priority = 10;
+        //}
+        //else
+        //{
+        //    dronCamera.Priority = 10;
+        //    playerCamera.Priority = 11;
+        //}
     }
 
     public void CameraToPlayer()
     {
-        playerCamera.Priority = 11;
-        dronCamera.Priority = 10;
+        //playerCamera.Priority = 11;
+        //dronCamera.Priority = 10;
     }
     public CinemachineVirtualCamera GetDronCamera()
     {

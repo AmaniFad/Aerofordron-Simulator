@@ -25,8 +25,8 @@ public class LookTowardsItem : MonoBehaviour
         if (lastItem != EventSystem.current.currentSelectedGameObject)
         {
 
-            LookTowards(EventSystem.current.currentSelectedGameObject);
-            lastItem = EventSystem.current.currentSelectedGameObject;
+            //LookTowards(EventSystem.current.currentSelectedGameObject);
+            //lastItem = EventSystem.current.currentSelectedGameObject;
 
 
         }

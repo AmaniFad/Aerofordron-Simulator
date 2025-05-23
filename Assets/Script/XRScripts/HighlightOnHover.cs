@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class HighlightOnHover : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class HighlightOnHover : MonoBehaviour
             currentOutline = outline;
             outline.OutlineWidth = 10;
         }
+        EventSystem.current.SetSelectedGameObject(this.gameObject);
 
 
     }

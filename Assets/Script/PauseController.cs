@@ -45,7 +45,7 @@ public class PauseController : MonoBehaviour
 
 
         //el bool canPause es para que no si le llegan dos inputs en un lapso de tiempo muy corto no se abre y se cierre el menu de pausa
-        if (PlayerInputController.Instance.IsPausing())
+        if (DisplayInputData.isMenuPressed)
         {
 
             TryPause();
