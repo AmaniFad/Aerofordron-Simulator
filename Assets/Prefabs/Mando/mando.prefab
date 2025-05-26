@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 5695959279180046125}
   - component: {fileID: 7133355489956880557}
   - component: {fileID: 8260784117769634550}
+  - component: {fileID: 2522613597295726077}
   m_Layer: 0
   m_Name: mando
   m_TagString: Untagged
@@ -326,10 +327,34 @@ MonoBehaviour:
       m_Calls: []
   m_HoverEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2522613597295726077}
+        m_TargetAssemblyTypeName: HighlightOnHover, Assembly-CSharp
+        m_MethodName: Hovered
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_HoverExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2522613597295726077}
+        m_TargetAssemblyTypeName: HighlightOnHover, Assembly-CSharp
+        m_MethodName: Unhovered
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstSelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -474,6 +499,21 @@ MonoBehaviour:
   m_MinimumScaleRatio: 0.25
   m_MaximumScaleRatio: 2
   m_ScaleMultiplier: 0.25
+--- !u!114 &2522613597295726077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969072071828205987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3c70f95d864f94ba08376da839fc48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outsideObject: {fileID: 0}
+  signText: {fileID: 0}
+  isOutlineObjectNotThis: 0
 --- !u!1 &2873864061687989673
 GameObject:
   m_ObjectHideFlags: 0

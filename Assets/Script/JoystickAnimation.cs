@@ -29,8 +29,8 @@ public class JoystickAnimation : MonoBehaviour
 
     private void AnimationsLeftStick()
     {
-        float leftStickYInput = DronInputController.Instance.GetVerticalInput();
-        float leftStickXInput = DronInputController.Instance.GetRotationalInput();
+        float leftStickYInput = DisplayInputData.leftControllerDirection.y;
+        float leftStickXInput = DisplayInputData.leftControllerDirection.x;
         if (leftStickYInput > 0f)
         {
             leftStickAnimator.SetBool("LUp", true);
@@ -70,8 +70,8 @@ public class JoystickAnimation : MonoBehaviour
 
     private void AnimationsRightStick()
     {
-        float leftStickYInput = DronInputController.Instance.GetDirectionInput().y;
-        float leftStickXInput = DronInputController.Instance.GetDirectionInput().x;
+        float leftStickYInput = DisplayInputData.rightControllerDirection.y;
+        float leftStickXInput = DisplayInputData.rightControllerDirection.x;
         if (leftStickYInput > 0f)
         {
             rightStickAnimator.SetBool("LUp", true);
