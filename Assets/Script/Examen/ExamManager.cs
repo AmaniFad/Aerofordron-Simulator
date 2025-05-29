@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
-using Cinemachine;
+//using Cinemachine;
 
 public class ExamManager : MonoBehaviour
 {
@@ -70,7 +71,7 @@ public class ExamManager : MonoBehaviour
     {
         if (_is4Level)
         {
-            if(HUDController.GetSpeed() > 18)
+            if (HUDController.GetSpeed() > 18)
             {
                 NextLevel();
             }
@@ -111,7 +112,7 @@ public class ExamManager : MonoBehaviour
                 timeInPanel = 0;
                 panelAdvertecia.SetActive(false);
             }
-        } 
+        }
         else if (_isPersonaAuto)
         {
             if (Vector3.Distance(PersonaLevel9.transform.position, Dron.transform.position) > 10f)
@@ -122,7 +123,7 @@ public class ExamManager : MonoBehaviour
             {
                 panelAdvertecia.SetActive(false);
             }
-        }     
+        }
     }
     public void NextLevel()
     {
@@ -131,30 +132,30 @@ public class ExamManager : MonoBehaviour
         {
             case 0:
                 calculeDistancePoint(5f, 1.5f, pointsDetector[_countLevels]);
-            break;
+                break;
             case 1:
 
                 calculeDistancePoint(5f, 20f, pointsDetector[_countLevels]);
                 _countLine = 0;
                 _finalPoint = 8;
-            break; 
+                break;
             case 2:
 
                 calculeDistancePoint(40f, 40f, pointsDetector[_countLevels]);
                 calculeDistancePoint(7f, 20f, detectorPoint301);
                 detectorPoint301.SetActive(false);
-            break;
+                break;
             case 3:
 
                 calculeDistancePoint(5f, 30f, pointsDetector[_countLevels]);
-                
+
                 _countLine = 0;
                 _finalPoint = 5;
-            break;
+                break;
             case 4:
 
                 calculeDistancePoint(5f, 50f, pointsDetector[_countLevels]);
-            break;
+                break;
             case 5:
                 calculeDistancePoint(30f, 50f, pointsDetector[_countLevels]);
                 break;
@@ -162,7 +163,7 @@ public class ExamManager : MonoBehaviour
                 calculeDistancePoint(100f, 50f, pointsDetector[_countLevels]);
                 break;
             case 7:
-                calculeDistancePoint(20f,50f, pointsDetector[_countLevels]);
+                calculeDistancePoint(20f, 50f, pointsDetector[_countLevels]);
                 break;
             case 8:
                 calculeDistancePoint(30f, 50f, pointsDetector[_countLevels]);
@@ -202,7 +203,7 @@ public class ExamManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         listPanel[_countLevels].SetActive(false);
         Dron.SetActive(true);
-        
+
         dronCamera.LookAt = Dron.transform;
         Dron.GetComponent<DroneCrash>().GoToFirstPosition();
 
@@ -216,7 +217,7 @@ public class ExamManager : MonoBehaviour
     }
     public void ComprobePointLine()
     {
-        if(_countLine == _finalPoint)
+        if (_countLine == _finalPoint)
         {
             ReturnToStart();
         }

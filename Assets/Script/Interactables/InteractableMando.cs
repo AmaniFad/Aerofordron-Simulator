@@ -26,7 +26,7 @@ public class InteractableMando : MonoBehaviour, IInteractable
     {
         previousPosition = transform.position;
         isPickable = false;
-        Quaternion rotate = new Quaternion(0,0,0,0);
+        Quaternion rotate = new Quaternion(0, 0, 0, 0);
         transform.rotation = rotate;
         player.GrabItem(this.gameObject);
 
@@ -36,7 +36,7 @@ public class InteractableMando : MonoBehaviour, IInteractable
         GetComponent<Collider>().isTrigger = true;
         if (!isPickable)
         {
-            
+
         }
         transform.rotation = rotate;
     }

@@ -1,6 +1,7 @@
-using Cinemachine;
+//using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -23,7 +24,7 @@ public class CameraController : MonoBehaviour
                 playerCamera.Priority = 11;
                 droneCamera.Priority = 10;
             }
-                DronInputController.Instance.HasChangedCamera();
+            DronInputController.Instance.HasChangedCamera();
         }
     }
 }

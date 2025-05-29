@@ -10,7 +10,7 @@ public class CheckPoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-        { 
+        {
             onCheckPoint.Invoke();
             PlayerReferences.instance.StartCoroutine(_isCP());
         }

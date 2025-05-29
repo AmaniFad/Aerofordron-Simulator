@@ -34,10 +34,12 @@ public class DronController : MonoBehaviour
     private float currentCameraRotationSimplified;
     [SerializeField] private float cameraMovementSpeed;
     private bool isGrounded;
+    private Rigidbody rb;
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         currentCameraTilt = 0;
         //currentCameraRotationSimplified = 0;
         eventEmitter = GetComponent<StudioEventEmitter>();
@@ -53,7 +55,11 @@ public class DronController : MonoBehaviour
     }
     private void Update()
     {
-
+        if (eventEmitter)
+        {
+            eventEmitter.SetParameter("Speed", Mathf.Abs((rb.linearVelocity.x + rb.linearVelocity.y) / 2 / 60));
+            eventEmitter.SetParameter("Volume", Mathf.Abs((rb.linearVelocity.x + rb.linearVelocity.y) / 2 / 60));
+        }
         if (DisplayInputData.cameraUP)
         {
             MoveCameraUp();
@@ -193,7 +199,7 @@ public class DronController : MonoBehaviour
         if (currentCameraTilt < maxUpTilt)
         {
             float viewRotation = 1 * Time.deltaTime * cameraMovementSpeed;
-            currentCameraTilt += 10f; 
+            currentCameraTilt += 10f;
             dronView.transform.Rotate(viewRotation, 0, 0, Space.Self);
         }
     }
@@ -203,7 +209,7 @@ public class DronController : MonoBehaviour
         if (currentCameraTilt > maxDownTilt)
         {
             float viewRotation = -1 * Time.deltaTime * cameraMovementSpeed;
-            currentCameraTilt -= 10f; 
+            currentCameraTilt -= 10f;
             dronView.transform.Rotate(viewRotation, 0, 0, Space.Self);
         }
     }

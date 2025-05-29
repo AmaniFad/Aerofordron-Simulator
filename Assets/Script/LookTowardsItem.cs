@@ -1,6 +1,6 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -35,7 +35,7 @@ public class LookTowardsItem : MonoBehaviour
     public void LookTowards(GameObject item)
     {
         print(item.transform);
-        Camera.main.gameObject.GetComponent<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().LookAt = item.transform;
+        //Camera.main.gameObject.GetComponent<CinemachineBrain>().ActiveVirtualCamera..GetComponent<CinemachineVirtualCamera>().LookAt = item.transform;
     }
 
 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3732166003651421308}
   - component: {fileID: 5125632569604050167}
   - component: {fileID: -1663193168161968854}
+  - component: {fileID: 8558303224615915609}
   m_Layer: 5
   m_Name: SceneTransitionEnter
   m_TagString: Untagged
@@ -53,7 +54,7 @@ Canvas:
   m_GameObject: {fileID: 2754123419565852630}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -109,7 +110,7 @@ MonoBehaviour:
     m_Bits: 4294967295
 --- !u!95 &5125632569604050167
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -123,6 +124,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -140,6 +142,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2648129ab3dadbf4ba0d3e60de675337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8558303224615915609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2754123419565852630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f77e215ab49ae54e8d2c50d6286d958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraDistance: 1
 --- !u!1 &4163495663086447423
 GameObject:
   m_ObjectHideFlags: 0

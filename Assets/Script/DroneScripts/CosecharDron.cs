@@ -18,8 +18,8 @@ public class CosecharDron : MonoBehaviour
     }
     public void SoltarAgua()
     {
-        float chorro = DronInputController.Instance.GetAguaInput();
-        if (chorro == 1)
+        bool chorro = DisplayInputData.isPrimaryPressed;
+        if (chorro)
         {
             foreach (GameObject go in agua)
             {

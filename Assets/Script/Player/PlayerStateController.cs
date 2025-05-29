@@ -1,7 +1,9 @@
-using Cinemachine;
+
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
+using VInspector;
 
 public class PlayerStateController : MonoBehaviour
 {
@@ -77,4 +79,6 @@ public class PlayerStateController : MonoBehaviour
     {
         return dronCamera;
     }
+
+
 }

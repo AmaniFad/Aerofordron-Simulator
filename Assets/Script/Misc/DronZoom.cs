@@ -1,6 +1,6 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class DronZoom : MonoBehaviour
@@ -34,20 +34,20 @@ public class DronZoom : MonoBehaviour
         if (dron != null)
         {
             float distance = Vector3.Distance(player.transform.position, dron.transform.position);
-            float currentMinFOV = dronCamera.GetComponent<CinemachineFollowZoom>().m_MinFOV;
+            //float currentMinFOV = dronCamera.GetComponent<CinemachineFollowZoom>().m_MinFOV;
 
-            // Calculate the percentage decrease based on distance
-            float decreasePercentage = (distance - minDistanceForZoom) / currentMinFOV;
-            // Calculate the new minimum FOV with percentage decrease
-            float newMinFOV = currentMinFOV * (1 - decreasePercentage); // Decrease relative to current FOV
+            //// Calculate the percentage decrease based on distance
+            //float decreasePercentage = (distance - minDistanceForZoom) / currentMinFOV;
+            //// Calculate the new minimum FOV with percentage decrease
+            //float newMinFOV = currentMinFOV * (1 - decreasePercentage); // Decrease relative to current FOV
 
-            // Ensure the new minimum FOV stays within a specified range
-            float minAllowedFOV = 30f; // Adjust as needed
-            float maxAllowedFOV = 60f; // Adjust as needed
-            newMinFOV = Mathf.Clamp(newMinFOV, minAllowedFOV, maxAllowedFOV);
+            //// Ensure the new minimum FOV stays within a specified range
+            //float minAllowedFOV = 30f; // Adjust as needed
+            //float maxAllowedFOV = 60f; // Adjust as needed
+            //newMinFOV = Mathf.Clamp(newMinFOV, minAllowedFOV, maxAllowedFOV);
 
-            // Update the minimum FOV
-            dronCamera.GetComponent<CinemachineFollowZoom>().m_MinFOV = newMinFOV;
+            //// Update the minimum FOV
+            //dronCamera.GetComponent<CinemachineFollowZoom>().m_MinFOV = newMinFOV;
 
         }
     }

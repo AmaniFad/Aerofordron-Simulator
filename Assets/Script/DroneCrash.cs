@@ -1,7 +1,7 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class DroneCrash : MonoBehaviour
@@ -27,7 +27,7 @@ public class DroneCrash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public bool GetIsCrashed()
@@ -52,17 +52,12 @@ public class DroneCrash : MonoBehaviour
         currentDestroyedDronFeedback.transform.position = transform.position;
         gameObject.transform.rotation = Quaternion.identity;
         gameObject.transform.position = spawnPoint.position;
-        if(this.gameObject.GetComponent<HealthBehaviour>() != null )
+        if (this.gameObject.GetComponent<HealthBehaviour>() != null)
         {
             gameObject.GetComponent<HealthBehaviour>().Damage(damage);
         }
-        virtualCamera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
-        virtualCamera.Priority = 10;
-        thirrdPersonViewCamera.Priority = 12;
-        previousTransform = virtualCamera.Follow;
+
         InteractionZone.Instance.gameObject.SetActive(false);
-        thirrdPersonViewCamera.Follow = currentDestroyedDronFeedback.transform;
-        thirrdPersonViewCamera.LookAt = currentDestroyedDronFeedback.transform;
         controller.StopMovingDron();
         StartCoroutine(RecoverCamera(4));
         StartCoroutine(DestroyFeedback());
@@ -74,7 +69,6 @@ public class DroneCrash : MonoBehaviour
         gameObject.transform.rotation = Quaternion.identity;
         gameObject.transform.position = spawnPoint.position;
 
-        virtualCamera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
         StartCoroutine(RecoverCamera(4));
     }
 
