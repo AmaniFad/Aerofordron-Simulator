@@ -15,14 +15,17 @@ public class ShowModeNameOnButtonHover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject == this.gameObject)
-        {
-            modeName.SetActive(true);
-        }
-        else
-        {
-            modeName.SetActive(false);
-        }
 
+
+    }
+
+    public void ShowModeName()
+    {
+        modeName.SetActive(true);
+    }
+
+    public void HideModeName()
+    {
+        modeName.SetActive(false);
     }
 }

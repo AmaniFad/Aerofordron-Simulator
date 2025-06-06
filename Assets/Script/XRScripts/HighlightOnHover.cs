@@ -29,8 +29,6 @@ public class HighlightOnHover : MonoBehaviour
             currentOutline = outline;
             outline.OutlineWidth = 10;
         }
-        EventSystem.current.SetSelectedGameObject(this.gameObject);
-
 
     }
 
