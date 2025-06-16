@@ -16,8 +16,8 @@ public class InteractableTablet : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        tabletPlaceholder.SetActive(false);
-        hudTablet.SetActive(true);
+        //tabletPlaceholder.SetActive(false);
+        //hudTablet.SetActive(true);
         PlayerStateController.instance.StopCameraMovement();
         PlayerStateController.instance.StopMoving();
         Cursor.visible = true;
