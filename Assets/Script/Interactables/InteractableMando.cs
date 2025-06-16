@@ -13,7 +13,7 @@ public class InteractableMando : MonoBehaviour, IInteractable
     private bool isPickable;
     private Vector3 previousPosition;
     private Rigidbody rigidBody;
-    public Vector3 desiredRotation;
+    public Quaternion previousRotation;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -25,6 +25,7 @@ public class InteractableMando : MonoBehaviour, IInteractable
     public void Interact()
     {
         previousPosition = transform.position;
+        previousRotation = transform.localRotation;
         isPickable = false;
         Quaternion rotate = new Quaternion(0,0,0,0);
         transform.rotation = rotate;
@@ -41,9 +42,6 @@ public class InteractableMando : MonoBehaviour, IInteractable
         transform.rotation = rotate;
     }
 
-    // Start is called before the first frame update
-
-
     public void DropInteractable()
     {
         controller.StopDron();
@@ -51,7 +49,8 @@ public class InteractableMando : MonoBehaviour, IInteractable
         GetComponent<Collider>().isTrigger = false;
         transform.SetParent(null);
         transform.position = previousPosition;
-        rigidBody.useGravity = true;
+        transform.rotation = previousRotation;
+        //rigidBody.useGravity = true;
         rigidBody.isKinematic = false;
     }
 }
