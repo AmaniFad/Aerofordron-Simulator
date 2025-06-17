@@ -40,6 +40,7 @@ public class ExamManager : MonoBehaviour
     private bool _isDronAuto8;
     private bool _isPersonaAuto;
 
+    private bool onLevel;
     private float timeInPanel;
     #endregion
     #region getters and setters
@@ -122,10 +123,26 @@ public class ExamManager : MonoBehaviour
             {
                 panelAdvertecia.SetActive(false);
             }
-        }     
+        }
+        if (onLevel)
+        {
+            if (Player.GetComponent<PlayerInteract>().GetCurrentFeedback() != null)
+            {
+                if (Player.GetComponent<PlayerInteract>().GetCurrentFeedback().activeSelf)
+                {
+                    listPanel[_countLevels].SetActive(false);
+                }
+                else
+                {
+                    listPanel[_countLevels].SetActive(true);
+                }
+            }
+        }
+        
     }
     public void NextLevel()
     {
+        onLevel = true;
         listPanel[_countLevels].SetActive(true);
         switch (_countLevels)
         {
@@ -201,6 +218,7 @@ public class ExamManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         listPanel[_countLevels].SetActive(false);
+        onLevel = false;
         Dron.SetActive(true);
         
         dronCamera.LookAt = Dron.transform;
@@ -208,7 +226,7 @@ public class ExamManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         buttonPanelSelect[_countLevels].GetComponent<Image>().color = Color.green;
-        SelectLevel.SetActive(true);
+        //SelectLevel.SetActive(true);
     }
     public void AddPointsLine()
     {

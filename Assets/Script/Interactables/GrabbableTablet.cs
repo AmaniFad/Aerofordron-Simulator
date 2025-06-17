@@ -40,11 +40,12 @@ public class GrabbableTablet : MonoBehaviour, IInteractable
 
         isPickable = false;
 
+        player.GrabItem(this.gameObject);
+
+        PlayerStateController.instance.StopMoving();
+
         Quaternion rotate = new Quaternion(0, 0, 0, 0);
         transform.rotation = rotate;
-
-        player.GrabItem(this.gameObject);
-        PlayerStateController.instance.StopMoving();
 
         //this.transform.localRotation = rotationOffset;
         rigidBody.useGravity = false;
@@ -58,5 +59,9 @@ public class GrabbableTablet : MonoBehaviour, IInteractable
         transform.rotation = rotate;
     }
 
+    public void GetPlayerDropObj()
+    {
+        player.GetComponent<PlayerInteract>().DropObject();
+    }
   
 }
