@@ -13,4 +13,8 @@ public class ScoreController : MonoBehaviour
     {
         OnUpdateScore.Invoke(score);
     }
+    public int GetScore()
+    {
+        return score;
+    }
 }

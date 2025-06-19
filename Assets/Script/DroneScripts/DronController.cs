@@ -32,12 +32,14 @@ public class DronController : MonoBehaviour
     [SerializeField] private float maxDronViewRotation;
     [SerializeField] private float minDronViewRotation;
     private float currentCameraRotationSimplified;
+    private Rigidbody rb;
     [SerializeField] private float cameraMovementSpeed;
     private bool isGrounded;
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
     void Start()
     {
+        rb = GetComponent<Rigidbody>(); 
         currentCameraTilt = 0;
         //currentCameraRotationSimplified = 0;
         eventEmitter = GetComponent<StudioEventEmitter>();
@@ -53,7 +55,11 @@ public class DronController : MonoBehaviour
     }
     private void Update()
     {
-
+        if (eventEmitter)
+        {
+            eventEmitter.SetParameter("Speed", Mathf.Abs((rb.linearVelocity.x + rb.linearVelocity.y) / 2 / 60* 10));
+            eventEmitter.SetParameter("Volume", Mathf.Abs((rb.linearVelocity.x + rb.linearVelocity.y) / 2 / 60 * 10));
+        }
         if (DronInputController.Instance.GetCameraMovement() > 0)
         {
             MoveCameraDown();
@@ -91,6 +97,11 @@ public class DronController : MonoBehaviour
                 isPlaying = true;
             }
             TryToMoveDron();
+            if (!eventEmitter.IsPlaying())
+            {
+                eventEmitter.Play();
+
+            }
         }
         else
         {
