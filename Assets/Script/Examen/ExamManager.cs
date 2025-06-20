@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class ExamManager : MonoBehaviour
 {
@@ -63,6 +64,14 @@ public class ExamManager : MonoBehaviour
     #endregion
     void Start()
     {
+        for (int i = 0; i < buttonPanelSelect.Count; i++)
+        {
+            string key = "BotonNivel_" + i;
+            if (PlayerPrefs.GetInt(key, 0) == 1)
+            {
+                buttonPanelSelect[i].GetComponent<Image>().color = Color.green;
+            }
+        }
         //countLevels = 0;
         //StartCoroutine(_CountDown());  
     }
@@ -190,6 +199,9 @@ public class ExamManager : MonoBehaviour
     }
     public void SetTheLevel(int level)
     {
+        listPanel[_countLevels].SetActive(false);
+        pointsDetector[_countLevels].SetActive(false);
+
         _countLevels = level;
         NextLevel();
     }
@@ -212,7 +224,7 @@ public class ExamManager : MonoBehaviour
 
         StartCoroutine(_ChangePanels());
 
-        FadeInPanel.GetComponent<ScreenFader>().FadeOutCoroutine();
+        //FadeInPanel.GetComponent<ScreenFader>().FadeOutCoroutine();
     }
     IEnumerator _ChangePanels()
     {
@@ -225,7 +237,13 @@ public class ExamManager : MonoBehaviour
         Dron.GetComponent<DroneCrash>().GoToFirstPosition();
 
         yield return new WaitForSeconds(1);
+
         buttonPanelSelect[_countLevels].GetComponent<Image>().color = Color.green;
+        string key = "BotonNivel_" + _countLevels;
+        PlayerPrefs.SetInt(key, 1);
+        PlayerPrefs.Save();
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         //SelectLevel.SetActive(true);
     }
     public void AddPointsLine()
