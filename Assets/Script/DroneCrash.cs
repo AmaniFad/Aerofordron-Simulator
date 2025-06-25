@@ -12,6 +12,7 @@ public class DroneCrash : MonoBehaviour
     private GameObject currentDestroyedDronFeedback;
     private CinemachineVirtualCamera virtualCamera;
     private Transform previousTransform;
+    private Quaternion previousRotation;
     private Rigidbody dronRb;
     [SerializeField] private CinemachineVirtualCamera thirrdPersonViewCamera;
     [SerializeField] private float speedThreshold;
@@ -22,6 +23,8 @@ public class DroneCrash : MonoBehaviour
     {
         controller = GetComponent<DronController>();
         dronRb = GetComponent<Rigidbody>();
+        previousRotation = transform.localRotation;
+        Debug.Log(previousRotation + "" +gameObject.name);
     }
 
     // Update is called once per frame
@@ -50,7 +53,7 @@ public class DroneCrash : MonoBehaviour
         PlayerInputController.Instance.SetFullView(false);
         currentDestroyedDronFeedback = Instantiate(destroyedDron);
         currentDestroyedDronFeedback.transform.position = transform.position;
-        gameObject.transform.rotation = Quaternion.identity;
+        gameObject.transform.rotation = previousRotation;
         gameObject.transform.position = spawnPoint.position;
         if(this.gameObject.GetComponent<HealthBehaviour>() != null )
         {
@@ -71,7 +74,7 @@ public class DroneCrash : MonoBehaviour
     {
         SwitchToFullView.instance.ExitFullView();
         PlayerInputController.Instance.SetFullView(false);
-        gameObject.transform.rotation = Quaternion.identity;
+        gameObject.transform.rotation = previousRotation;
         gameObject.transform.position = spawnPoint.position;
 
         virtualCamera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;

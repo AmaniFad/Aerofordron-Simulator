@@ -8,6 +8,7 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private float raycastDistance = 10f;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private GameObject interactFeedback;
+    [SerializeField] private GameObject HudCanvas;
     private GameObject currentFeedback;
     private Transform interactionZone;
     private GameObject grabbeableObj;
@@ -15,6 +16,10 @@ public class PlayerInteract : MonoBehaviour
     private PlaySounds sound;
     private bool onlyThisFrame;
 
+    public GameObject GetCurrentFeedback()
+    {
+        return currentFeedback;
+    }
     private void Start()
     {
         sound = GetComponent<PlaySounds>();
@@ -35,6 +40,7 @@ public class PlayerInteract : MonoBehaviour
             else
             {
                 currentFeedback.SetActive(true);
+                HudCanvas.SetActive(false);
             }
         }
         else
@@ -42,6 +48,7 @@ public class PlayerInteract : MonoBehaviour
             if (currentFeedback != null)
             {
                 currentFeedback.SetActive(false);
+                HudCanvas.SetActive(true);
             }
         }
 
@@ -70,7 +77,6 @@ public class PlayerInteract : MonoBehaviour
     {
         if (!onlyThisFrame)
         {
-
 
             // Cast a ray from the position of this object forward
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));

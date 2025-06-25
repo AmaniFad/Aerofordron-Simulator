@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class ExamManager : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class ExamManager : MonoBehaviour
     private bool _isDronAuto8;
     private bool _isPersonaAuto;
 
+    private bool onLevel;
     private float timeInPanel;
     #endregion
     #region getters and setters
@@ -62,6 +64,14 @@ public class ExamManager : MonoBehaviour
     #endregion
     void Start()
     {
+        for (int i = 0; i < buttonPanelSelect.Count; i++)
+        {
+            string key = "BotonNivel_" + i;
+            if (PlayerPrefs.GetInt(key, 0) == 1)
+            {
+                buttonPanelSelect[i].GetComponent<Image>().color = Color.green;
+            }
+        }
         //countLevels = 0;
         //StartCoroutine(_CountDown());  
     }
@@ -122,10 +132,26 @@ public class ExamManager : MonoBehaviour
             {
                 panelAdvertecia.SetActive(false);
             }
-        }     
+        }
+        if (onLevel)
+        {
+            if (Player.GetComponent<PlayerInteract>().GetCurrentFeedback() != null)
+            {
+                if (Player.GetComponent<PlayerInteract>().GetCurrentFeedback().activeSelf)
+                {
+                    listPanel[_countLevels].SetActive(false);
+                }
+                else
+                {
+                    listPanel[_countLevels].SetActive(true);
+                }
+            }
+        }
+        
     }
     public void NextLevel()
     {
+        onLevel = true;
         listPanel[_countLevels].SetActive(true);
         switch (_countLevels)
         {
@@ -173,6 +199,9 @@ public class ExamManager : MonoBehaviour
     }
     public void SetTheLevel(int level)
     {
+        listPanel[_countLevels].SetActive(false);
+        pointsDetector[_countLevels].SetActive(false);
+
         _countLevels = level;
         NextLevel();
     }
@@ -195,20 +224,27 @@ public class ExamManager : MonoBehaviour
 
         StartCoroutine(_ChangePanels());
 
-        FadeInPanel.GetComponent<ScreenFader>().FadeOutCoroutine();
+        //FadeInPanel.GetComponent<ScreenFader>().FadeOutCoroutine();
     }
     IEnumerator _ChangePanels()
     {
         yield return new WaitForSeconds(2);
         listPanel[_countLevels].SetActive(false);
+        onLevel = false;
         Dron.SetActive(true);
         
         dronCamera.LookAt = Dron.transform;
         Dron.GetComponent<DroneCrash>().GoToFirstPosition();
 
         yield return new WaitForSeconds(1);
+
         buttonPanelSelect[_countLevels].GetComponent<Image>().color = Color.green;
-        SelectLevel.SetActive(true);
+        string key = "BotonNivel_" + _countLevels;
+        PlayerPrefs.SetInt(key, 1);
+        PlayerPrefs.Save();
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SelectLevel.SetActive(true);
     }
     public void AddPointsLine()
     {
