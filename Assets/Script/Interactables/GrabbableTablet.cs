@@ -10,7 +10,8 @@ public class GrabbableTablet : MonoBehaviour, IInteractable
     private Vector3 previousPosition;
     private Rigidbody rigidBody;
     private Quaternion previousRotation;
-   
+    [SerializeField] private Quaternion targetRotation;
+    [SerializeField] private Vector3 targetPosition;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -31,13 +32,14 @@ public class GrabbableTablet : MonoBehaviour, IInteractable
 
         //rigidBody.useGravity = true;
         rigidBody.isKinematic = false;
+        Cursor.visible = false;
     }
 
     public void Interact()
     {
         previousPosition = transform.position;
         previousRotation = transform.localRotation;
-
+        Cursor.visible = true;
         isPickable = false;
 
         player.GrabItem(this.gameObject);
@@ -57,6 +59,8 @@ public class GrabbableTablet : MonoBehaviour, IInteractable
             isTaked.Invoke();
         }
         transform.rotation = rotate;
+        transform.localRotation = targetRotation;
+        transform.localPosition = targetPosition;
     }
 
     public void GetPlayerDropObj()
