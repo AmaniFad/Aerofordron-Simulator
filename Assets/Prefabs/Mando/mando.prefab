@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5766679213510822951}
   - component: {fileID: 5695959279180046125}
   - component: {fileID: 6878695054447835485}
+  - component: {fileID: 532671944971375896}
   m_Layer: 3
   m_Name: mando
   m_TagString: Untagged
@@ -104,7 +105,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   dron: {fileID: 0}
-  desiredRotation: {x: 0, y: 0, z: 0}
 --- !u!65 &4553674244561645060
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969072071828205987}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ccf7610750180ea4b9e4101c8a413c04, type: 3}
   m_Name: 
@@ -149,7 +149,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969072071828205987}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 621b3c1dc2c77bf4db7cce465de3257e, type: 2}
   m_CullingMode: 0
@@ -194,6 +194,22 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &532671944971375896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969072071828205987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd081c8a3591c54a8ca53c00ec2e22d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftStickVisual: {fileID: 947401157684520964}
+  rightStickVisual: {fileID: 8071549603626928998}
+  movementRange: -0.15
+  tiltAngle: 0
 --- !u!1 &7562799143987136499
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,6 +604,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3983675384022818106}
   m_SourcePrefab: {fileID: 100100000, guid: d8bea057903dd1a449821f6d72d06b86, type: 3}
+--- !u!4 &947401157684520964 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5993847947337725134, guid: d8bea057903dd1a449821f6d72d06b86, type: 3}
+  m_PrefabInstance: {fileID: 6776708693079661770}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3795465263501444665 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -1538112130698044685, guid: d8bea057903dd1a449821f6d72d06b86, type: 3}
@@ -606,7 +627,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5965824160538927515}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 97b57fbce2633294d9a1bf63cb864800, type: 2}
   m_CullingMode: 0
@@ -623,6 +644,11 @@ Animator:
 --- !u!4 &6449451378370542369 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d8bea057903dd1a449821f6d72d06b86, type: 3}
+  m_PrefabInstance: {fileID: 6776708693079661770}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8071549603626928998 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3316992658331686828, guid: d8bea057903dd1a449821f6d72d06b86, type: 3}
   m_PrefabInstance: {fileID: 6776708693079661770}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8048923936519043356
