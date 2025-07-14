@@ -89,7 +89,8 @@ public class ExamManager : MonoBehaviour
         if (_isDronAuto7)
         {
             if (DronInputController.Instance.GetRemoteDron())
-            {
+            {   
+                Dron.GetComponent<DronController>().enabled = false;
                 Dron.SetActive(false);
                 DronAutoLevel7.transform.position = Dron.transform.position;
                 DronAutoLevel7.SetActive(true);
