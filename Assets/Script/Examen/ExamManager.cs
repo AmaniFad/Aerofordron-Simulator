@@ -4,16 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ExamManager : MonoBehaviour
 {
     #region variables
     [Header("Canvas")]
-    [SerializeField] private GameObject SelectLevel;
     [SerializeField] private List<GameObject> listPanel;
     [SerializeField] private List<GameObject> buttonPanelSelect;
     [SerializeField] private GameObject FadeInPanel;
     [SerializeField] private GameObject panelAdvertecia;
+    [SerializeField] private TMP_Text numEjercice;
 
     [Header("GameObjectsLevels")]
     [SerializeField] private List<GameObject> pointsDetector;
@@ -140,10 +141,12 @@ public class ExamManager : MonoBehaviour
                 if (Player.GetComponent<PlayerInteract>().GetCurrentFeedback().activeSelf)
                 {
                     listPanel[_countLevels].SetActive(false);
+                    numEjercice.gameObject.SetActive(false);
                 }
                 else
                 {
                     listPanel[_countLevels].SetActive(true);
+                    numEjercice.gameObject.SetActive(true);
                 }
             }
         }
@@ -153,6 +156,8 @@ public class ExamManager : MonoBehaviour
     {
         onLevel = true;
         listPanel[_countLevels].SetActive(true);
+        numEjercice.gameObject.SetActive(true);
+        numEjercice.text = (_countLevels + 1).ToString();
         switch (_countLevels)
         {
             case 0:
@@ -200,6 +205,7 @@ public class ExamManager : MonoBehaviour
     public void SetTheLevel(int level)
     {
         listPanel[_countLevels].SetActive(false);
+        numEjercice.gameObject.SetActive(false);
         pointsDetector[_countLevels].SetActive(false);
 
         _countLevels = level;
@@ -238,13 +244,12 @@ public class ExamManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        buttonPanelSelect[_countLevels].GetComponent<Image>().color = Color.green;
+        buttonPanelSelect[_countLevels].GetComponent<Image>().color = Color.white;
         string key = "BotonNivel_" + _countLevels;
         PlayerPrefs.SetInt(key, 1);
         PlayerPrefs.Save();
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //SelectLevel.SetActive(true);
     }
     public void AddPointsLine()
     {

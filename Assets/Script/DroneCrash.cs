@@ -24,7 +24,6 @@ public class DroneCrash : MonoBehaviour
         controller = GetComponent<DronController>();
         dronRb = GetComponent<Rigidbody>();
         previousRotation = transform.localRotation;
-        Debug.Log(previousRotation + "" +gameObject.name);
     }
 
     // Update is called once per frame
