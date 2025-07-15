@@ -12,7 +12,6 @@ public class HUDController : MonoBehaviour
     private GameObject player;
     private GameObject dron;
     private float speed;
-
     public float GetSpeed()
     {
         return speed;
@@ -47,9 +46,9 @@ public class HUDController : MonoBehaviour
                 fpvHeightDisplay.text = Mathf.Floor(dron.transform.position.y) + " ft";
             }*/
         }
-        else
-        {
-        }
+        
+
     }
+
 }
 
