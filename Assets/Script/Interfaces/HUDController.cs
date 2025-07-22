@@ -9,6 +9,7 @@ public class HUDController : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI speedDisplay;
     [SerializeField] TextMeshProUGUI heightDisplay;
+    [SerializeField] TextMeshProUGUI distanceToPlayer;
     private GameObject player;
     private GameObject dron;
     private float speed;
@@ -27,6 +28,7 @@ public class HUDController : MonoBehaviour
     void Update()
     {
         dron = PlayerReferences.instance.GetDron();
+        player = PlayerReferences.instance.GetPlayer();
 
         if (dron != null)
         {
@@ -45,10 +47,15 @@ public class HUDController : MonoBehaviour
                 heightDisplay.text = Mathf.Floor(dron.transform.position.y) + " ft";
                 fpvHeightDisplay.text = Mathf.Floor(dron.transform.position.y) + " ft";
             }*/
+            if(player != null)
+            {
+                int distance = (int)Vector3.Distance(player.transform.position, dron.transform.position);
+                if(distanceToPlayer != null)
+                {
+                    distanceToPlayer.text = distance.ToString();
+                }  
+            }
         }
-        
-
     }
-
 }
 

@@ -6,6 +6,7 @@ public class SwitchToFullView : MonoBehaviour
 {
     public static SwitchToFullView instance;
     [SerializeField] private GameObject fullViewCamera;
+    [SerializeField] private GameObject hudPlayer;
 
     private void Start()
     {
@@ -27,10 +28,12 @@ public class SwitchToFullView : MonoBehaviour
     public void EnterFullView()
     {
         fullViewCamera.SetActive(true);
+        hudPlayer.SetActive(false);
     }
 
     public void ExitFullView()
     {
         fullViewCamera.SetActive(false);
+        hudPlayer.SetActive(true);
     }
 }
