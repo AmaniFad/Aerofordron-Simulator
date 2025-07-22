@@ -34,6 +34,5 @@ public class SwitchToFullView : MonoBehaviour
     public void ExitFullView()
     {
         fullViewCamera.SetActive(false);
-        hudPlayer.SetActive(true);
     }
 }

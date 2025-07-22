@@ -6,9 +6,9 @@ using UnityEngine;
 public class ChangeTextOnControlSchemeChange : MonoBehaviour
 {
     [SerializeField]
-    private string keyboardText;
+    private GameObject keyboardText;
     [SerializeField]
-    private string gamepadText;
+    private GameObject gamepadText;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +20,15 @@ public class ChangeTextOnControlSchemeChange : MonoBehaviour
     {
         if (PlayerInputController.Instance.IsUsingGamepad())
         {
-            GetComponent<TextMeshProUGUI>().text = gamepadText;
+            gamepadText.SetActive(true);
+            keyboardText.SetActive(false);
+            //GetComponent<TextMeshProUGUI>().text = gamepadText;
         }
         else
         {
-
-            GetComponent<TextMeshProUGUI>().text = keyboardText;
+            gamepadText.SetActive(false);
+            keyboardText.SetActive(true);
+            //GetComponent<TextMeshProUGUI>().text = keyboardText;
         }
     }
 }
