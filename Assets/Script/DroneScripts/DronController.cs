@@ -39,7 +39,7 @@ public class DronController : MonoBehaviour
 
     [Header("SpawnPoints")]
     [SerializeField] private List<Transform> waypoints;
-    public int currentWaypointIndex = 0;
+    private int currentWaypointIndex = 0;
     private bool remoteDron;
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;

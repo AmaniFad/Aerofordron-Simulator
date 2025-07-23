@@ -4105,7 +4105,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawnpoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4118,10 +4118,11 @@ Transform:
   m_GameObject: {fileID: 358528607}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 189.58, y: 0.265, z: 178.31}
+  m_LocalPosition: {x: 189.63, y: 0.66, z: 178.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 496451330}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &365875553
@@ -5428,6 +5429,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4058463755352128380, guid: 88bab8c33daf51e428d562bdf08c15f7, type: 3}
   m_PrefabInstance: {fileID: 489442179}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &496451329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496451330}
+  m_Layer: 0
+  m_Name: previousPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496451330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496451329}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.27, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 358528608}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &498210996
 GameObject:
   m_ObjectHideFlags: 0
@@ -14747,6 +14779,9 @@ MonoBehaviour:
   maxDronViewRotation: 100
   minDronViewRotation: -100
   cameraMovementSpeed: 5
+  waypoints:
+  - {fileID: 496451330}
+  - {fileID: 358528608}
 --- !u!114 &835503458
 MonoBehaviour:
   m_ObjectHideFlags: 0
