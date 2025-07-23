@@ -9,6 +9,7 @@ using UnityEngine.Windows;
 
 public class DronController : MonoBehaviour
 {
+    #region variables
     [Header("Distances")]
     [SerializeField] private float maxHeight;
     [SerializeField] private float maxDistanceFromPlayer;
@@ -35,8 +36,14 @@ public class DronController : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private float cameraMovementSpeed;
     private bool isGrounded;
+
+    [Header("SpawnPoints")]
+    [SerializeField] private List<Transform> waypoints;
+    public int currentWaypointIndex = 0;
+    private bool remoteDron;
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
+    #endregion
     void Start()
     {
         rb = GetComponent<Rigidbody>(); 
@@ -96,12 +103,17 @@ public class DronController : MonoBehaviour
                 PlayDroneSound();
                 isPlaying = true;
             }
-            TryToMoveDron();
+            if (!remoteDron)
+            {
+                TryToMoveDron();
+            }
+            
             if (!eventEmitter.IsPlaying())
             {
                 eventEmitter.Play();
 
             }
+            returnToSpawn();
         }
         else
         {
@@ -269,6 +281,63 @@ public class DronController : MonoBehaviour
     public bool IsGrounded()
     {
         return isGrounded;
+    }
+
+    private void returnToSpawn()
+    {
+        if (DronInputController.Instance.GetRemoteDron())
+        {
+            remoteDron = true;
+        }
+        if(remoteDron)
+        { 
+            float speed = 750f;
+
+            Transform targetWaypoint = waypoints[currentWaypointIndex];
+
+            // direccion
+            Vector3 direction = (targetWaypoint.position - transform.position).normalized;
+            float distanceToWaypoint = Vector3.Distance(transform.position, targetWaypoint.position);
+
+            
+            //reducir la velocidad
+            if (distanceToWaypoint < 15f)
+            {
+                speed = 70;
+            }
+            //para que baje esteticamente
+            if (targetWaypoint.gameObject.name == "Spawnpoint")
+            {
+                speed = 50;
+                mMovementBehaviour.MoveDronAuto(Vector3.down, speed);
+
+
+                // Estabilizar: dejar la rotación sin inclinación (horizontal al suelo)
+                Quaternion stableRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
+                transform.rotation = Quaternion.Slerp(transform.rotation, stableRotation, Time.deltaTime * 2f);
+            }
+            else
+            {
+                mMovementBehaviour.MoveDronAuto(direction, speed);
+
+                // rotacion suave
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+            }
+
+            //ultimo ounto
+            if (distanceToWaypoint <= 0.5f)
+            {
+                currentWaypointIndex++;
+
+                if (currentWaypointIndex >= waypoints.Count)
+                {
+                    mMovementBehaviour.StopMovingOnY();
+                    remoteDron = false;
+                    currentWaypointIndex = 0;
+                }
+            }
+        }
     }
 }
 

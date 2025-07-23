@@ -24,7 +24,6 @@ public class ExamManager : MonoBehaviour
     [Header("Player & Dron")]
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject Dron;
-    [SerializeField] private GameObject DronAutoLevel7;
     [SerializeField] private GameObject DronAutoLevel8;
     [SerializeField] private GameObject PersonaLevel9;
 
@@ -38,7 +37,6 @@ public class ExamManager : MonoBehaviour
     public int _countLevels;
     private int _countLine, _finalPoint;
     private bool _is4Level;
-    private bool _isDronAuto7;
     private bool _isDronAuto8;
     private bool _isPersonaAuto;
 
@@ -49,10 +47,6 @@ public class ExamManager : MonoBehaviour
     public void SetIsLevel(bool is4Level)
     {
         this._is4Level = is4Level;
-    }
-    public void SetIsDronAuto(bool isDronAuto)
-    {
-        this._isDronAuto7 = isDronAuto;
     }
     public void SetIsDronAuto8(bool isDronAuto8)
     {
@@ -84,18 +78,6 @@ public class ExamManager : MonoBehaviour
             if(HUDController.GetSpeed() > 18)
             {
                 NextLevel();
-            }
-        }
-        if (_isDronAuto7)
-        {
-            if (DronInputController.Instance.GetRemoteDron())
-            {   
-                Dron.GetComponent<DronController>().enabled = false;
-                Dron.SetActive(false);
-                DronAutoLevel7.transform.position = Dron.transform.position;
-                DronAutoLevel7.SetActive(true);
-                dronCamera.LookAt = DronAutoLevel7.transform;
-                _isDronAuto7 = false;
             }
         }
         if (_isDronAuto8)

@@ -13,7 +13,7 @@ public class DronInputController : MonoBehaviour
     private float cameraMovement;
     private float aguaInput;
     private bool buttonPressed = false;
-    private bool isRemoteDron;
+    private bool isRemoteDron; 
     private void Start()
     {
         Instance = this;
