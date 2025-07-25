@@ -20,6 +20,7 @@ public class ExamManager : MonoBehaviour
     [SerializeField] private List<GameObject> pointsDetector;
     [SerializeField] private GameObject detectorPoint301;
     [SerializeField] private GameObject mando;
+    [SerializeField] private GameObject dronHud;
 
     [Header("Player & Dron")]
     [SerializeField] private GameObject Player;
@@ -77,12 +78,12 @@ public class ExamManager : MonoBehaviour
         {
             if(HUDController.GetSpeed() > 18)
             {
-                NextLevel();
+                ReturnToStart();
             }
         }
         if (_isDronAuto8)
         {
-            if (Vector3.Distance(DronAutoLevel8.transform.position, Dron.transform.position) > 10f)
+            if (Vector3.Distance(DronAutoLevel8.transform.position, Dron.transform.position) > 15f)
             {
                 panelAdvertecia.SetActive(true);
                 /*timeInPanel += Time.deltaTime;
@@ -131,6 +132,16 @@ public class ExamManager : MonoBehaviour
                     listPanel[_countLevels].SetActive(true);
                     numEjercice.gameObject.SetActive(true);
                 }
+            }
+            if (dronHud.activeSelf)
+            {
+                listPanel[_countLevels].SetActive(false);
+                numEjercice.gameObject.SetActive(false);
+            }
+            else
+            {
+                listPanel[_countLevels].SetActive(true);
+                numEjercice.gameObject.SetActive(true);
             }
         }
         
