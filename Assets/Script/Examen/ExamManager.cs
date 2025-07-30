@@ -60,12 +60,34 @@ public class ExamManager : MonoBehaviour
     #endregion
     void Start()
     {
-        for (int i = 0; i < buttonPanelSelect.Count; i++)
+        if (PlayerPrefs.GetInt("SceneInitialized", 0) == 0)
         {
-            string key = "BotonNivel_" + i;
-            if (PlayerPrefs.GetInt(key, 0) == 1)
+            // Primera vez en la escena
+            for (int i = 0; i < buttonPanelSelect.Count; i++)
             {
                 buttonPanelSelect[i].GetComponent<Image>().color = Color.green;
+
+                // También guarda el estado como "no completado"
+                string key = "BotonNivel_" + i;
+                PlayerPrefs.SetInt(key, 0);
+            }
+
+            // Marcar como ya inicializada para la próxima vez
+            PlayerPrefs.SetInt("SceneInitialized", 1);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            // Ya has entrado antes: carga colores desde PlayerPrefs
+            for (int i = 0; i < buttonPanelSelect.Count; i++)
+            {
+                string key = "BotonNivel_" + i;
+                int state = PlayerPrefs.GetInt(key, 0);
+
+                if (state == 0)
+                    buttonPanelSelect[i].GetComponent<Image>().color = Color.green;
+                else if (state == 1)
+                    buttonPanelSelect[i].GetComponent<Image>().color = Color.white;
             }
         }
         //countLevels = 0;
@@ -127,22 +149,18 @@ public class ExamManager : MonoBehaviour
                     listPanel[_countLevels].SetActive(false);
                     numEjercice.gameObject.SetActive(false);
                 }
+                else if (dronHud.activeSelf)
+                {
+                    listPanel[_countLevels].SetActive(false);
+                    numEjercice.gameObject.SetActive(false);
+                }
                 else
                 {
                     listPanel[_countLevels].SetActive(true);
                     numEjercice.gameObject.SetActive(true);
                 }
             }
-            if (dronHud.activeSelf)
-            {
-                listPanel[_countLevels].SetActive(false);
-                numEjercice.gameObject.SetActive(false);
-            }
-            else
-            {
-                listPanel[_countLevels].SetActive(true);
-                numEjercice.gameObject.SetActive(true);
-            }
+            
         }
         
     }
