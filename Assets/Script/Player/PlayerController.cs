@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInteract playerInteract;
     private FMOD.Studio.EventInstance foosteps;
     private Coroutine isMoving;
+    [SerializeField] private GameObject modelPlayer;
     void Start()
     {
         if (Instance == null)
@@ -51,6 +52,8 @@ public class PlayerController : MonoBehaviour
             cameraForward.y = 0;
             cameraRight.y = 0;
 
+            modelPlayer.transform.localRotation = Quaternion.LookRotation(cameraForward);
+
             cameraForward.Normalize();
             cameraRight.Normalize();
             Vector3 input = cameraForward * playerWasd.y + cameraRight * playerWasd.x;
@@ -61,15 +64,19 @@ public class PlayerController : MonoBehaviour
             if (PlayerInputController.Instance.IsRunning())
             {
                 MB.RunRB(input, runMultiplier);
+                modelPlayer.GetComponent<Animator>().SetFloat("Blend", 1f);
             }
             else
             {
                 MB.MoveRB3D(input);
+                modelPlayer.GetComponent<Animator>().SetFloat("Blend", 0.3f);
             }
         }
         if (PlayerInputController.Instance.GetPlayerInput() == Vector2.zero)
         {
             MB.StopMoving();
+            modelPlayer.GetComponent<Animator>().SetFloat("Blend", 0f);
+            modelPlayer.GetComponent<Animator>().SetTrigger("normal");
         }
     }
 
