@@ -1,16 +1,12 @@
-using Mono.Cecil;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.U2D;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
-using VInspector.Libs;
-using static Unity.Burst.Intrinsics.X86;
+
 
 public class ControlsTutorialController : MonoBehaviour
 {
@@ -23,6 +19,10 @@ public class ControlsTutorialController : MonoBehaviour
     //Esta input action tiene que tener que registre cualquier boton/tecla porque es la encargada de actualizar el esquema de controles de la clase control
     public InputAction checkSchemeOnButtonPress;
     public UnityEvent onTutorialFinish;
+    [SerializeField] private UnityEngine.UI.Image background;
+    [SerializeField] private int fadeInAndOutTimer;
+    [SerializeField] private int finalBackgroundAlpha;
+    [SerializeField] private GameObject finishTutorialPanel;
     [System.Serializable]
     public class Control
     {
@@ -137,21 +137,21 @@ public class ControlsTutorialController : MonoBehaviour
 
         public void WriteTextInStep(WriteSlowly writter)
         {
-            writter.WriteText(stepTitleDisplay, stepTitleDisplay.text, stepTitleDisplay.text.Length * 0.05f);
+            //writter.WriteText(stepTitleDisplay, stepTitleDisplay.text, stepTitleDisplay.text.Length * 0.03f);
             foreach (Control i in controls)
             {
                 if (i.keyboardControl)
                 {
 
                     TextMeshProUGUI keyboard = i.keyboardControl.GetComponent<TextMeshProUGUI>();
-                    writter.WriteText(keyboard, keyboard.text, keyboard.text.Length * 0.05f);
+                    //writter.WriteText(keyboard, keyboard.text, keyboard.text.Length * 0.03f);
 
                 }
                 if (i.gamePadControl)  
                 {
 
                     TextMeshProUGUI gamepad = i.gamePadControl.GetComponent<TextMeshProUGUI>();
-                    writter.WriteText(gamepad, gamepad.text, gamepad.text.Length * 0.05f);
+                    //writter.WriteText(gamepad, gamepad.text, gamepad.text.Length * 0.03f);
 
                 }
 
@@ -270,6 +270,8 @@ public class ControlsTutorialController : MonoBehaviour
 
     // Update is called once per frame
 
+
+    //Check if it needs to change step
     private void FixedUpdate()
     {
         if (CheckStep() && currentStep < steps.Length - 1)
@@ -278,8 +280,7 @@ public class ControlsTutorialController : MonoBehaviour
         }
         else if (CheckStep() && currentStep >= steps.Length - 1)
         {
-            onTutorialFinish.Invoke();
-            this.enabled = false;
+            StartCoroutine(EndTutorial());
         }
         if (isInputBeingHeld)
         {
@@ -287,15 +288,25 @@ public class ControlsTutorialController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Does what is needed to end the tutorial, by now the only thing it does is waiting a bit before invoking the end event and showing a fininish panel
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator EndTutorial()
+    {
+        DeactivateCurrentStep();
+        finishTutorialPanel.SetActive(true);
+        yield return new WaitForSeconds(2.5f);
+        onTutorialFinish.Invoke();
+        this.enabled = false;
+    }
 
-
+    //Deactivates currentStep adds 1 to currentStep index and activates the new Step
     private void StartNextStep()
     {
         try
         {
-            Step oldStep = steps[currentStep];
-            oldStep.GetStepObject().SetActive(false);
-            oldStep.DeactivateInputs();
+            DeactivateCurrentStep();
         }
         catch (Exception e)
         {
@@ -305,16 +316,9 @@ public class ControlsTutorialController : MonoBehaviour
         currentStep++;
         try
         {
-            Step newStep = steps[currentStep];
-            newStep.GetStepObject().SetActive(true);
-            newStep.SerializeBindings();
-            newStep.WriteTextInStep(writter);
-            foreach (InputAction action in newStep.GetStepActions())
-            {
-                action.Enable();
-                action.performed += InputIsPressed;
-                action.canceled += InputIsNotPressed;
-            }
+            StartCoroutine(DoBackgroundFadeInAndOut());
+
+            ActivateNewStep();
         }
         catch (Exception e)
         {
@@ -322,6 +326,10 @@ public class ControlsTutorialController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This method is for when certain steps use an alternative condition for ending, if this is the case it should be checked in the boolean box in the Step object in the inspector
+    /// </summary>
+    /// <param name="stepIndex">Which index corresponds with the that ends with the alternative condition</param>
     public void EndAlternativeConditionStep(int stepIndex)
     {
         if (stepIndex == currentStep && steps[currentStep].NeedsAlternativeCondition())
@@ -330,6 +338,11 @@ public class ControlsTutorialController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if all the controls inside the step have been done if that's the case it ends sets the completed boolean inside step object to true which will make it end, it can only do so if the object has not been
+    /// marked with an Alternative Ending Condition, if any problem with this method  always check if the alternative condition boolean is not checked
+    /// </summary>
+    /// <returns></returns>
     private bool CheckStep()
     {
         Step step = steps[currentStep];
@@ -354,6 +367,34 @@ public class ControlsTutorialController : MonoBehaviour
         return aux;
     }
 
+    /// <summary>
+    /// Deactivates the step Gameobject and its correspondent inputs
+    /// </summary>
+    private void DeactivateCurrentStep()
+    {
+        Step oldStep = steps[currentStep];
+        oldStep.GetStepObject().SetActive(false);
+        oldStep.DeactivateInputs();
+    }
+
+
+    /// <summary>
+    /// Activates the newStep, activating the gameobject, serializing the inputs, and sending the signal to start writing the text
+    /// </summary>
+    private void ActivateNewStep()
+    {
+        Step newStep = steps[currentStep];
+        newStep.GetStepObject().SetActive(true);
+        newStep.SerializeBindings();
+
+        newStep.WriteTextInStep(writter);
+        foreach (InputAction action in newStep.GetStepActions())
+        {
+            action.Enable();
+            action.performed += InputIsPressed;
+            action.canceled += InputIsNotPressed;
+        }
+    }
     private void CheckControls()
     {
         steps[currentStep].ControlIsPressed(currentActionValue);
@@ -370,6 +411,10 @@ public class ControlsTutorialController : MonoBehaviour
         isInputBeingHeld = false;
     }
 
+    /// <summary>
+    /// This method chekcs on every press what scheme control you're using in order to change the text if you change to controller or viceversa
+    /// </summary>
+    /// <param name="ctx"></param>
     private void CheckControlSchemeOnButtonPress(InputAction.CallbackContext ctx)
     {
 
@@ -387,6 +432,23 @@ public class ControlsTutorialController : MonoBehaviour
 
     }
 
+    private IEnumerator DoBackgroundFadeInAndOut()
+    {
+        Color initialAlpha = background.color;
+        initialAlpha.a = 0;
+        background.color = initialAlpha;
+        float t = 0;
+        while (t < fadeInAndOutTimer)
+        {
+            t += Time.deltaTime;
+            Color color = background.color;
+            color.a = Mathf.Lerp(0, finalBackgroundAlpha, t / fadeInAndOutTimer ) / 255;
+            background.color = color;
+            print(background.color.a);
+            yield return null;
+        }
+
+    }
     private void OnDisable()
     {
         checkSchemeOnButtonPress.Disable();
