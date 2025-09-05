@@ -1,4 +1,5 @@
 
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ public class ControlsTutorialController : MonoBehaviour
     WriteSlowly writter;
     private bool isInputBeingHeld;
     private int currentActionValue;
+    [SerializeField] private StudioEventEmitter radioSoundEmitter;
     //Esta input action tiene que tener que registre cualquier boton/tecla porque es la encargada de actualizar el esquema de controles de la clase control
     public InputAction checkSchemeOnButtonPress;
     public UnityEvent onTutorialFinish;
@@ -178,12 +180,12 @@ public class ControlsTutorialController : MonoBehaviour
                 action.Dispose();
             }
             ActivateInputs();
-            SetStepTitle();
+          
         }
 
         public void SetStepTitle()
         {
-            stepTitleDisplay.text = stepTitle;
+
         }
 
         /// <summary>
@@ -434,6 +436,7 @@ public class ControlsTutorialController : MonoBehaviour
 
     private IEnumerator DoBackgroundFadeInAndOut()
     {
+        radioSoundEmitter.Play();
         Color initialAlpha = background.color;
         initialAlpha.a = 0;
         background.color = initialAlpha;
@@ -447,6 +450,7 @@ public class ControlsTutorialController : MonoBehaviour
             print(background.color.a);
             yield return null;
         }
+        radioSoundEmitter.Stop();
 
     }
     private void OnDisable()
