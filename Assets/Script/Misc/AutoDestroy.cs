@@ -9,4 +9,5 @@ public class AutoDestroy : MonoBehaviour
         Debug.Log("AutoDestroySelf was called");
         Destroy(this.gameObject);
     }
+
 }
