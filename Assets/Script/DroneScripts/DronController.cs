@@ -41,6 +41,7 @@ public class DronController : MonoBehaviour
     [SerializeField] private List<Transform> waypoints;
     private int currentWaypointIndex = 0;
     private bool remoteDron;
+    private bool aux;
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
     #endregion
@@ -290,8 +291,8 @@ public class DronController : MonoBehaviour
             remoteDron = true;
         }
         if(remoteDron)
-        { 
-            float speed = 750f;
+        {
+            /*float speed = 750f;
 
             Transform targetWaypoint = waypoints[currentWaypointIndex];
 
@@ -336,6 +337,56 @@ public class DronController : MonoBehaviour
                     remoteDron = false;
                     currentWaypointIndex = 0;
                 }
+            }*/
+            float speed = 750f;
+            Transform targetWaypoint = waypoints[0];
+
+            // Dirección horizontal (sin Y)
+            Vector3 direction = (targetWaypoint.position - transform.position);
+            direction.y = 0f;
+            direction.Normalize();
+            
+            float distanceY = Mathf.Abs(transform.position.y - targetWaypoint.position.y);
+            float distanceAll = Vector3.Distance(transform.position, targetWaypoint.position);
+
+            // Distancia horizontal
+            float distanceXZ = Vector2.Distance(
+                new Vector2(transform.position.x, transform.position.z),
+                new Vector2(targetWaypoint.position.x, targetWaypoint.position.z)
+            );
+            if(distanceAll < 15f)
+            {
+                speed = 60;
+            }
+            if (distanceXZ <= 0.5f || aux)
+            {
+                // Reducir velocidad gradualmente al descender
+                speed = 50;
+                mMovementBehaviour.MoveDronAuto(Vector3.down, Mathf.Max(speed, 5f)); // mínimo para que no se quede colgado
+
+                // Estabilizar rotación horizontal
+                Quaternion stableRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
+                transform.rotation = Quaternion.Slerp(transform.rotation, stableRotation, Time.deltaTime * 2f);
+
+                aux = true;
+            }
+            else
+            {
+                // Avanzar horizontalmente
+                mMovementBehaviour.MoveDronAuto(direction, speed);
+
+                // Rotación suave mirando hacia adelante
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+            }
+
+
+            
+            if (distanceXZ <= 0.5f && distanceY <= 0.5f)
+            {
+                mMovementBehaviour.StopMovingOnY();
+                remoteDron = false;
+                aux = false;
             }
         }
     }
