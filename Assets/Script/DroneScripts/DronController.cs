@@ -112,7 +112,6 @@ public class DronController : MonoBehaviour
             if (!eventEmitter.IsPlaying())
             {
                 eventEmitter.Play();
-
             }
             returnToSpawn();
         }
@@ -289,6 +288,7 @@ public class DronController : MonoBehaviour
         if (DronInputController.Instance.GetRemoteDron())
         {
             remoteDron = true;
+            Debug.Log("oressed" + remoteDron);
         }
         if(remoteDron)
         {
@@ -339,7 +339,7 @@ public class DronController : MonoBehaviour
                 }
             }*/
             float speed = 750f;
-            Transform targetWaypoint = waypoints[0];
+            Transform targetWaypoint = waypoints[1];
 
             // Dirección horizontal (sin Y)
             Vector3 direction = (targetWaypoint.position - transform.position);
@@ -354,15 +354,15 @@ public class DronController : MonoBehaviour
                 new Vector2(transform.position.x, transform.position.z),
                 new Vector2(targetWaypoint.position.x, targetWaypoint.position.z)
             );
-            if(distanceAll < 15f)
+            if(distanceXZ < 20f)
             {
-                speed = 60;
+                speed = 50;
             }
-            if (distanceXZ <= 0.5f || aux)
+            if (distanceXZ <= 0.3f || aux)
             {
                 // Reducir velocidad gradualmente al descender
-                speed = 50;
-                mMovementBehaviour.MoveDronAuto(Vector3.down, Mathf.Max(speed, 5f)); // mínimo para que no se quede colgado
+                speed = 60;
+                mMovementBehaviour.MoveDronAuto(Vector3.down, speed); // mínimo para que no se quede colgado
 
                 // Estabilizar rotación horizontal
                 Quaternion stableRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
@@ -382,7 +382,7 @@ public class DronController : MonoBehaviour
 
 
             
-            if (distanceXZ <= 0.5f && distanceY <= 0.5f)
+            if (distanceXZ <= 0.5f && distanceY <= 0.2f)
             {
                 mMovementBehaviour.StopMovingOnY();
                 remoteDron = false;
