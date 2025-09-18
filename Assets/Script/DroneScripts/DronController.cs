@@ -34,13 +34,16 @@ public class DronController : MonoBehaviour
     [SerializeField] private float minDronViewRotation;
     private float currentCameraRotationSimplified;
     private Rigidbody rb;
+    float currentZTiltMultiplier = 1;
+
     [SerializeField] private float cameraMovementSpeed;
     private bool isGrounded;
-
+    private float lastTiltZ;
     [Header("SpawnPoints")]
     [SerializeField] private List<Transform> waypoints;
     private int currentWaypointIndex = 0;
     private bool remoteDron;
+    
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
     #endregion
@@ -52,7 +55,7 @@ public class DronController : MonoBehaviour
         eventEmitter = GetComponent<StudioEventEmitter>();
         isPlaying = false;
         mMovementBehaviour = GetComponent<MovementBehaviour>();
-        tiltAngle = 25;
+        //tiltAngle = 25;
         rotationSpeed = 150;
     }
 
@@ -194,11 +197,19 @@ public class DronController : MonoBehaviour
     {
         //Necesario sino vuelve a 0 la rotation para los lados el momento que dejes de pulsar
         float currentYRotation = transform.rotation.eulerAngles.y;
-
+        if (lastTiltZ != -inputDirection.x * tiltAngle && lastTiltZ != 0)
+        {
+            currentZTiltMultiplier = 2;
+        }
         //Esto es para que tire un poco hacia el lado que se esta moviendo
-        float tiltAroundZ = -inputDirection.x * tiltAngle;
-        float tiltAroundX = +inputDirection.y * tiltAngle;
+        float tiltAroundZ =  -inputDirection.x * tiltAngle * currentZTiltMultiplier;
 
+        float tiltAroundX = +inputDirection.y * tiltAngle;
+        currentZTiltMultiplier = Mathf.Lerp(currentZTiltMultiplier, 1, 0.15f) ;
+        if (tiltAroundZ != 0)
+        lastTiltZ = -inputDirection.x * tiltAngle;
+
+        print("Tilt: " + tiltAroundZ + " Direction " + -inputDirection.x);
 
         Quaternion targetRotation = Quaternion.Euler(tiltAroundX, currentYRotation, tiltAroundZ);
 
