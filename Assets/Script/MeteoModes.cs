@@ -8,6 +8,7 @@ using VInspector;
 
 public class MeteoModes : MonoBehaviour
 {
+    public static MeteoModes instance;
     //This bools are for debugging;
     [SerializeField] private bool isRaining;
     [SerializeField] private bool isSunny;
@@ -29,52 +30,44 @@ public class MeteoModes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isRaining)
-        {
-            SetRain();
-        }
-        else
-        {
-            StopRain();
-        }
+
     }
 
-    public void SetRain()
+    public void ToggleRain()
     {
         rainParticles.SetActive(true);
         rainParticles.transform.position =Camera.main.transform.position + new Vector3(0, 2, 0);
     }
 
-    public void StopRain()
-    {
-        rainParticles.SetActive(false);
-
-    }
 
     [Button]
-    public void AddClouds()
-    {
-        //print(clouds.profile.components[0].parameters.);
-        
-        VolumetricClouds vol = (VolumetricClouds)clouds.profile.components[0];
-        vol.cloudPreset = VolumetricClouds.CloudPresets.Stormy;
-    }
-
-
-    public void RemoveClouds()
+    public void ToggleClouds()
     {
         VolumetricClouds vol = (VolumetricClouds)clouds.profile.components[0];
+        if (vol.cloudPreset == VolumetricClouds.CloudPresets.Stormy)
         vol.cloudPreset = VolumetricClouds.CloudPresets.Sparse;
+        else
+            vol.cloudPreset = VolumetricClouds.CloudPresets.Stormy;
+
     }
+
+
 
     [Button]
-    public void AddFod()
+    public void ToggleFog()
     {
-        RenderSettings.fog = true;
+        RenderSettings.fog = !RenderSettings.fog;
     }
 
-    public void RemoveFog()
+
+
+    public void AddBlindingSun()
     {
-        RenderSettings.fog = false;
+
+    }
+
+    public void RemoveBlindingSun()
+    {
+
     }
 }
