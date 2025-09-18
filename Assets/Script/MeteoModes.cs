@@ -24,7 +24,14 @@ public class MeteoModes : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (instance == null)
+        { 
+            instance = this;
+        }
+        else
+        {
+            print("Ya existe un singleton MeteoModes");
+        }
     }
 
     // Update is called once per frame
@@ -35,8 +42,8 @@ public class MeteoModes : MonoBehaviour
 
     public void ToggleRain()
     {
-        rainParticles.SetActive(true);
-        rainParticles.transform.position =Camera.main.transform.position + new Vector3(0, 2, 0);
+        rainParticles.SetActive(!rainParticles.activeInHierarchy);
+        rainParticles.transform.position = Camera.main.transform.position + new Vector3(0, 2, 0);
     }
 
 
@@ -45,7 +52,7 @@ public class MeteoModes : MonoBehaviour
     {
         VolumetricClouds vol = (VolumetricClouds)clouds.profile.components[0];
         if (vol.cloudPreset == VolumetricClouds.CloudPresets.Stormy)
-        vol.cloudPreset = VolumetricClouds.CloudPresets.Sparse;
+            vol.cloudPreset = VolumetricClouds.CloudPresets.Sparse;
         else
             vol.cloudPreset = VolumetricClouds.CloudPresets.Stormy;
 
