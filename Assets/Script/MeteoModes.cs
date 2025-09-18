@@ -1,4 +1,7 @@
+using System;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using VInspector;
@@ -64,13 +67,14 @@ public class MeteoModes : MonoBehaviour
         vol.cloudPreset = VolumetricClouds.CloudPresets.Sparse;
     }
 
+    [Button]
     public void AddFod()
     {
-
+        RenderSettings.fog = true;
     }
 
     public void RemoveFog()
     {
-
+        RenderSettings.fog = false;
     }
 }
