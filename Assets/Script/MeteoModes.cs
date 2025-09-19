@@ -1,9 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using VInspector;
 
 public class MeteoModes : MonoBehaviour
@@ -64,6 +62,8 @@ public class MeteoModes : MonoBehaviour
     public void ToggleFog()
     {
         RenderSettings.fog = !RenderSettings.fog;
+        RenderSettings.fogDensity = 0.5f;
+        RenderSettings.fogMode = FogMode.Exponential;
     }
 
 
