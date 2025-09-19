@@ -43,7 +43,9 @@ public class DronController : MonoBehaviour
     [SerializeField] private List<Transform> waypoints;
     private int currentWaypointIndex = 0;
     private bool remoteDron;
-    
+
+    private bool aux;
+
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
     #endregion
@@ -114,7 +116,6 @@ public class DronController : MonoBehaviour
             if (!eventEmitter.IsPlaying())
             {
                 eventEmitter.Play();
-
             }
             returnToSpawn();
         }
@@ -299,10 +300,11 @@ public class DronController : MonoBehaviour
         if (DronInputController.Instance.GetRemoteDron())
         {
             remoteDron = true;
+            Debug.Log("oressed" + remoteDron);
         }
         if(remoteDron)
-        { 
-            float speed = 750f;
+        {
+            /*float speed = 750f;
 
             Transform targetWaypoint = waypoints[currentWaypointIndex];
 
@@ -323,7 +325,7 @@ public class DronController : MonoBehaviour
                 mMovementBehaviour.MoveDronAuto(Vector3.down, speed);
 
 
-                // Estabilizar: dejar la rotación sin inclinación (horizontal al suelo)
+                // Estabilizar: dejar la rotaciï¿½n sin inclinaciï¿½n (horizontal al suelo)
                 Quaternion stableRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
                 transform.rotation = Quaternion.Slerp(transform.rotation, stableRotation, Time.deltaTime * 2f);
             }
@@ -347,6 +349,56 @@ public class DronController : MonoBehaviour
                     remoteDron = false;
                     currentWaypointIndex = 0;
                 }
+            }*/
+            float speed = 750f;
+            Transform targetWaypoint = waypoints[1];
+
+            // Direcciï¿½n horizontal (sin Y)
+            Vector3 direction = (targetWaypoint.position - transform.position);
+            direction.y = 0f;
+            direction.Normalize();
+            
+            float distanceY = Mathf.Abs(transform.position.y - targetWaypoint.position.y);
+            float distanceAll = Vector3.Distance(transform.position, targetWaypoint.position);
+
+            // Distancia horizontal
+            float distanceXZ = Vector2.Distance(
+                new Vector2(transform.position.x, transform.position.z),
+                new Vector2(targetWaypoint.position.x, targetWaypoint.position.z)
+            );
+            if(distanceXZ < 20f)
+            {
+                speed = 50;
+            }
+            if (distanceXZ <= 0.3f || aux)
+            {
+                // Reducir velocidad gradualmente al descender
+                speed = 60;
+                mMovementBehaviour.MoveDronAuto(Vector3.down, speed); // mï¿½nimo para que no se quede colgado
+
+                // Estabilizar rotaciï¿½n horizontal
+                Quaternion stableRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
+                transform.rotation = Quaternion.Slerp(transform.rotation, stableRotation, Time.deltaTime * 2f);
+
+                aux = true;
+            }
+            else
+            {
+                // Avanzar horizontalmente
+                mMovementBehaviour.MoveDronAuto(direction, speed);
+
+                // Rotaciï¿½n suave mirando hacia adelante
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+            }
+
+
+            
+            if (distanceXZ <= 0.5f && distanceY <= 0.2f)
+            {
+                mMovementBehaviour.StopMovingOnY();
+                remoteDron = false;
+                aux = false;
             }
         }
     }
