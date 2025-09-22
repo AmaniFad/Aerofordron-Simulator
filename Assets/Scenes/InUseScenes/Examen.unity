@@ -6555,7 +6555,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 469082300}
-  m_Father: {fileID: 629008214}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6843,6 +6843,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 629008214}
+  - component: {fileID: 629008215}
   m_Layer: 0
   m_Name: Todos Los Canvas
   m_TagString: Untagged
@@ -6865,10 +6866,22 @@ Transform:
   m_Children:
   - {fileID: 1840043080}
   - {fileID: 2022339779}
-  - {fileID: 583309641}
   - {fileID: 1097984809}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &629008215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629008213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c7b644c7beee5c48b3b65871f0905a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseController: {fileID: 1159738024}
 --- !u!1 &641174127
 GameObject:
   m_ObjectHideFlags: 0
@@ -8248,8 +8261,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1963526982}
-  - {fileID: 925188432}
   - {fileID: 681973253}
+  - {fileID: 925188432}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &720930516
@@ -11805,6 +11818,17 @@ MonoBehaviour:
   dronCamera: {fileID: 1067645929}
   player: {fileID: 1067645933}
   canMove: 1
+--- !u!114 &1159738024 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5453106001587266999, guid: 9b28ee20edd01de449496ea5059b801a, type: 3}
+  m_PrefabInstance: {fileID: 925188431}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159738015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792e24a0daa96c14ea70840c2ca17e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1164673383
 GameObject:
   m_ObjectHideFlags: 0
@@ -24129,6 +24153,7 @@ SceneRoots:
   - {fileID: 1510533744}
   - {fileID: 475192561}
   - {fileID: 1633861541}
+  - {fileID: 583309641}
   - {fileID: 629008214}
   - {fileID: 1067645928}
   - {fileID: 1549392386}
