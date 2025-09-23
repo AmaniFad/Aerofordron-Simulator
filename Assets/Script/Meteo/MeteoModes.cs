@@ -6,6 +6,17 @@ using VInspector;
 
 public class MeteoModes : MonoBehaviour
 {
+
+    [System.Serializable]
+    private class FogLevels 
+    {
+        [SerializeField] public FogMode fog_mode;
+        [SerializeField] public float fog_density;
+
+
+
+        
+    }
     public static MeteoModes instance;
     //This bools are for debugging;
     [SerializeField] private bool isRaining;
@@ -14,7 +25,9 @@ public class MeteoModes : MonoBehaviour
     [SerializeField] private bool isCloudy;
     [SerializeField] private bool isDay;
     [SerializeField] private bool isNight;
-
+    [SerializeField] private FogLevels[] fogLevel;
+    [SerializeField]
+    public int currentFogLevel;
     [Tab("Rain")]
     [SerializeField] private GameObject rainParticles;
     [Tab("Clouds")]
@@ -30,6 +43,7 @@ public class MeteoModes : MonoBehaviour
         {
             print("Ya existe un singleton MeteoModes");
         }
+        currentFogLevel = 0;
     }
 
     // Update is called once per frame
@@ -62,11 +76,29 @@ public class MeteoModes : MonoBehaviour
     public void ToggleFog()
     {
         RenderSettings.fog = !RenderSettings.fog;
-        RenderSettings.fogDensity = 0.5f;
-        RenderSettings.fogMode = FogMode.Exponential;
+        RenderSettings.fogDensity = fogLevel[currentFogLevel].fog_density;
+        RenderSettings.fogMode = fogLevel[currentFogLevel].fog_mode;
     }
 
-
+    //Changes fog level according to parameter
+    public void ChangeFogLevel(int fogChangeIndex)
+    {
+        if (currentFogLevel + fogChangeIndex >= fogLevel.Length)
+        {
+            currentFogLevel = 0;
+        }
+        else if (currentFogLevel + fogChangeIndex < 0)
+        {
+            currentFogLevel = fogLevel.Length - 1;
+        }
+        else
+        {
+            currentFogLevel += fogChangeIndex;
+        }
+        
+        RenderSettings.fogDensity = fogLevel[currentFogLevel].fog_density;
+        RenderSettings.fogMode = fogLevel[currentFogLevel].fog_mode;
+    }
 
     public void AddBlindingSun()
     {
