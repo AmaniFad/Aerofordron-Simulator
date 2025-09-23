@@ -32,9 +32,20 @@ public class MeteoModes : MonoBehaviour
     [SerializeField] private GameObject rainParticles;
     [Tab("Clouds")]
     [SerializeField] private UnityEngine.Rendering.Volume clouds;
+    [Tab("Night")]
+    [SerializeField] private Color nightFogColor;
+    [SerializeField] private GameObject nightLight;
+    [SerializeField] private Material nightSkybox;
+    [Tab("Day")]
+    [SerializeField] private Color dayFogColor;
+    [SerializeField] private GameObject dayLight;
+    [SerializeField] private Material daySkybox;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        rainParticles.GetComponent<FollowMeteo>().SetTarget(Camera.main.gameObject);
         if (instance == null)
         { 
             instance = this;
@@ -108,5 +119,27 @@ public class MeteoModes : MonoBehaviour
     public void RemoveBlindingSun()
     {
 
+    }
+
+    [Button]
+    public void NightMode()
+    {
+        isDay = false;
+        isNight = true;
+        nightLight.SetActive(true);
+        dayLight.SetActive(false);
+        RenderSettings.skybox = nightSkybox;
+        RenderSettings.fogColor = nightFogColor;
+    }
+
+    [Button]
+    public void DayMode()
+    {
+        isNight = false;
+        isDay = true;
+        RenderSettings.skybox = daySkybox;
+        nightLight.SetActive(false);
+        dayLight.SetActive(true);
+        RenderSettings.fogColor = dayFogColor;
     }
 }

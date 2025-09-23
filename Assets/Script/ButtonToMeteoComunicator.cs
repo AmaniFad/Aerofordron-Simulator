@@ -19,5 +19,16 @@ public class ButtonToMeteoComunicator : MonoBehaviour
     {
         MeteoModes.instance.ToggleClouds();
     }
+
+    public void SetDay()
+    {
+        MeteoModes.instance.DayMode();
+    }
+
+    public void SetNight()
+    {
+
+        MeteoModes.instance.NightMode();
+    }
 }
 

@@ -5,143 +5,143 @@ using TMPro;
 
 public class ScorePlayer : MonoBehaviour
 {
-    public static ScorePlayer Instance;
+    //public static ScorePlayer Instance;
 
-    [SerializeField] private TMP_Text score_Text;
-    [SerializeField] private TMP_Text rongAnswers_Text;
-    [SerializeField] private TMP_Text aproveTheoric_Text;
+    //[SerializeField] private TMP_Text score_Text;
+    //[SerializeField] private TMP_Text rongAnswers_Text;
+    //[SerializeField] private TMP_Text aproveTheoric_Text;
 
-    private Quiz quizManager;
-    private int scoreQuiz;
-    private int scoreInteractive;
+    //private Quiz quizManager;
+    //private int scoreQuiz;
+    //private int scoreInteractive;
 
-    private int totalScorePractic;
-    private int totalScoreQuiz;
+    //private int totalScorePractic;
+    //private int totalScoreQuiz;
 
-    private bool aproveTheoric;
-    private bool aprovePractic;
+    //private bool aproveTheoric;
+    //private bool aprovePractic;
 
-    private int wrongAnswers;
+    //private int wrongAnswers;
 
-    public void SetScoreQuiz(int scoreQuiz)
-    {
-        this.scoreQuiz = scoreQuiz;
-    }
-    public void SetTotalScoreQuiz(int totalScoreQuiz)
-    {
-        this.totalScoreQuiz = totalScoreQuiz;
-    }
+    //public void SetScoreQuiz(int scoreQuiz)
+    //{
+    //    this.scoreQuiz = scoreQuiz;
+    //}
+    //public void SetTotalScoreQuiz(int totalScoreQuiz)
+    //{
+    //    this.totalScoreQuiz = totalScoreQuiz;
+    //}
 
-    public void SetTotalScorePractic(int totalScorePractic)
-    {
-        this.totalScorePractic = totalScorePractic;
-    }
-    public void SetScoreInteractive(int scoreInteractive)
-    {
-        this.scoreInteractive = scoreInteractive;
-    }
+    //public void SetTotalScorePractic(int totalScorePractic)
+    //{
+    //    this.totalScorePractic = totalScorePractic;
+    //}
+    //public void SetScoreInteractive(int scoreInteractive)
+    //{
+    //    this.scoreInteractive = scoreInteractive;
+    //}
 
-    void Start()
-    {
-        quizManager = GetComponent<Quiz>();
-        scoreInteractive = 0;
-        scoreQuiz = 0;
+    //void Start()
+    //{
+    //    quizManager = GetComponent<Quiz>();
+    //    scoreInteractive = 0;
+    //    scoreQuiz = 0;
 
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Debug.Log("El singleton ScorePlayer ya existe borrando objeto: " + gameObject.name);
-            Destroy(gameObject);
-        }
-    }
-    public void ResetValues()
-    {
-        scoreInteractive = 0;
-        scoreQuiz = 0;
-        totalScorePractic = 0;
-        totalScoreQuiz = 0;
-        aproveTheoric = false;
-        aprovePractic = false;
-    }
-    public void CheckTheoricRequisites()
-    {
-        int percentageOfTotalScoreQuiz = (scoreQuiz * 100) / totalScoreQuiz;
+    //    if (Instance == null)
+    //    {
+    //        Instance = this;
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("El singleton ScorePlayer ya existe borrando objeto: " + gameObject.name);
+    //        Destroy(gameObject);
+    //    }
+    //}
+    //public void ResetValues()
+    //{
+    //    scoreInteractive = 0;
+    //    scoreQuiz = 0;
+    //    totalScorePractic = 0;
+    //    totalScoreQuiz = 0;
+    //    aproveTheoric = false;
+    //    aprovePractic = false;
+    //}
+    //public void CheckTheoricRequisites()
+    //{
+    //    int percentageOfTotalScoreQuiz = (scoreQuiz * 100) / totalScoreQuiz;
 
-        if (percentageOfTotalScoreQuiz >= 50)
-        {
-            aproveTheoric = true;
-        }
+    //    if (percentageOfTotalScoreQuiz >= 50)
+    //    {
+    //        aproveTheoric = true;
+    //    }
 
-        wrongAnswers = (totalScoreQuiz / 10) - (scoreQuiz / 10);
-    }
+    //    wrongAnswers = (totalScoreQuiz / 10) - (scoreQuiz / 10);
+    //}
 
-    public void CheckPracticRequisites(int wrongA)
-    {
-        int percentageOfTotalScorePractic = (scoreInteractive * 100) / totalScorePractic;
-        if (percentageOfTotalScorePractic >= 50)
-        {
-            aprovePractic = true;
-        }
+    //public void CheckPracticRequisites(int wrongA)
+    //{
+    //    int percentageOfTotalScorePractic = (scoreInteractive * 100) / totalScorePractic;
+    //    if (percentageOfTotalScorePractic >= 50)
+    //    {
+    //        aprovePractic = true;
+    //    }
 
-        wrongAnswers = wrongA;
-        Debug.Log(wrongAnswers + "wrongA");
-    }
+    //    wrongAnswers = wrongA;
+    //    Debug.Log(wrongAnswers + "wrongA");
+    //}
 
-    public void SetInfoTextPractic(TMP_Text score_T, TMP_Text wrongA_T, TMP_Text aproveP, int wrongA)
-    {
-        CheckPracticRequisites(wrongA);
+    //public void SetInfoTextPractic(TMP_Text score_T, TMP_Text wrongA_T, TMP_Text aproveP, int wrongA)
+    //{
+    //    CheckPracticRequisites(wrongA);
 
-        if (scoreInteractive < 0)
-        {
-            scoreInteractive = 0;
-        }
-        score_T.text = scoreInteractive.ToString();
-        wrongA_T.text = wrongAnswers.ToString();
+    //    if (scoreInteractive < 0)
+    //    {
+    //        scoreInteractive = 0;
+    //    }
+    //    score_T.text = scoreInteractive.ToString();
+    //    wrongA_T.text = wrongAnswers.ToString();
 
-        if (aprovePractic)
-        {
-            aproveP.text = "COMPLETADO";
+    //    if (aprovePractic)
+    //    {
+    //        aproveP.text = "COMPLETADO";
 
-        }
-        else
-        {
-            aproveP.text = "NO COMPLETADO";
-        }
-    }
-    public void SetInfoTextTheoric()
-    {
-        CheckTheoricRequisites();
-        //cargo nivel
-        if (LevelLoader.Instance.GetCurrentLevel() != null)
-        {
-            LevelLoader.Instance.UnloadCurrentLevel();
-        }
-        LevelLoader.Instance.LoadLevel(quizManager.GetLevelName());
+    //    }
+    //    else
+    //    {
+    //        aproveP.text = "NO COMPLETADO";
+    //    }
+    //}
+    //public void SetInfoTextTheoric()
+    //{
+    //    CheckTheoricRequisites();
+    //    //cargo nivel
+    //    if (LevelLoader.Instance.GetCurrentLevel() != null)
+    //    {
+    //        LevelLoader.Instance.UnloadCurrentLevel();
+    //    }
+    //    LevelLoader.Instance.LoadLevel(quizManager.GetLevelName());
 
-        score_Text.text = scoreQuiz.ToString();
-        rongAnswers_Text.text = wrongAnswers.ToString();
+    //    score_Text.text = scoreQuiz.ToString();
+    //    rongAnswers_Text.text = wrongAnswers.ToString();
 
-        if (aproveTheoric)
-        {
-            aproveTheoric_Text.text = "COMPLETADO";
+    //    if (aproveTheoric)
+    //    {
+    //        aproveTheoric_Text.text = "COMPLETADO";
 
-        }
-        else
-        {
-            aproveTheoric_Text.text = "NO COMPLETADO";
-        }
-    }
+    //    }
+    //    else
+    //    {
+    //        aproveTheoric_Text.text = "NO COMPLETADO";
+    //    }
+    //}
 
-    public void FinishTest()
-    {
-        PlayerStateController.instance.ResumeMoving();
-    }
-    public void SaveInfo(string level, int score)
-    {
-        PlayerPrefs.SetInt(level, score);
-    }
+    //public void FinishTest()
+    //{
+    //    PlayerStateController.instance.ResumeMoving();
+    //}
+    //public void SaveInfo(string level, int score)
+    //{
+    //    PlayerPrefs.SetInt(level, score);
+    //}
 
 }
