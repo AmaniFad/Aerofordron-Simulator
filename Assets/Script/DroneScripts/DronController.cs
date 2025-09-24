@@ -288,6 +288,7 @@ public class DronController : MonoBehaviour
 
     public void StartMovingDron()
     {
+        if (!PlayerStateController.instance.CanMove())
         canMove = true;
     }
     public bool IsGrounded()
