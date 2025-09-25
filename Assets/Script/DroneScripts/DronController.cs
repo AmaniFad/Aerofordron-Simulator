@@ -51,6 +51,7 @@ public class DronController : MonoBehaviour
     #endregion
     void Start()
     {
+
         rb = GetComponent<Rigidbody>(); 
         currentCameraTilt = 0;
         //currentCameraRotationSimplified = 0;
@@ -59,6 +60,7 @@ public class DronController : MonoBehaviour
         mMovementBehaviour = GetComponent<MovementBehaviour>();
         //tiltAngle = 25;
         rotationSpeed = 150;
+        PlayerReferences.instance.SetDron(this.gameObject);
     }
 
     private bool CheckIfGrounded()

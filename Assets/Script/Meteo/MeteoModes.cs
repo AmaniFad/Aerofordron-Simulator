@@ -2,6 +2,7 @@ using System;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using VInspector;
 
 public class MeteoModes : MonoBehaviour
@@ -10,13 +11,15 @@ public class MeteoModes : MonoBehaviour
     [System.Serializable]
     private class FogLevels 
     {
-        [SerializeField] public FogMode fog_mode;
-        [SerializeField] public float fog_density;
+        [SerializeField] public float intensity;
+        [SerializeField] public float remapMin;
+        [SerializeField] public float remapMax;
 
 
 
         
     }
+    
     public static MeteoModes instance;
     //This bools are for debugging;
     [SerializeField] private bool isRaining;
@@ -28,8 +31,13 @@ public class MeteoModes : MonoBehaviour
     [SerializeField] private FogLevels[] fogLevel;
     [SerializeField]
     public int currentFogLevel;
+    [Tab("Fog")]
+    [SerializeField] private UniversalRendererData fogRenderer;
+    [SerializeField] private ScriptableRendererFeature fog;
+    [SerializeField] private Material fogMaterial;
     [Tab("Rain")]
     [SerializeField] private GameObject rainParticles;
+    [SerializeField] private GameObject dronRainParticles;
     [Tab("Clouds")]
     [SerializeField] private UnityEngine.Rendering.Volume clouds;
     [Tab("Night")]
@@ -44,17 +52,30 @@ public class MeteoModes : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        currentFogLevel = 0;
+        foreach ( ScriptableRendererFeature pass in fogRenderer.rendererFeatures)
+        {
+            if (pass.name == "VolumetricFogRendererFeatureLite")
+            {
+                print("Hola");
+                fog = pass;
+            }
+        }
+        fog.SetActive(false);
+        fogMaterial.SetFloat("_Density", fogLevel[currentFogLevel].intensity);
+        fogMaterial.SetFloat("_Remap_Min", fogLevel[currentFogLevel].remapMin);
+        fogMaterial.SetFloat("_Remap_Max", fogLevel[currentFogLevel].remapMax);
         rainParticles.GetComponent<FollowMeteo>().SetTarget(Camera.main.gameObject);
+        dronRainParticles.GetComponent<FollowMeteo>().SetTarget(PlayerReferences.instance.GetDron());
         if (instance == null)
         { 
             instance = this;
+            
         }
         else
         {
             print("Ya existe un singleton MeteoModes");
         }
-        currentFogLevel = 0;
     }
 
     // Update is called once per frame
@@ -66,7 +87,9 @@ public class MeteoModes : MonoBehaviour
     public void ToggleRain()
     {
         rainParticles.SetActive(!rainParticles.activeInHierarchy);
+        dronRainParticles.SetActive(!dronRainParticles.activeInHierarchy);
         rainParticles.transform.position = Camera.main.transform.position + new Vector3(0, 2, 0);
+        dronRainParticles.transform.position = PlayerReferences.instance.GetDron().transform.position + new Vector3(0, 2, 0);
     }
 
 
@@ -84,11 +107,9 @@ public class MeteoModes : MonoBehaviour
 
 
     [Button]
-    public void ToggleFog()
+    public void ToggleFog(bool state)
     {
-        RenderSettings.fog = !RenderSettings.fog;
-        RenderSettings.fogDensity = fogLevel[currentFogLevel].fog_density;
-        RenderSettings.fogMode = fogLevel[currentFogLevel].fog_mode;
+        fog.SetActive(state);
     }
 
     //Changes fog level according to parameter
@@ -106,13 +127,15 @@ public class MeteoModes : MonoBehaviour
         {
             currentFogLevel += fogChangeIndex;
         }
-        
-        RenderSettings.fogDensity = fogLevel[currentFogLevel].fog_density;
-        RenderSettings.fogMode = fogLevel[currentFogLevel].fog_mode;
+        fogMaterial.SetFloat("_Density", fogLevel[currentFogLevel].intensity);
+        fogMaterial.SetFloat("_Remap_Min", fogLevel[currentFogLevel].remapMin);
+        fogMaterial.SetFloat("_Remap_Max", fogLevel[currentFogLevel].remapMax);
+
     }
 
     public void AddBlindingSun()
-    {
+    {       
+
 
     }
 
