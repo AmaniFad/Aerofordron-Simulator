@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class PauseController : MonoBehaviour
     private bool isPausing;
     [SerializeField] private bool pauseWithoutPauseMenu;
     [SerializeField] private GameObject pauseMenuInstance;
+
+    [SerializeField] private CinemachineInputProvider inputProvider;
 
     public bool GetISPause() 
     {
@@ -35,15 +38,18 @@ public class PauseController : MonoBehaviour
                 if (!pauseMenuInstance.activeInHierarchy)
                 {
                     Time.timeScale = 1f;
+                    inputProvider.enabled = true;
                 }
                 else
                 {
                     Time.timeScale = 0f;
+                    inputProvider.enabled = false;
                 }
             }
             else
             {
                 Time.timeScale = 1f;
+                inputProvider.enabled = true;
             }
             
         }
@@ -63,13 +69,14 @@ public class PauseController : MonoBehaviour
     {
         pauseWithoutPauseMenu = true;
         Time.timeScale = 0;
-
+        inputProvider.enabled = false;
     }
 
     public void UnPauseWithoutMenu()
     {
         pauseWithoutPauseMenu = false;
         Time.timeScale = 1;
+        inputProvider.enabled = true;
     }
 
     public void TryPause()
@@ -83,6 +90,7 @@ public class PauseController : MonoBehaviour
             pauseMenuInstance.SetActive(true);
             pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
             Time.timeScale = 0f;
+            inputProvider.enabled = false;
             PlayerInputController.Instance.HasPaused();
             Cursor.visible = true;
 
@@ -95,6 +103,7 @@ public class PauseController : MonoBehaviour
                 pauseMenuInstance.SetActive(true);
                 pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
                 Time.timeScale = 0f;
+                inputProvider.enabled = false;
                 PlayerInputController.Instance.HasPaused();
                 Cursor.visible = true;
             }
@@ -102,6 +111,7 @@ public class PauseController : MonoBehaviour
             {
                 Cursor.visible = false;
                 Time.timeScale = 1f;
+                inputProvider.enabled = true;
                 isPausing = false;
                 pauseMenuInstance.SetActive(false);
                 PlayerInputController.Instance.HasPaused();
@@ -115,6 +125,7 @@ public class PauseController : MonoBehaviour
     {
         Cursor.visible = false;
         Time.timeScale = 1f;
+        inputProvider.enabled = true;
         isPausing = false;
         PlayerInputController.Instance.HasPaused();
     }
