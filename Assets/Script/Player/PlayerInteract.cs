@@ -40,7 +40,6 @@ public class PlayerInteract : MonoBehaviour
             else
             {
                 currentFeedback.SetActive(true);
-                HudCanvas.SetActive(false);
             }
         }
         else
@@ -48,7 +47,6 @@ public class PlayerInteract : MonoBehaviour
             if (currentFeedback != null)
             {
                 currentFeedback.SetActive(false);
-                HudCanvas.SetActive(true);
             }
         }
 

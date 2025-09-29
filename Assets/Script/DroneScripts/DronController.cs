@@ -256,7 +256,7 @@ public class DronController : MonoBehaviour
         PlayerStateController.instance.StopMoving();
         canMove = true;
         GetComponent<Animator>().SetBool("flying", true);
-        PlayerReferences.instance.GetHUD().SetActive(true);
+        PlayerReferences.instance.GetHUD().SetActive(false);
     }
 
     public void StopDron()
@@ -266,7 +266,7 @@ public class DronController : MonoBehaviour
         PlayerStateController.instance.ResumeMoving();
         canMove = false;
         GetComponent<Animator>().SetBool("flying", false);
-        PlayerReferences.instance.GetHUD().SetActive(false);
+        PlayerReferences.instance.GetHUD().SetActive(true);
     }
 
     private void PlayDroneSound()
