@@ -3,9 +3,9 @@ using UnityEngine;
 public class ButtonToMeteoComunicator : MonoBehaviour
 {
 
-    public void ToggleFog()
+    public void ToggleFog(bool value)
     {
-        MeteoModes.instance.ToggleFog();
+        MeteoModes.instance.ToggleFog(value);
     }
 
     public void ToggleRain()
@@ -18,6 +18,17 @@ public class ButtonToMeteoComunicator : MonoBehaviour
     public void ToggleClouds()
     {
         MeteoModes.instance.ToggleClouds();
+    }
+
+    public void SetDay()
+    {
+        MeteoModes.instance.DayMode();
+    }
+
+    public void SetNight()
+    {
+
+        MeteoModes.instance.NightMode();
     }
 }
 

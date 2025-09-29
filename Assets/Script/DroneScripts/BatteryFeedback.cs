@@ -19,17 +19,21 @@ public class BatteryFeedback : MonoBehaviour
     // Aqui voy actualizando la barra, hace falta que cuando te quedes sin bateria apareca algo que te avise
     void Update()
     {
-        maxBattery = BatteryController.Instance.MaxBatteryAmount();
-        if (BatteryController.Instance.HasBattery())
+        if (BatteryController.Instance)
         {
-            float percentage = Mathf.Floor((BatteryController.Instance.BatteryAmount() / maxBattery) * 100 );
-            batteryPercentage.text = percentage.ToString() + "%" ;
-            batteryBar.fillAmount = percentage/100;
+            maxBattery = BatteryController.Instance.MaxBatteryAmount();
+            if (BatteryController.Instance.HasBattery())
+            {
+                float percentage = Mathf.Floor((BatteryController.Instance.BatteryAmount() / maxBattery) * 100);
+                batteryPercentage.text = percentage.ToString() + "%";
+                batteryBar.fillAmount = percentage / 100;
+            }
+            else
+            {
+                batteryBar.fillAmount = 0;
+                Debug.Log("Ran Out of battery");
+            }
         }
-        else
-        {
-            batteryBar.fillAmount = 0;
-            Debug.Log("Ran Out of battery");
-        }
+
     }
 }

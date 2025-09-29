@@ -49,6 +49,30 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 3302065f671a8450b82c9ddf07426f3a, type: 3}
   - {fileID: 2800000, guid: 56a77a3e8d64f47b6afe9e3c95cb57d5, type: 3}
   m_Shader: {fileID: 4800000, guid: 0849e84e3d62649e8882e9d6f056a017, type: 3}
+--- !u!114 &-944203513788673699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a01d188a26328b4b920cdfdfa2d0def, type: 3}
+  m_Name: VolumetricFogRendererFeatureLite
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  renderInSceneView: 0
+  renderPassEvent: 450
+  settings:
+    fogDownsampleLevel: 2
+    fogMaterial: {fileID: 2100000, guid: 10d77fea58680bd4497eec1c177490b2, type: 2}
+    depthMaterial: {fileID: 2100000, guid: 1d99b61e891acf84683aee11f0e05a8b, type: 2}
+    compositeMaterial: {fileID: 2100000, guid: 03b06fe23c18b44479459d11dc405c49, type: 2}
+    compositeMaterialColourTextureName: _ColourTexture
+    compositeMaterialFogTextureName: _FogTexture
+    compositeMaterialDepthTextureName: _DepthTexture
+    renderTextureQuality: 2
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,7 +102,8 @@ MonoBehaviour:
   - {fileID: 7638165734824632692}
   - {fileID: 2807542737883846059}
   - {fileID: -5900928643632276397}
-  m_RendererFeatureMap: adc0de57c6d2eee57461c85f4437006aab554bbf3e65f62653dc5ebfa9b01bae
+  - {fileID: -944203513788673699}
+  m_RendererFeatureMap: adc0de57c6d2eee57461c85f4437006aab554bbf3e65f62653dc5ebfa9b01bae5d51f324e883e5f2
   m_UseNativeRenderPass: 0
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}

@@ -89,6 +89,7 @@ public class DroneCrash : MonoBehaviour
         virtualCamera.Priority = 12;
         thirrdPersonViewCamera.LookAt = transform;
         thirrdPersonViewCamera.Follow = previousTransform;
+
         controller.StartMovingDron();
         isCrashed = false;
     }

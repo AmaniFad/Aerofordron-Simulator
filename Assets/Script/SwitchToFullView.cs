@@ -10,6 +10,7 @@ public class SwitchToFullView : MonoBehaviour
 
     private void Start()
     {
+        hudPlayer = PlayerReferences.instance.GetHUD();
         instance = this;
     }
     // Update is called once per frame

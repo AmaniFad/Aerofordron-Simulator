@@ -51,6 +51,7 @@ public class DronController : MonoBehaviour
     #endregion
     void Start()
     {
+
         rb = GetComponent<Rigidbody>(); 
         currentCameraTilt = 0;
         //currentCameraRotationSimplified = 0;
@@ -59,6 +60,7 @@ public class DronController : MonoBehaviour
         mMovementBehaviour = GetComponent<MovementBehaviour>();
         //tiltAngle = 25;
         rotationSpeed = 150;
+        PlayerReferences.instance.SetDron(this.gameObject);
     }
 
     private bool CheckIfGrounded()
@@ -254,7 +256,7 @@ public class DronController : MonoBehaviour
         PlayerStateController.instance.StopMoving();
         canMove = true;
         GetComponent<Animator>().SetBool("flying", true);
-        PlayerReferences.instance.GetHUD().SetActive(true);
+        PlayerReferences.instance.GetHUD().SetActive(false);
     }
 
     public void StopDron()
@@ -264,7 +266,7 @@ public class DronController : MonoBehaviour
         PlayerStateController.instance.ResumeMoving();
         canMove = false;
         GetComponent<Animator>().SetBool("flying", false);
-        PlayerReferences.instance.GetHUD().SetActive(false);
+        PlayerReferences.instance.GetHUD().SetActive(true);
     }
 
     private void PlayDroneSound()
@@ -288,6 +290,7 @@ public class DronController : MonoBehaviour
 
     public void StartMovingDron()
     {
+        if (!PlayerStateController.instance.CanMove())
         canMove = true;
     }
     public bool IsGrounded()
