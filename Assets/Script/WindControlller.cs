@@ -61,7 +61,9 @@ public class WindControlller : MonoBehaviour
     }
     public Vector3 GetWindForce()
     {
+        Debug.Log(new Vector3(rightWind - leftWind, 0f, frontWind - backWind));
         return new Vector3(rightWind - leftWind, 0f, frontWind - backWind);
+        
     }
 
     private IEnumerator _SpawnWindEffects()

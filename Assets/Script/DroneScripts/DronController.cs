@@ -191,11 +191,11 @@ public class DronController : MonoBehaviour
         //    playerOnGroundFeedback.SetActive(false);
         }*/
     }
-
+    // hay qu ehacer que el dron baje su veolciada ahta que se adapte a la del viendto, y no de golpe, tambien hay que hacer que sea mas complicado volaraq hacia el lado del viento y por ultimo hay que poner que aunk haya viento en modo gps el dorn quieto no se mueve
     private void OnDestroy()
     {
         StopPlayDroneSound();
-    }
+    }s
     private void SendDronRotation(Vector2 inputDirection)
     {
         //Necesario sino vuelve a 0 la rotation para los lados el momento que dejes de pulsar
