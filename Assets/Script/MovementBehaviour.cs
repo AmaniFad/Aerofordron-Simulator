@@ -68,11 +68,13 @@ public class MovementBehaviour : MonoBehaviour
     public void Deceleration(float deceleration)
     {
         speed -= deceleration;
-
-        // Limita la velocidad a 0 para evitar que el objeto se mueva hacia atr�s
         speed = Mathf.Max(speed, 0);
-
-        // Aplica la velocidad al objeto
         rb.linearVelocity = transform.forward * speed;
+    }
+
+    [System.Obsolete]
+    public void nonInputInputls(Vector3 vector, float impuls)
+    {
+        rb.velocity = Vector3.Lerp(rb.velocity, vector, Time.deltaTime * impuls);
     }
 }

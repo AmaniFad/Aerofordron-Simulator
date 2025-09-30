@@ -39,13 +39,14 @@ public class DronController : MonoBehaviour
     [SerializeField] private float cameraMovementSpeed;
     private bool isGrounded;
     private float lastTiltZ;
+
     [Header("SpawnPoints")]
     [SerializeField] private Transform waypoints;
-    private int currentWaypointIndex = 0;
-    private bool remoteDron;
 
+    private bool remoteDron;
     private bool aux;
 
+    public bool _attiMode;
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
     #endregion
@@ -131,6 +132,8 @@ public class DronController : MonoBehaviour
     {
 
     }
+
+    [System.Obsolete]
     private void TryToMoveDron()
     {
         Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
@@ -152,12 +155,36 @@ public class DronController : MonoBehaviour
         {
             Vector3 direction = transform.right * inputDirection.x + transform.forward * inputDirection.y;
 
-            mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z));
-            SendDronRotation(inputDirection);
-            if (WindControlller.Instance != null)
+            if (_attiMode)
             {
-                mMovementBehaviour.MoveWithoutSpeed(WindControlller.Instance.GetWindForce());
+                if (inputDirection.magnitude > 0.01f)
+                {
+                    mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z));
+                    SendDronRotation(inputDirection);
+                }
+                else
+                {
+                    // Sueltas los sticks → que decaiga lentamente la velocidad
+                    mMovementBehaviour.nonInputInputls(new Vector3(0, rb.velocity.y, 0), 0.05f);
+                }
+                if (WindControlller.Instance != null)
+                {
+                    mMovementBehaviour.MoveWithoutSpeed(WindControlller.Instance.GetWindForce());
+                }
             }
+            else // GPS Mode
+            {
+                if (inputDirection.magnitude > 0.01f)
+                {
+                    mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z));
+                    SendDronRotation(inputDirection);
+                }
+                else
+                {
+                    mMovementBehaviour.nonInputInputls(Vector3.zero,4.5f);
+                }
+            }
+            SendDronRotation(inputDirection);
         }
         float cameraMovement = DronInputController.Instance.GetCameraMovement();
         /*if (cameraMovement != 0)
@@ -191,11 +218,11 @@ public class DronController : MonoBehaviour
         //    playerOnGroundFeedback.SetActive(false);
         }*/
     }
-    // hay qu ehacer que el dron baje su veolciada ahta que se adapte a la del viendto, y no de golpe, tambien hay que hacer que sea mas complicado volaraq hacia el lado del viento y por ultimo hay que poner que aunk haya viento en modo gps el dorn quieto no se mueve
+    // consume mas en modo atti
     private void OnDestroy()
     {
         StopPlayDroneSound();
-    }s
+    }
     private void SendDronRotation(Vector2 inputDirection)
     {
         //Necesario sino vuelve a 0 la rotation para los lados el momento que dejes de pulsar
@@ -297,7 +324,6 @@ public class DronController : MonoBehaviour
     {
         return isGrounded;
     }
-
     private void returnToSpawn()
     {
         if (DronInputController.Instance.GetRemoteDron())
@@ -307,52 +333,6 @@ public class DronController : MonoBehaviour
         }
         if(remoteDron)
         {
-            /*float speed = 750f;
-
-            Transform targetWaypoint = waypoints[currentWaypointIndex];
-
-            // direccion
-            Vector3 direction = (targetWaypoint.position - transform.position).normalized;
-            float distanceToWaypoint = Vector3.Distance(transform.position, targetWaypoint.position);
-
-            
-            //reducir la velocidad
-            if (distanceToWaypoint < 15f)
-            {
-                speed = 70;
-            }
-            //para que baje esteticamente
-            if (targetWaypoint.gameObject.name == "Spawnpoint")
-            {
-                speed = 50;
-                mMovementBehaviour.MoveDronAuto(Vector3.down, speed);
-
-
-                // Estabilizar: dejar la rotaci�n sin inclinaci�n (horizontal al suelo)
-                Quaternion stableRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
-                transform.rotation = Quaternion.Slerp(transform.rotation, stableRotation, Time.deltaTime * 2f);
-            }
-            else
-            {
-                mMovementBehaviour.MoveDronAuto(direction, speed);
-
-                // rotacion suave
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
-            }
-
-            //ultimo ounto
-            if (distanceToWaypoint <= 0.5f)
-            {
-                currentWaypointIndex++;
-
-                if (currentWaypointIndex >= waypoints.Count)
-                {
-                    mMovementBehaviour.StopMovingOnY();
-                    remoteDron = false;
-                    currentWaypointIndex = 0;
-                }
-            }*/
             float speed = 750f;
             Transform targetWaypoint = waypoints;
 
@@ -395,8 +375,6 @@ public class DronController : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
             }
 
-
-            
             if (distanceXZ <= 0.5f && distanceY <= 0.2f)
             {
                 mMovementBehaviour.StopMovingOnY();
@@ -406,5 +384,3 @@ public class DronController : MonoBehaviour
         }
     }
 }
-
-
