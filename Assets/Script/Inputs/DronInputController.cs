@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class DronInputController : MonoBehaviour
 {
@@ -12,10 +13,11 @@ public class DronInputController : MonoBehaviour
     private bool changeCamera;
     private float cameraMovement;
     private float aguaInput;
-    private bool buttonPressed = false;
-    private bool isRemoteDron; 
+    //Falta poner la input action
+    private bool isRemoteDron;
     private void Start()
     {
+
         Instance = this;
     }
     public void OnDroneRightStick(InputValue inputValue)
@@ -23,9 +25,13 @@ public class DronInputController : MonoBehaviour
         directionInput = inputValue.Get<Vector2>();
     }
 
+    public bool GetRemoteDron()
+    {
+        return isRemoteDron;
+    }
     public void OnDroneLeftStick(InputValue inputValue)
     {
-
+        
         verticalInput = inputValue.Get<Vector2>().y;
         rotationalInput = inputValue.Get<Vector2>().x;
 
@@ -37,14 +43,13 @@ public class DronInputController : MonoBehaviour
     }
     public void OnAgua(InputValue value)
     {
-        if (value.isPressed && !buttonPressed)
+        if (value.isPressed)
         {
-            aguaInput = (aguaInput == 0) ? 1 : 0;
-            buttonPressed = true;
+            aguaInput = 1;
         }
-        else if (!value.isPressed)
+        else
         {
-            buttonPressed = false;
+            aguaInput = 0;
         }
     }
     public float GetCameraMovement()
@@ -53,11 +58,7 @@ public class DronInputController : MonoBehaviour
     }
     public float GetVerticalInput()
     {
-        if (verticalInput > -0.2f && verticalInput < 0.1f)
-        {
-            verticalInput = 0;
-        }
-            return verticalInput;
+        return verticalInput;
     }
 
     public float GetRotationalInput()
@@ -89,21 +90,9 @@ public class DronInputController : MonoBehaviour
             changeCamera = true;
         }
     }
-    public void OnRemoteDron(InputValue value)
-    {
-        if (value.isPressed)
-        {
-            isRemoteDron = true;
-        }
-        else
-        {
-            isRemoteDron = false;
-        }
-    }
-    public bool GetRemoteDron()
-    {
-        return isRemoteDron;
-    }
+
+
+
     public void HasChangedCamera()
     {
         changeCamera = false;

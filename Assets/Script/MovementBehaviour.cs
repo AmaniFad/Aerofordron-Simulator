@@ -19,16 +19,11 @@ public class MovementBehaviour : MonoBehaviour
     {
         rb.AddForce(movementDirection.normalized * speed * Time.deltaTime , ForceMode.Force);
     }
+
     public void MoveDronAuto(Vector3 movementDirection, float speedAuto)
     {
         rb.AddForce(movementDirection.normalized * speedAuto * Time.deltaTime, ForceMode.Force);
     }
-    public void MoveDronGost(Vector3 movementDirection)
-    {
-        movementDirection.Normalize();
-        transform.position = movementDirection * speed * Time.deltaTime;
-    }
-
     public void MoveWithoutSpeed(Vector3 movementDirection)
     {
         rb.AddForce(movementDirection * Time.deltaTime, ForceMode.Force);
@@ -43,13 +38,6 @@ public class MovementBehaviour : MonoBehaviour
     public void StopMovingOnY()
     {
         rb.AddForce(new Vector3(0f,-Physics.gravity.y,0f));
-    }
-
-    public void StopMoving()
-    {
-        Vector3 velocity = new Vector3(0,Physics.gravity.y,0);
-        rb.linearVelocity = velocity; 
-        
     }
 
     public void MoveRB3D(Vector3 input)

@@ -15,9 +15,9 @@ public class PauseController : MonoBehaviour
 
     [SerializeField] private CinemachineInputProvider inputProvider;
 
-    public bool GetISPause() 
+    public bool GetISPause()
     {
-        return isPausing; 
+        return isPausing;
     }
     // Start is called before the first frame update
     void Start()
@@ -57,7 +57,7 @@ public class PauseController : MonoBehaviour
                 Time.timeScale = 1f;
                 inputProvider.enabled = true;
             }
-            
+
         }
 
 
@@ -115,8 +115,8 @@ public class PauseController : MonoBehaviour
                 pauseMenuInstance.SetActive(true);
                 pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
                 Time.timeScale = 0f;
-                CinemachineVirtualCamera camera =(CinemachineVirtualCamera) Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
-                inputProvider = (CinemachineInputProvider) camera.GetComponent<CinemachineInputProvider>();
+                CinemachineVirtualCamera camera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
+                inputProvider = (CinemachineInputProvider)camera.GetComponent<CinemachineInputProvider>();
                 inputProvider.enabled = false;
                 PlayerInputController.Instance.HasPaused();
                 Cursor.visible = true;

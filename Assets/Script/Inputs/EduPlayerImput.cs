@@ -194,7 +194,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""name"": ""Agua"",
                     ""type"": ""Value"",
                     ""id"": ""acfbdb18-efc0-4d74-bb60-69ac61bf7cd8"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -720,17 +720,6 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""44bd9446-3a77-4241-baed-2210542c383c"",
                     ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Agua"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d9050e5e-f2f7-44cc-b46f-263c8ed87f6b"",
-                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

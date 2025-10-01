@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,7 +15,14 @@ public class PlayerController : MonoBehaviour
     private PlayerInteract playerInteract;
     private FMOD.Studio.EventInstance foosteps;
     private Coroutine isMoving;
-    [SerializeField] private GameObject modelPlayer;
+    [SerializeField] private UnityEngine.XR.Interaction.Toolkit.Interactors.XRDirectInteractor interactor;
+    [SerializeField] private DynamicMoveProvider movement;
+
+
+    private void OnEnable()
+    {
+
+    }
     void Start()
     {
         if (Instance == null)
@@ -30,7 +39,17 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         playerInteract = GetComponent<PlayerInteract>();
     }
-
+    private void Update()
+    {
+        if (PlayerStateController.instance.CanMove())
+        {
+            movement.moveSpeed = 1;
+        }
+        else
+        {
+            movement.moveSpeed = 0;
+        }
+    }
     private void FixedUpdate()
     {
         if (cameraTransform == null)
@@ -52,11 +71,17 @@ public class PlayerController : MonoBehaviour
             cameraForward.y = 0;
             cameraRight.y = 0;
 
-            modelPlayer.transform.localRotation = Quaternion.LookRotation(cameraForward);
-
             cameraForward.Normalize();
             cameraRight.Normalize();
             Vector3 input = cameraForward * playerWasd.y + cameraRight * playerWasd.x;
+            if (input.x > -0.1f && input.x < 0.1f)
+            {
+                input.x = 0;
+            }
+            if (input.z > -0.1f && input.z < 0.1f)
+            {
+                input.z = 0;
+            }
             if (isMoving == null && input != Vector3.zero)
             {
                 isMoving = StartCoroutine(_PlayFootstep());
@@ -64,19 +89,11 @@ public class PlayerController : MonoBehaviour
             if (PlayerInputController.Instance.IsRunning())
             {
                 MB.RunRB(input, runMultiplier);
-                modelPlayer.GetComponent<Animator>().SetFloat("Blend", 1f);
             }
             else
             {
                 MB.MoveRB3D(input);
-                modelPlayer.GetComponent<Animator>().SetFloat("Blend", 0.3f);
             }
-        }
-        if (PlayerInputController.Instance.GetPlayerInput() == Vector2.zero)
-        {
-            MB.StopMoving();
-            modelPlayer.GetComponent<Animator>().SetFloat("Blend", 0f);
-            modelPlayer.GetComponent<Animator>().SetTrigger("normal");
         }
     }
 
