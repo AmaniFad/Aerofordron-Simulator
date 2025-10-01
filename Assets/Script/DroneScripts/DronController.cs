@@ -46,7 +46,7 @@ public class DronController : MonoBehaviour
     private bool remoteDron;
     private bool aux;
 
-    public bool _attiMode;
+    public float _attiMode;
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
     #endregion
@@ -151,13 +151,14 @@ public class DronController : MonoBehaviour
         if (verticalDirection < -0.2f || verticalDirection > 0.05f)
             mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0));
 
+        _attiMode = DronInputController.Instance.GetModeAtti();
 
         //Debug.Log(CheckIfGrounded());
         if (!CheckIfGrounded())
         {
             Vector3 direction = transform.right * inputDirection.x + transform.forward * inputDirection.y;
 
-            if (_attiMode)
+            if (_attiMode == 1)
             {
                 if (inputDirection.magnitude > 0.01f)
                 {

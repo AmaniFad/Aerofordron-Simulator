@@ -207,6 +207,15 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ModeDron"",
+                    ""type"": ""Button"",
+                    ""id"": ""26aaa010-4522-412b-bb3b-240ee4a51142"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -757,6 +766,17 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""ChangeCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8e46170-5797-4a22-a398-1d0d941f802b"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ModeDron"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1391,6 +1411,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         m_Player_FullView = m_Player.FindAction("FullView", throwIfNotFound: true);
         m_Player_Agua = m_Player.FindAction("Agua", throwIfNotFound: true);
         m_Player_RemoteDron = m_Player.FindAction("RemoteDron", throwIfNotFound: true);
+        m_Player_ModeDron = m_Player.FindAction("ModeDron", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1503,6 +1524,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_FullView;
     private readonly InputAction m_Player_Agua;
     private readonly InputAction m_Player_RemoteDron;
+    private readonly InputAction m_Player_ModeDron;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1566,6 +1588,10 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/RemoteDron".
         /// </summary>
         public InputAction @RemoteDron => m_Wrapper.m_Player_RemoteDron;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/ModeDron".
+        /// </summary>
+        public InputAction @ModeDron => m_Wrapper.m_Player_ModeDron;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1631,6 +1657,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @RemoteDron.started += instance.OnRemoteDron;
             @RemoteDron.performed += instance.OnRemoteDron;
             @RemoteDron.canceled += instance.OnRemoteDron;
+            @ModeDron.started += instance.OnModeDron;
+            @ModeDron.performed += instance.OnModeDron;
+            @ModeDron.canceled += instance.OnModeDron;
         }
 
         /// <summary>
@@ -1681,6 +1710,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @RemoteDron.started -= instance.OnRemoteDron;
             @RemoteDron.performed -= instance.OnRemoteDron;
             @RemoteDron.canceled -= instance.OnRemoteDron;
+            @ModeDron.started -= instance.OnModeDron;
+            @ModeDron.performed -= instance.OnModeDron;
+            @ModeDron.canceled -= instance.OnModeDron;
         }
 
         /// <summary>
@@ -2242,6 +2274,13 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRemoteDron(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ModeDron" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnModeDron(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
