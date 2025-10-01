@@ -151,6 +151,8 @@ public class DronController : MonoBehaviour
         if (verticalDirection < -0.2f || verticalDirection > 0.05f)
             mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0));
 
+
+        //Debug.Log(CheckIfGrounded());
         if (!CheckIfGrounded())
         {
             Vector3 direction = transform.right * inputDirection.x + transform.forward * inputDirection.y;
@@ -181,7 +183,7 @@ public class DronController : MonoBehaviour
                 }
                 else
                 {
-                    mMovementBehaviour.nonInputInputls(Vector3.zero,4.5f);
+                    mMovementBehaviour.nonInputInputls(Vector3.zero,5f);
                 }
             }
             SendDronRotation(inputDirection);
