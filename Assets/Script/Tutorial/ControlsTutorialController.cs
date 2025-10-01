@@ -61,13 +61,17 @@ public class ControlsTutorialController : MonoBehaviour
                 return;
             if (PlayerInputController.Instance.IsUsingGamepad())
             {
-                keyboardControl.SetActive(false);
-                gamePadControl.SetActive(true);
+                if (keyboardControl)
+                    keyboardControl.SetActive(false);
+                if (gamePadControl)
+                    gamePadControl.SetActive(true);
             }
             else
             {
-                keyboardControl.SetActive(true);
-                gamePadControl.SetActive(false);
+                if (keyboardControl)
+                    keyboardControl.SetActive(true);
+                if (gamePadControl)
+                    gamePadControl.SetActive(false);
 
             }
         }
