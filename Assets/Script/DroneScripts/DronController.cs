@@ -170,13 +170,16 @@ public class DronController : MonoBehaviour
                     // Sueltas los sticks → que decaiga lentamente la velocidad
                     mMovementBehaviour.nonInputInputls(new Vector3(0, rb.velocity.y, 0), 0.05f);
                 }
-                if (WindControlller.Instance != null)
+                if (GetComponent<WindObject>() != null)
                 {
-                    mMovementBehaviour.MoveWithoutSpeed(WindControlller.Instance.GetWindForce());
+                    //mMovementBehaviour.MoveWithoutSpeed(WindControlller.Instance.GetWindForce());
+                    GetComponent<WindObject>().SetWindDampen(1f);
                 }
             }
             else // GPS Mode
             {
+                GetComponent<WindObject>().SetWindDampen(0f);
+
                 if (inputDirection.magnitude > 0.01f)
                 {
                     mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z));
