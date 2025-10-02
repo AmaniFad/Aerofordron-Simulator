@@ -133,8 +133,8 @@ public class DronController : MonoBehaviour
     }
     private void TryToMoveDron()
     {
-        Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
-        float verticalDirection = DronInputController.Instance.GetVerticalInput();
+        Vector2 inputDirection = DisplayInputData.rightControllerDirection;
+        float verticalDirection = DisplayInputData.leftControllerDirection.y;
 
         if (transform.position.y >= maxHeight)
         {
@@ -217,7 +217,7 @@ public class DronController : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(tiltAroundX, currentYRotation, tiltAroundZ);
 
         // Aqui se pone la rotacion Recordatorio no utilizar time.DeltaTime en un fixedUpdate
-        float additionalRotationY = DronInputController.Instance.GetRotationalInput() * rotationSpeed;
+        float additionalRotationY = DisplayInputData.leftControllerDirection.x * rotationSpeed;
         targetRotation *= Quaternion.Euler(0, additionalRotationY, 0);
 
         // Apply the rotation with slerp

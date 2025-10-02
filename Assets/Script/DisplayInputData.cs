@@ -31,6 +31,7 @@ public class DisplayInputData : MonoBehaviour
         Debug.Log(tryInput.IsPressed());
         if (_inputData._leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out Vector2 direction))
         {
+            Debug.Log("DisplayInput Left controller " + leftControllerDirection);
             leftControllerDirection = direction;
         }
 
