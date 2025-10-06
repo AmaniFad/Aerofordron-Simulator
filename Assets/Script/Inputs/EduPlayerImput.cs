@@ -210,12 +210,12 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""ModeDron"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""26aaa010-4522-412b-bb3b-240ee4a51142"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [

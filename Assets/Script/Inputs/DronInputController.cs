@@ -51,12 +51,13 @@ public class DronInputController : MonoBehaviour
     }
     public void OnModeDron(InputValue value)
     {
+        Debug.Log(value.ToString());
         if (value.isPressed && !buttonPressedMode) 
         {
             isModeAtti = (isModeAtti == 0) ? 1 : 0;
             buttonPressedMode = true;
         }
-        else if(value.isPressed) 
+        else if(!value.isPressed) 
         {
             buttonPressedMode = false;
         }
