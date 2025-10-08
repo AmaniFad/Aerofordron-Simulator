@@ -17,14 +17,17 @@ public class InputData : MonoBehaviour
     }
     private void InitializeInputDevices()
     {
-        
+
         if(!_rightController.isValid)
             InitializeInputDevice(InputDeviceCharacteristics.Controller | InputDeviceCharacteristics.Right, ref _rightController);
         if (!_leftController.isValid) 
             InitializeInputDevice(InputDeviceCharacteristics.Controller | InputDeviceCharacteristics.Left, ref _leftController);
         if (!_HMD.isValid) 
             InitializeInputDevice(InputDeviceCharacteristics.HeadMounted, ref _HMD);
+        List<InputDevice> devices = new List<InputDevice>();
+        InputDevices.GetDevices(devices);
 
+        print(devices.Count);
     }
 
     private void InitializeInputDevice(InputDeviceCharacteristics inputCharacteristics, ref InputDevice inputDevice)

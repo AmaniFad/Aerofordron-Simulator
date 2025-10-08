@@ -28,7 +28,8 @@ public class DisplayInputData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(tryInput.IsPressed());
+        _inputData._rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out Vector2 righ234tDirection);
+        Debug.Log(righ234tDirection);
         if (_inputData._leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out Vector2 direction))
         {
             Debug.Log("DisplayInput Left controller " + leftControllerDirection);
