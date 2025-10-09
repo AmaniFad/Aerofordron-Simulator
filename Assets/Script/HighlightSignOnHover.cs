@@ -34,6 +34,7 @@ public class HighlightSignOnHover : MonoBehaviour
         {
 
             currentOutline = outline;
+            if(signText)
             signText.color = Color.white;
             outline.OutlineWidth = 10;
         }
@@ -53,6 +54,7 @@ public class HighlightSignOnHover : MonoBehaviour
         {
 
             currentOutline.OutlineWidth = 0;
+            if (signText)
             signText.color = Color.black;
         }
         if (TryGetComponent<Image>(out Image image))

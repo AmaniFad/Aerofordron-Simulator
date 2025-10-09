@@ -39,42 +39,43 @@ public class PlayerStateController : MonoBehaviour
 
     public void StopCameraMovement()
     {
-        playerCamera.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = 0;
-        playerCamera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = 0;
+        //playerCamera.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = 0;
+        //playerCamera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = 0;
 
 
     }
 
     public void ResumeCameraMovement()
     {
-        playerCamera.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = 150;
-        playerCamera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = 300;
+        //playerCamera.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = 150;
+        //playerCamera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = 300;
 
 
     }
 
     public void CameraToDron(GameObject dron)
     {
-        if (dron != null)
-        {
-            dronCamera.Priority = 11;
-            dronCamera.LookAt = dron.transform;
-            playerCamera.Priority = 10;
-        }
-        else
-        {
-            dronCamera.Priority = 10;
-            playerCamera.Priority = 11;
-        }
+        //if (dron != null)
+        //{
+        //    dronCamera.Priority = 11;
+        //    dronCamera.LookAt = dron.transform;
+        //    playerCamera.Priority = 10;
+        //}
+        //else
+        //{
+        //    dronCamera.Priority = 10;
+        //    playerCamera.Priority = 11;
+        //}
     }
 
     public void CameraToPlayer()
     {
-        playerCamera.Priority = 11;
-        dronCamera.Priority = 10;
+        //playerCamera.Priority = 11;
+        //dronCamera.Priority = 10;
     }
     public CinemachineVirtualCamera GetDronCamera()
     {
-        return dronCamera;
+        return null;
+        //return dronCamera;
     }
 }

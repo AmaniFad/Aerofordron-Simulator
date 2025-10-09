@@ -13,19 +13,19 @@ public class DronZoom : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dronCamera = PlayerStateController.instance.GetDronCamera();
+        //dronCamera = PlayerStateController.instance.GetDronCamera();
         player = PlayerReferences.instance.GetPlayer();
     }
 
     private void Update()
     {
-        frameCounter++;
+        //frameCounter++;
 
-        if (frameCounter % 5 == 0)
-        {
-            CheckIfZoom();
-            frameCounter = 0;
-        }
+        //if (frameCounter % 5 == 0)
+        //{
+        //    CheckIfZoom();
+        //    frameCounter = 0;
+        //}
     }
 
     private void CheckIfZoom()
