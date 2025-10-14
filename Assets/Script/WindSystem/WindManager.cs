@@ -15,13 +15,8 @@ public class WindManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        windObjects = new List<Rigidbody>();
     }
-    void Start()
-    {
-        windObjects = new List<Rigidbody>();   
-    }
-
-    // Update is called once per frame
     void Update()
     {
 
