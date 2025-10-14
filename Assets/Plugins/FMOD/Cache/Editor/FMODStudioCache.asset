@@ -81,6 +81,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-8399770391906145524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/DronHelix/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3570537280
+    data2: 371892823
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-7414259212575173824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,8 +129,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -1988661366231329593}
-  - {fileID: 9007933164598685021}
+  - {fileID: -5023607490049461380}
+  - {fileID: -8399770391906145524}
   MinDistance: 1
   MaxDistance: 20
   Length: 66480
@@ -137,6 +161,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-5795297594500240585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Radio
+  m_EditorClassIdentifier: 
+  Path: event:/Radio
+  Guid:
+    Data1: -442053374
+    Data2: 1323436339
+    Data3: -335060088
+    Data4: -62032595
+  Banks:
+  - {fileID: -4915763324935556390}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2749
 --- !u!114 &-5330824799129210497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +242,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-5023607490049461380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/DronHelix/Volume
+  m_EditorClassIdentifier: 
+  Name: Volume
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 739237380
+    data2: 3186113931
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-4915763324935556390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +281,7 @@ MonoBehaviour:
   Path: AerofordronSimFMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638956915913378780
+  lastModified: 638960395473002769
   FileSizes:
   - Name: Desktop
     Value: 1365184
@@ -337,13 +412,13 @@ MonoBehaviour:
   - {fileID: 3079350859005122796}
   - {fileID: -9067372619325631916}
   - {fileID: -3236072464313056059}
-  - {fileID: -9155364175462762188}
+  - {fileID: -5795297594500240585}
   EditorParameters: []
   MasterBanks:
   - {fileID: -3291120647248060449}
   StringsBanks:
   - {fileID: 5577932714807398085}
-  cacheTime: 638956915913378780
+  cacheTime: 638960395473002769
   cacheVersion: 131609
 --- !u!114 &3079350859005122796
 MonoBehaviour:
@@ -387,7 +462,7 @@ MonoBehaviour:
   Path: AerofordronSimFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638956915913158557
+  lastModified: 638960395472922703
   FileSizes:
   - Name: Desktop
     Value: 1578
