@@ -191,6 +191,8 @@ public class DronController : MonoBehaviour
             }
             SendDronRotation(inputDirection);
         }
+
+        _attiMode = 0;
         float cameraMovement = DronInputController.Instance.GetCameraMovement();
         /*if (cameraMovement != 0)
         //{

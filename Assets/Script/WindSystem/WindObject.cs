@@ -16,6 +16,10 @@ public class WindObject : MonoBehaviour
         this.windDampen = windDampen;
         currentWindDampen = windDampen;
     }
+    public float GetWindDampen()
+    {
+        return currentWindDampen;
+    }
     void Start()
     {
         currentWindDampen = windDampen;
@@ -31,6 +35,7 @@ public class WindObject : MonoBehaviour
         }
     }
 
+    
     // Update is called once per frame
     void Update()
     {

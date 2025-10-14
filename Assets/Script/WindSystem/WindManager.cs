@@ -185,7 +185,7 @@ public class WindManager : MonoBehaviour
             if (rb.isKinematic) continue;
             if (((1 << rb.gameObject.layer) & affectedLayers) == 0) continue;
             if (areaLimited && areaBounds) { if (!areaBounds.bounds.Contains(rb.worldCenterOfMass)) continue; }
-            rb.AddForce(dir * force, forceMode);
+            rb.AddForce(dir * force * rb.gameObject.GetComponent<WindObject>().GetWindDampen(), forceMode);
         }
     }
 
