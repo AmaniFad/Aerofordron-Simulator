@@ -95,6 +95,7 @@ public class PauseController : MonoBehaviour
         if (!pauseMenuInstance)
         {
             pauseMenuInstance = Instantiate(pauseMenu);
+            pauseMenu.GetComponent<Canvas>().worldCamera = Camera.main;
             pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
             isPausing = true;
             pauseMenuInstance.SetActive(true);
