@@ -73,6 +73,10 @@ public class SceneLoader : MonoBehaviour
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
         GameObject b = Instantiate(sceneTransitions);
+        b.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+
+        b.GetComponent<Canvas>().planeDistance = 0.5f;
+        b.GetComponent <Canvas>().worldCamera = Camera.main;
         DontDestroyOnLoad(b);
         b.GetComponent<Animator>().SetTrigger("leaveTransition");
 
@@ -82,6 +86,7 @@ public class SceneLoader : MonoBehaviour
         }
         Debug.Log("Works");
         b.GetComponent<Animator>().SetTrigger("enterTransition");
+        b.GetComponent<Canvas>().worldCamera = Camera.main;
         FMODUnity.RuntimeManager.GetVCA("vca:/General").setVolume(previousVolume);
         Destroy(transitionController);
     }
