@@ -29,7 +29,6 @@ public class DisplayInputData : MonoBehaviour
     void Update()
     {
         _inputData._rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out Vector2 righ234tDirection);
-        Debug.Log(righ234tDirection);
         if (_inputData._leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out Vector2 direction))
         {
             Debug.Log("DisplayInput Left controller " + leftControllerDirection);
@@ -59,6 +58,7 @@ public class DisplayInputData : MonoBehaviour
         if (_inputData._rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.secondaryButton, out bool menuButtonPress2))
         {
             isMenuPressed = menuButtonPress2;
+            print(isMenuPressed);
         }
         if (_inputData._leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.secondaryButton, out bool cameraUp))
         {

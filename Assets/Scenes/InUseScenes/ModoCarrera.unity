@@ -773,7 +773,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &25818762
 Canvas:
   m_ObjectHideFlags: 0
@@ -783,7 +783,7 @@ Canvas:
   m_GameObject: {fileID: 25818759}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -804,10 +804,10 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25818759}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: -0, y: 0.99969167, z: -0, w: -0.024829885}
+  m_LocalPosition: {x: 0, y: 0, z: 181.978}
+  m_LocalScale: {x: 0.002, y: 0.002, z: 0.002}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 777955486}
   - {fileID: 309120592}
@@ -819,12 +819,12 @@ RectTransform:
   - {fileID: 1137756354}
   - {fileID: 1642393602}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 182.846, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 182.07, y: 1.958}
+  m_SizeDelta: {x: 1920, y: 1079.4937}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &25818764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4872,7 +4872,7 @@ PrefabInstance:
     - target: {fileID: 5453106001587266999, guid: 9b28ee20edd01de449496ea5059b801a, type: 3}
       propertyPath: pauseMenu
       value: 
-      objectReference: {fileID: 7110887480503317339, guid: 8d22301391839bb469f633f475dd5936, type: 3}
+      objectReference: {fileID: 3993411520126908394, guid: 29ee9daebc6d6cb4ba6d384da978c2a9, type: 3}
     - target: {fileID: 5453106001587266999, guid: 9b28ee20edd01de449496ea5059b801a, type: 3}
       propertyPath: pauseMenuInstance
       value: 
@@ -5910,12 +5910,12 @@ MonoBehaviour:
       Data4: -1253477179
     Path: event:/ForestAmbient
   Event: 
-  PlayEvent: 1
-  StopEvent: 2
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
-  AllowNonRigidbodyDoppler: 0
+  NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 1

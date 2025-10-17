@@ -17,4 +17,17 @@ public class MenuOptions : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void StopPause()
+    {
+        Time.timeScale = 1;
+
+    }
+
+
+    public void LoadSceneFromSceneLoader(string scene)
+    {
+        SceneLoader.Instance.SceneLoad(scene);
+    }
+
 }

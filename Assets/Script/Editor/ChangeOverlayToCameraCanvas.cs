@@ -31,5 +31,6 @@ public class ChangeOverlayToCameraCanvas : EditorWindow
                 }
             }
         }
+        GUILayout.EndHorizontal();
     }
 }

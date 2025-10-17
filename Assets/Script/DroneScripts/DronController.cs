@@ -135,7 +135,7 @@ public class DronController : MonoBehaviour
     {
         Vector2 inputDirection = DisplayInputData.rightControllerDirection;
         float verticalDirection = DisplayInputData.leftControllerDirection.y;
-
+        print(verticalDirection);
         if (transform.position.y >= maxHeight)
         {
             verticalDirection = 0;
@@ -159,37 +159,7 @@ public class DronController : MonoBehaviour
                 mMovementBehaviour.MoveWithoutSpeed(WindControlller.Instance.GetWindForce());
             }
         }
-        float cameraMovement = DronInputController.Instance.GetCameraMovement();
-        //if (cameraMovement != 0)
-        //{
-        //    Debug.Log(currentCameraRotationSimplified);
-        //    if (cameraMovement > 0 && currentCameraRotationSimplified < maxDronViewRotation)
-        //    {
-        //        Quaternion rotation = gameObject.transform.rotation;
-        //        rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
-        //        Debug.Log("Rotation " + rotation);
-        //        currentCameraRotationSimplified += rotation.x + 10;
-        //        dronView.transform.Rotate(new Vector3(rotation.x, 0, 0), rotation.x * 10, Space.Self);
-        //    }
-        //    else if (cameraMovement < 0 && currentCameraRotationSimplified > minDronViewRotation)
-        //    {
 
-        //        Quaternion rotation = gameObject.transform.rotation;
-        //        rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
-        //        Debug.Log("Rotation " + rotation);
-        //        currentCameraRotationSimplified -= rotation.x + 10;
-        //        dronView.transform.Rotate(new Vector3(-rotation.x,0,0),rotation.x * 10,Space.Self);
-        //    }
-        //}
-
-        //if (CheckIfGrounded() && inputDirection != Vector2.zero)
-        //{
-        //    playerOnGroundFeedback.SetActive(true);
-        //}
-        //else
-        //{
-        //    playerOnGroundFeedback.SetActive(false);
-        //}
     }
 
     private void OnDestroy()
