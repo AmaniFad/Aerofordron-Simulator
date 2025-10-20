@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class ScoreManager : MonoBehaviour
 {
-    private int score;
+    public int score;
     [SerializeField] private int maximScore;
     [SerializeField] private UnityEvent<int> OnUpdateCanvasScore;
     [SerializeField] private UnityEvent OnWin;
@@ -45,6 +45,7 @@ public class ScoreManager : MonoBehaviour
         OnUpdateCanvasScore.Invoke(score);
         if(score == maximScore)
         {
+            Debug.Log(score +" " + maximScore);
             OnWin.Invoke();
         }
     }

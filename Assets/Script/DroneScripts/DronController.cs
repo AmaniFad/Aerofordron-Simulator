@@ -45,7 +45,12 @@ public class DronController : MonoBehaviour
 
     private bool remoteDron;
     private bool aux;
+    private float _attiMode;
 
+    public float GetAttiMode()
+    {
+        return _attiMode;
+    }
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
     #endregion
@@ -150,8 +155,7 @@ public class DronController : MonoBehaviour
         if (verticalDirection < -0.2f || verticalDirection > 0.05f)
             mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0));
 
-        float _attiMode = DronInputController.Instance.GetModeAtti();
-
+        _attiMode = DronInputController.Instance.GetModeAtti();
         //Debug.Log(CheckIfGrounded());
         if (!CheckIfGrounded())
         {
@@ -340,6 +344,7 @@ public class DronController : MonoBehaviour
         }
         if(remoteDron)
         {
+            GetComponent<WindObject>().SetWindDampen(0f);
             float speed = 750f;
             Transform targetWaypoint = waypoints;
 
