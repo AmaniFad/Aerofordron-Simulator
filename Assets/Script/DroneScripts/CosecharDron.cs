@@ -21,28 +21,19 @@ public class CosecharDron : MonoBehaviour
     }
     void Update()
     {
-        SoltarAgua();
         waterAmountImage.fillAmount = currentWaterAmount / maxWaterAmount;
         waterAmountPercentage.text = (Mathf.Round((currentWaterAmount / maxWaterAmount) * 100) * 10) / 10 + "%";
     }
     public void SoltarAgua()
     {
-        float chorro = DronInputController.Instance.GetAguaInput();
-        if (chorro == 1)
-        {
+        
             currentWaterAmount -= Time.deltaTime;
             foreach (GameObject go in agua)
             {
-                go.SetActive(true);
+                go.SetActive(!go.activeInHierarchy);
             }
-        }
-        else
-        {
-            foreach (GameObject go in agua)
-            {
-                go.SetActive(false);
-            }
-        }
+        
+
     }
 
 }

@@ -54,16 +54,16 @@ public class PlayerInteract : MonoBehaviour
     }
     public void GrabItem(GameObject grabbeable)
     {
-        interactionZone = InteractionZone.Instance.GetInteractionZone();
+        //interactionZone = InteractionZone.Instance.GetInteractionZone();
 
-        Quaternion rotation = grabbeable.transform.rotation;
+        //Quaternion rotation = grabbeable.transform.rotation;
 
         //grabbeable.transform.rotation = Quaternion.identity;
-        grabbeable.transform.SetParent(interactionZone, true);
+        //grabbeable.transform.SetParent(interactionZone, true);
 
 
         // grabbeable.transform.rotation = rotation;
-        grabbeable.transform.position = interactionZone.position;
+        //grabbeable.transform.position = interactionZone.position;
 
         grabbeableObj = grabbeable;
     }

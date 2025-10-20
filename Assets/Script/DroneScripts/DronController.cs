@@ -52,7 +52,7 @@ public class DronController : MonoBehaviour
     void Start()
     {
 
-        rb = GetComponent<Rigidbody>(); 
+        rb = GetComponent<Rigidbody>();
         currentCameraTilt = 0;
         //currentCameraRotationSimplified = 0;
         eventEmitter = GetComponent<StudioEventEmitter>();
@@ -71,18 +71,18 @@ public class DronController : MonoBehaviour
     {
         if (eventEmitter)
         {
-            eventEmitter.SetParameter("Speed", Mathf.Abs((rb.linearVelocity.x + rb.linearVelocity.y) / 2 / 60* 10));
+            eventEmitter.SetParameter("Speed", Mathf.Abs((rb.linearVelocity.x + rb.linearVelocity.y) / 2 / 60 * 10));
             eventEmitter.SetParameter("Volume", Mathf.Abs((rb.linearVelocity.x + rb.linearVelocity.y) / 2 / 60 * 10));
         }
-        if (DronInputController.Instance.GetCameraMovement() > 0)
+        if (DisplayInputData.cameraDown)
         {
             MoveCameraDown();
         }
-        if (DronInputController.Instance.GetCameraMovement() < 0)
+        if (DisplayInputData.cameraUP)
         {
             MoveCameraUp();
         }
-        
+
     }
 
     //private void FixedUpdate()
@@ -114,7 +114,7 @@ public class DronController : MonoBehaviour
             {
                 TryToMoveDron();
             }
-            
+
             if (!eventEmitter.IsPlaying())
             {
                 eventEmitter.Play();
@@ -145,7 +145,7 @@ public class DronController : MonoBehaviour
             GetComponent<Rigidbody>().useGravity = false;
             //mMovementBehaviour.StopMovingOnY();
         }
-        if (verticalDirection < -0.2f || verticalDirection > 0.05f)
+        if (verticalDirection < -0.5f || verticalDirection > 0.5f)
             mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0));
 
         if (!CheckIfGrounded())
@@ -175,20 +175,24 @@ public class DronController : MonoBehaviour
             currentZTiltMultiplier = 2;
         }
         //Esto es para que tire un poco hacia el lado que se esta moviendo
-        float tiltAroundZ =  -inputDirection.x * tiltAngle * currentZTiltMultiplier;
+        float tiltAroundZ = -inputDirection.x * tiltAngle * currentZTiltMultiplier;
 
         float tiltAroundX = +inputDirection.y * tiltAngle;
-        currentZTiltMultiplier = Mathf.Lerp(currentZTiltMultiplier, 1, 0.15f) ;
+        currentZTiltMultiplier = Mathf.Lerp(currentZTiltMultiplier, 1, 0.15f);
         if (tiltAroundZ != 0)
-        lastTiltZ = -inputDirection.x * tiltAngle;
+            lastTiltZ = -inputDirection.x * tiltAngle;
 
         print("Tilt: " + tiltAroundZ + " Direction " + -inputDirection.x);
 
         Quaternion targetRotation = Quaternion.Euler(tiltAroundX, currentYRotation, tiltAroundZ);
 
         // Aqui se pone la rotacion Recordatorio no utilizar time.DeltaTime en un fixedUpdate
-        float additionalRotationY = DisplayInputData.leftControllerDirection.x * rotationSpeed;
-        targetRotation *= Quaternion.Euler(0, additionalRotationY, 0);
+        if (DisplayInputData.leftControllerDirection.x < 0.5f || DisplayInputData.leftControllerDirection.x > 0.5f)
+        {
+
+            float additionalRotationY = DisplayInputData.leftControllerDirection.x * rotationSpeed;
+            targetRotation *= Quaternion.Euler(0, additionalRotationY, 0);
+        }
 
         // Apply the rotation with slerp
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
@@ -201,7 +205,7 @@ public class DronController : MonoBehaviour
         if (currentCameraTilt < maxUpTilt)
         {
             float viewRotation = 1 * Time.deltaTime * cameraMovementSpeed;
-            currentCameraTilt += 10f; 
+            currentCameraTilt += 10f;
             dronView.transform.Rotate(viewRotation, 0, 0, Space.Self);
         }
     }
@@ -211,7 +215,7 @@ public class DronController : MonoBehaviour
         if (currentCameraTilt > maxDownTilt)
         {
             float viewRotation = -1 * Time.deltaTime * cameraMovementSpeed;
-            currentCameraTilt -= 10f; 
+            currentCameraTilt -= 10f;
             dronView.transform.Rotate(viewRotation, 0, 0, Space.Self);
         }
     }
@@ -221,6 +225,7 @@ public class DronController : MonoBehaviour
     }
     public void StartDron()
     {
+        PlayDroneSound();
         PlayerReferences.instance.SetDron(gameObject);
         PlayerStateController.instance.CameraToDron(gameObject);
         PlayerStateController.instance.StopMoving();
@@ -235,7 +240,12 @@ public class DronController : MonoBehaviour
         PlayerStateController.instance.CameraToDron(null);
         PlayerStateController.instance.ResumeMoving();
         canMove = false;
-        GetComponent<Animator>().SetBool("flying", false);
+        if (CheckIfGrounded())
+        {
+            GetComponent<Animator>().SetBool("flying", false);
+            StopPlayDroneSound();
+        }
+
         PlayerReferences.instance.GetHUD().SetActive(true);
     }
 
@@ -261,7 +271,7 @@ public class DronController : MonoBehaviour
     public void StartMovingDron()
     {
         if (!PlayerStateController.instance.CanMove())
-        canMove = true;
+            canMove = true;
     }
     public bool IsGrounded()
     {
@@ -275,7 +285,7 @@ public class DronController : MonoBehaviour
             remoteDron = true;
             Debug.Log("oressed" + remoteDron);
         }
-        if(remoteDron)
+        if (remoteDron)
         {
             /*float speed = 750f;
 
@@ -330,7 +340,7 @@ public class DronController : MonoBehaviour
             Vector3 direction = (targetWaypoint.position - transform.position);
             direction.y = 0f;
             direction.Normalize();
-            
+
             float distanceY = Mathf.Abs(transform.position.y - targetWaypoint.position.y);
             float distanceAll = Vector3.Distance(transform.position, targetWaypoint.position);
 
@@ -339,7 +349,7 @@ public class DronController : MonoBehaviour
                 new Vector2(transform.position.x, transform.position.z),
                 new Vector2(targetWaypoint.position.x, targetWaypoint.position.z)
             );
-            if(distanceXZ < 20f)
+            if (distanceXZ < 20f)
             {
                 speed = 50;
             }
@@ -366,7 +376,7 @@ public class DronController : MonoBehaviour
             }
 
 
-            
+
             if (distanceXZ <= 0.5f && distanceY <= 0.2f)
             {
                 mMovementBehaviour.StopMovingOnY();
@@ -374,6 +384,10 @@ public class DronController : MonoBehaviour
                 aux = false;
             }
         }
+    }
+    public GameObject GetDronView()
+    {
+        return dronView;
     }
 }
 

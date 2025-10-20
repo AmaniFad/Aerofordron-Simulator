@@ -27,19 +27,19 @@ public class InteractableMando : MonoBehaviour, IInteractable
         previousPosition = transform.position;
         previousRotation = transform.localRotation;
         isPickable = false;
-        Quaternion rotate = new Quaternion(0,0,0,0);
-        transform.rotation = rotate;
+        //Quaternion rotate = new Quaternion(0,0,0,0);
+        //transform.rotation = rotate;
         player.GrabItem(this.gameObject);
         controller.StartDron();
         //this.transform.localRotation = rotationOffset;
-        rigidBody.useGravity = false;
-        rigidBody.isKinematic = true;
+        //rigidBody.useGravity = false;
+        //rigidBody.isKinematic = true;
         GetComponent<Collider>().isTrigger = true;
         if (!isPickable)
         {
             isTaked.Invoke();
         }
-        transform.rotation = rotate;
+        //transform.rotation = rotate;
     }
 
     public void DropInteractable()

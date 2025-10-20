@@ -176,7 +176,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""d7f91ee6-1779-4817-9365-0b748b4d374a"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -731,6 +731,17 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""44bd9446-3a77-4241-baed-2210542c383c"",
                     ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Agua"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91c50adf-e3ba-4612-ae95-dcc1b70cc4d7"",
+                    ""path"": ""<XRController>{RightHand}/{PrimaryTrigger}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

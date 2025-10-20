@@ -83,13 +83,17 @@ public class PauseController : MonoBehaviour
 
             pauseMenuInstance = Instantiate(pauseMenu);
             print(Camera.main);
-            pauseMenuInstance.GetComponent<Follow>().SetTarget(Camera.main.gameObject);
+            Vector3 offset = new Vector3(0,0,1f);
+            pauseMenuInstance.transform.position = Camera.main.transform.TransformPoint(offset);
+            pauseMenuInstance.transform.rotation = Camera.main.transform.rotation;
+            //pauseMenuInstance.GetComponent<Follow>().SetTarget(Camera.main.gameObject);
             pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
             isPausing = true;
             pauseMenuInstance.SetActive(true);
             pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
             Time.timeScale = 0f;
 
+                SwitchToFullView.instance.ExitFullView();
             PlayerInputController.Instance.HasPaused();
             Cursor.visible = true;
 
@@ -98,8 +102,12 @@ public class PauseController : MonoBehaviour
         {
             if (!isPausing)
             {
-                pauseMenuInstance.GetComponent<Follow>().SetTarget(Camera.main.gameObject);
+                //pauseMenuInstance.GetComponent<Follow>().SetTarget(Camera.main.gameObject);
+                Vector3 offset = new Vector3(0, 0, 1f);
+                pauseMenuInstance.transform.position = Camera.main.transform.TransformPoint(offset);
+                pauseMenuInstance.transform.rotation = Camera.main.transform.rotation;
                 isPausing = true;
+                SwitchToFullView.instance.ExitFullView();
                 pauseMenuInstance.SetActive(true);
                 pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
                 Time.timeScale = 0f;
