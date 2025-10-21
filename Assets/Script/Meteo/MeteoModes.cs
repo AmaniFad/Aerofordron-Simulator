@@ -96,11 +96,11 @@ public class MeteoModes : MonoBehaviour
     [Button]
     public void ToggleClouds()
     {
-        VolumetricClouds vol = (VolumetricClouds)clouds.profile.components[0];
-        if (vol.cloudPreset == VolumetricClouds.CloudPresets.Stormy)
-            vol.cloudPreset = VolumetricClouds.CloudPresets.Sparse;
-        else
-            vol.cloudPreset = VolumetricClouds.CloudPresets.Stormy;
+        //VolumetricClouds vol = (VolumetricClouds)clouds.profile.components[0];
+        //if (vol.cloudPreset == VolumetricClouds.CloudPresets.Stormy)
+        //    vol.cloudPreset = VolumetricClouds.CloudPresets.Sparse;
+        //else
+        //    vol.cloudPreset = VolumetricClouds.CloudPresets.Stormy;
 
     }
 
