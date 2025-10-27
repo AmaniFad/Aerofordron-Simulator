@@ -12,8 +12,10 @@ public class DronInputController : MonoBehaviour
     private bool changeCamera;
     private float cameraMovement;
     private float aguaInput;
-    private bool buttonPressed = false;
-    private bool isRemoteDron; 
+    private bool buttonPressedAgua = false;
+    private bool buttonPressedMode = false;
+    private bool isRemoteDron;
+    private float isModeAtti;
     private void Start()
     {
         Instance = this;
@@ -37,15 +39,32 @@ public class DronInputController : MonoBehaviour
     }
     public void OnAgua(InputValue value)
     {
-        if (value.isPressed && !buttonPressed)
+        if (value.isPressed && !buttonPressedAgua)
         {
             aguaInput = (aguaInput == 0) ? 1 : 0;
-            buttonPressed = true;
+            buttonPressedAgua = true;
         }
         else if (!value.isPressed)
         {
-            buttonPressed = false;
+            buttonPressedAgua = false;
         }
+    }
+    public void OnModeDron(InputValue value)
+    {
+        Debug.Log(value.ToString());
+        if (value.isPressed && !buttonPressedMode) 
+        {
+            isModeAtti = (isModeAtti == 0) ? 1 : 0;
+            buttonPressedMode = true;
+        }
+        else if(!value.isPressed) 
+        {
+            buttonPressedMode = false;
+        }
+    }
+    public float GetModeAtti()
+    {
+        return isModeAtti;
     }
     public float GetCameraMovement()
     {

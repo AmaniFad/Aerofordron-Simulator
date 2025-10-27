@@ -1164,37 +1164,6 @@ BoxCollider:
   m_CorrespondingSourceObject: {fileID: 4412203717237097585, guid: b424bc0784c5d8f43b993c607736cec8, type: 3}
   m_PrefabInstance: {fileID: 26119366}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &28008668
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 28008669}
-  m_Layer: 0
-  m_Name: previousPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &28008669
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 28008668}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.27, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1232691390}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &35375861
 GameObject:
   m_ObjectHideFlags: 0
@@ -52050,8 +52019,7 @@ Transform:
   m_LocalPosition: {x: 7.312, y: 0.579, z: 25.671}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 28008669}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1234684859 stripped
@@ -68517,6 +68485,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1614557628}
+  - component: {fileID: 1614557629}
   m_Layer: 0
   m_Name: CanvasManager
   m_TagString: Untagged
@@ -68545,6 +68514,19 @@ Transform:
   - {fileID: 238263276}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1614557629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614557627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c7b644c7beee5c48b3b65871f0905a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseController: {fileID: 1606635004}
 --- !u!1 &1622002540
 GameObject:
   m_ObjectHideFlags: 0
@@ -68868,13 +68850,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3477753400508625027, guid: e9d08a74801d9ef4fb0dbc384652222f, type: 3}
+      propertyPath: waypoints
+      value: 
+      objectReference: {fileID: 1232691390}
+    - target: {fileID: 3477753400508625027, guid: e9d08a74801d9ef4fb0dbc384652222f, type: 3}
       propertyPath: waypoints.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3477753400508625027, guid: e9d08a74801d9ef4fb0dbc384652222f, type: 3}
       propertyPath: 'waypoints.Array.data[0]'
       value: 
-      objectReference: {fileID: 28008669}
+      objectReference: {fileID: 0}
     - target: {fileID: 3477753400508625027, guid: e9d08a74801d9ef4fb0dbc384652222f, type: 3}
       propertyPath: 'waypoints.Array.data[1]'
       value: 

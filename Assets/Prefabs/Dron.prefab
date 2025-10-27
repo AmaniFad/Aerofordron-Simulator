@@ -410,6 +410,7 @@ GameObject:
   - component: {fileID: 7279174253017422689}
   - component: {fileID: 6459605025783248662}
   - component: {fileID: 9121587466417908338}
+  - component: {fileID: 194880639022903922}
   m_Layer: 0
   m_Name: Dron
   m_TagString: Player
@@ -526,7 +527,8 @@ MonoBehaviour:
   maxDronViewRotation: 5
   minDronViewRotation: -5
   cameraMovementSpeed: 40
-  waypoints: []
+  waypoints: {fileID: 0}
+  _attiMode: 0
 --- !u!114 &4963133959394168013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,6 +613,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   batteryBar: {fileID: 0}
   batteryPercentage: {fileID: 0}
+--- !u!114 &194880639022903922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6133564546592706454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3693fffc6185cb5409a813034423c072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windDampen: 0
+  currentWindDampen: 0
+  staticOnGround: 0
 --- !u!1001 &8670255834323251163
 PrefabInstance:
   m_ObjectHideFlags: 0

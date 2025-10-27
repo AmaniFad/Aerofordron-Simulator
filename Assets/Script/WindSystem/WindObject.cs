@@ -10,6 +10,16 @@ public class WindObject : MonoBehaviour
     Rigidbody rb;
     float windDampening;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public void SetWindDampen(float windDampen)
+    {
+        this.windDampen = windDampen;
+        currentWindDampen = windDampen;
+    }
+    public float GetWindDampen()
+    {
+        return currentWindDampen;
+    }
     void Start()
     {
         currentWindDampen = windDampen;
@@ -25,6 +35,7 @@ public class WindObject : MonoBehaviour
         }
     }
 
+    
     // Update is called once per frame
     void Update()
     {

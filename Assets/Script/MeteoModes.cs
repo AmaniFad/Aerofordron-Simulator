@@ -96,21 +96,11 @@ public class MeteoModes : MonoBehaviour
     [Button]
     public void ToggleClouds()
     {
-        #if UNITY_WEBGL
-            print("WEBGL doesnt support clouds");
-        #else
-
-            VolumetricClouds vol = (VolumetricClouds)clouds.profile.components[0];
-            if (vol.cloudPreset == VolumetricClouds.CloudPresets.Stormy)
-                vol.cloudPreset = VolumetricClouds.CloudPresets.Sparse;
-            else
-                vol.cloudPreset = VolumetricClouds.CloudPresets.Stormy;
-
-        #endif
-
-
-
-
+        //VolumetricClouds vol = (VolumetricClouds)clouds.profile.components[0];
+        //if (vol.cloudPreset == VolumetricClouds.CloudPresets.Stormy)
+        //    vol.cloudPreset = VolumetricClouds.CloudPresets.Sparse;
+        //else
+        //    vol.cloudPreset = VolumetricClouds.CloudPresets.Stormy;
 
     }
 
@@ -119,36 +109,12 @@ public class MeteoModes : MonoBehaviour
     [Button]
     public void ToggleFog(bool state)
     {
-#if UNITY_WEBGL
-        RenderSettings.fog = !RenderSettings.fog;
-        RenderSettings.fogDensity = 0.5f;
-        RenderSettings.fogMode = FogMode.Exponential;
-#else
-
         fog.SetActive(state);
-#endif
-        
     }
-    
+
     //Changes fog level according to parameter
     public void ChangeFogLevel(int fogChangeIndex)
     {
-#if UNITY_WEBGL
-        if (currentFogLevel + fogChangeIndex >= fogLevel.Length)
-        {
-            currentFogLevel = 0;
-        }
-        else if (currentFogLevel + fogChangeIndex < 0)
-        {
-            currentFogLevel = fogLevel.Length - 1;
-        }
-        else
-        {
-            currentFogLevel += fogChangeIndex;
-        }
-        RenderSettings.fogDensity = 0.5f + currentFogLevel / 10;
-#else
-
         if (currentFogLevel + fogChangeIndex >= fogLevel.Length)
         {
             currentFogLevel = 0;
@@ -164,7 +130,7 @@ public class MeteoModes : MonoBehaviour
         fogMaterial.SetFloat("_Density", fogLevel[currentFogLevel].intensity);
         fogMaterial.SetFloat("_Remap_Min", fogLevel[currentFogLevel].remapMin);
         fogMaterial.SetFloat("_Remap_Max", fogLevel[currentFogLevel].remapMax);
-#endif
+
     }
 
     public void AddBlindingSun()
