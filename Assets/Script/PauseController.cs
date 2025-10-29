@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,25 +38,23 @@ public class PauseController : MonoBehaviour
             {
                 if (!pauseMenuInstance.activeInHierarchy)
                 {
-                    CinemachineVirtualCamera camera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
-                    inputProvider = (CinemachineInputProvider)camera.GetComponent<CinemachineInputProvider>();
+
                     Time.timeScale = 1f;
-                    inputProvider.enabled = true;
+                    SetInputProviderState(false);
                 }
                 else
                 {
-                    CinemachineVirtualCamera camera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
-                    inputProvider = (CinemachineInputProvider)camera.GetComponent<CinemachineInputProvider>();
+
                     Time.timeScale = 0f;
-                    inputProvider.enabled = false;
+                    SetInputProviderState(false);
                 }
             }
             else
             {
-                CinemachineVirtualCamera camera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
-                inputProvider = (CinemachineInputProvider)camera.GetComponent<CinemachineInputProvider>();
+                SetInputProviderState(true);
+
                 Time.timeScale = 1f;
-                inputProvider.enabled = true;
+
             }
             
         }
@@ -73,20 +72,19 @@ public class PauseController : MonoBehaviour
 
     public void PauseWihoutPauseMenu()
     {
-        CinemachineVirtualCamera camera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
-        inputProvider = (CinemachineInputProvider)camera.GetComponent<CinemachineInputProvider>();
+
         pauseWithoutPauseMenu = true;
         Time.timeScale = 0;
-        inputProvider.enabled = false;
+        SetInputProviderState(false);
     }
 
     public void UnPauseWithoutMenu()
     {
-        CinemachineVirtualCamera camera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
-        inputProvider = (CinemachineInputProvider)camera.GetComponent<CinemachineInputProvider>();
+
         pauseWithoutPauseMenu = false;
         Time.timeScale = 1;
-        inputProvider.enabled = true;
+        SetInputProviderState(false);
+
     }
 
     public void TryPause()
@@ -100,9 +98,8 @@ public class PauseController : MonoBehaviour
             pauseMenuInstance.SetActive(true);
             pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
             Time.timeScale = 0f;
-            CinemachineVirtualCamera camera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
-            inputProvider = (CinemachineInputProvider)camera.GetComponent<CinemachineInputProvider>();
-            inputProvider.enabled = false;
+            SetInputProviderState(false);
+
             PlayerInputController.Instance.HasPaused();
             Cursor.visible = true;
 
@@ -115,9 +112,8 @@ public class PauseController : MonoBehaviour
                 pauseMenuInstance.SetActive(true);
                 pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
                 Time.timeScale = 0f;
-                CinemachineVirtualCamera camera =(CinemachineVirtualCamera) Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
-                inputProvider = (CinemachineInputProvider) camera.GetComponent<CinemachineInputProvider>();
-                inputProvider.enabled = false;
+                SetInputProviderState(false);
+
                 PlayerInputController.Instance.HasPaused();
                 Cursor.visible = true;
             }
@@ -125,11 +121,9 @@ public class PauseController : MonoBehaviour
             {
                 Cursor.visible = false;
                 Time.timeScale = 1f;
-                CinemachineVirtualCamera camera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
 
-                inputProvider = (CinemachineInputProvider)camera.GetComponent<CinemachineInputProvider>();
 
-                inputProvider.enabled = true;
+                SetInputProviderState(true);
                 isPausing = false;
                 pauseMenuInstance.SetActive(false);
                 PlayerInputController.Instance.HasPaused();
@@ -143,11 +137,27 @@ public class PauseController : MonoBehaviour
     {
         Cursor.visible = false;
         Time.timeScale = 1f;
-        CinemachineVirtualCamera camera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
-
-        inputProvider = (CinemachineInputProvider)camera.GetComponent<CinemachineInputProvider>();
-        inputProvider.enabled = true;
+        SetInputProviderState(true);
         isPausing = false;
         PlayerInputController.Instance.HasPaused();
+    }
+
+    public void SetInputProviderState(bool state)
+    {
+        try
+        {
+            CinemachineVirtualCamera camera = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
+
+            inputProvider = (CinemachineInputProvider)camera.GetComponent<CinemachineInputProvider>();
+            if (inputProvider)
+            {
+                inputProvider.enabled = true;
+
+            }
+        }
+        catch(Exception e) {
+           
+        }
+
     }
 }
