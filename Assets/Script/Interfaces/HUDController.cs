@@ -21,14 +21,19 @@ public class HUDController : MonoBehaviour
     {
         Debug.developerConsoleVisible = true;
         Debug.developerConsoleEnabled = true;
+        if (PlayerReferences.instance)
         player = PlayerReferences.instance.GetPlayer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        dron = PlayerReferences.instance.GetDron();
-        player = PlayerReferences.instance.GetPlayer();
+        if (PlayerReferences.instance)
+        {
+            dron = PlayerReferences.instance.GetDron();
+            player = PlayerReferences.instance.GetPlayer();
+        }
+
 
         if (dron != null)
         {

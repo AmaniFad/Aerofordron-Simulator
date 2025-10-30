@@ -34,7 +34,6 @@ public class LookTowardsItem : MonoBehaviour
 
     public void LookTowards(GameObject item)
     {
-        print(item.transform);
         Camera.main.gameObject.GetComponent<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().LookAt = item.transform;
     }
 

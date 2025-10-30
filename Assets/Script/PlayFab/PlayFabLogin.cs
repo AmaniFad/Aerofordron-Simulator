@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
@@ -10,28 +11,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-[Serializable]
-public class InitialUsersList
-{
-    public List<User> Users = new List<User>();
-}
-[Serializable]
-public class User
-{
-    public string UserName;
-    public string Password;
-}
-[Serializable]
-public class UserInizalized
-{
-    public bool isInizalized;
-}
-[SerializeField]
-public class PlayerValues
-{
-    public string UserName;
-    public string Password;
-}
+
+
 public class PlayFabLogin : MonoBehaviour
 {
     [SerializeField] private TMP_Text incorrectUserText;
@@ -40,66 +21,61 @@ public class PlayFabLogin : MonoBehaviour
 
     [Header("Event")]
     [SerializeField] private UnityEvent enterSimulator;
-    private string playerName;
-    private string playerPassword;
-
-    private bool isLoggedIn;
+    bool onlyLogInOnce;
     public void Start()
     {
         DontDestroyOnLoad(this);
-        isLoggedIn = false;
+        onlyLogInOnce = true;
     }
     private void OnLoginSuccess(LoginResult result)
     {
+        if (onlyLogInOnce)
+        {
+            GetUserDataRequest dataRequest = new GetUserDataRequest { PlayFabId = result.PlayFabId };
 
-        LoginWithPlayFabRequest request = new LoginWithPlayFabRequest();
-        request.Username = playerNameInput.text;
-        request.Password = playerPasswordInput.text;
-        request.TitleId = PlayFabSettings.staticSettings.TitleId;
-        PlayFabClientAPI.LoginWithPlayFab(request, LoginCallback, OnLoginFailure);
+            PlayFabClientAPI.GetUserData(dataRequest,
+             dataResult =>
+             {
+                 if (dataResult.Data["TimeLeft"].Value == "0")
+                 {
+                         onlyLogInOnce = false;
+                     enterSimulator.Invoke();
+                 }
+                 else
+                 {
+                     DateTime dt1 = DateTime.Parse(dataResult.Data["TimeLeft"].Value);
+                     DateTime dt2 = DateTime.Now;
+                     if (dt1 > dt2)
+                     {
+                         onlyLogInOnce = false;
+                         enterSimulator.Invoke();
+                     }
 
-    }
-    private void LoginCallback(LoginResult result)
-    {
-        GetUserDataRequest dataRequest = new GetUserDataRequest { PlayFabId = result.PlayFabId };
-
-        PlayFabClientAPI.GetUserData(dataRequest,
-   dataResult =>
-   {
-       if (dataResult.Data["TimeLeft"].Value == "0")
-       {
-           enterSimulator.Invoke();
-       }
-       else
-       {
-           DateTime dt1 = DateTime.Parse(dataResult.Data["TimeLeft"].Value);
-           DateTime dt2 = DateTime.Now;
-           if (dt1 > dt2)
-           {
-               enterSimulator.Invoke();
-           }
-
-           else
-           {
-               incorrectUserText.text = "Esta cuenta ya no es valida";
-               playerNameInput.text = string.Empty;
-               playerPasswordInput.text = string.Empty;
-               StartCoroutine(DeleteText());
-           }
-       }
+                     else
+                     {
+                         incorrectUserText.text = "Esta cuenta ya no es valida";
+                         playerNameInput.text = string.Empty;
+                         playerPasswordInput.text = string.Empty;
+                         StartCoroutine(DeleteText());
+                     }
+                 }
 
 
 
-       Destroy(this);
+                 Destroy(this);
 
 
-   }, error => { print("Error en la peticion de datos"); });
-        print(result);
-    }
+             }, error => { print("Error en la peticion de datos"); });
+            print(result);
+        }
+
+
+}
+
 
     private void OnLoginFailure(PlayFabError error)
     {
-        incorrectUserText.text = "Incorrect User or Password";
+        incorrectUserText.text = error.ErrorMessage;
         playerNameInput.text = string.Empty;
         playerPasswordInput.text = string.Empty;
         StartCoroutine(DeleteText());
@@ -108,21 +84,25 @@ public class PlayFabLogin : MonoBehaviour
         Debug.LogError(error.GenerateErrorReport());
     }
 
-    public void PressedLoading()
+    public void TryLogIn()
     {
-        if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.TitleId))
+        if (playerNameInput.text != "" && playerPasswordInput.text != "") 
         {
-            /*
-            Please change the titleId below to your own titleId from PlayFab Game Manager.
-            If you have already set the value in the Editor Extensions, this can be skipped.
-            */
-            PlayFabSettings.staticSettings.TitleId = "6CC33";
+            if (onlyLogInOnce)
+            {
+                if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.TitleId))
+                {
+                    PlayFabSettings.staticSettings.TitleId = "6CC33";
+                }
+                LoginWithPlayFabRequest request = new LoginWithPlayFabRequest();
+                request.Username = playerNameInput.text;
+                request.Password = playerPasswordInput.text;
+                request.TitleId = PlayFabSettings.staticSettings.TitleId;
+                PlayFabClientAPI.LoginWithPlayFab(request, OnLoginSuccess, OnLoginFailure);
+            }
         }
-        LoginWithPlayFabRequest request = new LoginWithPlayFabRequest();
-        request.Username = playerNameInput.text;
-        request.Password = playerPasswordInput.text;
-        request.TitleId = PlayFabSettings.staticSettings.TitleId;
-        PlayFabClientAPI.LoginWithPlayFab(request, OnLoginSuccess, OnLoginFailure);
+
+
     }
     private IEnumerator DeleteText()
     {
