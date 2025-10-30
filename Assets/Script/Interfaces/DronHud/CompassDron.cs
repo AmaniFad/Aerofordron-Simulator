@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class CompassDron : MonoBehaviour
 {
-    [SerializeField] private Transform player;          
+    [SerializeField] private Transform player;
     [SerializeField] private Transform dron;
     [SerializeField] private RawImage compassImage;
     [SerializeField] private RectTransform playerMarker;
@@ -14,13 +14,17 @@ public class CompassDron : MonoBehaviour
     [SerializeField] private Sprite YellowBanner;
     [SerializeField] private GameObject BannerObj;
     [SerializeField] private TMP_Text BannerText;
-    
+
     private void Start()
     {
-        player = PlayerReferences.instance.GetPlayer().transform;
-        dron = PlayerReferences.instance.GetDron().transform;
+        if (PlayerReferences.instance)
+        {
 
-        if(compassImage != null)
+            player = PlayerReferences.instance.GetPlayer().transform;
+            dron = PlayerReferences.instance.GetDron().transform;
+        }
+
+        if (compassImage != null)
             compassWidth = compassImage.rectTransform.rect.width;
     }
     void Update()
@@ -41,7 +45,7 @@ public class CompassDron : MonoBehaviour
             BannerObj.GetComponent<Image>().sprite = YellowBanner;
             BannerText.text = "ATTI MODE";
         }
-        else  
+        else
         {
             BannerObj.GetComponent<Image>().sprite = GreenBanner;
             BannerText.text = "GPS MODE";
