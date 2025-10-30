@@ -12,7 +12,7 @@ public class SaveTutorialState : MonoBehaviour
             Keys = null
         }, result => {
             Debug.Log("Got user data:");
-            if (result.Data == null || !result.Data.ContainsKey("tutorial")) Debug.Log("No Ancestor");
+            if (result.Data == null || !result.Data.ContainsKey("tutorial")) Debug.Log("No tutorial data");
             else {
                 Debug.Log("tutorial: " + result.Data["tutorial"].Value);
                 if (result.Data["tutorial"].Value == "No") { }
