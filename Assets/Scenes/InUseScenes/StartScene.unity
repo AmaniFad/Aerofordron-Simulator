@@ -4394,6 +4394,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1034535476}
+        m_TargetAssemblyTypeName: SaveTutorialState, Assembly-CSharp
+        m_MethodName: SetTutorialState
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: yes
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &611374922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7902,6 +7914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1034535474}
   - component: {fileID: 1034535475}
+  - component: {fileID: 1034535476}
   m_Layer: 0
   m_Name: TutorialBotonesEleccion
   m_TagString: Untagged
@@ -7954,6 +7967,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1034535476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034535473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46e7029683b85e84b9c6bcd3fb8d7469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1034833988
 GameObject:
   m_ObjectHideFlags: 0
@@ -13223,9 +13248,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1980071028}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+      - m_Target: {fileID: 1034535476}
+        m_TargetAssemblyTypeName: SaveTutorialState, Assembly-CSharp
+        m_MethodName: SetTutorialState
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: no
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 435375664}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

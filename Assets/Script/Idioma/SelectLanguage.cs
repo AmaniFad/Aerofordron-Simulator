@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Localization.Settings;
 
-public class SelectLlenguage : MonoBehaviour
+public class SelectLanguage : MonoBehaviour
 {
     private bool active = false;
     private void Start()
