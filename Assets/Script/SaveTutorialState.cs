@@ -7,6 +7,23 @@ public class SaveTutorialState : MonoBehaviour
 {
     void Start()
     {
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest()
+        {
+            Keys = null
+        }, result => {
+            Debug.Log("Got user data:");
+            if (result.Data == null || !result.Data.ContainsKey("tutorial")) Debug.Log("No Ancestor");
+            else {
+                Debug.Log("tutorial: " + result.Data["tutorial"].Value);
+                if (result.Data["tutorial"].Value == "No") { }
+                {
+                    gameObject.SetActive(false);
+                }
+            }
+        }, (error) => {
+            Debug.Log("Got error retrieving user data:");
+            Debug.Log(error.GenerateErrorReport());
+        });
 
     }
 
