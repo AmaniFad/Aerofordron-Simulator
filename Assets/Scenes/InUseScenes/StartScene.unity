@@ -2090,6 +2090,23 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &294314031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294314022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d43fb79ee6a17499e4ba908131d78f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookAtObject: {fileID: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
+  constraintX: 0
+  constraintY: 0
+  constraintZ: 0
 --- !u!1 &326043879
 GameObject:
   m_ObjectHideFlags: 0
@@ -5761,6 +5778,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a356ae6b069dbfb468a689d8a6fb3afd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 294314030}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a356ae6b069dbfb468a689d8a6fb3afd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 294314031}
   m_SourcePrefab: {fileID: 100100000, guid: a356ae6b069dbfb468a689d8a6fb3afd, type: 3}
 --- !u!1001 &779610662
 PrefabInstance:
@@ -8943,6 +8963,7 @@ GameObject:
   - component: {fileID: 1357739775}
   - component: {fileID: 1357739774}
   - component: {fileID: 1357739773}
+  - component: {fileID: 1357739776}
   m_Layer: 0
   m_Name: Main Camera/CinemachineBrain
   m_TagString: MainCamera
@@ -9095,6 +9116,19 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1357739776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357739770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1515657d7e49b5c42a5b36bd8493abe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 15
 --- !u!1 &1363613997
 GameObject:
   m_ObjectHideFlags: 0
