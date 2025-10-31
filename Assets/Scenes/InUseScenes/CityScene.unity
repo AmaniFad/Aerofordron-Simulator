@@ -50665,6 +50665,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 380690827}
+  - component: {fileID: 380690828}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -50691,6 +50692,19 @@ Transform:
   - {fileID: 172325311}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &380690828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380690826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26fd28d808a91364ca8ed1db9495e14a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  batteryTime: 600
 --- !u!1001 &380888717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -111896,19 +111910,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1029349742849228827, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
   m_PrefabInstance: {fileID: 1119673631}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &835336145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835336143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26fd28d808a91364ca8ed1db9495e14a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  batteryTime: 600
 --- !u!1 &835578376 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6255798403621622275, guid: f0fa6751ecba8a44b87f542ef29ff46f, type: 3}
@@ -151321,10 +151322,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 825835805168226619, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1317875113}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1029349742849228827, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 835336145}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
 --- !u!224 &1119673632 stripped
 RectTransform:
