@@ -295,6 +295,7 @@ public class DronController : MonoBehaviour
         canMove = true;
         GetComponent<Animator>().SetBool("flying", true);
         PlayerReferences.instance.GetHUD().SetActive(false);
+        PlayerReferences.instance.SetIsFlyingDrone(true);
     }
 
     public void StopDron()
@@ -304,6 +305,7 @@ public class DronController : MonoBehaviour
         PlayerStateController.instance.ResumeMoving();
         canMove = false;
         GetComponent<Animator>().SetBool("flying", false);
+        PlayerReferences.instance.SetIsFlyingDrone(false);
         PlayerReferences.instance.GetHUD().SetActive(true);
     }
 

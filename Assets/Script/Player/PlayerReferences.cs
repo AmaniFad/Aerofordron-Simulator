@@ -10,6 +10,7 @@ public class PlayerReferences : MonoBehaviour
     [SerializeField]private GameObject dronHud;
     [SerializeField] private GameObject dron;
     private Rigidbody rb;
+    private bool isFlyingDrone;
     void Start()
     {
         if (instance == null)
@@ -51,4 +52,13 @@ public class PlayerReferences : MonoBehaviour
         return dronHud;
     }
 
+    public void SetIsFlyingDrone(bool isItFlying)
+    {
+        isFlyingDrone = isItFlying;
+    }
+
+    public bool IsFlyingDrone()
+    {
+        return isFlyingDrone;
+    }
 }

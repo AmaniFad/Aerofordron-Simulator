@@ -22,10 +22,12 @@ public class BatteryController : MonoBehaviour
             Debug.Log("Ya existe un BatteryController, recuerda poner los singletons en el GameObject Manager en la escena");
         }
         maxBatteryTime = batteryTime;
+        
     }
 
     void Update()
     {
+        if (PlayerReferences.instance.IsFlyingDrone())
         batteryTime -= Time.deltaTime; 
     }
 
