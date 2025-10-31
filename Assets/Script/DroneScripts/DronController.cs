@@ -18,8 +18,8 @@ public class DronController : MonoBehaviour
     private bool canMove;
     private MovementBehaviour mMovementBehaviour;
     private bool isPlaying;
-    private float maxUpTilt = 1000;
-    private float maxDownTilt = -700;
+    [SerializeField] private float maxUpTilt ;
+    [SerializeField] private float maxDownTilt ;
     private float currentCameraTilt;
     [Header("References")]
     [SerializeField] private EventReference soundReference;
@@ -266,7 +266,7 @@ public class DronController : MonoBehaviour
     private void MoveCameraUp()
     {
 
-        if (currentCameraTilt < maxUpTilt)
+        if (currentCameraTilt < maxUpTilt &&canMove)
         {
             float viewRotation = 1 * Time.deltaTime * cameraMovementSpeed;
             currentCameraTilt += 10f; 
@@ -276,7 +276,7 @@ public class DronController : MonoBehaviour
 
     private void MoveCameraDown()
     {
-        if (currentCameraTilt > maxDownTilt)
+        if (currentCameraTilt > maxDownTilt && canMove)
         {
             float viewRotation = -1 * Time.deltaTime * cameraMovementSpeed;
             currentCameraTilt -= 10f; 
