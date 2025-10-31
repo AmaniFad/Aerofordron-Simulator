@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization;
 
 public class ShowMenuButtonTooltip : MonoBehaviour
 {
@@ -15,12 +16,17 @@ public class ShowMenuButtonTooltip : MonoBehaviour
     {
         if(this.gameObject == EventSystem.current.currentSelectedGameObject)
         {
-            SendTextToDisplay();
+            SendTextToDisplay(tooltip);
         }
     }
 
-    private void SendTextToDisplay()
+    private void SendTextToDisplay(string text)
     {
-        TooltipDisplay.Instance.ChangeTooltipText(tooltip);
+        TooltipDisplay.Instance.ChangeTooltipText(text);
+    }
+
+    public void SetTooltip(string tooltip)
+    {
+        this.tooltip = tooltip;
     }
 }
