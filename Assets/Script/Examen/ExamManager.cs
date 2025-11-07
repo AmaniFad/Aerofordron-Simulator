@@ -229,7 +229,7 @@ public class ExamManager : MonoBehaviour
         Vector3 positionPlayer = Player.transform.position;
         Vector3 escalaPlayer = Player.transform.localScale;
 
-        Vector3 newPositionX = Player.transform.forward * distanceX * escalaPlayer.x;
+        Vector3 newPositionX = -Player.transform.forward * distanceX * escalaPlayer.x;
         Vector3 newPositionY = Player.transform.up * distanceY;
 
         point.SetActive(true);
@@ -237,6 +237,7 @@ public class ExamManager : MonoBehaviour
     }
     public void ReturnToStart()
     {
+        Debug.Log("return" + gameObject.name);
         FadeInPanel.SetActive(true);
         FadeInPanel.GetComponent<ScreenFader>().FadeInCoroutine();
 
