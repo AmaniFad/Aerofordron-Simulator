@@ -521,12 +521,15 @@ MonoBehaviour:
     Path: event:/DronHelix
   dronVisuals: {fileID: 0}
   tiltAngle: 20
-  rotationSpeed: 150
+  rotationSpeed: 90
   dronView: {fileID: 2627707560200648486}
   maxDronViewRotation: 5
   minDronViewRotation: -5
+  deadzone: 0.85
   cameraMovementSpeed: 40
-  waypoints: []
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &4963133959394168013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,7 +759,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 5d260f3e99cdf284086f537c687369bb, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6507901977716847365, guid: 735e3bec015449d4f8ad1dfded89a78e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 735e3bec015449d4f8ad1dfded89a78e, type: 3}

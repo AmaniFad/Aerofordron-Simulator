@@ -35,7 +35,7 @@ public class DronController : MonoBehaviour
     private float currentCameraRotationSimplified;
     private Rigidbody rb;
     float currentZTiltMultiplier = 1;
-
+    [SerializeField] private float deadzone;
     [SerializeField] private float cameraMovementSpeed;
     private bool isGrounded;
     private float lastTiltZ;
@@ -145,8 +145,16 @@ public class DronController : MonoBehaviour
             GetComponent<Rigidbody>().useGravity = false;
             //mMovementBehaviour.StopMovingOnY();
         }
-        if (verticalDirection < -0.5f || verticalDirection > 0.5f)
-            mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0));
+        if (verticalDirection < 0f)
+        {
+
+            mMovementBehaviour.Move(new Vector3(0, Mathf.Clamp(verticalDirection - deadzone,-1,0) , 0));
+        }
+        else if (verticalDirection > 0f)
+        {
+            mMovementBehaviour.Move(new Vector3(0, Mathf.Clamp(verticalDirection + deadzone,0,1) , 0));
+
+        }
 
         if (!CheckIfGrounded())
         {
@@ -187,10 +195,10 @@ public class DronController : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(tiltAroundX, currentYRotation, tiltAroundZ);
 
         // Aqui se pone la rotacion Recordatorio no utilizar time.DeltaTime en un fixedUpdate
-        if (DisplayInputData.leftControllerDirection.x < 0.5f || DisplayInputData.leftControllerDirection.x > 0.5f)
+        if (DisplayInputData.leftControllerDirection.x < 0.75f || DisplayInputData.leftControllerDirection.x > 0.75f)
         {
 
-            float additionalRotationY = DisplayInputData.leftControllerDirection.x * rotationSpeed;
+            float additionalRotationY = DisplayInputData.leftControllerDirection.x / 2  * rotationSpeed;
             targetRotation *= Quaternion.Euler(0, additionalRotationY, 0);
         }
 

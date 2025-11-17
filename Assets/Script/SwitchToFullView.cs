@@ -4,6 +4,7 @@ using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.Rendering;
+using VInspector;
 
 public class SwitchToFullView : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class SwitchToFullView : MonoBehaviour
     [SerializeField] private LayerMask normalViewCameraCulling;
     [SerializeField] private LayerMask fullViewVolumeCulling;
     [SerializeField] private LayerMask normalViewVolumeCulling;
-
+    
     private bool currentState = false;
     private float changeCameraCooldown = 0.2f;
     private bool canChangeCamera;
@@ -51,14 +52,33 @@ public class SwitchToFullView : MonoBehaviour
 
         Camera.main.cullingMask = fullviewCameraCulling;
         Camera.main.clearFlags = CameraClearFlags.SolidColor;
+        currentState = true;
     }
 
     public void ExitFullView()
     {
         Camera.main.cullingMask = normalViewCameraCulling;
         Camera.main.clearFlags = CameraClearFlags.Skybox;
+        currentState = false;
     }
 
+    [Button]
+    public void ToggleFullView()
+    {
+        if (!currentState)
+        {
+            Camera.main.cullingMask = fullviewCameraCulling;
+            Camera.main.clearFlags = CameraClearFlags.SolidColor;
+            currentState = true;
+
+        }
+        else
+        {
+            Camera.main.cullingMask = normalViewCameraCulling;
+            Camera.main.clearFlags = CameraClearFlags.Skybox;
+            currentState = false;
+        }
+    }
     private IEnumerator DoChangeCameraCooldown()
     {
         canChangeCamera = false;
