@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Windows;
+using VInspector;
 
 public class DronController : MonoBehaviour
 {
@@ -18,17 +19,18 @@ public class DronController : MonoBehaviour
     private bool canMove;
     private MovementBehaviour mMovementBehaviour;
     private bool isPlaying;
-    [SerializeField] private float maxUpTilt ;
-    [SerializeField] private float maxDownTilt ;
+    [SerializeField] private float maxUpTilt;
+    [SerializeField] private float maxDownTilt;
     private float currentCameraTilt;
     [Header("References")]
     [SerializeField] private EventReference soundReference;
     [SerializeField] private GameObject dronVisuals;
+    [SerializeField] private DronMode[] dronModes;
+    private int currentDronMode;
     private FMOD.Studio.EventInstance helixSound;
     private StudioEventEmitter eventEmitter;
     [Header("Rotations")]
     [SerializeField] private float tiltAngle;
-    [SerializeField] private float rotationSpeed;
     [SerializeField] private GameObject dronView;
     [SerializeField] private float maxDronViewRotation;
     [SerializeField] private float minDronViewRotation;
@@ -47,6 +49,15 @@ public class DronController : MonoBehaviour
     private bool aux;
     private float _attiMode;
 
+
+    [System.Serializable]
+    private class DronMode
+    {
+        public float rotationSpeed;
+        public float speed;
+    }
+
+
     public float GetAttiMode()
     {
         return _attiMode;
@@ -57,14 +68,11 @@ public class DronController : MonoBehaviour
     void Start()
     {
 
-        rb = GetComponent<Rigidbody>(); 
+        rb = GetComponent<Rigidbody>();
         currentCameraTilt = 0;
-        //currentCameraRotationSimplified = 0;
         eventEmitter = GetComponent<StudioEventEmitter>();
         isPlaying = false;
         mMovementBehaviour = GetComponent<MovementBehaviour>();
-        //tiltAngle = 25;
-        rotationSpeed = 150;
         PlayerReferences.instance.SetDron(this.gameObject);
     }
 
@@ -72,11 +80,16 @@ public class DronController : MonoBehaviour
     {
         return Physics.Raycast(transform.position, Vector3.down, groundedRayDistance);
     }
+
+    public bool IsGrounded()
+    {
+        return isGrounded;
+    }
     private void Update()
     {
         if (eventEmitter)
         {
-            eventEmitter.SetParameter("Speed", Mathf.Abs((rb.linearVelocity.x + rb.linearVelocity.y) / 2 / 60* 10));
+            eventEmitter.SetParameter("Speed", Mathf.Abs((rb.linearVelocity.x + rb.linearVelocity.y) / 2 / 60 * 10));
             eventEmitter.SetParameter("Volume", Mathf.Abs((rb.linearVelocity.x + rb.linearVelocity.y) / 2 / 60 * 10));
         }
         if (DronInputController.Instance.GetCameraMovement() > 0)
@@ -87,25 +100,9 @@ public class DronController : MonoBehaviour
         {
             MoveCameraUp();
         }
-        
+
     }
 
-    //private void FixedUpdate()
-    //{
-    //    if (canMove)
-    //    {
-    //        if (!isPlaying)
-    //        {
-    //            PlayDroneSound();
-    //            isPlaying = true;
-    //        }
-    //        TryToMoveDron();
-    //    }
-    //    else
-    //    {
-    //        StopPlayDroneSound();
-    //    }
-    //}
     private void FixedUpdate()
     {
         if (canMove)
@@ -119,7 +116,7 @@ public class DronController : MonoBehaviour
             {
                 TryToMoveDron();
             }
-            
+
             if (!eventEmitter.IsPlaying())
             {
                 eventEmitter.Play();
@@ -137,7 +134,6 @@ public class DronController : MonoBehaviour
 
     }
 
-    [System.Obsolete]
     private void TryToMoveDron()
     {
         Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
@@ -171,7 +167,7 @@ public class DronController : MonoBehaviour
                 else
                 {
                     // Sueltas los sticks → que decaiga lentamente la velocidad
-                    mMovementBehaviour.nonInputInputls(new Vector3(0, rb.velocity.y, 0), 0.05f);
+                    mMovementBehaviour.nonInputInputls(new Vector3(0, rb.linearVelocity.y, 0), 0.05f);
                 }
                 if (GetComponent<WindObject>() != null)
                 {
@@ -190,7 +186,7 @@ public class DronController : MonoBehaviour
                 }
                 else
                 {
-                    mMovementBehaviour.nonInputInputls(Vector3.zero,5f);
+                    mMovementBehaviour.nonInputInputls(Vector3.zero, 5f);
                 }
             }
             SendDronRotation(inputDirection);
@@ -198,36 +194,7 @@ public class DronController : MonoBehaviour
 
         _attiMode = 0;
         float cameraMovement = DronInputController.Instance.GetCameraMovement();
-        /*if (cameraMovement != 0)
-        //{
-        //    Debug.Log(currentCameraRotationSimplified);
-        //    if (cameraMovement > 0 && currentCameraRotationSimplified < maxDronViewRotation)
-        //    {
-        //        Quaternion rotation = gameObject.transform.rotation;
-        //        rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
-        //        Debug.Log("Rotation " + rotation);
-        //        currentCameraRotationSimplified += rotation.x + 10;
-        //        dronView.transform.Rotate(new Vector3(rotation.x, 0, 0), rotation.x * 10, Space.Self);
-        //    }
-        //    else if (cameraMovement < 0 && currentCameraRotationSimplified > minDronViewRotation)
-        //    {
 
-        //        Quaternion rotation = gameObject.transform.rotation;
-        //        rotation.x += cameraMovement * Time.deltaTime * cameraMovementSpeed;
-        //        Debug.Log("Rotation " + rotation);
-        //        currentCameraRotationSimplified -= rotation.x + 10;
-        //        dronView.transform.Rotate(new Vector3(-rotation.x,0,0),rotation.x * 10,Space.Self);
-        //    }
-        //}
-
-        //if (CheckIfGrounded() && inputDirection != Vector2.zero)
-        //{
-        //    playerOnGroundFeedback.SetActive(true);
-        //}
-        //else
-        //{
-        //    playerOnGroundFeedback.SetActive(false);
-        }*/
     }
     // consume mas en modo atti
     private void OnDestroy()
@@ -243,19 +210,19 @@ public class DronController : MonoBehaviour
             currentZTiltMultiplier = 2;
         }
         //Esto es para que tire un poco hacia el lado que se esta moviendo
-        float tiltAroundZ =  -inputDirection.x * tiltAngle * currentZTiltMultiplier;
+        float tiltAroundZ = -inputDirection.x * tiltAngle * currentZTiltMultiplier;
 
         float tiltAroundX = +inputDirection.y * tiltAngle;
-        currentZTiltMultiplier = Mathf.Lerp(currentZTiltMultiplier, 1, 0.15f) ;
+        currentZTiltMultiplier = Mathf.Lerp(currentZTiltMultiplier, 1, 0.15f);
         if (tiltAroundZ != 0)
-        lastTiltZ = -inputDirection.x * tiltAngle;
+            lastTiltZ = -inputDirection.x * tiltAngle;
 
         print("Tilt: " + tiltAroundZ + " Direction " + -inputDirection.x);
 
         Quaternion targetRotation = Quaternion.Euler(tiltAroundX, currentYRotation, tiltAroundZ);
 
         // Aqui se pone la rotacion Recordatorio no utilizar time.DeltaTime en un fixedUpdate
-        float additionalRotationY = DronInputController.Instance.GetRotationalInput() * rotationSpeed;
+        float additionalRotationY = DronInputController.Instance.GetRotationalInput() * dronModes[currentDronMode].rotationSpeed;
         targetRotation *= Quaternion.Euler(0, additionalRotationY, 0);
 
         // Apply the rotation with slerp
@@ -263,13 +230,14 @@ public class DronController : MonoBehaviour
 
     }
 
+    #region Camera Rotation
     private void MoveCameraUp()
     {
 
-        if (currentCameraTilt < maxUpTilt &&canMove)
+        if (currentCameraTilt < maxUpTilt && canMove)
         {
             float viewRotation = 1 * Time.deltaTime * cameraMovementSpeed;
-            currentCameraTilt += 10f; 
+            currentCameraTilt += 10f;
             dronView.transform.Rotate(viewRotation, 0, 0, Space.Self);
         }
     }
@@ -279,14 +247,12 @@ public class DronController : MonoBehaviour
         if (currentCameraTilt > maxDownTilt && canMove)
         {
             float viewRotation = -1 * Time.deltaTime * cameraMovementSpeed;
-            currentCameraTilt -= 10f; 
+            currentCameraTilt -= 10f;
             dronView.transform.Rotate(viewRotation, 0, 0, Space.Self);
         }
     }
-    private void MoveCamera()
-    {
-
-    }
+    #endregion
+    #region Start and Stop dron methods
     public void StartDron()
     {
         PlayerReferences.instance.SetDron(gameObject);
@@ -331,12 +297,10 @@ public class DronController : MonoBehaviour
     public void StartMovingDron()
     {
         if (!PlayerStateController.instance.CanMove())
-        canMove = true;
+            canMove = true;
     }
-    public bool IsGrounded()
-    {
-        return isGrounded;
-    }
+    #endregion
+
     private void returnToSpawn()
     {
         if (DronInputController.Instance.GetRemoteDron())
@@ -344,17 +308,17 @@ public class DronController : MonoBehaviour
             remoteDron = true;
             Debug.Log("oressed" + remoteDron);
         }
-        if(remoteDron)
+        if (remoteDron)
         {
             GetComponent<WindObject>().SetWindDampen(0f);
             float speed = 750f;
             Transform targetWaypoint = waypoints;
 
-            
+
             Vector3 direction = (targetWaypoint.position - transform.position);
             direction.y = 0f;
             direction.Normalize();
-            
+
             float distanceY = Mathf.Abs(transform.position.y - targetWaypoint.position.y);
             float distanceAll = Vector3.Distance(transform.position, targetWaypoint.position);
 
@@ -363,7 +327,7 @@ public class DronController : MonoBehaviour
                 new Vector2(transform.position.x, transform.position.z),
                 new Vector2(targetWaypoint.position.x, targetWaypoint.position.z)
             );
-            if(distanceXZ < 20f)
+            if (distanceXZ < 20f)
             {
                 speed = 50;
             }
@@ -371,7 +335,7 @@ public class DronController : MonoBehaviour
             {
                 // Reducir velocidad gradualmente al descender
                 speed = 60;
-                mMovementBehaviour.MoveDronAuto(Vector3.down, speed); 
+                mMovementBehaviour.MoveDronAuto(Vector3.down, speed);
 
                 // Estabilizar rotaci�n horizontal
                 Quaternion stableRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
@@ -395,6 +359,20 @@ public class DronController : MonoBehaviour
                 remoteDron = false;
                 aux = false;
             }
+        }
+    }
+
+    [Button]
+    public void ChangeMode()
+    {
+        if (currentDronMode + 1 >= dronModes.Length)
+        {
+            currentDronMode = 0;
+        }
+        else
+        {
+
+            currentDronMode++;
         }
     }
 }

@@ -17,8 +17,16 @@ public class MovementBehaviour : MonoBehaviour
     //Usamos Addforce para hacer mas realistas las fisicas
     public void Move(Vector3 movementDirection)
     {
-        rb.AddForce(movementDirection.normalized * speed * Time.deltaTime , ForceMode.Force);
+            rb.AddForce(movementDirection.normalized * this.speed * Time.deltaTime, ForceMode.Force);
+
+
     }
+    public void Move(Vector3 movementDirection, float objectSpeed)
+    {
+               
+            rb.AddForce(movementDirection.normalized * objectSpeed * Time.deltaTime, ForceMode.Force);
+    }
+
     public void MoveDronAuto(Vector3 movementDirection, float speedAuto)
     {
         rb.AddForce(movementDirection.normalized * speedAuto * Time.deltaTime, ForceMode.Force);
@@ -42,14 +50,14 @@ public class MovementBehaviour : MonoBehaviour
     //Esto es para que haga hover cuando lo dejes quieto
     public void StopMovingOnY()
     {
-        rb.AddForce(new Vector3(0f,-Physics.gravity.y,0f));
+        rb.AddForce(new Vector3(0f, -Physics.gravity.y, 0f));
     }
 
     public void StopMoving()
     {
-        Vector3 velocity = new Vector3(0,Physics.gravity.y,0);
-        rb.linearVelocity = velocity; 
-        
+        Vector3 velocity = new Vector3(0, Physics.gravity.y, 0);
+        rb.linearVelocity = velocity;
+
     }
 
     public void MoveRB3D(Vector3 input)
@@ -58,7 +66,7 @@ public class MovementBehaviour : MonoBehaviour
         Vector3 velocityXZ = input.normalized * speed;
         rb.linearVelocity = new Vector3(velocityXZ.x, rb.linearVelocity.y, velocityXZ.z);
     }
-    public void RunRB(Vector3 input,float runMultiplier)
+    public void RunRB(Vector3 input, float runMultiplier)
     {
 
         input.y = 0;
