@@ -149,7 +149,7 @@ public class DronController : MonoBehaviour
             //mMovementBehaviour.StopMovingOnY();
         }
         if (verticalDirection < -0.2f || verticalDirection > 0.05f)
-            mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0));
+            mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0), dronModes[currentDronMode].speed);
 
         _attiMode = DronInputController.Instance.GetModeAtti();
         //Debug.Log(CheckIfGrounded());
@@ -161,7 +161,7 @@ public class DronController : MonoBehaviour
             {
                 if (inputDirection.magnitude > 0.01f)
                 {
-                    mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z));
+                    mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z), dronModes[currentDronMode].speed);
                     SendDronRotation(inputDirection);
                 }
                 else
@@ -181,7 +181,7 @@ public class DronController : MonoBehaviour
 
                 if (inputDirection.magnitude > 0.01f)
                 {
-                    mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z));
+                    mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z), dronModes[currentDronMode].speed);
                     SendDronRotation(inputDirection);
                 }
                 else
