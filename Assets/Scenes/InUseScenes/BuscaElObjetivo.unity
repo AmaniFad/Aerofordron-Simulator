@@ -3267,13 +3267,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9121587466417908338, guid: e9d08a74801d9ef4fb0dbc384652222f, type: 3}
+    - {fileID: 9116161493326452502, guid: e9d08a74801d9ef4fb0dbc384652222f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6133564546592706454, guid: e9d08a74801d9ef4fb0dbc384652222f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1591171792}
+    - targetCorrespondingSourceObject: {fileID: 2627707560200648486, guid: e9d08a74801d9ef4fb0dbc384652222f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1289512254}
   m_SourcePrefab: {fileID: 100100000, guid: e9d08a74801d9ef4fb0dbc384652222f, type: 3}
+--- !u!1 &924470055 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2627707560200648486, guid: e9d08a74801d9ef4fb0dbc384652222f, type: 3}
+  m_PrefabInstance: {fileID: 924470054}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &926755099
 GameObject:
   m_ObjectHideFlags: 0
@@ -3284,7 +3293,6 @@ GameObject:
   m_Component:
   - component: {fileID: 926755102}
   - component: {fileID: 926755101}
-  - component: {fileID: 926755100}
   - component: {fileID: 926755103}
   - component: {fileID: 926755104}
   - component: {fileID: 926755105}
@@ -3295,14 +3303,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &926755100
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926755099}
-  m_Enabled: 1
 --- !u!20 &926755101
 Camera:
   m_ObjectHideFlags: 0
@@ -3460,6 +3460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
   attenuationObject: {fileID: 0}
 --- !u!1 &968519478
 GameObject:
@@ -4747,6 +4748,20 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 67719298616223336, guid: e9d08a74801d9ef4fb0dbc384652222f, type: 3}
   m_PrefabInstance: {fileID: 924470054}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1289512254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924470055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &1316068625
 GameObject:
   m_ObjectHideFlags: 0
@@ -5824,12 +5839,12 @@ MonoBehaviour:
       Data4: -1253477179
     Path: event:/ForestAmbient
   Event: 
-  PlayEvent: 1
-  StopEvent: 2
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
-  AllowNonRigidbodyDoppler: 0
+  NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 1
