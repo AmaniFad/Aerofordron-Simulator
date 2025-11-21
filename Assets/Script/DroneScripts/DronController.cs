@@ -1,4 +1,5 @@
 using FMODUnity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -26,7 +27,17 @@ public class DronController : MonoBehaviour
     [SerializeField] private EventReference soundReference;
     [SerializeField] private GameObject dronVisuals;
     [SerializeField] private DronMode[] dronModes;
-    private int currentDronMode;
+    public event Action<int> onDronModeChange;
+    private int _currentDronMode;
+    private int currentDronMode
+    {
+        get => _currentDronMode;
+        set
+        {
+            _currentDronMode = value;
+            onDronModeChange?.Invoke(currentDronMode);
+        }
+    }
     private FMOD.Studio.EventInstance helixSound;
     private StudioEventEmitter eventEmitter;
     [Header("Rotations")]
@@ -68,6 +79,7 @@ public class DronController : MonoBehaviour
     void Start()
     {
 
+        currentDronMode = 1;
         rb = GetComponent<Rigidbody>();
         currentCameraTilt = 0;
         eventEmitter = GetComponent<StudioEventEmitter>();
