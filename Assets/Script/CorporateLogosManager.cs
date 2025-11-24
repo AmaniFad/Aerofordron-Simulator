@@ -43,6 +43,7 @@ public class CorporateLogosManager : MonoBehaviour
         {
             if (item.name == name) 
             {
+                currentCorportaion = item;
                 SetImages(item);
             }
         }

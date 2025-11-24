@@ -36,6 +36,11 @@ public class PlayFabLogin : MonoBehaviour
             PlayFabClientAPI.GetUserData(dataRequest,
              dataResult =>
              {
+             string corporation = dataResult.Data["Corporation"].Value;
+                 if (!string.IsNullOrEmpty(corporation))
+                 {
+                     CorporateLogosManager.instance.ChangeCorporation(corporation);
+                 }
                  if (dataResult.Data["TimeLeft"].Value == "0")
                  {
                          onlyLogInOnce = false;
