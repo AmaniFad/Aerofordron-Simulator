@@ -14,8 +14,7 @@ Material:
   m_ValidKeywords:
   - _LEAFTUMBLING
   - _LEAFTURBULENCE
-  m_InvalidKeywords:
-  - _ADVANCEDFLUTTER
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -27,12 +26,48 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Normal_vegetation:
+        m_Texture: {fileID: 2800000, guid: d7dcdeeae2a5d4c6f8e5328e09728b47, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 5597dc21a8aed4e7ba2c0f93dc4b1d98, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpSpecMap:
         m_Texture: {fileID: 2800000, guid: b1d0d3d0153acd44a9902e3e90407181, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Covering_Height:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 5597dc21a8aed4e7ba2c0f93dc4b1d98, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Masking:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Snow_Base_Color_sm:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Snow_Mask_sm:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Snow_Normal_sm:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Transmission:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - mask_vegetation:
+        m_Texture: {fileID: 2800000, guid: ca6a46a4d37514e00ae826202bad794e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -49,28 +84,90 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Boolean_3f7fc101151e4131b707a42791e97a87: 0
+    - Boolean_5d00527b3b684cbb96b368d7d4a87861: 0
+    - Boolean_8f05bfb3c582445c93d235ec658586eb: 0
+    - Normal_intensity_vegetation: 1
+    - Vector1_16F2F1E4: -0.26
+    - Vector1_1e8cbc9d6438468987568852e20507fe: 0
+    - Vector1_75aa5bc7e21e4586994ff9264c97ec84: 0
+    - Vector1_813F3AD6: 0
+    - Vector1_82f64464d37b4a1db58d85694d73429c: 0
+    - Vector1_9d08a8daf91945c08a536cac44a65abc: 0.5
+    - Vector1_DDCDCAD2: 1
+    - Vector1_b64466b3c71c4e21b3eee17260cb70f3: 0
+    - Wind_vegetation_sm: 1
+    - _AO_Snow_Intensity_sm: 0
+    - _ASSET_TYPE: 0
     - _AmbientTranslucency: 2
     - _BAKEDBRANCHAXIS: 0
     - _BackFaceSmoothness: 0.71
+    - _Bend_Variation_B: 0
+    - _Bend_multiply: 1
+    - _Blend_Amount: 0
     - _BumpScale: 4
+    - _COVERING_POSITION: 0
+    - _Covering_Controller_sm: 0
+    - _Covering_Effect_Scale_sm: 8
+    - _Covering_Height_Intensity: 0
+    - _Covering_Tilling_Multiply_sm: 1
+    - _Covering_masking_map: 0
+    - _Covering_sm: 0
     - _Cutoff: 0.5
     - _EdgeFlutterInfluence: 0
     - _EnableAdvancedEdgeBending: 1
     - _EnableNormalRotation: 0
+    - _Foliage_Covering_Controller_sm: 0
     - _LEAFTUMBLING: 1
     - _LEAFTURBULENCE: 1
     - _LeafNoise: 0.1
     - _LeafTurbulence: 0.1
+    - _Lock_Covering_Textures: 0
+    - _Multiply_Pivot_Bend_by_Red_Channel: 0
+    - _Object_Direction: 0
+    - _Overall_Covering_Direction: 1
+    - _Overall_Covering_Masking: 1
+    - _Pivot_Bend: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0.68
+    - _Snow_Normal_Intensity_sm: 1
+    - _Snow_T_Q_sm: 15
+    - _Solid_Transmission: 0
+    - _T_Snow_sm: 0
+    - _Thickness_Snow_sm: 0
+    - _Transmission_if_it_is_Solid: 1
     - _TumbleFrequency: 0.6
     - _TumbleStrength: 0.012
+    - _UV_SET: 0
+    - _Use_height_to_blend: 0
+    - _Variant_Covering_Controller_sm: 1
+    - _Vertex_AO_sm: 0
+    - _Wetness_sm: 0
+    - _Wind_Multiply_sm: 1
+    - _cutoff: 0.5
+    - bend_vegetation: 0.05
+    - turbulence_vegetation: 0.8
+    - wind_speed_vegetation: 0.5
     m_Colors:
+    - Vector2_08a82e0e13154010b31c543aff7192b4: {r: 0.5, g: 1, b: 0, a: 0}
+    - Vector2_fef41d8fdb394bab92fa6a65ad93b844: {r: -1.5, g: 2, b: 0, a: 0}
+    - Vector3_32a9de8205ce41559c900c00e8c69e32: {r: 0, g: 1, b: 0, a: 0}
+    - Vector3_8df6f0d427cb4bed9ab0ed9fd7ef1f3d: {r: 1, g: 0, b: 1, a: 0}
     - _AdvancedEdgeBending: {r: 0.6, g: 1.3, b: 0, a: 0}
+    - _Color: {r: 0.8726415, g: 1, b: 0.87817883, a: 1}
+    - _Covering_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Covering_Direction: {r: 0, g: 1, b: 0, a: 0}
+    - _Covering_Tiling: {r: 1, g: 1, b: 0, a: 0}
     - _HueVariation: {r: 0, g: 0.9019608, b: 0.827451, a: 0.101960786}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Overall_Covering_Remap: {r: 0, g: 1, b: 0, a: 0}
+    - _Pivot_Bend_Direction: {r: 1, g: 0, b: 1, a: 0}
+    - _Smoothness_Snow_sm: {r: 0, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Tilling: {r: 1, g: 1, b: 0, a: 0}
     - _Translucency: {r: 1.5, g: 2, b: 0.01, a: 0}
+    - _Transmission_Remap: {r: -1, g: 1, b: 0, a: 0}
     - _WindMultipliers: {r: 0.5, g: 2, b: 1, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
