@@ -23,6 +23,12 @@ public class PlayerInputController : MonoBehaviour
         playerInput = move.Get<Vector2>();
     }
 
+    public void OnDronMode(InputAction.CallbackContext callbackContext)
+    {
+ 
+    }
+
+
     public Vector2 GetPlayerInput()
     {
         return playerInput;

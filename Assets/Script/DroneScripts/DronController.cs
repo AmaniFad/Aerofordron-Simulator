@@ -112,7 +112,9 @@ public class DronController : MonoBehaviour
         {
             MoveCameraUp();
         }
-
+        if (DronInputController.Instance.GetModeChange()){
+            ChangeMode();
+        }
     }
 
     private void FixedUpdate()

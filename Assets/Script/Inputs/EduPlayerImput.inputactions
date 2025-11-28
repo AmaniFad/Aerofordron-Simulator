@@ -7,9 +7,9 @@
             "actions": [
                 {
                     "name": "Look",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "b4ce2eee-04c8-4896-bda9-9ec4a90b31db",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -124,12 +124,21 @@
                 },
                 {
                     "name": "ModeDron",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "26aaa010-4522-412b-bb3b-240ee4a51142",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ModeChange",
+                    "type": "Button",
+                    "id": "0de8adf9-3818-4473-826e-ea86d746e086",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -702,6 +711,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ModeDron",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f253ba48-9814-481d-a9d8-bfc6b114f614",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ModeChange",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

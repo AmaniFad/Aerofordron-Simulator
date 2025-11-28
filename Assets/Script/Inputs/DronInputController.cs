@@ -16,6 +16,8 @@ public class DronInputController : MonoBehaviour
     private bool buttonPressedMode = false;
     private bool isRemoteDron;
     private float isModeAtti;
+    private bool changeMovementMode;
+
     private void Start()
     {
         Instance = this;
@@ -61,6 +63,24 @@ public class DronInputController : MonoBehaviour
         {
             buttonPressedMode = false;
         }
+    }
+
+    public void OnModeChange(InputValue callbackContext)
+    {
+        if (callbackContext.isPressed)
+            changeMovementMode = true;
+        
+    }
+
+    public bool GetModeChange()
+    {
+        if (changeMovementMode)
+        {
+
+        changeMovementMode = false;
+        return true;
+        }
+        return false;
     }
     public float GetModeAtti()
     {

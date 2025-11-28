@@ -93,9 +93,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Look"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""b4ce2eee-04c8-4896-bda9-9ec4a90b31db"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -210,12 +210,21 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""ModeDron"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""26aaa010-4522-412b-bb3b-240ee4a51142"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ModeChange"",
+                    ""type"": ""Button"",
+                    ""id"": ""0de8adf9-3818-4473-826e-ea86d746e086"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -788,6 +797,17 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ModeDron"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f253ba48-9814-481d-a9d8-bfc6b114f614"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ModeChange"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1423,6 +1443,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         m_Player_Agua = m_Player.FindAction("Agua", throwIfNotFound: true);
         m_Player_RemoteDron = m_Player.FindAction("RemoteDron", throwIfNotFound: true);
         m_Player_ModeDron = m_Player.FindAction("ModeDron", throwIfNotFound: true);
+        m_Player_ModeChange = m_Player.FindAction("ModeChange", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1536,6 +1557,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Agua;
     private readonly InputAction m_Player_RemoteDron;
     private readonly InputAction m_Player_ModeDron;
+    private readonly InputAction m_Player_ModeChange;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1604,6 +1626,10 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @ModeDron => m_Wrapper.m_Player_ModeDron;
         /// <summary>
+        /// Provides access to the underlying input action "Player/ModeChange".
+        /// </summary>
+        public InputAction @ModeChange => m_Wrapper.m_Player_ModeChange;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1671,6 +1697,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @ModeDron.started += instance.OnModeDron;
             @ModeDron.performed += instance.OnModeDron;
             @ModeDron.canceled += instance.OnModeDron;
+            @ModeChange.started += instance.OnModeChange;
+            @ModeChange.performed += instance.OnModeChange;
+            @ModeChange.canceled += instance.OnModeChange;
         }
 
         /// <summary>
@@ -1724,6 +1753,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @ModeDron.started -= instance.OnModeDron;
             @ModeDron.performed -= instance.OnModeDron;
             @ModeDron.canceled -= instance.OnModeDron;
+            @ModeChange.started -= instance.OnModeChange;
+            @ModeChange.performed -= instance.OnModeChange;
+            @ModeChange.canceled -= instance.OnModeChange;
         }
 
         /// <summary>
@@ -2292,6 +2324,13 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnModeDron(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ModeChange" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnModeChange(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
