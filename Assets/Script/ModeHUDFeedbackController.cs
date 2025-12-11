@@ -2,14 +2,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using VInspector;
 using TMPro;
-
+using System.Runtime.CompilerServices;
+using System;
+using System.Collections;
 
 public class ModeHUDFeedbackController : MonoBehaviour
 {
     //Importante 0 es tripode, 1 es normal y 2 es sport
     [SerializeField] private TextMeshProUGUI[] modeFeedback;
     private int currentMode;
-
+    [SerializeField] private Animator dronFeedbackAnimator;
     [Foldout("Colors")] 
     [SerializeField] private Color deactivatedColor;
     [SerializeField] private Color activatedColor;
@@ -17,13 +19,28 @@ public class ModeHUDFeedbackController : MonoBehaviour
     void Start()
     {
         currentMode = 1;
+        ChangeModeFeedback(currentMode);
     }
 
 
-
+    private void Update()
+    {
+        
+    }
     private void OnEnable()
     {
-        PlayerReferences.instance.GetDron().GetComponent<DronController>().onDronModeChange += ChangeModeFeedback;
+        try
+        {
+
+            PlayerReferences.instance.GetDron().GetComponent<DronController>().onDronModeChange += ChangeModeFeedback;
+            ChangeModeFeedback(PlayerReferences.instance.GetDron().GetComponent<DronController>().GetCurrentDronMode());
+        }
+        catch(Exception e)
+        {
+            print("Could not find Dron reference in player reference, Retrying in 10 seconds");
+            StartCoroutine(RetrySubscribingToEvent());
+        }
+        print("Hola");
     }
 
     private void OnDisable()
@@ -36,5 +53,24 @@ public class ModeHUDFeedbackController : MonoBehaviour
         modeFeedback[currentMode].color = deactivatedColor;
         currentMode = mode;
         modeFeedback[currentMode].color = activatedColor;
+        if (dronFeedbackAnimator)
+        {
+            dronFeedbackAnimator.SetInteger("ModeInt",mode);
+        }
+    }
+
+    private IEnumerator RetrySubscribingToEvent()
+    {
+        yield return new WaitForSeconds(5);
+        try
+        {
+
+            PlayerReferences.instance.GetDron().GetComponent<DronController>().onDronModeChange += ChangeModeFeedback;
+        }
+        catch (Exception e)
+        {
+            print("Could not find Dron reference in player reference");
+            StartCoroutine(RetrySubscribingToEvent());
+        }
     }
 }
