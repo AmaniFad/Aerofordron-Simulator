@@ -389,4 +389,9 @@ public class DronController : MonoBehaviour
             currentDronMode++;
         }
     }
+
+    public int GetCurrentDronMode()
+    {
+        return currentDronMode;
+    }
 }
