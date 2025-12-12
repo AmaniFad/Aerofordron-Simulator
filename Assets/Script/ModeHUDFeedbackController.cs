@@ -50,15 +50,20 @@ public class ModeHUDFeedbackController : MonoBehaviour
 
     private void ChangeModeFeedback(int mode)
     {
-        modeFeedback[currentMode].color = deactivatedColor;
+        StartCoroutine(ChangeColor(currentMode,mode));
         currentMode = mode;
-        modeFeedback[currentMode].color = activatedColor;
+
         if (dronFeedbackAnimator)
         {
             dronFeedbackAnimator.SetInteger("ModeInt",mode);
         }
     }
-
+    private IEnumerator ChangeColor(int old, int newMode)
+    {
+        modeFeedback[old].color = deactivatedColor;
+        yield return new WaitForSeconds(0.1f);
+        modeFeedback[newMode].color = activatedColor;
+    }
     private IEnumerator RetrySubscribingToEvent()
     {
         yield return new WaitForSeconds(5);
