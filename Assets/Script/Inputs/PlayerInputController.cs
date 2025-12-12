@@ -15,7 +15,8 @@ public class PlayerInputController : MonoBehaviour
     private bool isUsingGamepad;
     void Start()
     {
-        Instance = this;
+        if(Instance == null)
+            Instance = this;
     }
 
     public void OnMove(InputValue move)
