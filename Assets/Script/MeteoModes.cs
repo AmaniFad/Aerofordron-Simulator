@@ -9,7 +9,7 @@ public class MeteoModes : MonoBehaviour
 {
 
     [System.Serializable]
-    private class FogLevels 
+    private class FogLevels
     {
         [SerializeField] public float intensity;
         [SerializeField] public float remapMin;
@@ -17,9 +17,9 @@ public class MeteoModes : MonoBehaviour
 
 
 
-        
+
     }
-    
+
     public static MeteoModes instance;
     //This bools are for debugging;
     [SerializeField] private bool isRaining;
@@ -53,7 +53,7 @@ public class MeteoModes : MonoBehaviour
     void Start()
     {
         currentFogLevel = 0;
-        foreach ( ScriptableRendererFeature pass in fogRenderer.rendererFeatures)
+        foreach (ScriptableRendererFeature pass in fogRenderer.rendererFeatures)
         {
             if (pass.name == "VolumetricFogRendererFeatureLite")
             {
@@ -68,9 +68,9 @@ public class MeteoModes : MonoBehaviour
         rainParticles.GetComponent<FollowMeteo>().SetTarget(Camera.main.gameObject);
         dronRainParticles.GetComponent<FollowMeteo>().SetTarget(PlayerReferences.instance.GetDron());
         if (instance == null)
-        { 
+        {
             instance = this;
-            
+
         }
         else
         {
@@ -84,6 +84,7 @@ public class MeteoModes : MonoBehaviour
 
     }
 
+    [Button]
     public void ToggleRain()
     {
         rainParticles.SetActive(!rainParticles.activeInHierarchy);
@@ -106,10 +107,16 @@ public class MeteoModes : MonoBehaviour
 
 
 
+
     [Button]
     public void ToggleFog(bool state)
     {
-        fog.SetActive(state);
+#if UNITY_WEBGL
+        RenderSettings.fog = !RenderSettings.fog;
+#elif UNITY_STANDALONE_WIN
+                fogRenderer.rendererFeatures[2].SetActive(!fogRenderer.rendererFeatures[2].isActive);
+
+#endif
     }
 
     //Changes fog level according to parameter
@@ -134,7 +141,7 @@ public class MeteoModes : MonoBehaviour
     }
 
     public void AddBlindingSun()
-    {       
+    {
 
 
     }
