@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
@@ -38,6 +39,7 @@ public class MeteoModes : MonoBehaviour
     [Tab("Rain")]
     [SerializeField] private GameObject rainParticles;
     [SerializeField] private GameObject dronRainParticles;
+    [SerializeField] private StudioEventEmitter rainSound;
     [Tab("Clouds")]
     [SerializeField] private UnityEngine.Rendering.Volume clouds;
     [Tab("Night")]
@@ -91,6 +93,16 @@ public class MeteoModes : MonoBehaviour
         dronRainParticles.SetActive(!dronRainParticles.activeInHierarchy);
         rainParticles.transform.position = Camera.main.transform.position + new Vector3(0, 2, 0);
         dronRainParticles.transform.position = PlayerReferences.instance.GetDron().transform.position + new Vector3(0, 2, 0);
+        if (rainParticles.activeInHierarchy)
+        {
+            rainSound.Play();
+        }
+        else
+        {
+            rainSound.Stop();
+
+        }
+
     }
 
 
