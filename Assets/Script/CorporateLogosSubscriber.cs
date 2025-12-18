@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using static CorporateLogosManager;
@@ -11,12 +12,20 @@ public class CorporateLogosSubscriber : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        try
+        {
+
         logo = GetComponent<Image>();
         CorporateLogosManager.instance.SubscribeItem(this);
         if (CorporateLogosManager.instance.currentCorportaion != null)
             SetCorporateImages(CorporateLogosManager.instance.currentCorportaion);
         else 
             logo.gameObject.SetActive(false);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
     }
 
     // Update is called once per frame
