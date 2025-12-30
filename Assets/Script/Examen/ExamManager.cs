@@ -173,42 +173,42 @@ public class ExamManager : MonoBehaviour
         switch (_countLevels)
         {
             case 0:
-                calculeDistancePoint(5f, 1.5f, pointsDetector[_countLevels]);
+                calculeDistancePoint(5f, 1.5f, pointsDetector[_countLevels], true);
             break;
             case 1:
 
-                calculeDistancePoint(5f, 20f, pointsDetector[_countLevels]);
+                calculeDistancePoint(5f, 20f, pointsDetector[_countLevels], true);
                 _countLine = 0;
                 _finalPoint = 8;
             break; 
             case 2:
 
-                calculeDistancePoint(40f, 40f, pointsDetector[_countLevels]);
-                calculeDistancePoint(7f, 20f, detectorPoint301);
+                calculeDistancePoint(40f, 40f, pointsDetector[_countLevels], true);
+                calculeDistancePoint(7f, 20f, detectorPoint301, false);
                 detectorPoint301.SetActive(false);
             break;
             case 3:
 
-                calculeDistancePoint(5f, 30f, pointsDetector[_countLevels]);
+                calculeDistancePoint(5f, 30f, pointsDetector[_countLevels], true);
                 
                 _countLine = 0;
                 _finalPoint = 5;
             break;
             case 4:
 
-                calculeDistancePoint(5f, 50f, pointsDetector[_countLevels]);
+                calculeDistancePoint(5f, 50f, pointsDetector[_countLevels], true);
             break;
             case 5:
-                calculeDistancePoint(30f, 50f, pointsDetector[_countLevels]);
+                calculeDistancePoint(30f, 50f, pointsDetector[_countLevels], true);
                 break;
             case 6:
-                calculeDistancePoint(100f, 50f, pointsDetector[_countLevels]);
+                calculeDistancePoint(100f, 50f, pointsDetector[_countLevels], true);
                 break;
             case 7:
-                calculeDistancePoint(20f,50f, pointsDetector[_countLevels]);
+                calculeDistancePoint(20f,50f, pointsDetector[_countLevels], true);
                 break;
             case 8:
-                calculeDistancePoint(30f, 50f, pointsDetector[_countLevels]);
+                calculeDistancePoint(30f, 50f, pointsDetector[_countLevels], true);
                 break;
             default:
                 break;
@@ -224,7 +224,7 @@ public class ExamManager : MonoBehaviour
         NextLevel();
     }
 
-    private void calculeDistancePoint(float distanceX, float distanceY, GameObject point)
+    private void calculeDistancePoint(float distanceX, float distanceY, GameObject point, bool line)
     {
         Vector3 positionPlayer = Player.transform.position;
         Vector3 escalaPlayer = Player.transform.localScale;
@@ -234,6 +234,12 @@ public class ExamManager : MonoBehaviour
 
         point.SetActive(true);
         point.transform.position = positionPlayer + newPositionX + newPositionY;
+        
+        if(line)
+        {
+            LineToTarget.instance.SetTarget(point.transform);
+            LineToTarget.instance.SetBool(true);
+        }
     }
     public void ReturnToStart()
     {
