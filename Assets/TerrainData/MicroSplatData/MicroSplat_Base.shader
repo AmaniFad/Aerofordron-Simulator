@@ -11,7 +11,7 @@
 ////////////////////////////////////////
 
 
-Shader "MicroSplat/Example"
+Shader "Hidden/Terrain (1)_Base985659755"
 {
    Properties
    {
@@ -22,9 +22,6 @@ Shader "MicroSplat/Example"
       [HideInInspector] _Control1 ("Control1", 2D) = "black" {}
       [HideInInspector] _Control2 ("Control2", 2D) = "black" {}
       [HideInInspector] _Control3 ("Control3", 2D) = "black" {}
-      [HideInInspector] _Control4 ("Control4", 2D) = "black" {}
-      [HideInInspector] _Control5 ("Control5", 2D) = "black" {}
-      [HideInInspector] _Control6 ("Control6", 2D) = "black" {}
       
 
       // Splats
@@ -41,13 +38,13 @@ Shader "MicroSplat/Example"
 
       _TerrainHeightmapTexture("", 2D) = "black" {}
       _TerrainNormalmapTexture("", 2D) = "bump" {}
-      [NoScaleOffset]_Specular ("Specular Array", 2DArray) = "black" {}
+      _HybridHeightBlendDistance("Hybrid Blend Distance", Float) = 300
 
 
    }
    SubShader
    {
-            Tags {"RenderPipeline" = "UniversalPipeline"  "RenderType" = "UniversalLitShader" "Queue" = "Geometry+100" "IgnoreProjector" = "False"  "TerrainCompatible" = "true" "SplatCount" = "28"}
+            Tags {"RenderPipeline" = "UniversalPipeline"  "RenderType" = "UniversalLitShader" "Queue" = "Geometry+100" "IgnoreProjector" = "False"  "TerrainCompatible" = "true" "SplatCount" = "16"}
       
 
       
@@ -120,13 +117,19 @@ Shader "MicroSplat/Example"
 
             
       #define _MICROSPLAT 1
-      #define _MICROTERRAIN 1
-      #define _USESPECULARWORKFLOW 1
-      #define _USEGRADMIP 1
-      #define _MAX28TEXTURES 1
       #define _BRANCHSAMPLES 1
       #define _BRANCHSAMPLESAGR 1
+      #define _USEGRADMIP 1
+      #define _MICROTERRAIN 1
+      #define _MSRENDERLOOP_UNITYLD 1
+      #define _MSRENDERLOOP_UNITYURP2020 1
+      #define _MSRENDERLOOP_UNITYURP2021 1
+      #define _MSRENDERLOOP_UNITYURP2022 1
       #define _MSRENDERLOOP_UNITYURP6 1
+      #define _MSRENDERLOOP_UNITYURP6P3 1
+      #define _HYBRIDHEIGHTBLEND 1
+      #define _PERTEXUVSCALEOFFSET 1
+      #define _MICROSPLATBASEMAP 1
       #define _MSRENDERLOOP_UNITYLD 1
       #define _MSRENDERLOOP_UNITYURP2020 1
       #define _MSRENDERLOOP_UNITYURP2021 1
@@ -134,14 +137,10 @@ Shader "MicroSplat/Example"
       #define _MSRENDERLOOP_UNITYURP6 1
       #define _MSRENDERLOOP_UNITYURP6P3 1
 
-      #define _SPECULAR_SETUP
 #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap forwardadd
 
 
    #define _URP 1
-
-#define _USESPECULAR 1
-#define _MATERIAL_FEATURE_SPECULAR_COLOR 1
 
 
 
@@ -4440,13 +4439,19 @@ float3 GetTessFactors ()
 
             
       #define _MICROSPLAT 1
-      #define _MICROTERRAIN 1
-      #define _USESPECULARWORKFLOW 1
-      #define _USEGRADMIP 1
-      #define _MAX28TEXTURES 1
       #define _BRANCHSAMPLES 1
       #define _BRANCHSAMPLESAGR 1
+      #define _USEGRADMIP 1
+      #define _MICROTERRAIN 1
+      #define _MSRENDERLOOP_UNITYLD 1
+      #define _MSRENDERLOOP_UNITYURP2020 1
+      #define _MSRENDERLOOP_UNITYURP2021 1
+      #define _MSRENDERLOOP_UNITYURP2022 1
       #define _MSRENDERLOOP_UNITYURP6 1
+      #define _MSRENDERLOOP_UNITYURP6P3 1
+      #define _HYBRIDHEIGHTBLEND 1
+      #define _PERTEXUVSCALEOFFSET 1
+      #define _MICROSPLATBASEMAP 1
       #define _MSRENDERLOOP_UNITYLD 1
       #define _MSRENDERLOOP_UNITYURP2020 1
       #define _MSRENDERLOOP_UNITYURP2021 1
@@ -4454,14 +4459,10 @@ float3 GetTessFactors ()
       #define _MSRENDERLOOP_UNITYURP6 1
       #define _MSRENDERLOOP_UNITYURP6P3 1
 
-      #define _SPECULAR_SETUP
 #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap forwardadd
 
 
    #define _URP 1
-
-#define _USESPECULAR 1
-#define _MATERIAL_FEATURE_SPECULAR_COLOR 1
 
 
 
@@ -8699,13 +8700,19 @@ float3 GetTessFactors ()
 
             
       #define _MICROSPLAT 1
-      #define _MICROTERRAIN 1
-      #define _USESPECULARWORKFLOW 1
-      #define _USEGRADMIP 1
-      #define _MAX28TEXTURES 1
       #define _BRANCHSAMPLES 1
       #define _BRANCHSAMPLESAGR 1
+      #define _USEGRADMIP 1
+      #define _MICROTERRAIN 1
+      #define _MSRENDERLOOP_UNITYLD 1
+      #define _MSRENDERLOOP_UNITYURP2020 1
+      #define _MSRENDERLOOP_UNITYURP2021 1
+      #define _MSRENDERLOOP_UNITYURP2022 1
       #define _MSRENDERLOOP_UNITYURP6 1
+      #define _MSRENDERLOOP_UNITYURP6P3 1
+      #define _HYBRIDHEIGHTBLEND 1
+      #define _PERTEXUVSCALEOFFSET 1
+      #define _MICROSPLATBASEMAP 1
       #define _MSRENDERLOOP_UNITYLD 1
       #define _MSRENDERLOOP_UNITYURP2020 1
       #define _MSRENDERLOOP_UNITYURP2021 1
@@ -8713,14 +8720,10 @@ float3 GetTessFactors ()
       #define _MSRENDERLOOP_UNITYURP6 1
       #define _MSRENDERLOOP_UNITYURP6P3 1
 
-      #define _SPECULAR_SETUP
 #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap forwardadd
 
 
    #define _URP 1
-
-#define _USESPECULAR 1
-#define _MATERIAL_FEATURE_SPECULAR_COLOR 1
 
 
                  
@@ -12858,13 +12861,19 @@ float3 GetTessFactors ()
 
             
       #define _MICROSPLAT 1
-      #define _MICROTERRAIN 1
-      #define _USESPECULARWORKFLOW 1
-      #define _USEGRADMIP 1
-      #define _MAX28TEXTURES 1
       #define _BRANCHSAMPLES 1
       #define _BRANCHSAMPLESAGR 1
+      #define _USEGRADMIP 1
+      #define _MICROTERRAIN 1
+      #define _MSRENDERLOOP_UNITYLD 1
+      #define _MSRENDERLOOP_UNITYURP2020 1
+      #define _MSRENDERLOOP_UNITYURP2021 1
+      #define _MSRENDERLOOP_UNITYURP2022 1
       #define _MSRENDERLOOP_UNITYURP6 1
+      #define _MSRENDERLOOP_UNITYURP6P3 1
+      #define _HYBRIDHEIGHTBLEND 1
+      #define _PERTEXUVSCALEOFFSET 1
+      #define _MICROSPLATBASEMAP 1
       #define _MSRENDERLOOP_UNITYLD 1
       #define _MSRENDERLOOP_UNITYURP2020 1
       #define _MSRENDERLOOP_UNITYURP2021 1
@@ -12872,14 +12881,10 @@ float3 GetTessFactors ()
       #define _MSRENDERLOOP_UNITYURP6 1
       #define _MSRENDERLOOP_UNITYURP6P3 1
 
-      #define _SPECULAR_SETUP
 #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap forwardadd
 
 
    #define _URP 1
-
-#define _USESPECULAR 1
-#define _MATERIAL_FEATURE_SPECULAR_COLOR 1
 
 
             // Includes
@@ -17014,13 +17019,19 @@ float3 GetTessFactors ()
 
             
       #define _MICROSPLAT 1
-      #define _MICROTERRAIN 1
-      #define _USESPECULARWORKFLOW 1
-      #define _USEGRADMIP 1
-      #define _MAX28TEXTURES 1
       #define _BRANCHSAMPLES 1
       #define _BRANCHSAMPLESAGR 1
+      #define _USEGRADMIP 1
+      #define _MICROTERRAIN 1
+      #define _MSRENDERLOOP_UNITYLD 1
+      #define _MSRENDERLOOP_UNITYURP2020 1
+      #define _MSRENDERLOOP_UNITYURP2021 1
+      #define _MSRENDERLOOP_UNITYURP2022 1
       #define _MSRENDERLOOP_UNITYURP6 1
+      #define _MSRENDERLOOP_UNITYURP6P3 1
+      #define _HYBRIDHEIGHTBLEND 1
+      #define _PERTEXUVSCALEOFFSET 1
+      #define _MICROSPLATBASEMAP 1
       #define _MSRENDERLOOP_UNITYLD 1
       #define _MSRENDERLOOP_UNITYURP2020 1
       #define _MSRENDERLOOP_UNITYURP2021 1
@@ -17028,14 +17039,10 @@ float3 GetTessFactors ()
       #define _MSRENDERLOOP_UNITYURP6 1
       #define _MSRENDERLOOP_UNITYURP6P3 1
 
-      #define _SPECULAR_SETUP
 #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap forwardadd
 
 
    #define _URP 1
-
-#define _USESPECULAR 1
-#define _MATERIAL_FEATURE_SPECULAR_COLOR 1
 
 
 
@@ -21170,13 +21177,19 @@ float3 GetTessFactors ()
 
             
       #define _MICROSPLAT 1
-      #define _MICROTERRAIN 1
-      #define _USESPECULARWORKFLOW 1
-      #define _USEGRADMIP 1
-      #define _MAX28TEXTURES 1
       #define _BRANCHSAMPLES 1
       #define _BRANCHSAMPLESAGR 1
+      #define _USEGRADMIP 1
+      #define _MICROTERRAIN 1
+      #define _MSRENDERLOOP_UNITYLD 1
+      #define _MSRENDERLOOP_UNITYURP2020 1
+      #define _MSRENDERLOOP_UNITYURP2021 1
+      #define _MSRENDERLOOP_UNITYURP2022 1
       #define _MSRENDERLOOP_UNITYURP6 1
+      #define _MSRENDERLOOP_UNITYURP6P3 1
+      #define _HYBRIDHEIGHTBLEND 1
+      #define _PERTEXUVSCALEOFFSET 1
+      #define _MICROSPLATBASEMAP 1
       #define _MSRENDERLOOP_UNITYLD 1
       #define _MSRENDERLOOP_UNITYURP2020 1
       #define _MSRENDERLOOP_UNITYURP2021 1
@@ -21184,14 +21197,10 @@ float3 GetTessFactors ()
       #define _MSRENDERLOOP_UNITYURP6 1
       #define _MSRENDERLOOP_UNITYURP6P3 1
 
-      #define _SPECULAR_SETUP
 #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap forwardadd
 
 
    #define _URP 1
-
-#define _USESPECULAR 1
-#define _MATERIAL_FEATURE_SPECULAR_COLOR 1
 
 
 
@@ -25354,7 +25363,7 @@ float3 GetTessFactors ()
 
         UsePass "Hidden/Nature/Terrain/Utilities/PICKING"
    }
-   Dependency "BaseMapShader" =  "Hidden/MicroSplat/Example_Base1580617940"
-   Fallback "Hidden/MicroSplat/Example_Base1580617940"
+   Dependency "BaseMapShader" =  "Off"
+   Fallback "Off"
    CustomEditor "MicroSplatShaderGUI"
 }
