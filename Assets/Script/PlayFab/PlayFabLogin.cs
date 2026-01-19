@@ -48,7 +48,9 @@ public class PlayFabLogin : MonoBehaviour
                  }
                  else
                  {
-                     DateTime dt1 = DateTime.Parse(dataResult.Data["TimeLeft"].Value);
+                     
+                     string format = "dd-MM-yyyy";
+                     DateTime dt1 = DateTime.ParseExact(dataResult.Data["TimeLeft"].Value,format,null);
                      DateTime dt2 = DateTime.Now;
                      if (dt1 > dt2)
                      {
