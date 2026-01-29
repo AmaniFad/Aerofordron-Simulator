@@ -11,7 +11,7 @@
 ////////////////////////////////////////
 
 
-Shader "Hidden/MicroSplat/Example_Base-1669048639"
+Shader "Hidden/MicroSplat/Example_Base-938864081"
 {
    Properties
    {
@@ -38,6 +38,9 @@ Shader "Hidden/MicroSplat/Example_Base-1669048639"
 
       _TerrainHeightmapTexture("", 2D) = "black" {}
       _TerrainNormalmapTexture("", 2D) = "bump" {}
+      _SSSDistance("SSS Distance", Float) = 1
+      _SSSScale("SSS Scale", Float) = 4
+      _SSSPower("SSS Power", Float) = 4
 
 
    }
@@ -118,7 +121,9 @@ Shader "Hidden/MicroSplat/Example_Base-1669048639"
       #define _MICROSPLAT 1
       #define _MICROTERRAIN 1
       #define _USEGRADMIP 1
+      #define _PERTEXSSS 1
       #define _PERTEXHEIGHTOFFSET 1
+      #define _PERTEXCURVEWEIGHT 1
       #define _MSRENDERLOOP_UNITYURP6 1
       #define _MICROSPLATBASEMAP 1
       #define _MSRENDERLOOP_UNITYLD 1
@@ -564,6 +569,9 @@ Shader "Hidden/MicroSplat/Example_Base-1669048639"
             TEXTURE2D(_TerrainNormalmapTexture);
          #endif
       #endif
+      half _SSSScale;
+      half _SSSPower;
+      half _SSSDistance;
 
 
          CBUFFER_END
@@ -4432,7 +4440,9 @@ float3 GetTessFactors ()
       #define _MICROSPLAT 1
       #define _MICROTERRAIN 1
       #define _USEGRADMIP 1
+      #define _PERTEXSSS 1
       #define _PERTEXHEIGHTOFFSET 1
+      #define _PERTEXCURVEWEIGHT 1
       #define _MSRENDERLOOP_UNITYURP6 1
       #define _MICROSPLATBASEMAP 1
       #define _MSRENDERLOOP_UNITYLD 1
@@ -4877,6 +4887,9 @@ float3 GetTessFactors ()
             TEXTURE2D(_TerrainNormalmapTexture);
          #endif
       #endif
+      half _SSSScale;
+      half _SSSPower;
+      half _SSSDistance;
 
 
             CBUFFER_END
@@ -8685,7 +8698,9 @@ float3 GetTessFactors ()
       #define _MICROSPLAT 1
       #define _MICROTERRAIN 1
       #define _USEGRADMIP 1
+      #define _PERTEXSSS 1
       #define _PERTEXHEIGHTOFFSET 1
+      #define _PERTEXCURVEWEIGHT 1
       #define _MSRENDERLOOP_UNITYURP6 1
       #define _MICROSPLATBASEMAP 1
       #define _MSRENDERLOOP_UNITYLD 1
@@ -9114,6 +9129,9 @@ float3 GetTessFactors ()
             TEXTURE2D(_TerrainNormalmapTexture);
          #endif
       #endif
+      half _SSSScale;
+      half _SSSPower;
+      half _SSSDistance;
 
 
             CBUFFER_END
@@ -12838,7 +12856,9 @@ float3 GetTessFactors ()
       #define _MICROSPLAT 1
       #define _MICROTERRAIN 1
       #define _USEGRADMIP 1
+      #define _PERTEXSSS 1
       #define _PERTEXHEIGHTOFFSET 1
+      #define _PERTEXCURVEWEIGHT 1
       #define _MSRENDERLOOP_UNITYURP6 1
       #define _MICROSPLATBASEMAP 1
       #define _MSRENDERLOOP_UNITYLD 1
@@ -13270,6 +13290,9 @@ float3 GetTessFactors ()
             TEXTURE2D(_TerrainNormalmapTexture);
          #endif
       #endif
+      half _SSSScale;
+      half _SSSPower;
+      half _SSSDistance;
 
 
             CBUFFER_END
@@ -16988,7 +17011,9 @@ float3 GetTessFactors ()
       #define _MICROSPLAT 1
       #define _MICROTERRAIN 1
       #define _USEGRADMIP 1
+      #define _PERTEXSSS 1
       #define _PERTEXHEIGHTOFFSET 1
+      #define _PERTEXCURVEWEIGHT 1
       #define _MSRENDERLOOP_UNITYURP6 1
       #define _MICROSPLATBASEMAP 1
       #define _MSRENDERLOOP_UNITYLD 1
@@ -17420,6 +17445,9 @@ float3 GetTessFactors ()
             TEXTURE2D(_TerrainNormalmapTexture);
          #endif
       #endif
+      half _SSSScale;
+      half _SSSPower;
+      half _SSSDistance;
 
 
             CBUFFER_END
@@ -21138,7 +21166,9 @@ float3 GetTessFactors ()
       #define _MICROSPLAT 1
       #define _MICROTERRAIN 1
       #define _USEGRADMIP 1
+      #define _PERTEXSSS 1
       #define _PERTEXHEIGHTOFFSET 1
+      #define _PERTEXCURVEWEIGHT 1
       #define _MSRENDERLOOP_UNITYURP6 1
       #define _MICROSPLATBASEMAP 1
       #define _MSRENDERLOOP_UNITYLD 1
@@ -21579,6 +21609,9 @@ float3 GetTessFactors ()
             TEXTURE2D(_TerrainNormalmapTexture);
          #endif
       #endif
+      half _SSSScale;
+      half _SSSPower;
+      half _SSSDistance;
 
 
          CBUFFER_END
