@@ -12,6 +12,11 @@ using UnityEditor;
 using UnityEditor.AnimatedValues;
 using UnityEditorInternal;
 using UnityEngine;
+#if UNITY_2021_2_OR_NEWER
+using UnityEngine.TerrainTools;
+#else
+using UnityEngine.Experimental.TerrainAPI;
+#endif
 
 namespace sc.terrain.proceduralpainter
 {
@@ -23,10 +28,13 @@ namespace sc.terrain.proceduralpainter
         private SerializedProperty resolution;
         private SerializedProperty colorMapResolution;
         private SerializedProperty terrains;
-        private bool hasMissingTerrains;
         private SerializedProperty autoRepaint;
         private Dictionary<LayerSettings, ReorderableList> m_modifierList = new Dictionary<LayerSettings, ReorderableList>();
         private ReorderableList curModList;
+        
+        //Setup warnings
+        private bool hasMissingTerrains;
+        private bool instancedTerrains;
 
 #if VEGETATION_STUDIO_PRO
         private SerializedProperty refreshVegetationOnPaint;
@@ -182,10 +190,11 @@ namespace sc.terrain.proceduralpainter
             SceneView.onSceneGUIDelegate -= OnSceneRepaint;
 #endif
             
-            //This is necessary, since painting data is serialized asynchronously.
-            //- If the scene were to be closed the TerrainAPI looses reference to the terrains
-            //- Doing manual painting after using the Terrain Painter, then saving, will loose those modifications
-            AssetDatabase.SaveAssets();
+            //This function copies the GPU splatmaps to the terrain data's internal float arrays.
+            //It is normally called when saving the project. But there's the risk of the terrains in the queue no longer being present in the scene, thus throwing null-refs.
+            PaintContext.ApplyDelayedActions();
+            
+            script.Dispose();
         }
         
         public override void OnInspectorGUI()
@@ -206,6 +215,8 @@ namespace sc.terrain.proceduralpainter
 #endif
                     new GUIContent("Settings", EditorGUIUtility.IconContent(iconPrefix + "SettingsIcon").image)
                 }, GUILayout.Height(30f));
+
+                instancedTerrains = script.terrains[0] && script.terrains[0].drawInstanced;
             }
             else
             {
@@ -248,9 +259,11 @@ namespace sc.terrain.proceduralpainter
             using (new EditorGUILayout.HorizontalScope())
             {
                 GUILayout.FlexibleSpace();   
-                if(GUILayout.Button(new GUIContent(" Force Repaint ", "Trigger a complete repaint operation. Typically needed if the terrain was modified in some way, yet not changes are made in the Terrain Painter component")))
+                if(GUILayout.Button(new GUIContent(" Force Repaint ", "Trigger a complete repaint operation." +
+                                                                      "\n\nTypically needed if the terrain was modified externally in some way, yet no changes were made in the Terrain Painter component")))
                 {
                     requiresRepaint = true;
+                    EditorApplication.Beep();
                 }
                 GUILayout.FlexibleSpace();
             }
@@ -282,9 +295,9 @@ namespace sc.terrain.proceduralpainter
                 {
                     GUILayout.FlexibleSpace();
 
-                    if (GUILayout.Button("Add active terrains"))
+                    if (GUILayout.Button("Assign active terrains"))
                     {
-                        //Important! Don't repaint of the terrains are new, current splatmaps would be wiped without user warning!
+                        //Important! Don't repaint if the terrains are new, current splatmaps would be wiped without user warning!
                         if(terrains.arraySize > 0) requiresRepaint = true;
                         
                         script.SetTargetTerrains(Terrain.activeTerrains);
@@ -293,6 +306,20 @@ namespace sc.terrain.proceduralpainter
                         
                         EditorUtility.SetDirty(target);
                     }
+                    EditorGUI.BeginDisabledGroup(script.transform.childCount == 0);
+                    if (GUILayout.Button("Assign child terrains"))
+                    {
+                        //Important! Don't repaint if the terrains are new, current splatmaps would be wiped without user warning!
+                        if(terrains.arraySize > 0) requiresRepaint = true;
+                        
+                        script.SetTargetTerrains(script.GetComponentsInChildren<Terrain>());
+
+                        hasMissingTerrains = false;
+                        
+                        EditorUtility.SetDirty(target);
+                        
+                    }
+                    EditorGUI.EndDisabledGroup();
 
                     if (terrains.arraySize > 0)
                     {
@@ -336,16 +363,9 @@ namespace sc.terrain.proceduralpainter
                     requiresRepaint = true;
                 }
 
-                EditorGUILayout.Space();
-                
-#if VEGETATION_STUDIO_PRO
-                EditorGUILayout.LabelField("Vegetation Studio Pro", EditorStyles.boldLabel);
-                EditorGUILayout.PropertyField(refreshVegetationOnPaint);
-#endif
-
                 using (new EditorGUILayout.HorizontalScope())
                 {
-                    EditorGUILayout.LabelField("Bounds");
+                    EditorGUILayout.PrefixLabel("Bounds");
 
                     if (GUILayout.Button(new GUIContent("Recalculate bounds",
                             "If the terrain size has changed, the bounds must be recalculated. The white box must encapsulate all terrains"),
@@ -356,6 +376,14 @@ namespace sc.terrain.proceduralpainter
                         EditorUtility.SetDirty(target);
                     }
                 }
+                
+                EditorGUILayout.Space();
+                
+#if VEGETATION_STUDIO_PRO
+                EditorGUILayout.LabelField("Vegetation Studio Pro", EditorStyles.boldLabel);
+                EditorGUILayout.PropertyField(refreshVegetationOnPaint);
+                EditorGUILayout.Space();
+#endif
             }
         }
 
@@ -412,12 +440,12 @@ namespace sc.terrain.proceduralpainter
 #endif
 
             sliderRect = EditorGUILayout.GetControlRect();
-            sliderRect.x += (EditorGUIUtility.currentViewWidth * 0.75f);
+            sliderRect.x += (EditorGUIUtility.currentViewWidth * 0.725f);
             sliderRect.width *= 0.2f;
             
-            previewScaleMultiplier = GUI.HorizontalSlider(sliderRect, previewScaleMultiplier, 4f, m_LayerList.count);
+            previewScaleMultiplier = GUI.HorizontalSlider(sliderRect, previewScaleMultiplier, 4f, 16);
             
-            scrollview = EditorGUILayout.BeginScrollView(scrollview, GUILayout.Height((kElementHeight * previewScaleMultiplier) + 3f));
+            scrollview = EditorGUILayout.BeginScrollView(scrollview, EditorStyles.textArea, GUILayout.Height((kElementHeight * previewScaleMultiplier) + 20f));
 
             m_LayerList.DoLayoutList();
             
@@ -428,7 +456,7 @@ namespace sc.terrain.proceduralpainter
             {
                 EditorGUI.BeginDisabledGroup(m_LayerList.index < 0 || m_LayerList.count == 0);
                 {
-                    heatmapEnabled = GUILayout.Toggle(heatmapEnabled, new GUIContent("  Heatmap", EditorGUIUtility.IconContent(iconPrefix + "winbtn_mac_close").image), EditorStyles.toolbarButton, GUILayout.MaxWidth(110f));
+                    heatmapEnabled = GUILayout.Toggle(heatmapEnabled, new GUIContent("  Heatmap", EditorGUIUtility.IconContent(iconPrefix + "P4_Local").image), EditorStyles.toolbarButton, GUILayout.MaxWidth(110f));
                     if (heatmapEnabled)
                     {
                         EditorGUILayout.LabelField("Countour", GUILayout.MaxWidth(60f));
@@ -1055,6 +1083,30 @@ namespace sc.terrain.proceduralpainter
             
             //Can't draw the properties of the serializedproperty itself
             var editor = Editor.CreateEditor(modifierProp.objectReferenceValue);
+            
+            if (instancedTerrains == false && (modifierProp.objectReferenceValue.GetType() == typeof(Curvature) || modifierProp.objectReferenceValue.GetType() == typeof(Direction)))
+            {
+                EditorGUILayout.HelpBox("\nInstanced rendering is disabled on the terrain(s)." +
+                                        "\n\nThis modifier will have no effect\n", MessageType.Error);
+                
+                GUILayout.Space(-48);
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    GUILayout.FlexibleSpace();
+                    if (GUILayout.Button(new GUIContent("Enable"), GUILayout.Width(60)))
+                    {
+                        foreach (Terrain terrain in script.terrains)
+                        {
+                            terrain.drawInstanced = true;
+                            EditorUtility.SetDirty(terrain);
+                        }
+
+                        requiresRepaint = true;
+                    }
+                    GUILayout.Space(8);
+                }
+                GUILayout.Space(32);
+            }
             
             EditorGUI.BeginChangeCheck();
             

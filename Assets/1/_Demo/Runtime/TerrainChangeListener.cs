@@ -1,12 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
 
 namespace sc.terrain.proceduralpainter
 {
     [ExecuteInEditMode]
+    [AddComponentMenu("")] //Hide
     public class TerrainChangeListener : MonoBehaviour
     {
         [HideInInspector]
         public Terrain terrain;
+
+        private void Reset()
+        {
+            terrain = GetComponent<Terrain>();
+        }
 
         void OnTerrainChanged(TerrainChangedFlags flags)
         {
@@ -14,7 +22,7 @@ namespace sc.terrain.proceduralpainter
 
             if ((flags & TerrainChangedFlags.Heightmap) != 0)
             {
-                if(TerrainPainter.Current.autoRepaint) TerrainPainter.Current.RepaintTerrain(terrain);
+                if(TerrainPainter.Current.autoRepaint && TerrainPainter.Current.terrains.Contains(terrain)) TerrainPainter.Current.RepaintTerrain(terrain);
             }
         }
     }

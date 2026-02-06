@@ -23,7 +23,8 @@ namespace sc.terrain.proceduralpainter
             Slope,
             Curvature,
             TextureMask,
-            Noise
+            Noise,
+            Direction
         }
         [HideInInspector]
         public FilterPass passIndex;

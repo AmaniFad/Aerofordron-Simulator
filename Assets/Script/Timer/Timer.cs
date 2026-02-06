@@ -59,6 +59,7 @@ public abstract class Timer : MonoBehaviour
     }
     public void StopTime()
     {
+        print("Stop Time timer");
         Time.timeScale = 0.0f;
         Cursor.visible = true;
     }

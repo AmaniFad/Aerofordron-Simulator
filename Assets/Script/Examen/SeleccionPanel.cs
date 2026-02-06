@@ -7,6 +7,7 @@ public class SeleccionPanel : MonoBehaviour
     public void StopTime()
     {
         Cursor.visible = true;
+        print("SeleccionPanelPause");
         Time.timeScale = 0;
     }
     public void ResetTime()

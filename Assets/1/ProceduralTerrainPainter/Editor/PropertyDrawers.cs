@@ -113,7 +113,8 @@ namespace sc.terrain.proceduralpainter
                 if (property.propertyType != SerializedPropertyType.Vector2) return;
                 
                 Attributes.MinMaxSlider range = attribute as Attributes.MinMaxSlider;
-                
+
+                position.y += EditorGUIUtility.singleLineHeight;
                 EditorGUI.BeginProperty(position, label, property);
                 
                 // Draw label

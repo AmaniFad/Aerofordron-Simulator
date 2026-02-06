@@ -69,24 +69,50 @@ float4 NormalFromHeight(sampler2D heightmap, float2 uv, float texelSize, float h
 	return normals;
 }
 
+#define SOFT_CURVATURE 1
+
 //https://blender.stackexchange.com/questions/89278/how-to-get-a-smooth-curvature-map-from-a-normal-map
-float CurvatureFromNormal(sampler2D normals, float2 uv, float texelSize)
+float CurvatureFromNormal(sampler2D normals, sampler2D _Heightmap, float2 uv, float2 texelSize, uint mode)
 {
-	float width = texelSize;
-
 	uint mip = 0;
-	float posX = RemapNormals(tex2Dlod(normals, float4(uv.x + width, uv.y, 0, mip))).x * CurvStrength;
-	float negX = RemapNormals(tex2Dlod(normals, float4(uv.x - width, uv.y, 0, mip))).x * CurvStrength;
+	float curvature = 0;
+	
+	if(mode == 1) //Hard
+	{
+		float3 normal = (tex2Dlod(normals, float4(uv.x, uv.y, 0, mip))).rgb;
+		normal = normalize(normal);
 
-	float x = (posX - negX) + 0.5;
+		const float3 right = (tex2Dlod(normals, float4(uv.x + texelSize.x, uv.y, 0, mip))).xyz * CurvStrength;
+		const float3 left = (tex2Dlod(normals, float4(uv.x - texelSize.x, uv.y, 0, mip))).xyz * CurvStrength;
+		const float3 up = (tex2Dlod(normals, float4(uv.x, uv.y + texelSize.x, 0, mip))).xyz * CurvStrength;
+		const float3 down = (tex2Dlod(normals, float4(uv.x, uv.y - texelSize.x, 0, mip))).xyz * CurvStrength;
+	
+		float3 xpos = normal + right;
+		float3 xneg = normal - left;
+		float3 ypos = normal + up;
+		float3 yneg = normal - down;
 
-	float posY = RemapNormals(tex2Dlod(normals, float4(uv.x, uv.y + width, 0, mip))).y * CurvStrength;
-	float negY = RemapNormals(tex2Dlod(normals, float4(uv.x, uv.y - width, 0, mip))).y * CurvStrength;
+		float depth = UnpackHeightmap(tex2Dlod(_Heightmap, float4(uv.x, uv.y, 0, mip)).r);
+		curvature = (cross(xneg, xpos).x - cross(yneg, ypos).y) * 4.0 / 1;
+		curvature = 1-(curvature * 0.5 + 0.5);
+	}
+	else
+	{
+		float right = RemapNormals(tex2Dlod(normals, float4(uv.x + texelSize.x, uv.y, 0, mip))).x * CurvStrength;
+		float left = RemapNormals(tex2Dlod(normals, float4(uv.x - texelSize.x, uv.y, 0, mip))).x * CurvStrength;
 
-	float y = (posY - negY) + 0.5;
+		float x = (right - left) + 0.5;
 
-	//Overlay blending
-	return (y < 0.5) ? 2.0 * x * y : 1.0 - 2.0 * (1.0 - x) * (1.0 - y);
+		float up = RemapNormals(tex2Dlod(normals, float4(uv.x, uv.y + texelSize.x, 0, mip))).y * CurvStrength;
+		float down = RemapNormals(tex2Dlod(normals, float4(uv.x, uv.y - texelSize.x, 0, mip))).y * CurvStrength;
+
+		float y = (up - down) + 0.5;
+
+		//Overlay blending
+		curvature = (y < 0.5) ? 2.0 * x * y : 1.0 - 2.0 * (1.0 - x) * (1.0 - y);
+	}
+
+	return curvature;
 }
 
 //Returns 0-90 degrees slope value
@@ -100,12 +126,14 @@ float SlopeFromNormal(float3 normal)
 float SlopeMask(sampler2D _Heightmap, float2 uv, float4 params, float texelSize) {
 
 	float width = texelSize;
-	
+
+	uint mip = 0;
+
 	float centerHeight = UnpackHeightmap(tex2D(_Heightmap, uv).r);
-	float posX = UnpackHeightmap(tex2D(_Heightmap, float2(uv.x + width, uv.y)).r) - centerHeight;
-	float negX = UnpackHeightmap(tex2D(_Heightmap, float2(uv.x - width, uv.y)).r) - centerHeight;
-	float posY = UnpackHeightmap(tex2D(_Heightmap, float2(uv.x, uv.y + width)).r) - centerHeight;
-	float negY = UnpackHeightmap(tex2D(_Heightmap, float2(uv.x, uv.y - width)).r) - centerHeight;
+	float posX = UnpackHeightmap(tex2Dlod(_Heightmap, float4(uv.x + width, uv.y, 0, mip)).r) - centerHeight;
+	float negX = UnpackHeightmap(tex2D(_Heightmap, float4(uv.x - width, uv.y, 0, mip)).r) - centerHeight;
+	float posY = UnpackHeightmap(tex2D(_Heightmap, float4(uv.x, uv.y + width, 0, mip)).r) - centerHeight;
+	float negY = UnpackHeightmap(tex2D(_Heightmap, float4(uv.x, uv.y - width, 0, mip)).r) - centerHeight;
 
 	float slope = sqrt((posX * posX) + (posY * posY) + (negX * negX) + (negY * negY)) * 90;
 
@@ -125,9 +153,11 @@ float SlopeMask(sampler2D _Heightmap, float2 uv, float4 params, float texelSize)
 	return saturate(maxWeight * minWeight);
 }
 
-float CurvatureMask(sampler2D _NormalMap, float2 uv, float4 params, float texelSize)
+float CurvatureMask(sampler2D _NormalMap, sampler2D _Heightmap, float2 uv, float4 params, float texelSize, uint mode)
 {
-	float convexity = CurvatureFromNormal(_NormalMap, uv, texelSize);
+	float convexity = CurvatureFromNormal(_NormalMap, _Heightmap, uv, texelSize, mode);
+	//return convexity;
+	
 	float curvature = (convexity - (1.0 - convexity)) * 0.5 + 0.5;
 				
 	#define MIN_CURV params.x
