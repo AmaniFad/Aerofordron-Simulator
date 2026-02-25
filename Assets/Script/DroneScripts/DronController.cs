@@ -240,7 +240,8 @@ public class DronController : MonoBehaviour
         targetRotation *= Quaternion.Euler(0, additionalRotationY, 0);
 
         // Apply the rotation with slerp
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+        rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.deltaTime * 5f));
 
     }
 
@@ -351,7 +352,7 @@ public class DronController : MonoBehaviour
                 speed = 60;
                 mMovementBehaviour.MoveDronAuto(Vector3.down, speed);
 
-                // Estabilizar rotaci�n horizontal
+                // Estabilizar rotación horizontal
                 Quaternion stableRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
                 transform.rotation = Quaternion.Slerp(transform.rotation, stableRotation, Time.deltaTime * 2f);
 
@@ -362,7 +363,7 @@ public class DronController : MonoBehaviour
                 // Avanzar horizontalmente
                 mMovementBehaviour.MoveDronAuto(direction, speed);
 
-                // Rotaci�n suave mirando hacia adelante
+                // Rotación suave mirando hacia adelante
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
             }

@@ -265,9 +265,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 27422133}
   serializedVersion: 4
-  m_Mass: 20
+  m_Mass: 15
   m_Drag: 1
-  m_AngularDrag: 3
+  m_AngularDrag: 2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1631,7 +1631,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1236764810}
   - {fileID: 27422134}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2563,12 +2562,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1236764809}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.898163, y: 5.8444443, z: 1.4144287}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: -0.9998505, z: -0, w: -0.017290412}
+  m_LocalPosition: {x: -89.6, y: 42.9, z: -30.5}
+  m_LocalScale: {x: 24.897446, y: 24.897442, z: 24.897446}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 424119972}
+  m_Father: {fileID: 1774560567}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!153 &1236764811
 ConfigurableJoint:
@@ -2578,12 +2577,12 @@ ConfigurableJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1236764809}
   serializedVersion: 4
-  m_ConnectedBody: {fileID: 27422135}
+  m_ConnectedBody: {fileID: 1774560566}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.5, z: 0}
+  m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: -0.8, z: 0}
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 1
   m_YMotion: 1
@@ -2595,7 +2594,7 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LinearLimit:
-    limit: 2
+    limit: 6
     bounciness: 0
     contactDistance: 0
   m_AngularXLimitSpring:
@@ -2617,28 +2616,28 @@ ConfigurableJoint:
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 0
+    limit: 45
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
     serializedVersion: 4
-    positionSpring: 200
+    positionSpring: 0
     positionDamper: 50
-    maximumForce: 1000
+    maximumForce: 3.402823e+38
     useAcceleration: 0
   m_YDrive:
     serializedVersion: 4
-    positionSpring: 200
+    positionSpring: 0
     positionDamper: 50
-    maximumForce: 1000
+    maximumForce: 3.402823e+38
     useAcceleration: 0
   m_ZDrive:
     serializedVersion: 4
-    positionSpring: 200
+    positionSpring: 0
     positionDamper: 50
-    maximumForce: 1000
+    maximumForce: 3.402823e+38
     useAcceleration: 0
   m_TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_TargetAngularVelocity: {x: 0, y: 0, z: 0}
@@ -2657,8 +2656,8 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 0
-    positionDamper: 0
+    positionSpring: 50
+    positionDamper: 6
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_ProjectionMode: 0
@@ -2680,9 +2679,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1236764809}
   serializedVersion: 4
-  m_Mass: 80
-  m_Drag: 2
-  m_AngularDrag: 2
+  m_Mass: 5
+  m_Drag: 0.5
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -4030,9 +4029,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774560559}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 1.2
-  m_AngularDrag: 0.3
+  m_Mass: 15
+  m_Drag: 1
+  m_AngularDrag: 2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -4065,6 +4064,7 @@ Transform:
   - {fileID: 1438362539}
   - {fileID: 1750214056}
   - {fileID: 789018335}
+  - {fileID: 1236764810}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 181.981, z: 0}
 --- !u!1001 &1793772784
