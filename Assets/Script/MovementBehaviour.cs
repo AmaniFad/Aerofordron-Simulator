@@ -22,8 +22,10 @@ public class MovementBehaviour : MonoBehaviour
     }
     public void Move(Vector3 movementDirection, float objectSpeed)
     {
-        //rb.AddForce(movementDirection.normalized * objectSpeed * Time.deltaTime, ForceMode.Force);
-
+        rb.AddForce(movementDirection.normalized * objectSpeed * Time.deltaTime, ForceMode.Force);
+    }
+    public void MoveWithLoad(Vector3 movementDirection, float objectSpeed)
+    {
         rb.AddForce(movementDirection.normalized * objectSpeed, ForceMode.Force);
         Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         if (horizontalVelocity.magnitude > maxSpeed)
@@ -32,7 +34,6 @@ public class MovementBehaviour : MonoBehaviour
             rb.linearVelocity = new Vector3(horizontalVelocity.x, rb.linearVelocity.y, horizontalVelocity.z);
         }
     }
-
     public void MoveDronAuto(Vector3 movementDirection, float speedAuto)
     {
         rb.AddForce(movementDirection.normalized * speedAuto * Time.deltaTime, ForceMode.Force);

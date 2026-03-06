@@ -59,7 +59,7 @@ public class DronController : MonoBehaviour
     private bool remoteDron;
     private bool aux;
     private float _attiMode;
-
+    public bool _isLoaded;
 
     [System.Serializable]
     private class DronMode
@@ -148,6 +148,7 @@ public class DronController : MonoBehaviour
 
     }
 
+    [Obsolete]
     private void TryToMoveDron()
     {
         Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
@@ -163,7 +164,13 @@ public class DronController : MonoBehaviour
             //mMovementBehaviour.StopMovingOnY();
         }
         if (verticalDirection < -0.2f || verticalDirection > 0.05f)
-            mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0), dronModes[currentDronMode].speed);
+        {
+            if(_isLoaded)
+                mMovementBehaviour.MoveWithLoad(new Vector3(0, verticalDirection, 0), dronModes[currentDronMode].speed);
+            else
+                mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0), dronModes[currentDronMode].speed);
+        }
+            
 
         _attiMode = DronInputController.Instance.GetModeAtti();
         //Debug.Log(CheckIfGrounded());
@@ -175,8 +182,16 @@ public class DronController : MonoBehaviour
             {
                 if (inputDirection.magnitude > 0.01f)
                 {
-                    mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z), dronModes[currentDronMode].speed);
-                    SendDronRotation(inputDirection);
+                    if (_isLoaded)
+                    {
+                        mMovementBehaviour.MoveWithLoad(new Vector3(direction.x, 0, direction.z), dronModes[currentDronMode].speed);
+                    }
+                    else 
+                    {
+                        mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z), dronModes[currentDronMode].speed);
+                    }
+
+                        SendDronRotation(inputDirection);
                 }
                 else
                 {
@@ -195,12 +210,22 @@ public class DronController : MonoBehaviour
 
                 if (inputDirection.magnitude > 0.01f)
                 {
-                    mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z), dronModes[currentDronMode].speed);
+                    if (_isLoaded)
+                    {
+                        mMovementBehaviour.MoveWithLoad(new Vector3(direction.x, 0, direction.z), dronModes[currentDronMode].speed);
+                    }
+                    else
+                    {
+                        mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z), dronModes[currentDronMode].speed);
+                    }
                     SendDronRotation(inputDirection);
                 }
                 else
                 {
-                    mMovementBehaviour.nonInputInputls(Vector3.zero, 5f);
+                    if(_isLoaded)
+                        mMovementBehaviour.nonInputInputls(rb.linearVelocity, 0.2f);
+                    else
+                        mMovementBehaviour.nonInputInputls(Vector3.zero, 5f);
                 }
             }
             SendDronRotation(inputDirection);
