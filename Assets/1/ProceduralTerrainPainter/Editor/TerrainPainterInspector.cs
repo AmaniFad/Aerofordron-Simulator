@@ -397,7 +397,16 @@ namespace sc.terrain.proceduralpainter
 
                     for (int i = 0; i < script.terrains.Length; i++)
                     {
-                        HeatmapPreview.Draw(script.terrains[i], script.layerSettings[m_LayerList.index].layer, heatmaps[i], visualizeContour, visualizeTiling);
+                        if (heatmaps != null &&
+    i < heatmaps.Length &&
+    heatmaps[i])
+                        {
+                            HeatmapPreview.Draw(script.terrains[i],
+                                script.layerSettings[m_LayerList.index].layer,
+                                heatmaps[i],
+                                visualizeContour,
+                                visualizeTiling);
+                        }
                     }
                 }
             }
