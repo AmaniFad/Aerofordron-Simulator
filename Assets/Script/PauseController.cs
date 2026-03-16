@@ -44,7 +44,8 @@ public class PauseController : MonoBehaviour
                 }
                 else
                 {
-
+                    
+                    print("Update Pause Controller pause");
                     Time.timeScale = 0f;
                     SetInputProviderState(false);
                 }
@@ -74,6 +75,7 @@ public class PauseController : MonoBehaviour
     {
 
         pauseWithoutPauseMenu = true;
+        print("Pause without Pause Controller pause");
         Time.timeScale = 0;
         SetInputProviderState(false);
     }
@@ -97,6 +99,7 @@ public class PauseController : MonoBehaviour
             isPausing = true;
             pauseMenuInstance.SetActive(true);
             pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
+            print("TryPause1");
             Time.timeScale = 0f;
             SetInputProviderState(false);
 
@@ -111,6 +114,7 @@ public class PauseController : MonoBehaviour
                 isPausing = true;
                 pauseMenuInstance.SetActive(true);
                 pauseMenuInstance.GetComponent<ChangeCurrentButtonSelected>().SelectButton();
+                print("tryPause");
                 Time.timeScale = 0f;
                 SetInputProviderState(false);
 

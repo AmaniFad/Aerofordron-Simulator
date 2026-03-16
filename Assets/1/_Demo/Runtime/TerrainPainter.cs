@@ -1,6 +1,7 @@
 ﻿// Procedural Terrain Painter by Staggart Creations http://staggart.xyz
 // Copyright protected under Unity Asset Store EULA
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -16,10 +17,10 @@ namespace sc.terrain.proceduralpainter
     [ExecuteInEditMode]
     public partial class TerrainPainter : MonoBehaviour
     {
-        public const string Version = "1.0.4";
+        public const string Version = "1.0.5";
         public static TerrainPainter Current;
 
-        public Terrain[] terrains;
+        public Terrain[] terrains = new Terrain[0];
         [Attributes.ResolutionDropdown(64, 1024)] 
         public int splatmapResolution = 256;
         [Attributes.ResolutionDropdown(16, 2048)]
@@ -54,12 +55,20 @@ namespace sc.terrain.proceduralpainter
         /// Triggers whenever a terrain is repainted. Passes the context terrain as a parameter.
         /// </summary>
         public static event TerrainRepaintEvent OnTerrainRepaint;
+
+        private void Reset()
+        {
+            filterShader = Shader.Find("Hidden/TerrainPainter/Modifier");
+        }
         
         private void OnEnable()
         {
-            if (!filterShader) filterShader = Shader.Find("Hidden/TerrainPainter/Modifier");
-
             Current = this;
+        }
+
+        private void OnDisable()
+        {
+            Dispose();
         }
 
         /// <summary>
@@ -96,7 +105,8 @@ namespace sc.terrain.proceduralpainter
         /// <summary>
         /// Repaints all the assigned terrains using the current configuration
         /// </summary>
-        public void RepaintAll()
+        /// <param name="syncCPU">(Slow) Copy the internal splatmap render texture to the terrain's "Alphamaps" float arrays. Making it possible to use Terrain.TerrainData.GetAlphamaps()</param>
+        public void RepaintAll(bool syncCPU = false)
         {
             if (layerSettings.Count == 0) return;
 
@@ -110,17 +120,23 @@ namespace sc.terrain.proceduralpainter
                     continue;
                 }
                 
-                RepaintTerrain(terrain);
+                RepaintTerrain(terrain, syncCPU);
             }
             
             //ApplyAllStamps();
+        }
+
+        public void Dispose()
+        {
+            ModifierStack.Dispose();
         }
 
         /// <summary>
         /// Repaints an individual terrain
         /// </summary>
         /// <param name="terrain"></param>
-        public void RepaintTerrain(Terrain terrain)
+        /// <param name="syncCPU">(Slow) Copy the internal splatmap render texture to the terrain's "Alphamaps" float arrays. Making it possible to use Terrain.TerrainData.GetAlphamaps()</param>
+        public void RepaintTerrain(Terrain terrain, bool syncCPU = false)
         {
             if (layerSettings.Count == 0 || terrain == null) return;
             
@@ -135,10 +151,10 @@ namespace sc.terrain.proceduralpainter
             terrain.terrainData.SetBaseMapDirty();
 
             RefreshVegetation(terrain);
-            
-            terrain.Flush();
-            
+
             OnTerrainRepaint?.Invoke(terrain);
+
+            if (syncCPU) FinalizeTerrain(terrain);
 
 #if UNITY_EDITOR
             EditorUtility.SetDirty(terrain.terrainData);
@@ -235,6 +251,28 @@ namespace sc.terrain.proceduralpainter
                 EditorUtility.SetDirty(terrain.terrainData);
 #endif
             }
+        }
+
+        /// <summary>
+        /// Copy the internal splatmap render texture to the terrain's "Alphamaps" float arrays. Making it possible to use (the slower) scipting operations such as Terrain.TerrainData.GetAlphamaps()
+        /// This also saves the data to disk
+        /// </summary>
+        public void FinalizeChanges()
+        {
+            foreach (Terrain terrain in terrains)
+            {
+                FinalizeTerrain(terrain);
+            }
+        }
+
+        private void FinalizeTerrain(Terrain terrain)
+        {
+            terrain.terrainData.SetBaseMapDirty();
+            terrain.terrainData.SyncTexture(TerrainData.AlphamapTextureName);
+                
+#if UNITY_EDITOR
+            EditorUtility.SetDirty(terrain.terrainData);
+#endif
         }
         
         #region Virtual

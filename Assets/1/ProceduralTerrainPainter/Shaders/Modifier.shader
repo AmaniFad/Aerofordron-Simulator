@@ -9,7 +9,7 @@ Shader "Hidden/TerrainPainter/Modifier"
     	_BlendOp("Blend Operation", float) = 0
     	_Opacity("Opacity / 100", float) = 1
         _Heightmap ("_Heightmap", 2D) = "black" {}
-		_NormalMap("NormalMap", 2D) = "white" {}
+		_NormalMap("NormalMap", 2D) = "bump" {}
 		_MaskTexture("Mask", 2D) = "white" {}
 
     	//Filters
@@ -94,6 +94,7 @@ Shader "Hidden/TerrainPainter/Modifier"
     	ColorMask RGBA
     	AlphaToMask Off
     	
+    	
 		Pass
 		{
 			Name "Height"
@@ -137,10 +138,16 @@ Shader "Hidden/TerrainPainter/Modifier"
 			#pragma fragment frag
 
 			float _CurvatureRadius;
+			uint _CurvatureSolver;
 
 			fixed4 frag(Varyings i) : SV_Target
 			{
-				const float mask = CurvatureMask(_NormalMap, i.uv, _MinMaxCurvature, _NormalMap_TexelSize.x * _CurvatureRadius);
+				float normal = RemapNormals(tex2Dlod(_NormalMap, float4(i.uv.x, i.uv.y, 0, 0))).rgb ;
+
+				float3 dx = fwidth(normal);
+
+				//return float4(dx, 1.0);
+				const float mask = CurvatureMask(_NormalMap, _Heightmap, i.uv, _MinMaxCurvature, _NormalMap_TexelSize.x * _CurvatureRadius, _CurvatureSolver);
 
 				return lerp(BASE, mask, _Opacity);
 			}
@@ -211,6 +218,28 @@ Shader "Hidden/TerrainPainter/Modifier"
 				mask = smoothstep(_Levels.x, _Levels.y, mask);
 
 				return lerp(BASE, mask, _Opacity);
+			}
+			ENDHLSL
+		}
+    	Pass
+		{		
+			Name "Direction"
+			HLSLPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			
+			float3 _Direction;
+			float4 _DirectionLevels;
+
+			fixed4 frag(Varyings i) : SV_Target
+			{
+				const float3 normal = RemapNormals(tex2Dlod(_NormalMap, float4(i.uv.x, i.uv.y, 0, 0))).xyz;
+
+				const float aspect = dot(_Direction, -normal);
+				
+				float dirMask = smoothstep(_DirectionLevels.x, _DirectionLevels.y, aspect);
+				
+				return lerp(BASE, dirMask, _Opacity);
 			}
 			ENDHLSL
 		}

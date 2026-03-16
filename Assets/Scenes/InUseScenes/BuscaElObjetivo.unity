@@ -206,7 +206,6 @@ GameObject:
   - component: {fileID: 17556241}
   - component: {fileID: 17556240}
   - component: {fileID: 17556243}
-  - component: {fileID: 17556244}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -321,49 +320,6 @@ MonoBehaviour:
   patchBoundsMultiplier: {x: 1, y: 1, z: 1}
   reenabled: 1
   importSplatMaps: []
---- !u!114 &17556244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 17556239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6af2d410bf489d842a543a60d605af5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  terrains:
-  - {fileID: 17556241}
-  splatmapResolution: 256
-  colorMapResolution: 256
-  layerSettings:
-  - enabled: 1
-    layer: {fileID: 8574412962073106934, guid: 6fae8c04e9d9545409ecc1f889962ac9, type: 2}
-    modifierStack:
-    - {fileID: 799659691}
-    - {fileID: 1693775402}
-    - {fileID: 616738042}
-  - enabled: 1
-    layer: {fileID: 8574412962073106934, guid: c8cf30bfb85d01442bbcc405d2725f0a, type: 2}
-    modifierStack:
-    - {fileID: 685684921}
-    - {fileID: 927696968}
-  - enabled: 1
-    layer: {fileID: 8574412962073106934, guid: 7c2505f328bad3c4da2c9b82635f50c9, type: 2}
-    modifierStack:
-    - {fileID: 357408671}
-    - {fileID: 2057009889}
-  - enabled: 1
-    layer: {fileID: 8574412962073106934, guid: 80ce63ee8da39b241a5892eb88ae09d3, type: 2}
-    modifierStack: []
-  autoRepaint: 0
-  terrainListeners: []
-  bounds:
-    m_Center: {x: 207.29001, y: 299.8, z: 194.79999}
-    m_Extent: {x: 500, y: 300, z: 500}
-  msTexArray: {fileID: 11400000, guid: 23fddc8733d3cf94a9460765a3bb4f34, type: 2}
-  filterShader: {fileID: 4800000, guid: 0f44df78e3d64d9cb2616cac3d84cb77, type: 3}
 --- !u!1 &22261062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,26 +1394,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 338859167}
   m_CullTransparentMesh: 1
---- !u!114 &357408671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2562637f396e4c10acd3fa9926b53a12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enabled: 1
-  label: Slope
-  blendMode: 0
-  opacity: 100
-  passIndex: 1
-  minMax: {x: 7, y: 11.117642}
-  minFalloff: 10
-  maxFalloff: 10
 --- !u!1 &374724243
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,27 +2366,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1681749930}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &616738042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1d046e3917e4d8580903c69758b6558, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enabled: 1
-  label: Height
-  blendMode: 0
-  opacity: 100
-  passIndex: 0
-  min: 65.5
-  minFalloff: 37.5
-  max: 2000
-  maxFalloff: 1
 --- !u!1 &669535066
 GameObject:
   m_ObjectHideFlags: 0
@@ -2760,26 +2675,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limitController: {fileID: 0}
---- !u!114 &685684921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2562637f396e4c10acd3fa9926b53a12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enabled: 1
-  label: Slope
-  blendMode: 0
-  opacity: 100
-  passIndex: 1
-  minMax: {x: 9.588236, y: 90}
-  minFalloff: 0.001
-  maxFalloff: 30
 --- !u!1001 &692750424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3182,27 +3077,6 @@ Transform:
   - {fileID: 431433109}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 43.338, z: 0}
---- !u!114 &799659691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e07d49e90874d70b9937cb753327a2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enabled: 1
-  label: Noise
-  blendMode: 0
-  opacity: 100
-  passIndex: 4
-  noiseType: 1
-  noiseScale: 57.3
-  noiseOffset: {x: 0, y: 0}
-  levels: {x: 0.15882353, y: 0.5705882}
 --- !u!1 &815722880
 GameObject:
   m_ObjectHideFlags: 0
@@ -3917,27 +3791,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nonRigidbodyVelocity: 0
   attenuationObject: {fileID: 0}
---- !u!114 &927696968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1d046e3917e4d8580903c69758b6558, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enabled: 1
-  label: Height
-  blendMode: 0
-  opacity: 100
-  passIndex: 0
-  min: 102.3
-  minFalloff: 130.5
-  max: 2000
-  maxFalloff: 1
 --- !u!1 &968519478
 GameObject:
   m_ObjectHideFlags: 0
@@ -7008,26 +6861,6 @@ Transform:
   - {fileID: 553029445}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1693775402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2562637f396e4c10acd3fa9926b53a12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enabled: 1
-  label: Slope
-  blendMode: 0
-  opacity: 100
-  passIndex: 1
-  minMax: {x: 10, y: 90}
-  minFalloff: 0.001
-  maxFalloff: 20.7
 --- !u!1 &1713620156
 GameObject:
   m_ObjectHideFlags: 0
@@ -8381,27 +8214,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseController: {fileID: 1786983573}
---- !u!114 &2057009889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e07d49e90874d70b9937cb753327a2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enabled: 1
-  label: Noise
-  blendMode: 0
-  opacity: 100
-  passIndex: 4
-  noiseType: 0
-  noiseScale: 50
-  noiseOffset: {x: 1.9, y: 0}
-  levels: {x: 0.18235295, y: 1}
 --- !u!1 &2065354525
 GameObject:
   m_ObjectHideFlags: 0

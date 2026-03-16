@@ -1,6 +1,7 @@
 ﻿// Procedural Terrain Painter by Staggart Creations http://staggart.xyz
 // Copyright protected under Unity Asset Store EULA
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,23 +48,33 @@ namespace sc.terrain.proceduralpainter
         
         public static Bounds RecalculateBounds(Terrain[] terrains)
         {
-            Vector3 minSum = Vector3.one * Mathf.Infinity;
+            Bounds bounds = new Bounds(Vector3.zero, Vector3.one);
+            
+			Vector3 minSum = Vector3.one * Mathf.Infinity;
             Vector3 maxSum = Vector3.one * Mathf.NegativeInfinity;
-
+            Vector3 min = Vector3.zero;
+            Vector3 max = Vector3.zero;
+            
             foreach (Terrain terrain in terrains)
             {
-                if(terrain == null) continue;
-                if(!terrain.gameObject.activeInHierarchy) continue;;
+                if (terrain == null || terrain.terrainData == null)
+                {
+                    throw new Exception("Failed to calculate total terrain bounds, one or more terrain objects are missing or broken");
+                }
 
                 //Min/max bounds corners in world-space
-                Vector3 min = terrain.GetPosition(); //Safe to assume terrain starts at origin
-                Vector3 max = terrain.GetPosition() + terrain.terrainData.size; //Note, size is slightly more correct in height than bounds
+                min = terrain.GetPosition(); 
+                max = terrain.GetPosition() + terrain.terrainData.size;
 
-                if (min.x < minSum.x || min.y < minSum.y || min.z < minSum.z) minSum = min;
-                if (max.x > maxSum.x || max.y > maxSum.y || max.z > maxSum.z) maxSum = max;
+                minSum.x = Mathf.Min(minSum.x, min.x);
+                minSum.y = Mathf.Min(minSum.y, min.y);
+                minSum.z = Mathf.Min(minSum.z, min.z);
+                
+                //Must handle each axis separately, terrain may be further away, but not necessarily higher
+                maxSum.x = Mathf.Max(maxSum.x, max.x);
+                maxSum.y = Mathf.Max(maxSum.y, max.y);
+                maxSum.z = Mathf.Max(maxSum.z, max.z);
             }
-
-            Bounds bounds = new Bounds(Vector3.zero, Vector3.zero);
 
             bounds.SetMinMax(minSum, maxSum);
 

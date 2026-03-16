@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 #if UNITY_2021_2_OR_NEWER
 using UnityEngine.TerrainTools;
 #else
@@ -37,7 +38,7 @@ namespace sc.terrain.proceduralpainter
         {
             if (m_resolution != resolution || alphaMap == null)
             {
-                alphaMap = new RenderTexture(resolution, resolution, 0, RenderTextureFormat.R8);
+                alphaMap = new RenderTexture(resolution, resolution, 0, GraphicsFormat.R8_UNorm);
             }
             m_resolution = resolution;
             
@@ -108,6 +109,12 @@ namespace sc.terrain.proceduralpainter
             Graphics.Blit(alphaMap, c.destinationRenderTexture);
                     
             TerrainPaintUtility.EndPaintTexture(c, UndoActionName);
+        }
+
+        public static void Dispose()
+        {
+            filterMat = null;
+            alphaMap?.Release();
         }
     }
 }

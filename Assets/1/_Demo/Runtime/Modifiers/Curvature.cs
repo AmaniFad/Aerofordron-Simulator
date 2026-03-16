@@ -5,6 +5,13 @@ namespace sc.terrain.proceduralpainter
     [System.Serializable]
     public class Curvature : Modifier
     {
+        public enum CurvatureSolver
+        {
+            Soft,
+            Hard
+        }
+        public CurvatureSolver solver;
+        
         [Attributes.MinMaxSlider(0f, 1f)]
         [Min(0f)] public Vector2 minMax = new Vector2(0f, 0.25f);
         [Range(1f, 16f)] public float radius = 1;
@@ -20,6 +27,7 @@ namespace sc.terrain.proceduralpainter
         {
             base.Configure(material);
             
+            material.SetInt("_CurvatureSolver", (int)solver);
             material.SetFloat("_CurvatureRadius", radius);
             material.SetVector("_MinMaxCurvature", new Vector4(minMax.x, minMax.y, minFalloff,maxFalloff));
         }
