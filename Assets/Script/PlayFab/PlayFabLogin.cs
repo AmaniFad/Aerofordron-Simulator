@@ -32,52 +32,59 @@ public class PlayFabLogin : MonoBehaviour
         if (onlyLogInOnce)
         {
             GetUserDataRequest dataRequest = new GetUserDataRequest { PlayFabId = result.PlayFabId };
+            try
+            {
+                PlayFabClientAPI.GetUserData(dataRequest,
+    dataResult =>
+    {
+        string corporation = dataResult.Data["Corporation"].Value;
+        if (!string.IsNullOrEmpty(corporation))
+        {
+            CorporateLogosManager.instance.ChangeCorporation(corporation);
+        }
+        if (dataResult.Data["TimeLeft"].Value == "0")
+        {
+            onlyLogInOnce = false;
+            enterSimulator.Invoke();
+        }
+        else
+        {
 
-            PlayFabClientAPI.GetUserData(dataRequest,
-             dataResult =>
-             {
-             string corporation = dataResult.Data["Corporation"].Value;
-                 if (!string.IsNullOrEmpty(corporation))
-                 {
-                     CorporateLogosManager.instance.ChangeCorporation(corporation);
-                 }
-                 if (dataResult.Data["TimeLeft"].Value == "0")
-                 {
-                         onlyLogInOnce = false;
-                     enterSimulator.Invoke();
-                 }
-                 else
-                 {
-                     
-                     string format = "dd-MM-yyyy";
-                     DateTime dt1 = DateTime.ParseExact(dataResult.Data["TimeLeft"].Value,format,null);
-                     DateTime dt2 = DateTime.Now;
-                     if (dt1 > dt2)
-                     {
-                         onlyLogInOnce = false;
-                         enterSimulator.Invoke();
-                     }
+            string format = "dd-MM-yyyy";
+            DateTime dt1 = DateTime.ParseExact(dataResult.Data["TimeLeft"].Value, format, null);
+            DateTime dt2 = DateTime.Now;
+            if (dt1 > dt2)
+            {
+                onlyLogInOnce = false;
+                enterSimulator.Invoke();
+            }
 
-                     else
-                     {
-                         incorrectUserText.text = "Esta cuenta ya no es valida";
-                         playerNameInput.text = string.Empty;
-                         playerPasswordInput.text = string.Empty;
-                         StartCoroutine(DeleteText());
-                     }
-                 }
-
-
-
-                 Destroy(this);
+            else
+            {
+                incorrectUserText.text = "Esta cuenta ya no es valida";
+                playerNameInput.text = string.Empty;
+                playerPasswordInput.text = string.Empty;
+                StartCoroutine(DeleteText());
+            }
+        }
 
 
-             }, error => { print("Error en la peticion de datos"); });
+
+        Destroy(this);
+
+
+    }, error => { print("Error en la peticion de datos"); });
+            }
+            catch
+            {
+
+            }
+
             print(result);
         }
 
 
-}
+    }
 
 
     private void OnLoginFailure(PlayFabError error)
@@ -93,7 +100,7 @@ public class PlayFabLogin : MonoBehaviour
 
     public void TryLogIn()
     {
-        if (playerNameInput.text != "" && playerPasswordInput.text != "") 
+        if (playerNameInput.text != "" && playerPasswordInput.text != "")
         {
             if (onlyLogInOnce)
             {
