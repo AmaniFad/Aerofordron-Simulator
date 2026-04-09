@@ -167,7 +167,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""a337c3d0-e881-43e6-96d4-20d715b9153b"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -185,7 +185,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""name"": ""FullView"",
                     ""type"": ""Button"",
                     ""id"": ""a1bfaebb-5b98-40d7-8e1b-115db1928ce0"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -221,6 +221,15 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""name"": ""ModeChange"",
                     ""type"": ""Button"",
                     ""id"": ""0de8adf9-3818-4473-826e-ea86d746e086"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Load"",
+                    ""type"": ""Button"",
+                    ""id"": ""c62fe038-ae45-4d40-9881-46111429cc59"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -808,6 +817,17 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ModeChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c2700e4-1f76-4384-87c8-bc41d753e30b"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Load"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1444,6 +1464,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         m_Player_RemoteDron = m_Player.FindAction("RemoteDron", throwIfNotFound: true);
         m_Player_ModeDron = m_Player.FindAction("ModeDron", throwIfNotFound: true);
         m_Player_ModeChange = m_Player.FindAction("ModeChange", throwIfNotFound: true);
+        m_Player_Load = m_Player.FindAction("Load", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1558,6 +1579,7 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_RemoteDron;
     private readonly InputAction m_Player_ModeDron;
     private readonly InputAction m_Player_ModeChange;
+    private readonly InputAction m_Player_Load;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1630,6 +1652,10 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @ModeChange => m_Wrapper.m_Player_ModeChange;
         /// <summary>
+        /// Provides access to the underlying input action "Player/Load".
+        /// </summary>
+        public InputAction @Load => m_Wrapper.m_Player_Load;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1700,6 +1726,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @ModeChange.started += instance.OnModeChange;
             @ModeChange.performed += instance.OnModeChange;
             @ModeChange.canceled += instance.OnModeChange;
+            @Load.started += instance.OnLoad;
+            @Load.performed += instance.OnLoad;
+            @Load.canceled += instance.OnLoad;
         }
 
         /// <summary>
@@ -1756,6 +1785,9 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
             @ModeChange.started -= instance.OnModeChange;
             @ModeChange.performed -= instance.OnModeChange;
             @ModeChange.canceled -= instance.OnModeChange;
+            @Load.started -= instance.OnLoad;
+            @Load.performed -= instance.OnLoad;
+            @Load.canceled -= instance.OnLoad;
         }
 
         /// <summary>
@@ -2331,6 +2363,13 @@ public partial class @EduPlayerImput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnModeChange(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Load" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLoad(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

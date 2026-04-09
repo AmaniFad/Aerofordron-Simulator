@@ -13,6 +13,7 @@ public class PlayerInputController : MonoBehaviour
     private bool fullView;
     private bool isUsingKeyboard;
     private bool isUsingGamepad;
+    private bool isLoading;
     void Start()
     {
         if(Instance == null)
@@ -48,7 +49,19 @@ public class PlayerInputController : MonoBehaviour
     {
         return isInteracting;
     }
+    public void OnLoad(InputValue inputValue)
+    {
+        isLoading = true;
+    }
 
+    public void HasLoaded()
+    {
+        isLoading = false;
+    }
+    public bool IsLoading()
+    {
+        return isLoading;
+    }
     public void OnRun(InputValue inputValue)
     {
         if (inputValue.isPressed)

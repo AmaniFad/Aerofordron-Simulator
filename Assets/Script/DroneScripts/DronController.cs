@@ -73,6 +73,14 @@ public class DronController : MonoBehaviour
     {
         return _attiMode;
     }
+    public bool GetIsLoaded()
+    {
+        return _isLoaded;
+    }
+    public void SetIsLoaded(bool isLoaded)
+    {
+        _isLoaded = isLoaded;
+    }
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
     #endregion
@@ -256,7 +264,7 @@ public class DronController : MonoBehaviour
         if (tiltAroundZ != 0)
             lastTiltZ = -inputDirection.x * tiltAngle;
 
-        print("Tilt: " + tiltAroundZ + " Direction " + -inputDirection.x);
+        //print("Tilt: " + tiltAroundZ + " Direction " + -inputDirection.x);
 
         Quaternion targetRotation = Quaternion.Euler(tiltAroundX, currentYRotation, tiltAroundZ);
 

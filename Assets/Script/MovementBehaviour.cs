@@ -8,7 +8,7 @@ public class MovementBehaviour : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private float speed;
     [SerializeField] private float rotationSpeed;
-    [SerializeField] private float maxSpeed = .4f;
+    [SerializeField] private float maxSpeed = .7f;
 
     private void Start()
     {
@@ -28,7 +28,7 @@ public class MovementBehaviour : MonoBehaviour
     {
         rb.AddForce(movementDirection.normalized * objectSpeed, ForceMode.Force);
         Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        if (horizontalVelocity.magnitude > maxSpeed)
+        if (horizontalVelocity.magnitude < maxSpeed)
         {
             horizontalVelocity = horizontalVelocity.normalized * maxSpeed;
             rb.linearVelocity = new Vector3(horizontalVelocity.x, rb.linearVelocity.y, horizontalVelocity.z);

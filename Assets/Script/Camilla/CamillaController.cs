@@ -1,25 +1,43 @@
 ﻿using UnityEngine;
+using UnityEngine.Rendering;
 
-public class CamillaController : MonoBehaviour
+public class CamillaController : MonoBehaviour , IInteractable
 {
-    [Header("Referencias")]
-    public Transform drone;              // Referencia al dron
-    public SpringJoint springJoint;
+    [Header("References")]
+    [SerializeField] private Transform drone;
 
-    [Header("Ajustes de seguimiento")]
-    public float cableLength;       // Distancia vertical bajo el dron
+    [Header("Spring Join values")]
+    [SerializeField] private float cableLength;
+    [SerializeField] private float maxVerticalSpeed;
 
-    [Header("Velocidad máxima")]
-    public float maxVerticalSpeed;  // Máxima velocidad vertical de la camilla
-
-    void Start()
+    private SpringJoint springJoint;
+    public void Interact()
     {
+        springJoint = gameObject.AddComponent<SpringJoint>();
         if (springJoint != null)
         {
             springJoint.connectedBody = drone.GetComponent<Rigidbody>();
             springJoint.autoConfigureConnectedAnchor = false;
-            springJoint.anchor = Vector3.zero;               // punto central de la camilla
+            springJoint.anchor = Vector3.zero;
             springJoint.connectedAnchor = Vector3.zero;
+            springJoint.spring = 80;
+            springJoint.damper = 50;
+            springJoint.minDistance = 0;
+            springJoint.maxDistance = 2.5f;
+            springJoint.tolerance = 0.025f;
+            springJoint.enablePreprocessing = true;
+            springJoint.massScale = 1;
+            springJoint.connectedMassScale = 1;
+
+            drone.GetComponent<DronInteraction>().GrabItem(true);
+        }
+    }
+    public void DropInteractable()
+    {
+        if (springJoint != null)
+        {
+            Destroy(gameObject.GetComponent<SpringJoint>());
+            drone.GetComponent<DronInteraction>().DropObject();
         }
     }
 }
