@@ -48,12 +48,12 @@ public class DroneCrash : MonoBehaviour
 
     public void Respawn()
     {
+        this.gameObject.GetComponent<DronController>().SetAttiMode();
         SwitchToFullView.instance.ExitFullView();
         PlayerInputController.Instance.SetFullView(false);
         currentDestroyedDronFeedback = Instantiate(destroyedDron);
         currentDestroyedDronFeedback.transform.position = transform.position;
-        gameObject.transform.rotation = previousRotation;
-        gameObject.transform.position = spawnPoint.position;
+        StartCoroutine(ChangePosition(1f));
         if(this.gameObject.GetComponent<HealthBehaviour>() != null )
         {
             gameObject.GetComponent<HealthBehaviour>().Damage(damage);
@@ -69,6 +69,12 @@ public class DroneCrash : MonoBehaviour
         StartCoroutine(RecoverCamera(4));
         StartCoroutine(DestroyFeedback());
     }
+    private IEnumerator ChangePosition(float deltaTime)
+    {
+        yield return new WaitForSeconds(deltaTime);
+        gameObject.transform.rotation = previousRotation;
+        gameObject.transform.position = spawnPoint.position;
+    } 
     public void GoToFirstPosition()
     {
         SwitchToFullView.instance.ExitFullView();

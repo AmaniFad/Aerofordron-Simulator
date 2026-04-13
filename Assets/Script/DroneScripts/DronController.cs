@@ -73,6 +73,12 @@ public class DronController : MonoBehaviour
     {
         return _attiMode;
     }
+    public void SetAttiMode()
+    {
+        Debug.Log("setattimode");
+        _attiMode = 0;
+        DronInputController.Instance.HasChangedModeAtti();
+    }
     public bool GetIsLoaded()
     {
         return _isLoaded;
@@ -419,7 +425,6 @@ public class DronController : MonoBehaviour
         }
         else
         {
-
             currentDronMode++;
         }
     }
