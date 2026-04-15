@@ -40,7 +40,6 @@ public class ModeHUDFeedbackController : MonoBehaviour
             print("Could not find Dron reference in player reference, Retrying in 10 seconds");
             StartCoroutine(RetrySubscribingToEvent());
         }
-        print("Hola");
     }
 
     private void OnDisable()

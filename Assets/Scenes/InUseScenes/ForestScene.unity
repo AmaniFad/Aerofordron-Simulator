@@ -188,7 +188,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 364751243}
     m_Modifications:
     - target: {fileID: 745700369658498752, guid: f3a5e0f1f6523f049a6ecfe88a5c664b, type: 3}
       propertyPath: m_Name
@@ -357,6 +357,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallLogo: 0
   normalLogo: 1
+--- !u!224 &122735044 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2327320058966653920, guid: f3a5e0f1f6523f049a6ecfe88a5c664b, type: 3}
+  m_PrefabInstance: {fileID: 122735041}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &127369291
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,7 +1000,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 364751243}
-  - component: {fileID: 364751244}
   m_Layer: 0
   m_Name: TodosLosCanvas
   m_TagString: Untagged
@@ -1017,21 +1021,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 536345477}
+  - {fileID: 122735044}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &364751244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 364751242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c7b644c7beee5c48b3b65871f0905a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseController: {fileID: 1786983573}
 --- !u!1 &374724243
 GameObject:
   m_ObjectHideFlags: 0
@@ -4850,6 +4842,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7644287641004820233, guid: 9b28ee20edd01de449496ea5059b801a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1786983572}
+    - targetCorrespondingSourceObject: {fileID: 7644287641004820233, guid: 9b28ee20edd01de449496ea5059b801a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1786983575}
   m_SourcePrefab: {fileID: 100100000, guid: 9b28ee20edd01de449496ea5059b801a, type: 3}
 --- !u!1 &1786983571 stripped
 GameObject:
@@ -4884,6 +4879,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4898021782171011985, guid: 9b28ee20edd01de449496ea5059b801a, type: 3}
   m_PrefabInstance: {fileID: 1786983570}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1786983575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786983571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c7b644c7beee5c48b3b65871f0905a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  todosLosCanvas: {fileID: 364751242}
 --- !u!1001 &1796043070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5773,7 +5781,6 @@ SceneRoots:
   - {fileID: 2098782282}
   - {fileID: 1169211017}
   - {fileID: 516731677}
-  - {fileID: 122735041}
   - {fileID: 602223773}
   - {fileID: 518097522}
   - {fileID: 364751243}

@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class HudsManager : MonoBehaviour
 {
-    [SerializeField] private PauseController pauseController;
+    [SerializeField] private GameObject todosLosCanvas;
     private void Update()
     {
-        if (pauseController.GetISPause())
+        if (this.gameObject.GetComponent<PauseController>().GetISPause())
         {
-            foreach (Transform child in transform)
-            {
-                child.gameObject.SetActive(false);
-            }
+            todosLosCanvas.SetActive(false);
         }
         else
         {
-            foreach (Transform child in transform)
-            {
-                child.gameObject.SetActive(true);
-            }
+            todosLosCanvas.SetActive(true);
         }
     }
 }
