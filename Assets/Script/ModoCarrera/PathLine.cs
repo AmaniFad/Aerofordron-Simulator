@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PathLine : MonoBehaviour
 {
-    [SerializeField] private Transform[] waypoints; // Array de puntos por donde pasará la línea
+    public List<Transform> waypoints = new List<Transform>(); // Array de puntos por donde pasará la línea
     private LineRenderer lineRenderer;
 
     public static PathLine instance;
 
-    public Transform[] GetPoints() { return waypoints; }
+    //public Transform[] GetPoints() { return waypoints; }
     void Start()
     {
         if(instance == null)
@@ -17,10 +17,14 @@ public class PathLine : MonoBehaviour
             instance = this;
         }
         lineRenderer = GetComponent<LineRenderer>();
-        if (waypoints != null && waypoints.Length > 0)
+        foreach(Transform child in transform)
         {
-            lineRenderer.positionCount = waypoints.Length;
-            for (int i = 0; i < waypoints.Length; i++)
+            waypoints.Add(child);
+        }
+        if (waypoints != null && waypoints.Count > 0)
+        {
+            lineRenderer.positionCount = waypoints.Count;
+            for (int i = 0; i < waypoints.Count; i++)
             {
                 lineRenderer.SetPosition(i, waypoints[i].position);
                 //waypoints[i].gameObject.GetComponent<BoxCollider>().enabled = true;
@@ -30,7 +34,7 @@ public class PathLine : MonoBehaviour
 
     public void Restart()
     {
-        for (int i = 0; i < waypoints.Length; i++)
+        for (int i = 0; i < waypoints.Count; i++)
         {
             waypoints[i].gameObject.GetComponent<BoxCollider>().enabled = true;
         }

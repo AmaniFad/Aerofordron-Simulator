@@ -7,6 +7,10 @@ public class TimerModoCarrera : Timer
 {
     [Header("Canva")]
     [SerializeField] private GameObject canvaLose;
+    [SerializeField] private GameObject canvasWin;
+    [SerializeField] private GameObject timerCanvas;
+    [SerializeField] private PauseController pauseMenu;
+
 
     public bool modoCarrera;
     public static TimerModoCarrera instance;
@@ -72,5 +76,14 @@ public class TimerModoCarrera : Timer
     public void RestarP()
     {
         elapsedTime = 0;
+    }
+
+    public void EndLap()
+    {
+        canvasWin.SetActive(true);
+        StopTime();
+        setTextTime();
+        timerCanvas.SetActive(false);
+        pauseMenu.PauseWihoutPauseMenu();
     }
 }
