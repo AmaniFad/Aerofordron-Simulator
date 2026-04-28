@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpiralDrawer : MonoBehaviour
 {
     [Header("Spiral Manager")]
-    [SerializeField] private int numPoints = 200; // Número de puntos en la espiral
+    [SerializeField] private int numPoints = 250; // Número de puntos en la espiral
     [SerializeField] private float startRadius = 1f; // Radio inicial
     [SerializeField] private float spaceBetweenTurns = 0.2f; // Espaciado vertical entre vueltas
     [SerializeField] private float angleMultiplier = 5f; // Controla la cantidad de giros

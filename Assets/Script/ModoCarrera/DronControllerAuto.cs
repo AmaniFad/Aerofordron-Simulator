@@ -40,6 +40,9 @@ public class DronControllerAuto : MonoBehaviour
     #endregion
     void Start()
     {
+        waypoints = new List<Transform>();
+        waypoints = PathLine.instance.GetPoints();
+
         if (waypoints == null || waypoints.Count == 0)
         {
             Debug.LogError("No waypoints assigned. The drone will not move.");

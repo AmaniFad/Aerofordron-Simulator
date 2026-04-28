@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using VInspector.Libs;
 
 public class Poster : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Poster : MonoBehaviour
     [SerializeField] private UnityEvent onPasPosterP;
 
     [SerializeField] private GameObject nextPoster;
-    [SerializeField] private Image image;
+    [SerializeField] private SpriteRenderer image;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -33,9 +34,13 @@ public class Poster : MonoBehaviour
         if (nextPoster != null) 
         {
             nextPoster.GetComponent<BoxCollider>().enabled = true;
-            nextPoster.GetComponentInChildren<Image>().color = Color.blue;
+            var sr = nextPoster.GetComponentInChildren<SpriteRenderer>();
+            Color c2 = Color.blue;
+            c2.a = 0.4f;
+            sr.color = c2;
         }
         image.color = Color.yellow;
+        image.color = image.color.SetAlpha(.4f);
         this.GetComponent<BoxCollider>().enabled = false;
     }
 }
