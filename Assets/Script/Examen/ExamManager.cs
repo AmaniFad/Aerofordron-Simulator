@@ -169,15 +169,17 @@ public class ExamManager : MonoBehaviour
         onLevel = true;
         listPanel[_countLevels].SetActive(true);
         numEjercice.gameObject.SetActive(true);
-        numEjercice.text = (_countLevels + 1).ToString();
+        
         switch (_countLevels)
         {
             case 0:
                 calculeDistancePoint(5f, 1.5f, pointsDetector[_countLevels], true);
+                numEjercice.text = "VUELO ESTACIONARIO";
             break;
             case 1:
 
                 calculeDistancePoint(5f, 20f, pointsDetector[_countLevels], true);
+                numEjercice.text = "TRANSICIÓN DE VUELO";
                 _countLine = 0;
                 _finalPoint = 8;
             break; 
@@ -186,32 +188,38 @@ public class ExamManager : MonoBehaviour
                 calculeDistancePoint(40f, 40f, pointsDetector[_countLevels], true);
                 calculeDistancePoint(7f, 20f, detectorPoint301, false);
                 detectorPoint301.SetActive(false);
+                numEjercice.text = "ASCENSO Y DESCENSO";
             break;
             case 3:
 
                 calculeDistancePoint(5f, 30f, pointsDetector[_countLevels], true);
-                
+                numEjercice.text = "CONTROL DE LA VELOCIDAD EN VUELO";
                 _countLine = 0;
                 _finalPoint = 5;
             break;
             case 4:
-
+                numEjercice.text = "DESPEGUE Y ATERRIZAJE";
                 calculeDistancePoint(5f, 50f, pointsDetector[_countLevels], true);
             break;
             case 5:
                 calculeDistancePoint(30f, 50f, pointsDetector[_countLevels], true);
-                break;
+                numEjercice.text = "SIMULACIÓN DE FALLO DEL MOTOR";
+            break;
             case 6:
                 calculeDistancePoint(100f, 50f, pointsDetector[_countLevels], true);
-                break;
+                numEjercice.text = "SIMULACIÓN FALLO DE COMUNICACIÓN";
+            break;
             case 7:
                 calculeDistancePoint(20f,50f, pointsDetector[_countLevels], true);
+                numEjercice.text = "GESTIÓN DE SIMULACIÓN I / DRON";
                 break;
             case 8:
                 calculeDistancePoint(30f, 50f, pointsDetector[_countLevels], true);
-                break;
+                numEjercice.text = "GESTIÓN DE SIMULACIÓN II / PERSONA";
+            break;
             default:
-                break;
+                Debug.LogError("out of case");
+            break;
         }
     }
     public void SetTheLevel(int level)
