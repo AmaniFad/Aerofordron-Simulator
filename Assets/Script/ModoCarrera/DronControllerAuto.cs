@@ -41,7 +41,10 @@ public class DronControllerAuto : MonoBehaviour
     void Start()
     {
         waypoints = new List<Transform>();
-        waypoints = PathLine.instance.GetPoints();
+        if (waypoints.Count == 0)
+        {
+            waypoints = PathLine.instance.GetPoints();
+        }
 
         if (waypoints == null || waypoints.Count == 0)
         {

@@ -20,7 +20,6 @@ public class ExamManager : MonoBehaviour
     [SerializeField] private List<GameObject> pointsDetector;
     [SerializeField] private GameObject detectorPoint301;
     [SerializeField] private GameObject mando;
-    [SerializeField] private GameObject dronHud;
 
     [Header("Player & Dron")]
     [SerializeField] private GameObject Player;
@@ -65,7 +64,10 @@ public class ExamManager : MonoBehaviour
             // Primera vez en la escena
             for (int i = 0; i < buttonPanelSelect.Count; i++)
             {
-                buttonPanelSelect[i].GetComponent<Image>().color = Color.green;
+                Color newColor = Color.white;
+                ColorBlock buttonColor = buttonPanelSelect[i].GetComponent<Button>().colors;
+                buttonColor.normalColor = newColor;
+                buttonPanelSelect[i].GetComponent<Button>().colors = buttonColor;
 
                 // También guarda el estado como "no completado"
                 string key = "BotonNivel_" + i;
@@ -85,9 +87,20 @@ public class ExamManager : MonoBehaviour
                 int state = PlayerPrefs.GetInt(key, 0);
 
                 if (state == 0)
-                    buttonPanelSelect[i].GetComponent<Image>().color = Color.green;
+                {
+                    Color newColor = Color.white;
+                    ColorBlock buttonColor = buttonPanelSelect[i].GetComponent<Button>().colors;
+                    buttonColor.normalColor = newColor;
+                    buttonPanelSelect[i].GetComponent<Button>().colors = buttonColor;
+                }
                 else if (state == 1)
-                    buttonPanelSelect[i].GetComponent<Image>().color = Color.white;
+                {
+                    Color newColor = Color.green;
+                    ColorBlock buttonColor = buttonPanelSelect[i].GetComponent<Button>().colors;
+                    buttonColor.normalColor = newColor;
+                    buttonPanelSelect[i].GetComponent<Button>().colors = buttonColor;
+                }
+                    
             }
         }
         //countLevels = 0;
@@ -145,11 +158,6 @@ public class ExamManager : MonoBehaviour
             if (Player.GetComponent<PlayerInteract>().GetCurrentFeedback() != null)
             {
                 if (Player.GetComponent<PlayerInteract>().GetCurrentFeedback().activeSelf)
-                {
-                    listPanel[_countLevels].SetActive(false);
-                    numEjercice.gameObject.SetActive(false);
-                }
-                else if (dronHud.activeSelf)
                 {
                     listPanel[_countLevels].SetActive(false);
                     numEjercice.gameObject.SetActive(false);
@@ -271,7 +279,12 @@ public class ExamManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        buttonPanelSelect[_countLevels].GetComponent<Image>().color = Color.white;
+        //tablet button
+        Color newColor = Color.green;
+        ColorBlock buttonColor = buttonPanelSelect[_countLevels].GetComponent<Button>().colors;
+        buttonColor.normalColor = newColor;
+        buttonPanelSelect[_countLevels].GetComponent<Button>().colors = buttonColor;
+
         string key = "BotonNivel_" + _countLevels;
         PlayerPrefs.SetInt(key, 1);
         PlayerPrefs.Save();

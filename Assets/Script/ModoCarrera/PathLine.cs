@@ -17,9 +17,12 @@ public class PathLine : MonoBehaviour
             instance = this;
         }
         lineRenderer = GetComponent<LineRenderer>();
-        foreach(Transform child in transform)
+        if(waypoints.Count == 0)
         {
-            waypoints.Add(child);
+            foreach (Transform child in transform)
+            {
+                waypoints.Add(child);
+            }
         }
         if (waypoints != null && waypoints.Count > 0)
         {
