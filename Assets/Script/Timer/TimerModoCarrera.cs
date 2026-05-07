@@ -17,6 +17,7 @@ public class TimerModoCarrera : Timer
 
     private float saveRemainingTime;
     private bool startGame;
+    private TMP_Text timer;
     public void SetModoCarrera(bool modoCarrera)
     {
         this.modoCarrera = modoCarrera;
@@ -38,6 +39,7 @@ public class TimerModoCarrera : Timer
         saveRemainingTime = remainingTime;
         elapsedTime = 0;
         StopTime();
+        timer = timerCanvas.GetComponentInChildren<TMP_Text>();
     }
 
     // Update is called once per frame
@@ -63,6 +65,7 @@ public class TimerModoCarrera : Timer
                 base.cuentaAdelante();
             }
         }
+        timer.text = timerText.text;
     }
     private void Lose()
     {
