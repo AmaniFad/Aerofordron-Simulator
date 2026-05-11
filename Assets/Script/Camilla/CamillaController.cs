@@ -27,7 +27,7 @@ public class CamillaController : MonoBehaviour , IInteractable
 
             springJoint.spring = 80;
             springJoint.damper = 120f;
-            springJoint.minDistance = 2.5f;
+            springJoint.minDistance = 10f;
             springJoint.maxDistance = cableLength;
 
             // --- CAMBIO CLAVE AQUÍ ---

@@ -17,7 +17,7 @@ public class DronInteraction : MonoBehaviour
     }
     void Update()
     {
-        if (Vector3.Distance(camilla.position, this.transform.position) < 5f)
+        if (Vector3.Distance(camilla.position, this.transform.position) < 15f)
         {
             if (currentFeedback == null)
             {
@@ -61,7 +61,6 @@ public class DronInteraction : MonoBehaviour
     {
         if (!onlyThisFrame)
         {
-
             float distance = Vector3.Distance(camilla.position, this.transform.position);
             if (this.gameObject.GetComponent<DronController>().GetIsLoaded())
             {
@@ -72,14 +71,12 @@ public class DronInteraction : MonoBehaviour
             else
             {
                 // Perform the raycast
-                if (distance < 5f)
+                if (distance < 15f)
                 {
-                    // Check if the hit object implements the IInteract interface
                     IInteractable interactableObject = camilla.gameObject.GetComponent<IInteractable>();
                     if (interactableObject != null)
                     {
                         //sound.CallOneShot("event:/Grab");
-                        // Call the Interact method on the hit object
                         interactableObject.Interact();
                         Debug.Log("grab item");
                     }
