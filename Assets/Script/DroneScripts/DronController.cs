@@ -237,7 +237,7 @@ public class DronController : MonoBehaviour
                 else
                 {
                     if(_isLoaded)
-                        mMovementBehaviour.nonInputInputls(rb.linearVelocity, 0.2f);
+                        mMovementBehaviour.nonInputInputls(Vector3.zero, 2f);
                     else
                         mMovementBehaviour.nonInputInputls(Vector3.zero, 5f);
                 }

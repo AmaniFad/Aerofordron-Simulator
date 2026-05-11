@@ -24,14 +24,22 @@ public class CamillaController : MonoBehaviour , IInteractable
             springJoint.autoConfigureConnectedAnchor = false;
             springJoint.anchor = Vector3.zero;
             springJoint.connectedAnchor = Vector3.zero;
+
             springJoint.spring = 80;
             springJoint.damper = 120f;
             springJoint.minDistance = 2.5f;
             springJoint.maxDistance = cableLength;
-            springJoint.tolerance = 0.025f;
+
+            // --- CAMBIO CLAVE AQUÍ ---
+            // Al poner massScale alto, la camilla siente mucho la fuerza.
+            // Al poner connectedMassScale muy bajo (cercano a 0), 
+            // el dron ignora casi por completo las fuerzas que le llegan de la camilla.
+            springJoint.massScale = 1f;
+            springJoint.connectedMassScale = 0.001f;
+
+            // Evita que las colisiones entre dron y camilla vuelvan loco al sistema
+            springJoint.enableCollision = false;
             springJoint.enablePreprocessing = true;
-            springJoint.massScale = 1;
-            springJoint.connectedMassScale = 1;
 
             drone.GetComponent<DronInteraction>().GrabItem(true);
             rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
