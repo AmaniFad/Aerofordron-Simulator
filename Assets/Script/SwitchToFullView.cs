@@ -28,12 +28,14 @@ public class SwitchToFullView : MonoBehaviour
 
     public void EnterFullView()
     {
+        Camera.main.gameObject.SetActive(false);
         fullViewCamera.SetActive(true);
         hudPlayer.SetActive(false);
     }
 
     public void ExitFullView()
     {
+        Camera.main.gameObject.SetActive(true);
         fullViewCamera.SetActive(false);
         hudPlayer.SetActive(true);
     }
