@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using VInspector.Libs;
-
 public class Poster : MonoBehaviour
 {
     [SerializeField] private UnityEvent onPasPosterMC;
@@ -39,8 +37,9 @@ public class Poster : MonoBehaviour
             c2.a = 0.4f;
             sr.color = c2;
         }
-        image.color = Color.yellow;
-        image.color = image.color.SetAlpha(.4f);
+        Color c1 = Color.yellow;
+        c1.a = 0.4f;
+        image.color = c1;
         this.GetComponent<BoxCollider>().enabled = false;
     }
 }
