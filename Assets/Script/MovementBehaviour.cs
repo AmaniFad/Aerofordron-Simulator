@@ -8,6 +8,7 @@ public class MovementBehaviour : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private float speed;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private float maxSpeed = .7f;
 
     private void Start()
     {
@@ -17,16 +18,22 @@ public class MovementBehaviour : MonoBehaviour
     //Usamos Addforce para hacer mas realistas las fisicas
     public void Move(Vector3 movementDirection)
     {
-            rb.AddForce(movementDirection.normalized * this.speed * Time.deltaTime, ForceMode.Force);
-
-
+        rb.AddForce(movementDirection.normalized * this.speed * Time.deltaTime, ForceMode.Force);
     }
     public void Move(Vector3 movementDirection, float objectSpeed)
     {
-               
-            rb.AddForce(movementDirection.normalized * objectSpeed * Time.deltaTime, ForceMode.Force);
+        rb.AddForce(movementDirection.normalized * objectSpeed * Time.deltaTime, ForceMode.Force);
     }
-
+    public void MoveWithLoad(Vector3 movementDirection, float objectSpeed)
+    {
+        rb.AddForce(movementDirection.normalized * objectSpeed, ForceMode.Force);
+        Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        if (horizontalVelocity.magnitude < maxSpeed)
+        {
+            horizontalVelocity = horizontalVelocity.normalized * maxSpeed;
+            rb.linearVelocity = new Vector3(horizontalVelocity.x, rb.linearVelocity.y, horizontalVelocity.z);
+        }
+    }
     public void MoveDronAuto(Vector3 movementDirection, float speedAuto)
     {
         rb.AddForce(movementDirection.normalized * speedAuto * Time.deltaTime, ForceMode.Force);

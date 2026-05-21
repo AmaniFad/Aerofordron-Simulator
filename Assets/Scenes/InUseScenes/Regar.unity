@@ -6802,6 +6802,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4058463755352128380, guid: 88bab8c33daf51e428d562bdf08c15f7, type: 3}
   m_PrefabInstance: {fileID: 572785873}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &574917390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 574917391}
+  m_Layer: 0
+  m_Name: TodosLosCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &574917391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574917390}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 293.76535, y: 2.5369396, z: 654.46484}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 591430419}
+  - {fileID: 1840043081}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &582889145
 GameObject:
   m_ObjectHideFlags: 0
@@ -7199,11 +7232,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 574917391}
     m_Modifications:
     - target: {fileID: 745700369658498752, guid: f3a5e0f1f6523f049a6ecfe88a5c664b, type: 3}
       propertyPath: m_Name
       value: DronCameraCanvas (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 745700369658498752, guid: f3a5e0f1f6523f049a6ecfe88a5c664b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2327320058966653920, guid: f3a5e0f1f6523f049a6ecfe88a5c664b, type: 3}
       propertyPath: m_Pivot.x
@@ -7346,6 +7383,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3a5e0f1f6523f049a6ecfe88a5c664b, type: 3}
+--- !u!224 &591430419 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2327320058966653920, guid: f3a5e0f1f6523f049a6ecfe88a5c664b, type: 3}
+  m_PrefabInstance: {fileID: 591430418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &601033581
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15103,6 +15145,7 @@ MonoBehaviour:
   minDronViewRotation: -100
   cameraMovementSpeed: 5
   waypoints: {fileID: 358528608}
+  _isLoaded: 0
 --- !u!114 &835503458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15117,6 +15160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1000
   rotationSpeed: 3
+  maxSpeed: 0.4
 --- !u!65 &835503459
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16413,6 +16457,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7644287641004820233, guid: 9b28ee20edd01de449496ea5059b801a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1159738023}
+    - targetCorrespondingSourceObject: {fileID: 7644287641004820233, guid: 9b28ee20edd01de449496ea5059b801a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1159738037}
   m_SourcePrefab: {fileID: 100100000, guid: 9b28ee20edd01de449496ea5059b801a, type: 3}
 --- !u!1 &932891024
 GameObject:
@@ -19503,6 +19550,7 @@ GameObject:
   - component: {fileID: 1127190694}
   - component: {fileID: 1127190693}
   - component: {fileID: 1127190692}
+  - component: {fileID: 1127190695}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -19547,7 +19595,7 @@ Terrain:
   m_DetailObjectDistance: 177
   m_DetailObjectDensity: 1
   m_HeightmapPixelError: 5
-  m_SplatMapDistance: 1000
+  m_SplatMapDistance: 99999
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
@@ -19557,7 +19605,7 @@ Terrain:
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
+  m_MaterialTemplate: {fileID: 0}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -19585,6 +19633,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1127190695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127190691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6525fd4a9fb974b7f878dee70144de99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  templateMaterial: {fileID: 2100000, guid: 4cbb9808bd07cf64c99202ba4adfd6b5, type: 2}
+  blendMat: {fileID: 0}
+  blendMatInstance: {fileID: 0}
+  keywordSO: {fileID: 11400000, guid: b4c24620b8ac0df4f9e51dbf051608ed, type: 2}
+  perPixelNormal: {fileID: 0}
+  streamTexture: {fileID: 0}
+  propData: {fileID: 11400000, guid: f18d069db44916a4494b3f1e26a86e77, type: 2}
+  terrain: {fileID: 1127190693}
+  baseMapShader: {fileID: 4800000, guid: 1c606d90f1e29fa488a8ce5723dbb71b, type: 3}
+  customControl0: {fileID: 0}
+  customControl1: {fileID: 0}
+  customControl2: {fileID: 0}
+  customControl3: {fileID: 0}
+  customControl4: {fileID: 0}
+  customControl5: {fileID: 0}
+  customControl6: {fileID: 0}
+  customControl7: {fileID: 0}
+  patchBoundsMultiplier: {x: 1, y: 1, z: 1}
+  reenabled: 0
+  importSplatMaps: []
 --- !u!1001 &1128299982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20130,6 +20210,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4898021782171011985, guid: 9b28ee20edd01de449496ea5059b801a, type: 3}
   m_PrefabInstance: {fileID: 925188431}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1159738037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159738015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c7b644c7beee5c48b3b65871f0905a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  todosLosCanvas: {fileID: 574917390}
 --- !u!1001 &1163474603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26844,7 +26937,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 179836360064669992, guid: 3982ccd496d73f140a8a0c54ef3c0297, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 185.2
+      value: 185.23
       objectReference: {fileID: 0}
     - target: {fileID: 179836360064669992, guid: 3982ccd496d73f140a8a0c54ef3c0297, type: 3}
       propertyPath: m_LocalPosition.y
@@ -28453,7 +28546,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 574917391}
     m_Modifications:
     - target: {fileID: 145677942306453333, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
       propertyPath: m_AnchorMax.y
@@ -28557,15 +28650,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2806149689145115700, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 185.80165
+      value: -107.9637
       objectReference: {fileID: 0}
     - target: {fileID: 2806149689145115700, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.0309386
+      value: 0.493999
       objectReference: {fileID: 0}
     - target: {fileID: 2806149689145115700, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 140.28346
+      value: -514.1814
       objectReference: {fileID: 0}
     - target: {fileID: 2806149689145115700, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -28678,6 +28771,11 @@ PrefabInstance:
 --- !u!1 &1840043080 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1029349742849228827, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
+  m_PrefabInstance: {fileID: 1840043079}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1840043081 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2806149689145115700, guid: a193800c102f6c14abcb625efe388ff7, type: 3}
   m_PrefabInstance: {fileID: 1840043079}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1841069282
@@ -38392,7 +38490,6 @@ SceneRoots:
   - {fileID: 1510533744}
   - {fileID: 475192561}
   - {fileID: 1067645928}
-  - {fileID: 1840043079}
   - {fileID: 583309641}
   - {fileID: 657694490}
   - {fileID: 1097984809}
@@ -38406,4 +38503,4 @@ SceneRoots:
   - {fileID: 932891026}
   - {fileID: 1918425933}
   - {fileID: 627413278}
-  - {fileID: 591430418}
+  - {fileID: 574917391}

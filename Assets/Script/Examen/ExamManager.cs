@@ -20,7 +20,6 @@ public class ExamManager : MonoBehaviour
     [SerializeField] private List<GameObject> pointsDetector;
     [SerializeField] private GameObject detectorPoint301;
     [SerializeField] private GameObject mando;
-    [SerializeField] private GameObject dronHud;
 
     [Header("Player & Dron")]
     [SerializeField] private GameObject Player;
@@ -65,7 +64,10 @@ public class ExamManager : MonoBehaviour
             // Primera vez en la escena
             for (int i = 0; i < buttonPanelSelect.Count; i++)
             {
-                buttonPanelSelect[i].GetComponent<Image>().color = Color.green;
+                Color newColor = Color.white;
+                ColorBlock buttonColor = buttonPanelSelect[i].GetComponent<Button>().colors;
+                buttonColor.normalColor = newColor;
+                buttonPanelSelect[i].GetComponent<Button>().colors = buttonColor;
 
                 // También guarda el estado como "no completado"
                 string key = "BotonNivel_" + i;
@@ -85,9 +87,20 @@ public class ExamManager : MonoBehaviour
                 int state = PlayerPrefs.GetInt(key, 0);
 
                 if (state == 0)
-                    buttonPanelSelect[i].GetComponent<Image>().color = Color.green;
+                {
+                    Color newColor = Color.white;
+                    ColorBlock buttonColor = buttonPanelSelect[i].GetComponent<Button>().colors;
+                    buttonColor.normalColor = newColor;
+                    buttonPanelSelect[i].GetComponent<Button>().colors = buttonColor;
+                }
                 else if (state == 1)
-                    buttonPanelSelect[i].GetComponent<Image>().color = Color.white;
+                {
+                    Color newColor = Color.green;
+                    ColorBlock buttonColor = buttonPanelSelect[i].GetComponent<Button>().colors;
+                    buttonColor.normalColor = newColor;
+                    buttonPanelSelect[i].GetComponent<Button>().colors = buttonColor;
+                }
+                    
             }
         }
         //countLevels = 0;
@@ -149,11 +162,6 @@ public class ExamManager : MonoBehaviour
                     listPanel[_countLevels].SetActive(false);
                     numEjercice.gameObject.SetActive(false);
                 }
-                else if (dronHud.activeSelf)
-                {
-                    listPanel[_countLevels].SetActive(false);
-                    numEjercice.gameObject.SetActive(false);
-                }
                 else
                 {
                     listPanel[_countLevels].SetActive(true);
@@ -169,49 +177,57 @@ public class ExamManager : MonoBehaviour
         onLevel = true;
         listPanel[_countLevels].SetActive(true);
         numEjercice.gameObject.SetActive(true);
-        numEjercice.text = (_countLevels + 1).ToString();
+        
         switch (_countLevels)
         {
             case 0:
-                calculeDistancePoint(5f, 1.5f, pointsDetector[_countLevels]);
+                calculeDistancePoint(5f, 1.5f, pointsDetector[_countLevels], true);
+                numEjercice.text = "VUELO ESTACIONARIO";
             break;
             case 1:
 
-                calculeDistancePoint(5f, 20f, pointsDetector[_countLevels]);
+                calculeDistancePoint(5f, 20f, pointsDetector[_countLevels], true);
+                numEjercice.text = "TRANSICIÓN DE VUELO";
                 _countLine = 0;
                 _finalPoint = 8;
             break; 
             case 2:
 
-                calculeDistancePoint(40f, 40f, pointsDetector[_countLevels]);
-                calculeDistancePoint(7f, 20f, detectorPoint301);
+                calculeDistancePoint(40f, 40f, pointsDetector[_countLevels], true);
+                calculeDistancePoint(7f, 20f, detectorPoint301, false);
                 detectorPoint301.SetActive(false);
+                numEjercice.text = "ASCENSO Y DESCENSO";
             break;
             case 3:
 
-                calculeDistancePoint(5f, 30f, pointsDetector[_countLevels]);
-                
+                calculeDistancePoint(5f, 30f, pointsDetector[_countLevels], true);
+                numEjercice.text = "CONTROL DE LA VELOCIDAD EN VUELO";
                 _countLine = 0;
                 _finalPoint = 5;
             break;
             case 4:
-
-                calculeDistancePoint(5f, 50f, pointsDetector[_countLevels]);
+                numEjercice.text = "DESPEGUE Y ATERRIZAJE";
+                calculeDistancePoint(5f, 50f, pointsDetector[_countLevels], true);
             break;
             case 5:
-                calculeDistancePoint(30f, 50f, pointsDetector[_countLevels]);
-                break;
+                calculeDistancePoint(30f, 50f, pointsDetector[_countLevels], true);
+                numEjercice.text = "SIMULACIÓN DE FALLO DEL MOTOR";
+            break;
             case 6:
-                calculeDistancePoint(100f, 50f, pointsDetector[_countLevels]);
-                break;
+                calculeDistancePoint(100f, 50f, pointsDetector[_countLevels], true);
+                numEjercice.text = "SIMULACIÓN FALLO DE COMUNICACIÓN";
+            break;
             case 7:
-                calculeDistancePoint(20f,50f, pointsDetector[_countLevels]);
+                calculeDistancePoint(20f,50f, pointsDetector[_countLevels], true);
+                numEjercice.text = "GESTIÓN DE SIMULACIÓN I / DRON";
                 break;
             case 8:
-                calculeDistancePoint(30f, 50f, pointsDetector[_countLevels]);
-                break;
+                calculeDistancePoint(30f, 50f, pointsDetector[_countLevels], true);
+                numEjercice.text = "GESTIÓN DE SIMULACIÓN II / PERSONA";
+            break;
             default:
-                break;
+                Debug.LogError("out of case");
+            break;
         }
     }
     public void SetTheLevel(int level)
@@ -224,7 +240,7 @@ public class ExamManager : MonoBehaviour
         NextLevel();
     }
 
-    private void calculeDistancePoint(float distanceX, float distanceY, GameObject point)
+    private void calculeDistancePoint(float distanceX, float distanceY, GameObject point, bool line)
     {
         Vector3 positionPlayer = Player.transform.position;
         Vector3 escalaPlayer = Player.transform.localScale;
@@ -234,6 +250,12 @@ public class ExamManager : MonoBehaviour
 
         point.SetActive(true);
         point.transform.position = positionPlayer + newPositionX + newPositionY;
+        
+        if(line)
+        {
+            LineToTarget.instance.SetTarget(point.transform);
+            LineToTarget.instance.SetBool(true);
+        }
     }
     public void ReturnToStart()
     {
@@ -257,7 +279,12 @@ public class ExamManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        buttonPanelSelect[_countLevels].GetComponent<Image>().color = Color.white;
+        //tablet button
+        Color newColor = Color.green;
+        ColorBlock buttonColor = buttonPanelSelect[_countLevels].GetComponent<Button>().colors;
+        buttonColor.normalColor = newColor;
+        buttonPanelSelect[_countLevels].GetComponent<Button>().colors = buttonColor;
+
         string key = "BotonNivel_" + _countLevels;
         PlayerPrefs.SetInt(key, 1);
         PlayerPrefs.Save();

@@ -59,7 +59,6 @@ public class MeteoModes : MonoBehaviour
         {
             if (pass.name == "VolumetricFogRendererFeatureLite")
             {
-                print("Hola");
                 fog = pass;
             }
         }

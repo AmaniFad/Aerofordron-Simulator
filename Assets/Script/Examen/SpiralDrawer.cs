@@ -5,12 +5,12 @@ using UnityEngine;
 public class SpiralDrawer : MonoBehaviour
 {
     [Header("Spiral Manager")]
-    [SerializeField] private int numPoints = 200; // Número de puntos en la espiral
-    [SerializeField] private float startRadius = 1f; // Radio inicial
-    [SerializeField] private float spaceBetweenTurns = 0.2f; // Espaciado vertical entre vueltas
-    [SerializeField] private float angleMultiplier = 5f; // Controla la cantidad de giros
+    [SerializeField] private int numPoints = 250;
+    [SerializeField] private float startRadius = 1f; 
+    [SerializeField] private float spaceBetweenTurns = 0.2f; 
+    [SerializeField] private float angleMultiplier = 5f; 
     private LineRenderer lineRenderer;
-    private Vector3 startPosition; // Posición inicial de la espiral
+    private Vector3 startPosition;
 
     [Header("GameObject")]
     [SerializeField] private GameObject lastPoint;
@@ -23,7 +23,7 @@ public class SpiralDrawer : MonoBehaviour
             lineRenderer = gameObject.AddComponent<LineRenderer>();
         }
 
-        startPosition = transform.position; // Usar la posición del objeto en la escena
+        startPosition = transform.position; 
 
         DrawSpiral();
     }
@@ -35,13 +35,13 @@ public class SpiralDrawer : MonoBehaviour
 
         for (int i = 0; i < numPoints; i++)
         {
-            float angle = i * angleMultiplier * Mathf.PI / numPoints; // Ángulo de rotación
-            float radius = startRadius + (i * 0.01f); // Radio crece levemente
+            float angle = i * angleMultiplier * Mathf.PI / numPoints; 
+            float radius = startRadius + (i * 0.01f); 
             float x = radius * Mathf.Cos(angle);
-            float y = -i * spaceBetweenTurns; // Bajar la espiral
+            float y = -i * spaceBetweenTurns; 
             float z = radius * Mathf.Sin(angle);
 
-            points[i] = startPosition + new Vector3(x, y, z); // Ajusta la posición inicial
+            points[i] = startPosition + new Vector3(x, y, z); 
         }
 
         lineRenderer.SetPositions(points);

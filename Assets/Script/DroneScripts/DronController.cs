@@ -59,7 +59,7 @@ public class DronController : MonoBehaviour
     private bool remoteDron;
     private bool aux;
     private float _attiMode;
-
+    public bool _isLoaded;
 
     [System.Serializable]
     private class DronMode
@@ -72,6 +72,20 @@ public class DronController : MonoBehaviour
     public float GetAttiMode()
     {
         return _attiMode;
+    }
+    public void SetAttiMode()
+    {
+        Debug.Log("setattimode");
+        _attiMode = 0;
+        DronInputController.Instance.HasChangedModeAtti();
+    }
+    public bool GetIsLoaded()
+    {
+        return _isLoaded;
+    }
+    public void SetIsLoaded(bool isLoaded)
+    {
+        _isLoaded = isLoaded;
     }
     //POR IMPLEMENTAR
     //[SerializeField] private GameObject playerOnGroundFeedback;
@@ -148,6 +162,7 @@ public class DronController : MonoBehaviour
 
     }
 
+    [Obsolete]
     private void TryToMoveDron()
     {
         Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
@@ -163,7 +178,13 @@ public class DronController : MonoBehaviour
             //mMovementBehaviour.StopMovingOnY();
         }
         if (verticalDirection < -0.2f || verticalDirection > 0.05f)
-            mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0), dronModes[currentDronMode].speed);
+        {
+            if(_isLoaded)
+                mMovementBehaviour.MoveWithLoad(new Vector3(0, verticalDirection, 0), dronModes[currentDronMode].speed);
+            else
+                mMovementBehaviour.Move(new Vector3(0, verticalDirection, 0), dronModes[currentDronMode].speed);
+        }
+            
 
         _attiMode = DronInputController.Instance.GetModeAtti();
         //Debug.Log(CheckIfGrounded());
@@ -175,8 +196,16 @@ public class DronController : MonoBehaviour
             {
                 if (inputDirection.magnitude > 0.01f)
                 {
-                    mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z), dronModes[currentDronMode].speed);
-                    SendDronRotation(inputDirection);
+                    if (_isLoaded)
+                    {
+                        mMovementBehaviour.MoveWithLoad(new Vector3(direction.x, 0, direction.z), dronModes[currentDronMode].speed);
+                    }
+                    else 
+                    {
+                        mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z), dronModes[currentDronMode].speed);
+                    }
+
+                        SendDronRotation(inputDirection);
                 }
                 else
                 {
@@ -195,12 +224,22 @@ public class DronController : MonoBehaviour
 
                 if (inputDirection.magnitude > 0.01f)
                 {
-                    mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z), dronModes[currentDronMode].speed);
+                    if (_isLoaded)
+                    {
+                        mMovementBehaviour.MoveWithLoad(new Vector3(direction.x, 0, direction.z), dronModes[currentDronMode].speed);
+                    }
+                    else
+                    {
+                        mMovementBehaviour.Move(new Vector3(direction.x, 0, direction.z), dronModes[currentDronMode].speed);
+                    }
                     SendDronRotation(inputDirection);
                 }
                 else
                 {
-                    mMovementBehaviour.nonInputInputls(Vector3.zero, 5f);
+                    if(_isLoaded)
+                        mMovementBehaviour.nonInputInputls(Vector3.zero, 2f);
+                    else
+                        mMovementBehaviour.nonInputInputls(Vector3.zero, 5f);
                 }
             }
             SendDronRotation(inputDirection);
@@ -231,7 +270,7 @@ public class DronController : MonoBehaviour
         if (tiltAroundZ != 0)
             lastTiltZ = -inputDirection.x * tiltAngle;
 
-        print("Tilt: " + tiltAroundZ + " Direction " + -inputDirection.x);
+        //print("Tilt: " + tiltAroundZ + " Direction " + -inputDirection.x);
 
         Quaternion targetRotation = Quaternion.Euler(tiltAroundX, currentYRotation, tiltAroundZ);
 
@@ -240,7 +279,8 @@ public class DronController : MonoBehaviour
         targetRotation *= Quaternion.Euler(0, additionalRotationY, 0);
 
         // Apply the rotation with slerp
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+        rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.deltaTime * 5f));
 
     }
 
@@ -351,7 +391,7 @@ public class DronController : MonoBehaviour
                 speed = 60;
                 mMovementBehaviour.MoveDronAuto(Vector3.down, speed);
 
-                // Estabilizar rotaci�n horizontal
+                // Estabilizar rotación horizontal
                 Quaternion stableRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
                 transform.rotation = Quaternion.Slerp(transform.rotation, stableRotation, Time.deltaTime * 2f);
 
@@ -362,7 +402,7 @@ public class DronController : MonoBehaviour
                 // Avanzar horizontalmente
                 mMovementBehaviour.MoveDronAuto(direction, speed);
 
-                // Rotaci�n suave mirando hacia adelante
+                // Rotación suave mirando hacia adelante
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
             }
@@ -385,7 +425,6 @@ public class DronController : MonoBehaviour
         }
         else
         {
-
             currentDronMode++;
         }
     }

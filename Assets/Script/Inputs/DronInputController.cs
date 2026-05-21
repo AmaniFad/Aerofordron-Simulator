@@ -53,7 +53,6 @@ public class DronInputController : MonoBehaviour
     }
     public void OnModeDron(InputValue value)
     {
-        Debug.Log(value.ToString());
         if (value.isPressed && !buttonPressedMode) 
         {
             isModeAtti = (isModeAtti == 0) ? 1 : 0;
@@ -85,6 +84,11 @@ public class DronInputController : MonoBehaviour
     public float GetModeAtti()
     {
         return isModeAtti;
+    }
+    public void HasChangedModeAtti()
+    {
+        isModeAtti = 0;
+        buttonPressedMode = false;
     }
     public float GetCameraMovement()
     {

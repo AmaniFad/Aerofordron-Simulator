@@ -126,7 +126,6 @@ public class PauseController : MonoBehaviour
                 Cursor.visible = false;
                 Time.timeScale = 1f;
 
-
                 SetInputProviderState(true);
                 isPausing = false;
                 pauseMenuInstance.SetActive(false);

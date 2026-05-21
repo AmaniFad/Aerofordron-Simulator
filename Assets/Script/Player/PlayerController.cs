@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInteract playerInteract;
     private FMOD.Studio.EventInstance foosteps;
     private Coroutine isMoving;
+    private bool wasCanMove;
     [SerializeField] private GameObject modelPlayer;
     void Start()
     {
@@ -33,6 +34,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Vector3 cameraForward = cameraTransform.forward;
+        cameraForward.y = 0;
+        cameraForward.Normalize();
+        modelPlayer.transform.localRotation = Quaternion.LookRotation(-cameraForward);
+
+
         if (cameraTransform == null)
         {
             cameraTransform = Camera.main.transform;
@@ -45,18 +52,18 @@ public class PlayerController : MonoBehaviour
         if (PlayerStateController.instance.CanMove())
         {
             Vector2 playerWasd = PlayerInputController.Instance.GetPlayerInput();
-
-            Vector3 cameraForward = cameraTransform.forward;
+            
             Vector3 cameraRight = cameraTransform.right;
-
-            cameraForward.y = 0;
             cameraRight.y = 0;
-
-            modelPlayer.transform.localRotation = Quaternion.LookRotation(cameraForward);
-
-            cameraForward.Normalize();
             cameraRight.Normalize();
+
             Vector3 input = cameraForward * playerWasd.y + cameraRight * playerWasd.x;
+
+            if (!wasCanMove)
+            {
+                modelPlayer.GetComponent<Animator>().SetTrigger("happy");
+            }
+
             if (isMoving == null && input != Vector3.zero)
             {
                 isMoving = StartCoroutine(_PlayFootstep());
@@ -72,12 +79,19 @@ public class PlayerController : MonoBehaviour
                 modelPlayer.GetComponent<Animator>().SetFloat("Blend", 0.3f);
             }
         }
+        else
+        {
+            if (wasCanMove)
+            {
+                modelPlayer.GetComponent<Animator>().SetTrigger("grab");
+            }
+        }
         if (PlayerInputController.Instance.GetPlayerInput() == Vector2.zero)
         {
             MB.StopMoving();
             modelPlayer.GetComponent<Animator>().SetFloat("Blend", 0f);
-            modelPlayer.GetComponent<Animator>().SetTrigger("normal");
         }
+        wasCanMove = PlayerStateController.instance.CanMove();
     }
 
 

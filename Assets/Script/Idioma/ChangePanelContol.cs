@@ -9,6 +9,7 @@ public class ChangePanelContol : MonoBehaviour
     private bool isKeyboard;
     void Start()
     {
+
         isKeyboard = PlayerInputController.Instance.IsUsingKeyboard();
         if (isKeyboard)
         {

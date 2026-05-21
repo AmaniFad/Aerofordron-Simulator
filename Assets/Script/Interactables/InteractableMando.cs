@@ -14,22 +14,30 @@ public class InteractableMando : MonoBehaviour, IInteractable
     private Vector3 previousPosition;
     private Rigidbody rigidBody;
     private Quaternion previousRotation;
+
+    [SerializeField] private Quaternion targetRotation;
+    [SerializeField] private Vector3 targetPosition;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         controller = dron.GetComponent<DronController>();
         isPickable = true;
         player = PlayerReferences.instance.GetPlayer().GetComponent<PlayerInteract>();
+        previousPosition = transform.position;
+        previousRotation = transform.localRotation;
     }
 
     public void Interact()
     {
-        previousPosition = transform.position;
-        previousRotation = transform.localRotation;
         isPickable = false;
+
+        player.GrabItem(this.gameObject);
+
         Quaternion rotate = new Quaternion(0,0,0,0);
         transform.rotation = rotate;
-        player.GrabItem(this.gameObject);
+        transform.localRotation = targetRotation;
+        transform.localPosition = targetPosition;
+
         controller.StartDron();
         //this.transform.localRotation = rotationOffset;
         rigidBody.useGravity = false;
