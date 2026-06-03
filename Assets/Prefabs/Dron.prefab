@@ -504,6 +504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1000
   rotationSpeed: 3
+  maxSpeed: 0.7
 --- !u!114 &3477753400508625027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,7 +517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed4713da9ded964f8ca58152bf5c6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHeight: 120
+  maxHeight: 4000
   maxDistanceFromPlayer: 0
   groundedRayDistance: 0.5
   maxUpTilt: 2500
@@ -530,11 +531,11 @@ MonoBehaviour:
     Path: event:/DronHelix
   dronVisuals: {fileID: 0}
   dronModes:
-  - rotationSpeed: 30
+  - rotationSpeed: 15
     speed: 300
-  - rotationSpeed: 60
+  - rotationSpeed: 30
     speed: 900
-  - rotationSpeed: 100
+  - rotationSpeed: 60
     speed: 2000
   tiltAngle: 20
   dronView: {fileID: 2627707560200648486}
@@ -542,6 +543,7 @@ MonoBehaviour:
   minDronViewRotation: -20
   cameraMovementSpeed: 40
   waypoints: {fileID: 0}
+  _isLoaded: 0
 --- !u!114 &4963133959394168013
 MonoBehaviour:
   m_ObjectHideFlags: 0

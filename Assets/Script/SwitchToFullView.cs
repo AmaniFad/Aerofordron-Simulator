@@ -18,12 +18,18 @@ public class SwitchToFullView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerInputController.Instance.IsFullView() && !PlayerStateController.instance.CanMove() && !fullview)
-        {
+        if (PlayerInputController.Instance.IsFullView() && !PlayerStateController.instance.CanMove() && !fullview && Time.timeScale != 0f) { 
+        
             EnterFullView();
             fullview = true;
         }
         else if (fullview && !PlayerInputController.Instance.IsFullView())
+        {
+            fullview = false;
+            ExitFullView();
+        }
+
+        if (Time.timeScale == 0)
         {
             fullview = false;
             ExitFullView();

@@ -280,7 +280,7 @@ public class DronController : MonoBehaviour
 
         // Apply the rotation with slerp
         //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
-        rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.deltaTime * 5f));
+        rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.deltaTime * 0.5f));
 
     }
 
