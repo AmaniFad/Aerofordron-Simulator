@@ -17,7 +17,7 @@ public class DronInteraction : MonoBehaviour
     }
     void Update()
     {
-        if (Vector3.Distance(camilla.position, this.transform.position) < 15f)
+        if (Vector3.Distance(camilla.position, this.transform.position) < 10f)
         {
             if (currentFeedback == null)
             {

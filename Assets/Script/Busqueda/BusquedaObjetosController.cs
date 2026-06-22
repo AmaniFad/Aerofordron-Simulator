@@ -16,10 +16,6 @@ public class BusquedaObjetosController : MonoBehaviour
     [SerializeField] public GameObject canvasWin;
     [SerializeField] private GameObject canvasSeBusca;
 
-    [Header("ObjectsInScene")]
-    [SerializeField] private GameObject dronObj;
-    [SerializeField] private GameObject spawnDron;
-
     [Header("Score")]
     [SerializeField] private string nameLevel;
     private string finalTime;
