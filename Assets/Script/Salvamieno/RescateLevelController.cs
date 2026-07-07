@@ -13,6 +13,8 @@ public class RescateLevelController : MonoBehaviour
     [SerializeField] private TMP_Text followRule;
     [SerializeField] private GameObject dron;
     [SerializeField] private GameObject camilla;
+    [SerializeField] private Transform flecha;
+    [SerializeField] private Transform mando2dron;
     public enum SaveState
     {
         BeforeFound,
@@ -57,7 +59,9 @@ public class RescateLevelController : MonoBehaviour
                 followRule.text = "Encuentre a la persona desaparecida en la montaña";
             break;
             case SaveState.AfterFound:
-                followRule.text = "Diregete al inicio y recoge el material de rescate. Posteriormente hazlo llegar a la persona encontrada";
+                followRule.text = "Diregete al inicio y recoge el material de rescate (cambio de dron). Posteriormente hazlo llegar a la persona encontrada";
+                flecha.position = mando2dron.position + Vector3.up * 2f;
+                flecha.gameObject.SetActive(true);
             break;
             case SaveState.MaterialLeft:
                 followRule.text = "Recoge la camilla con la persona en ella y dirigete lentamente a la zona segura";
