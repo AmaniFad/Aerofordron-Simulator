@@ -92,8 +92,15 @@ public class DronController : MonoBehaviour
     #endregion
     void Start()
     {
+        if (dronModes.Length >= 2)
+        {
 
         currentDronMode = 1;
+        }
+        else
+        {
+            currentDronMode = 0;
+        }
         rb = GetComponent<Rigidbody>();
         currentCameraTilt = 0;
         eventEmitter = GetComponent<StudioEventEmitter>();

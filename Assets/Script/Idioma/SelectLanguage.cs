@@ -12,7 +12,6 @@ public class SelectLanguage : MonoBehaviour
     private string startingScene;
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
         startingScene = SceneManager.GetActiveScene().name;
     }
     public void ChangeLocale(int localeID)
