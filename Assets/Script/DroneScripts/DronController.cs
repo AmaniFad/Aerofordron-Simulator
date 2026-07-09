@@ -95,7 +95,7 @@ public class DronController : MonoBehaviour
         if (dronModes.Length >= 2)
         {
 
-        currentDronMode = 1;
+            currentDronMode = 1;
         }
         else
         {

@@ -7,7 +7,7 @@ using TMPro;
 public class RescateLevelController : MonoBehaviour
 {
     [Header("Objects")]
-    [SerializeField] private List<GameObject> spawns = new List<GameObject>();
+    [SerializeField] private List<Transform> spawns = new List<Transform>();
     [SerializeField] private GameObject personToFind;
 
     [SerializeField] private TMP_Text followRule;
@@ -27,9 +27,9 @@ public class RescateLevelController : MonoBehaviour
     void Start()
     {
         int randomValue = Random.Range(0, spawns.Count);
-        personToFind.transform.position = spawns[randomValue].transform.position;
+        personToFind.transform.position = spawns[randomValue].position;
         personToFind.SetActive(true);
-        EnterState(SaveState.BeforeFound);
+        StartCoroutine(WaitSomeSeconds(5));
     }
 
     
@@ -70,5 +70,10 @@ public class RescateLevelController : MonoBehaviour
                 followRule.text = "PERSONA RESCATADA CON EXITO!. Muy buen trabajo";
             break;
         }
+    }
+    private IEnumerator WaitSomeSeconds(float time)
+    {
+        yield return new WaitForSeconds(time);
+        EnterState(SaveState.BeforeFound);
     }
 }
