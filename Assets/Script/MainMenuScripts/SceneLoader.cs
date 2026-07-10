@@ -11,6 +11,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private GameObject sceneTransitions;
     private float previousVolume;
     public static SceneLoader Instance { get; private set; }
+    private Coroutine transitionControl;
     private void Start()
     {
         if (Instance == null)
@@ -62,20 +63,29 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator LoadSceneAsync(string scene)
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
+        if (transitionControl == null)
+        {
         GameObject instanceForControl = Instantiate(new GameObject());
-        instanceForControl.AddComponent<AlwaysLookAtGameobject>().StartCoroutine(_TransitionControl(scene,instanceForControl));  
+        transitionControl = instanceForControl.AddComponent<AlwaysLookAtGameobject>().StartCoroutine(_TransitionControl(scene,instanceForControl));  
         DontDestroyOnLoad(instanceForControl);
+
+        }
         yield return new WaitForEndOfFrame();
     }
 
     IEnumerator _TransitionControl(string scene, GameObject transitionController)
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
         GameObject b = Instantiate(sceneTransitions);
         DontDestroyOnLoad(b);
         b.GetComponent<Animator>().SetTrigger("leaveTransition");
-
+        Animator animationController = b.GetComponent<Animator>();
+        float t = 0;
+        while (animationController.GetCurrentAnimatorClipInfo(0).Length + 0.2f > t)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
         while (!asyncLoad.isDone)
         {
             yield return null;
