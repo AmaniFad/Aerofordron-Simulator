@@ -36,5 +36,9 @@ public class LookTowardsItem : MonoBehaviour
         Camera.main.gameObject.GetComponent<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().LookAt = item.transform;
     }
 
+    public void ChangeRotationSpeed(float speed)
+    {
+        rotationSpeed = speed;
+    }
 
 }
