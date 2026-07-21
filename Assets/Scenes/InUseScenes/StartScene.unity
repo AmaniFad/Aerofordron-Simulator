@@ -2718,23 +2718,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
---- !u!114 &294314031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 294314022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44d43fb79ee6a17499e4ba908131d78f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookAtObject: {fileID: 0}
-  rotationOffset: {x: 0, y: 0, z: 0}
-  constraintX: 0
-  constraintY: 0
-  constraintZ: 0
 --- !u!1 &326043879
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,7 +3306,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1357739776}
+        m_TargetAssemblyTypeName: LookTowardsItem, Assembly-CSharp
+        m_MethodName: ChangeRotationSpeed
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1466386950}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Exam
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &435375667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6480,9 +6487,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a356ae6b069dbfb468a689d8a6fb3afd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 294314030}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a356ae6b069dbfb468a689d8a6fb3afd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 294314031}
   m_SourcePrefab: {fileID: 100100000, guid: a356ae6b069dbfb468a689d8a6fb3afd, type: 3}
 --- !u!1 &771745135
 GameObject:
@@ -12994,28 +12998,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 779610664}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: SceneLoad
+      - m_Target: {fileID: 1466386950}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: ModoCarrera
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Race
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1773205246
@@ -14949,7 +14941,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Search
+          m_StringArgument: Agro
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!4 &2014866935 stripped
