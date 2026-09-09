@@ -8,6 +8,7 @@ public class RescateLevelController : MonoBehaviour
 {
     [Header("Objects")]
     [SerializeField] private List<Transform> spawns = new List<Transform>();
+    [SerializeField] private List<GameObject> textLevel = new List<GameObject>();
     [SerializeField] private GameObject personToFind;
 
     [SerializeField] private TMP_Text followRule;
@@ -15,6 +16,7 @@ public class RescateLevelController : MonoBehaviour
     [SerializeField] private GameObject camilla;
     [SerializeField] private Transform flecha;
     [SerializeField] private Transform mando2dron;
+    int i;
     public enum SaveState
     {
         BeforeFound,
@@ -26,6 +28,7 @@ public class RescateLevelController : MonoBehaviour
     public SaveState currentState;
     void Start()
     {
+        i = 0;
         int randomValue = Random.Range(0, spawns.Count);
         personToFind.transform.position = spawns[randomValue].position;
         personToFind.SetActive(true);
@@ -56,18 +59,29 @@ public class RescateLevelController : MonoBehaviour
         switch (currentState)
         {
             case SaveState.BeforeFound:
-                followRule.text = "Encuentre a la persona desaparecida en la montaña";
-            break;
+                textLevel[i].SetActive(false);
+                i++;
+                textLevel[i].SetActive(true);
+                break;
             case SaveState.AfterFound:
-                followRule.text = "Diregete al inicio y recoge el material de rescate (cambio de dron). Posteriormente hazlo llegar a la persona encontrada";
+                textLevel[i].SetActive(false);
+                i++;
+                textLevel[i].SetActive(true);
                 flecha.position = mando2dron.position + Vector3.up * 2f;
                 flecha.gameObject.SetActive(true);
             break;
             case SaveState.MaterialLeft:
-                followRule.text = "Recoge la camilla con la persona en ella y dirigete lentamente a la zona segura";
+                textLevel[i].SetActive(false);
+                i++;
+                textLevel[i].SetActive(true);
             break;
             case SaveState.PersonResued:
-                followRule.text = "PERSONA RESCATADA CON EXITO!. Muy buen trabajo";
+                textLevel[i].SetActive(false);
+                i++;
+                textLevel[i].SetActive(true);
+            break;
+            default:
+                Debug.LogError("no state assigned");
             break;
         }
     }
