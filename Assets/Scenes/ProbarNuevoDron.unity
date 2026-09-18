@@ -698,8 +698,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1065679071}
-  - component: {fileID: 1065679070}
   - component: {fileID: 1065679069}
+  - component: {fileID: 1065679075}
   - component: {fileID: 1065679073}
   - component: {fileID: 1065679072}
   - component: {fileID: 1065679074}
@@ -736,33 +736,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &1065679070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1065679068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e557de484e6c2c34f86d4aca5862ef06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  motorFrontLeft: {fileID: 761104922}
-  motorFrontRight: {fileID: 889702014}
-  motorBackLeft: {fileID: 1697779417}
-  motorBackRight: {fileID: 1527438776}
-  maxThrustPerMotor: 4
-  maxVerticalSpeed: 3
-  verticalP: 12
-  pitchPower: 1
-  rollPower: 1
-  yawPower: 0.6
-  levelP: 8
-  levelD: 1.5
-  maxTiltAngle: 35
-  stickDeadzone: 0.05
+  m_CollisionDetection: 1
 --- !u!4 &1065679071
 Transform:
   m_ObjectHideFlags: 0
@@ -846,6 +820,57 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.0059814, y: 0.43042755, z: 1}
   m_Center: {x: 0.046569824, y: 0.28478622, z: 0}
+--- !u!114 &1065679075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065679068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d6ede0745e8af04595bbabebd332ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiltForce: 10
+  rb: {fileID: 0}
+  speed: 3
+  minSpeed: 0
+  maxSpeed: 50
+  acceleration:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.29914454
+      value: 0.7512087
+      inSlope: 1.2530622
+      outSlope: 1.2530622
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  rotationSpeed: 500
 --- !u!1 &1196033936
 GameObject:
   m_ObjectHideFlags: 3
@@ -941,7 +966,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 1065679071}
   m_Follow: {fileID: 1065679071}
   m_Lens:
     FieldOfView: 40

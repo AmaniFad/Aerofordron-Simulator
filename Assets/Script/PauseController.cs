@@ -123,7 +123,6 @@ public class PauseController : MonoBehaviour
             }
             else
             {
-                Cursor.visible = false;
                 Time.timeScale = 1f;
 
                 SetInputProviderState(true);
