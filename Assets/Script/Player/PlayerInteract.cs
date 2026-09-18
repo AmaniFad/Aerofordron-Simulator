@@ -28,27 +28,31 @@ public class PlayerInteract : MonoBehaviour
 
     private void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-        if (Physics.Raycast(ray, raycastDistance, layerMask) && grabbeableObj == null)
+        if (Camera.main != null)
         {
-
-
-            if (currentFeedback == null)
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+            if (Physics.Raycast(ray, raycastDistance, layerMask) && grabbeableObj == null)
             {
-                currentFeedback = Instantiate(interactFeedback);
+
+
+                if (currentFeedback == null)
+                {
+                    currentFeedback = Instantiate(interactFeedback);
+                }
+                else
+                {
+                    currentFeedback.SetActive(true);
+                }
             }
             else
             {
-                currentFeedback.SetActive(true);
+                if (currentFeedback != null)
+                {
+                    currentFeedback.SetActive(false);
+                }
             }
         }
-        else
-        {
-            if (currentFeedback != null)
-            {
-                currentFeedback.SetActive(false);
-            }
-        }
+
 
     }
     public void GrabItem(GameObject grabbeable)

@@ -168,8 +168,6 @@ public class DronController : MonoBehaviour
     {
 
     }
-
-    [Obsolete]
     private void TryToMoveDron()
     {
         Vector2 inputDirection = DronInputController.Instance.GetDirectionInput();
