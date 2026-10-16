@@ -8,6 +8,7 @@ public class DroneCrash : MonoBehaviour
 {
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject destroyedDron;
+    [SerializeField] private GameObject dronVisuals;
     private DronController controller;
     private GameObject currentDestroyedDronFeedback;
     private CinemachineVirtualCamera virtualCamera;
@@ -54,6 +55,7 @@ public class DroneCrash : MonoBehaviour
         currentDestroyedDronFeedback = Instantiate(destroyedDron);
         currentDestroyedDronFeedback.transform.position = transform.position;
         StartCoroutine(ChangePosition(1f));
+        dronVisuals.SetActive(false);
         if(this.gameObject.GetComponent<HealthBehaviour>() != null )
         {
             gameObject.GetComponent<HealthBehaviour>().Damage(damage);
@@ -96,6 +98,7 @@ public class DroneCrash : MonoBehaviour
         thirrdPersonViewCamera.LookAt = transform;
         thirrdPersonViewCamera.Follow = previousTransform;
 
+        dronVisuals.SetActive(true);
         controller.StartMovingDron();
         isCrashed = false;
     }

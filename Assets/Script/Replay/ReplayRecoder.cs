@@ -65,10 +65,7 @@ public class ReplayRecoder : MonoBehaviour
 
         playbackSpeed = defaultPlaybackSpeed;
 
-        if (recordOnStart)
-        {
-            StartRecording();
-        }
+
     }
 
 
