@@ -1,62 +1,74 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using FMOD;
-using System;
+using UnityEngine;
 
-public class GridData : MonoBehaviour
+public class GridData
 {
-    Dictionary<Vector3Int, PlacementData> placedObj = new();
-    //este script se guarda la info de loq ue hemos puesto en la escena para no poner objetos encima de otros
-    public void AddObjAt(Vector3Int gridPosition, Vector2Int objSize, int ID, int placedObjIndex)
+    Dictionary<Vector3Int, PlacementData> placedObjects = new();
+
+    public void AddObjectAt(Vector3Int gridPosition,Vector2Int objectSize,int ID,int placedObjectIndex)
     {
-        List<Vector3Int> positionToOccupy = CalculatePositons(gridPosition, objSize);
-        PlacementData data = new PlacementData(positionToOccupy, ID, placedObjIndex);
+        List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
+        PlacementData data = new PlacementData(positionToOccupy, ID, placedObjectIndex);
         foreach (var pos in positionToOccupy)
         {
-            if(placedObj.ContainsKey(pos))
-            {
-                throw new Exception($"Dictionary already contains this cell position{pos}");
-            }
-            placedObj[pos] = data;
+            if (placedObjects.ContainsKey(pos))
+                throw new Exception($"Dictionary already contains this cell positiojn {pos}");
+            placedObjects[pos] = data;
         }
     }
-    public List<Vector3Int> CalculatePositons(Vector3Int gridPosition, Vector2Int objSize)
+
+    private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, Vector2Int objectSize)
     {
         List<Vector3Int> returnVal = new();
-        for(int x = 0; x < objSize.x; x++)
+        for (int x = 0; x < objectSize.x; x++)
         {
-            for(int y = 0; y < objSize.y; y++)
+            for (int y = 0; y < objectSize.y; y++)
             {
-                returnVal.Add(gridPosition + new Vector3Int(x, 0,y));
+                returnVal.Add(gridPosition + new Vector3Int(x, 0, y));
             }
         }
         return returnVal;
     }
-    public bool CanPlaceObjAt(Vector3Int gridPosition, Vector2Int objSize)
+
+    public bool CanPlaceObejctAt(Vector3Int gridPosition, Vector2Int objectSize)
     {
-        List<Vector3Int> positionsToOccupy= CalculatePositons(gridPosition,objSize);
-        foreach (var pos in positionsToOccupy)
+        List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
+        foreach (var pos in positionToOccupy)
         {
-            if (placedObj.ContainsKey(pos))
-            {
-                return false;   
-            }
+            if (placedObjects.ContainsKey(pos))
+                return false;
         }
         return true;
+    }
+
+    internal int GetRepresentationIndex(Vector3Int gridPosition)
+    {
+        if (placedObjects.ContainsKey(gridPosition) == false)
+            return -1;
+        return placedObjects[gridPosition].PlacedObjectIndex;
+    }
+
+    internal void RemoveObjectAt(Vector3Int gridPosition)
+    {
+        foreach (var pos in placedObjects[gridPosition].occupiedPositions)
+        {
+            placedObjects.Remove(pos);
+        }
     }
 }
 
 public class PlacementData
 {
-    public List<Vector3Int> occupiedPosition;
-    public int ID {  get; private set; }
-    public int PlacedObjIndex { get; private set; }
+    public List<Vector3Int> occupiedPositions;
+    public int ID { get; private set; }
+    public int PlacedObjectIndex { get; private set; }
 
-    public PlacementData (List<Vector3Int> occupiedPosition, int iD, int placedObjIndex)
+    public PlacementData(List<Vector3Int> occupiedPositions, int iD, int placedObjectIndex)
     {
-        this.occupiedPosition = occupiedPosition;
+        this.occupiedPositions = occupiedPositions;
         ID = iD;
-        PlacedObjIndex = placedObjIndex;
+        PlacedObjectIndex = placedObjectIndex;
     }
 }
