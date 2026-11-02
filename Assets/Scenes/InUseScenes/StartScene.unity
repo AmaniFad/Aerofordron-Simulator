@@ -3260,7 +3260,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -5918,9 +5918,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recoderPrefab: {fileID: 0}
+  timelineSlider: {fileID: 0}
   samplesPerSecond: 30
   maxRecordingTime: 60
   recordOnStart: 1
+  defaultPlaybackSpeed: 1
+  loopReplay: 0
 --- !u!1 &673652351
 GameObject:
   m_ObjectHideFlags: 0
@@ -9839,6 +9842,7 @@ GameObject:
   - component: {fileID: 1357739774}
   - component: {fileID: 1357739773}
   - component: {fileID: 1357739776}
+  - component: {fileID: 1357739777}
   m_Layer: 0
   m_Name: Main Camera/CinemachineBrain
   m_TagString: MainCamera
@@ -10005,6 +10009,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 15
+--- !u!114 &1357739777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357739770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfaa9a59eeed4e84897b99a00f26c8d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftArrow: {fileID: 1501369068}
+  rightArrow: {fileID: 246974869}
+  pressedScale: 0.85
+  animationSpeed: 18
+  normalColor: {r: 1, g: 0.79263175, b: 0, a: 1}
+  pressedColor: {r: 0.65, g: 0.65, b: 0.65, a: 1}
 --- !u!1 &1363613997
 GameObject:
   m_ObjectHideFlags: 0
